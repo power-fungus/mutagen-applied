@@ -69,7 +69,7 @@ use std::error::Error;
 use std::io;
 use std::process;
 
-fn example() -> Result<(), Box<dyn Error>> {
+#[cfg_attr(test, ::mutagen::mutate)] fn example() -> Result<(), Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     let mut rdr = csv::Reader::from_reader(io::stdin());
     for result in rdr.records() {
@@ -81,7 +81,7 @@ fn example() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn main() {
+#[cfg_attr(test, ::mutagen::mutate)] fn main() {
     if let Err(err) = example() {
         println!("error running example: {}", err);
         process::exit(1);
@@ -118,7 +118,7 @@ struct Record {
     population: Option<u64>,
 }
 
-fn example() -> Result<(), Box<dyn Error>> {
+#[cfg_attr(test, ::mutagen::mutate)] fn example() -> Result<(), Box<dyn Error>> {
     let mut rdr = csv::Reader::from_reader(io::stdin());
     for result in rdr.deserialize() {
         // Notice that we need to provide a type hint for automatic
@@ -129,7 +129,7 @@ fn example() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn main() {
+#[cfg_attr(test, ::mutagen::mutate)] fn main() {
     if let Err(err) = example() {
         println!("error running example: {}", err);
         process::exit(1);
@@ -204,7 +204,7 @@ pub enum QuoteStyle {
     __Nonexhaustive,
 }
 
-impl QuoteStyle {
+#[cfg_attr(test, ::mutagen::mutate)] impl QuoteStyle {
     fn to_core(self) -> csv_core::QuoteStyle {
         match self {
             QuoteStyle::Always => csv_core::QuoteStyle::Always,
@@ -216,7 +216,7 @@ impl QuoteStyle {
     }
 }
 
-impl Default for QuoteStyle {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for QuoteStyle {
     fn default() -> QuoteStyle {
         QuoteStyle::Necessary
     }
@@ -241,7 +241,7 @@ pub enum Terminator {
     __Nonexhaustive,
 }
 
-impl Terminator {
+#[cfg_attr(test, ::mutagen::mutate)] impl Terminator {
     /// Convert this to the csv_core type of the same name.
     fn to_core(self) -> csv_core::Terminator {
         match self {
@@ -252,7 +252,7 @@ impl Terminator {
     }
 }
 
-impl Default for Terminator {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for Terminator {
     fn default() -> Terminator {
         Terminator::CRLF
     }
@@ -278,7 +278,7 @@ pub enum Trim {
     __Nonexhaustive,
 }
 
-impl Trim {
+#[cfg_attr(test, ::mutagen::mutate)] impl Trim {
     fn should_trim_fields(&self) -> bool {
         self == &Trim::Fields || self == &Trim::All
     }
@@ -288,7 +288,7 @@ impl Trim {
     }
 }
 
-impl Default for Trim {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for Trim {
     fn default() -> Trim {
         Trim::None
     }

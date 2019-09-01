@@ -27,7 +27,7 @@ struct SeRecord<'w, W: 'w + io::Write> {
     wtr: &'w mut Writer<W>,
 }
 
-impl<'a, 'w, W: io::Write> Serializer for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> Serializer for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
     type SerializeSeq = Self;
@@ -232,7 +232,7 @@ impl<'a, 'w, W: io::Write> Serializer for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -248,7 +248,7 @@ impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -264,7 +264,7 @@ impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -280,7 +280,7 @@ impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -296,7 +296,7 @@ impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -319,7 +319,7 @@ impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -336,7 +336,7 @@ impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeStructVariant for &'a mut SeRecord<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeStructVariant for &'a mut SeRecord<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -353,13 +353,13 @@ impl<'a, 'w, W: io::Write> SerializeStructVariant for &'a mut SeRecord<'w, W> {
     }
 }
 
-impl SerdeError for Error {
+#[cfg_attr(test, ::mutagen::mutate)] impl SerdeError for Error {
     fn custom<T: fmt::Display>(msg: T) -> Error {
         Error::new(ErrorKind::Serialize(msg.to_string()))
     }
 }
 
-fn error_scalar_outside_struct<T: fmt::Display>(name: T) -> Error {
+#[cfg_attr(test, ::mutagen::mutate)] fn error_scalar_outside_struct<T: fmt::Display>(name: T) -> Error {
     Error::custom(format!(
         "cannot serialize {} scalar outside struct \
          when writing headers from structs",
@@ -367,7 +367,7 @@ fn error_scalar_outside_struct<T: fmt::Display>(name: T) -> Error {
     ))
 }
 
-fn error_container_inside_struct<T: fmt::Display>(name: T) -> Error {
+#[cfg_attr(test, ::mutagen::mutate)] fn error_container_inside_struct<T: fmt::Display>(name: T) -> Error {
     Error::custom(format!(
         "cannot serialize {} container inside struct \
          when writing headers from structs",
@@ -450,7 +450,7 @@ struct SeHeader<'w, W: 'w + io::Write> {
     state: HeaderState,
 }
 
-impl<'w, W: io::Write> SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'w, W: io::Write> SeHeader<'w, W> {
     fn new(wtr: &'w mut Writer<W>) -> Self {
         SeHeader { wtr: wtr, state: HeaderState::Write }
     }
@@ -491,7 +491,7 @@ impl<'w, W: io::Write> SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> Serializer for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> Serializer for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
     type SerializeSeq = Self;
@@ -682,7 +682,7 @@ impl<'a, 'w, W: io::Write> Serializer for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -698,7 +698,7 @@ impl<'a, 'w, W: io::Write> SerializeSeq for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -714,7 +714,7 @@ impl<'a, 'w, W: io::Write> SerializeTuple for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -730,7 +730,7 @@ impl<'a, 'w, W: io::Write> SerializeTupleStruct for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -746,7 +746,7 @@ impl<'a, 'w, W: io::Write> SerializeTupleVariant for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -769,7 +769,7 @@ impl<'a, 'w, W: io::Write> SerializeMap for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 
@@ -799,7 +799,7 @@ impl<'a, 'w, W: io::Write> SerializeStruct for &'a mut SeHeader<'w, W> {
     }
 }
 
-impl<'a, 'w, W: io::Write> SerializeStructVariant for &'a mut SeHeader<'w, W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'w, W: io::Write> SerializeStructVariant for &'a mut SeHeader<'w, W> {
     type Ok = ();
     type Error = Error;
 

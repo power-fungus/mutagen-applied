@@ -101,7 +101,7 @@ trait DeRecord<'r> {
 
 struct DeRecordWrap<T>(T);
 
-impl<'r, T: DeRecord<'r>> DeRecord<'r> for DeRecordWrap<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, T: DeRecord<'r>> DeRecord<'r> for DeRecordWrap<T> {
     #[inline]
     fn has_headers(&self) -> bool {
         self.0.has_headers()
@@ -154,7 +154,7 @@ struct DeStringRecord<'r> {
     field: u64,
 }
 
-impl<'r> DeRecord<'r> for DeStringRecord<'r> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r> DeRecord<'r> for DeStringRecord<'r> {
     #[inline]
     fn has_headers(&self) -> bool {
         self.headers.is_some()
@@ -238,7 +238,7 @@ struct DeByteRecord<'r> {
     field: u64,
 }
 
-impl<'r> DeRecord<'r> for DeByteRecord<'r> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r> DeRecord<'r> for DeByteRecord<'r> {
     #[inline]
     fn has_headers(&self) -> bool {
         self.headers.is_some()
@@ -346,7 +346,7 @@ macro_rules! deserialize_int {
     }
 }
 
-impl<'a, 'de: 'a, T: DeRecord<'de>> Deserializer<'de>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'de: 'a, T: DeRecord<'de>> Deserializer<'de>
     for &'a mut DeRecordWrap<T>
 {
     type Error = DeserializeError;
@@ -563,7 +563,7 @@ impl<'a, 'de: 'a, T: DeRecord<'de>> Deserializer<'de>
     }
 }
 
-impl<'a, 'de: 'a, T: DeRecord<'de>> EnumAccess<'de>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'de: 'a, T: DeRecord<'de>> EnumAccess<'de>
     for &'a mut DeRecordWrap<T>
 {
     type Error = DeserializeError;
@@ -578,7 +578,7 @@ impl<'a, 'de: 'a, T: DeRecord<'de>> EnumAccess<'de>
     }
 }
 
-impl<'a, 'de: 'a, T: DeRecord<'de>> VariantAccess<'de>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'de: 'a, T: DeRecord<'de>> VariantAccess<'de>
     for &'a mut DeRecordWrap<T>
 {
     type Error = DeserializeError;
@@ -614,7 +614,7 @@ impl<'a, 'de: 'a, T: DeRecord<'de>> VariantAccess<'de>
     }
 }
 
-impl<'a, 'de: 'a, T: DeRecord<'de>> SeqAccess<'de>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'de: 'a, T: DeRecord<'de>> SeqAccess<'de>
     for &'a mut DeRecordWrap<T>
 {
     type Error = DeserializeError;
@@ -631,7 +631,7 @@ impl<'a, 'de: 'a, T: DeRecord<'de>> SeqAccess<'de>
     }
 }
 
-impl<'a, 'de: 'a, T: DeRecord<'de>> MapAccess<'de>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'de: 'a, T: DeRecord<'de>> MapAccess<'de>
     for &'a mut DeRecordWrap<T>
 {
     type Error = DeserializeError;
@@ -685,19 +685,19 @@ pub enum DeserializeErrorKind {
     ParseFloat(num::ParseFloatError),
 }
 
-impl SerdeError for DeserializeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl SerdeError for DeserializeError {
     fn custom<T: fmt::Display>(msg: T) -> DeserializeError {
         DeserializeError { field: None, kind: DEK::Message(msg.to_string()) }
     }
 }
 
-impl StdError for DeserializeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl StdError for DeserializeError {
     fn description(&self) -> &str {
         self.kind.description()
     }
 }
 
-impl fmt::Display for DeserializeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for DeserializeError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if let Some(field) = self.field {
             write!(f, "field {}: {}", field, self.kind)
@@ -707,7 +707,7 @@ impl fmt::Display for DeserializeError {
     }
 }
 
-impl fmt::Display for DeserializeErrorKind {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for DeserializeErrorKind {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use self::DeserializeErrorKind::*;
 
@@ -725,7 +725,7 @@ impl fmt::Display for DeserializeErrorKind {
     }
 }
 
-impl DeserializeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl DeserializeError {
     /// Return the field index (starting at 0) of this error, if available.
     pub fn field(&self) -> Option<u64> {
         self.field
@@ -737,7 +737,7 @@ impl DeserializeError {
     }
 }
 
-impl DeserializeErrorKind {
+#[cfg_attr(test, ::mutagen::mutate)] impl DeserializeErrorKind {
     fn description(&self) -> &str {
         use self::DeserializeErrorKind::*;
 
@@ -763,23 +763,23 @@ serde_if_integer128! {
     }
 }
 
-fn try_positive_integer64(s: &str) -> Option<u64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_positive_integer64(s: &str) -> Option<u64> {
     s.parse().ok()
 }
 
-fn try_negative_integer64(s: &str) -> Option<i64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_negative_integer64(s: &str) -> Option<i64> {
     s.parse().ok()
 }
 
-fn try_float(s: &str) -> Option<f64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_float(s: &str) -> Option<f64> {
     s.parse().ok()
 }
 
-fn try_positive_integer64_bytes(s: &[u8]) -> Option<u64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_positive_integer64_bytes(s: &[u8]) -> Option<u64> {
     str::from_utf8(s).ok().and_then(|s| s.parse().ok())
 }
 
-fn try_negative_integer64_bytes(s: &[u8]) -> Option<i64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_negative_integer64_bytes(s: &[u8]) -> Option<i64> {
     str::from_utf8(s).ok().and_then(|s| s.parse().ok())
 }
 
@@ -793,7 +793,7 @@ serde_if_integer128! {
     }
 }
 
-fn try_float_bytes(s: &[u8]) -> Option<f64> {
+#[cfg_attr(test, ::mutagen::mutate)] fn try_float_bytes(s: &[u8]) -> Option<f64> {
     str::from_utf8(s).ok().and_then(|s| s.parse().ok())
 }
 

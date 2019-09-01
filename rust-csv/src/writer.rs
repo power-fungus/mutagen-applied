@@ -27,7 +27,7 @@ pub struct WriterBuilder {
     has_headers: bool,
 }
 
-impl Default for WriterBuilder {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for WriterBuilder {
     fn default() -> WriterBuilder {
         WriterBuilder {
             builder: CoreWriterBuilder::default(),
@@ -38,7 +38,7 @@ impl Default for WriterBuilder {
     }
 }
 
-impl WriterBuilder {
+#[cfg_attr(test, ::mutagen::mutate)] impl WriterBuilder {
     /// Create a new builder for configuring CSV writing.
     ///
     /// To convert a builder into a writer, call one of the methods starting
@@ -558,7 +558,7 @@ struct Buffer {
     len: usize,
 }
 
-impl<W: io::Write> Drop for Writer<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: io::Write> Drop for Writer<W> {
     fn drop(&mut self) {
         if self.wtr.is_some() && !self.state.panicked {
             let _ = self.flush();
@@ -566,7 +566,7 @@ impl<W: io::Write> Drop for Writer<W> {
     }
 }
 
-impl Writer<File> {
+#[cfg_attr(test, ::mutagen::mutate)] impl Writer<File> {
     /// Build a CSV writer with a default configuration that writes data to the
     /// given file path. The file is truncated if it already exists.
     ///
@@ -593,7 +593,7 @@ impl Writer<File> {
     }
 }
 
-impl<W: io::Write> Writer<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: io::Write> Writer<W> {
     fn new(builder: &WriterBuilder, wtr: W) -> Writer<W> {
         let header_state = if builder.has_headers {
             HeaderState::Write
@@ -1145,7 +1145,7 @@ impl<W: io::Write> Writer<W> {
     }
 }
 
-impl Buffer {
+#[cfg_attr(test, ::mutagen::mutate)] impl Buffer {
     /// Returns a slice of the buffer's current contents.
     ///
     /// The slice returned may be empty.

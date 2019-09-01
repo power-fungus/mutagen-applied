@@ -31,7 +31,7 @@ pub struct ReaderBuilder {
     builder: Box<CoreReaderBuilder>,
 }
 
-impl Default for ReaderBuilder {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for ReaderBuilder {
     fn default() -> ReaderBuilder {
         ReaderBuilder {
             capacity: 8 * (1 << 10),
@@ -43,7 +43,7 @@ impl Default for ReaderBuilder {
     }
 }
 
-impl ReaderBuilder {
+#[cfg_attr(test, ::mutagen::mutate)] impl ReaderBuilder {
     /// Create a new builder for configuring CSV parsing.
     ///
     /// To convert a builder into a reader, call one of the methods starting
@@ -755,7 +755,7 @@ struct Headers {
     string_record: result::Result<StringRecord, Utf8Error>,
 }
 
-impl Reader<Reader<File>> {
+#[cfg_attr(test, ::mutagen::mutate)] impl Reader<Reader<File>> {
     /// Create a new CSV parser with a default configuration for the given
     /// file path.
     ///
@@ -782,7 +782,7 @@ impl Reader<Reader<File>> {
     }
 }
 
-impl<R: io::Read> Reader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read> Reader<R> {
     /// Create a new CSV reader given a builder and a source of underlying
     /// bytes.
     fn new(builder: &ReaderBuilder, rdr: R) -> Reader<R> {
@@ -1744,7 +1744,7 @@ impl<R: io::Read> Reader<R> {
     }
 }
 
-impl<R: io::Read + io::Seek> Reader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read + io::Seek> Reader<R> {
     /// Seeks the underlying reader to the position given.
     ///
     /// This comes with a few caveats:
@@ -1850,7 +1850,7 @@ impl<R: io::Read + io::Seek> Reader<R> {
     }
 }
 
-impl ReaderState {
+#[cfg_attr(test, ::mutagen::mutate)] impl ReaderState {
     #[inline(always)]
     fn add_record(&mut self, record: &ByteRecord) -> Result<()> {
         let i = self.cur_pos.record();
@@ -1884,7 +1884,7 @@ pub struct DeserializeRecordsIntoIter<R, D> {
     _priv: PhantomData<D>,
 }
 
-impl<R: io::Read, D: DeserializeOwned> DeserializeRecordsIntoIter<R, D> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read, D: DeserializeOwned> DeserializeRecordsIntoIter<R, D> {
     fn new(mut rdr: Reader<R>) -> DeserializeRecordsIntoIter<R, D> {
         let headers = if !rdr.state.has_headers {
             None
@@ -1915,7 +1915,7 @@ impl<R: io::Read, D: DeserializeOwned> DeserializeRecordsIntoIter<R, D> {
     }
 }
 
-impl<R: io::Read, D: DeserializeOwned> Iterator
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read, D: DeserializeOwned> Iterator
     for DeserializeRecordsIntoIter<R, D>
 {
     type Item = Result<D>;
@@ -1942,7 +1942,7 @@ pub struct DeserializeRecordsIter<'r, R: 'r, D> {
     _priv: PhantomData<D>,
 }
 
-impl<'r, R: io::Read, D: DeserializeOwned> DeserializeRecordsIter<'r, R, D> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read, D: DeserializeOwned> DeserializeRecordsIter<'r, R, D> {
     fn new(rdr: &'r mut Reader<R>) -> DeserializeRecordsIter<'r, R, D> {
         let headers = if !rdr.state.has_headers {
             None
@@ -1968,7 +1968,7 @@ impl<'r, R: io::Read, D: DeserializeOwned> DeserializeRecordsIter<'r, R, D> {
     }
 }
 
-impl<'r, R: io::Read, D: DeserializeOwned> Iterator
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read, D: DeserializeOwned> Iterator
     for DeserializeRecordsIter<'r, R, D>
 {
     type Item = Result<D>;
@@ -1988,7 +1988,7 @@ pub struct StringRecordsIntoIter<R> {
     rec: StringRecord,
 }
 
-impl<R: io::Read> StringRecordsIntoIter<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read> StringRecordsIntoIter<R> {
     fn new(rdr: Reader<R>) -> StringRecordsIntoIter<R> {
         StringRecordsIntoIter { rdr: rdr, rec: StringRecord::new() }
     }
@@ -2009,7 +2009,7 @@ impl<R: io::Read> StringRecordsIntoIter<R> {
     }
 }
 
-impl<R: io::Read> Iterator for StringRecordsIntoIter<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read> Iterator for StringRecordsIntoIter<R> {
     type Item = Result<StringRecord>;
 
     fn next(&mut self) -> Option<Result<StringRecord>> {
@@ -2030,7 +2030,7 @@ pub struct StringRecordsIter<'r, R: 'r> {
     rec: StringRecord,
 }
 
-impl<'r, R: io::Read> StringRecordsIter<'r, R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read> StringRecordsIter<'r, R> {
     fn new(rdr: &'r mut Reader<R>) -> StringRecordsIter<'r, R> {
         StringRecordsIter { rdr: rdr, rec: StringRecord::new() }
     }
@@ -2046,7 +2046,7 @@ impl<'r, R: io::Read> StringRecordsIter<'r, R> {
     }
 }
 
-impl<'r, R: io::Read> Iterator for StringRecordsIter<'r, R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read> Iterator for StringRecordsIter<'r, R> {
     type Item = Result<StringRecord>;
 
     fn next(&mut self) -> Option<Result<StringRecord>> {
@@ -2064,7 +2064,7 @@ pub struct ByteRecordsIntoIter<R> {
     rec: ByteRecord,
 }
 
-impl<R: io::Read> ByteRecordsIntoIter<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read> ByteRecordsIntoIter<R> {
     fn new(rdr: Reader<R>) -> ByteRecordsIntoIter<R> {
         ByteRecordsIntoIter { rdr: rdr, rec: ByteRecord::new() }
     }
@@ -2085,7 +2085,7 @@ impl<R: io::Read> ByteRecordsIntoIter<R> {
     }
 }
 
-impl<R: io::Read> Iterator for ByteRecordsIntoIter<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: io::Read> Iterator for ByteRecordsIntoIter<R> {
     type Item = Result<ByteRecord>;
 
     fn next(&mut self) -> Option<Result<ByteRecord>> {
@@ -2106,7 +2106,7 @@ pub struct ByteRecordsIter<'r, R: 'r> {
     rec: ByteRecord,
 }
 
-impl<'r, R: io::Read> ByteRecordsIter<'r, R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read> ByteRecordsIter<'r, R> {
     fn new(rdr: &'r mut Reader<R>) -> ByteRecordsIter<'r, R> {
         ByteRecordsIter { rdr: rdr, rec: ByteRecord::new() }
     }
@@ -2122,7 +2122,7 @@ impl<'r, R: io::Read> ByteRecordsIter<'r, R> {
     }
 }
 
-impl<'r, R: io::Read> Iterator for ByteRecordsIter<'r, R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'r, R: io::Read> Iterator for ByteRecordsIter<'r, R> {
     type Item = Result<ByteRecord>;
 
     fn next(&mut self) -> Option<Result<ByteRecord>> {
