@@ -21,10 +21,10 @@ use std::fmt;
 use std::str::FromStr;
 use std::error::Error;
 
-use {Datelike, Timelike, Weekday, ParseWeekdayError};
-use div::{div_floor, mod_floor};
-use offset::{Offset, FixedOffset};
-use naive::{NaiveDate, NaiveTime};
+use crate::{Datelike, Timelike, Weekday, ParseWeekdayError};
+use crate::div::{div_floor, mod_floor};
+use crate::offset::{Offset, FixedOffset};
+use crate::naive::{NaiveDate, NaiveTime};
 
 pub use self::strftime::StrftimeItems;
 pub use self::parsed::Parsed;
@@ -411,7 +411,7 @@ pub fn format<'a, I>(
 
 
                 if let Some(v) = v {
-                    try!(
+                    r#try!(
                         if (spec == Year || spec == IsoYear) && !(0 <= v && v < 10_000) {
                             // non-four-digit years require an explicit sign as per ISO 8601
                             match pad {
@@ -553,7 +553,7 @@ pub fn format<'a, I>(
                     RFC2822 => // same to `%a, %e %b %Y %H:%M:%S %z`
                         if let (Some(d), Some(t), Some(&(_, off))) = (date, time, off) {
                             let sec = t.second() + t.nanosecond() / 1_000_000_000;
-                            try!(write!(
+                            r#try!(write!(
                                 result,
                                 "{}, {:02} {} {:04} {:02}:{:02}:{:02} ",
                                 SHORT_WEEKDAYS[d.weekday().num_days_from_monday() as usize],
@@ -568,7 +568,7 @@ pub fn format<'a, I>(
                         if let (Some(d), Some(t), Some(&(_, off))) = (date, time, off) {
                             // reuse `Debug` impls which already print ISO 8601 format.
                             // this is faster in this way.
-                            try!(write!(result, "{:?}T{:?}", d, t));
+                            r#try!(write!(result, "{:?}T{:?}", d, t));
                             Some(write_local_minus_utc(&mut result, off, false, true))
                         } else {
                             None
@@ -576,7 +576,7 @@ pub fn format<'a, I>(
                 };
 
                 match ret {
-                    Some(ret) => try!(ret),
+                    Some(ret) => r#try!(ret),
                     None => return Err(fmt::Error), // insufficient arguments for given format
                 }
             },

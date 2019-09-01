@@ -6,13 +6,13 @@
 use std::{str, fmt};
 use std::ops::{Add, Sub, AddAssign, SubAssign};
 use num_traits::ToPrimitive;
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use {Weekday, Datelike};
-use div::div_mod_floor;
-use naive::{NaiveTime, NaiveDateTime, IsoWeek};
-use format::{Item, Numeric, Pad};
-use format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
+use crate::{Weekday, Datelike};
+use crate::div::div_mod_floor;
+use crate::naive::{NaiveTime, NaiveDateTime, IsoWeek};
+use crate::format::{Item, Numeric, Pad};
+use crate::format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
 
 use super::isoweek;
 use super::internals::{self, DateImpl, Of, Mdf, YearFlags};
@@ -451,7 +451,7 @@ impl NaiveDate {
     /// ~~~~
     pub fn parse_from_str(s: &str, fmt: &str) -> ParseResult<NaiveDate> {
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
+        r#try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
         parsed.to_naive_date()
     }
 
@@ -1512,7 +1512,7 @@ impl str::FromStr for NaiveDate {
         ];
 
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_naive_date()
     }
 }
@@ -1680,9 +1680,9 @@ mod tests {
     use super::NaiveDate;
     use super::{MIN_DATE, MIN_YEAR, MIN_DAYS_FROM_YEAR_0};
     use super::{MAX_DATE, MAX_YEAR, MAX_DAYS_FROM_YEAR_0};
-    use {Datelike, Weekday};
+    use crate::{Datelike, Weekday};
     use std::{i32, u32};
-    use oldtime::Duration;
+    use crate::oldtime::Duration;
 
     #[test]
     fn test_date_from_ymd() {

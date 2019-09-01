@@ -5,11 +5,11 @@
 
 use std::fmt;
 #[cfg(all(feature="clock", not(all(target_arch = "wasm32", not(target_os = "emscripten")))))]
-use oldtime;
+use crate::oldtime;
 
-use naive::{NaiveDate, NaiveDateTime};
+use crate::naive::{NaiveDate, NaiveDateTime};
 #[cfg(feature="clock")]
-use {Date, DateTime};
+use crate::{Date, DateTime};
 use super::{TimeZone, Offset, LocalResult, FixedOffset};
 
 /// The UTC time zone. This is the most efficient time zone when you don't need the local time.

@@ -5,12 +5,12 @@
 
 use std::ops::{Add, Sub};
 use std::fmt;
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use Timelike;
-use div::div_mod_floor;
-use naive::{NaiveTime, NaiveDate, NaiveDateTime};
-use DateTime;
+use crate::Timelike;
+use crate::div::div_mod_floor;
+use crate::naive::{NaiveTime, NaiveDate, NaiveDateTime};
+use crate::DateTime;
 use super::{TimeZone, Offset, LocalResult};
 
 /// The time zone with fixed offset, from UTC-23:59:59 to UTC+23:59:59.
@@ -206,7 +206,7 @@ impl<Tz: TimeZone> Sub<FixedOffset> for DateTime<Tz> {
 
 #[cfg(test)]
 mod tests {
-    use offset::TimeZone;
+    use crate::offset::TimeZone;
     use super::FixedOffset;
 
     #[test]

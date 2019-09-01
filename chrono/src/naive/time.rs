@@ -5,12 +5,12 @@
 
 use std::{str, fmt, hash};
 use std::ops::{Add, Sub, AddAssign, SubAssign};
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use Timelike;
-use div::div_mod_floor;
-use format::{Item, Numeric, Pad, Fixed};
-use format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
+use crate::Timelike;
+use crate::div::div_mod_floor;
+use crate::format::{Item, Numeric, Pad, Fixed};
+use crate::format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
 
 /// ISO 8601 time without timezone.
 /// Allows for the nanosecond precision and optional leap second representation.
@@ -492,7 +492,7 @@ impl NaiveTime {
     /// ~~~~
     pub fn parse_from_str(s: &str, fmt: &str) -> ParseResult<NaiveTime> {
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
+        r#try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
         parsed.to_naive_time()
     }
 
@@ -1230,7 +1230,7 @@ impl fmt::Debug for NaiveTime {
             (sec, self.frac)
         };
 
-        try!(write!(f, "{:02}:{:02}:{:02}", hour, min, sec));
+        r#try!(write!(f, "{:02}:{:02}:{:02}", hour, min, sec));
         if nano == 0 {
             Ok(())
         } else if nano % 1_000_000 == 0 {
@@ -1308,7 +1308,7 @@ impl str::FromStr for NaiveTime {
         ];
 
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_naive_time()
     }
 }
@@ -1480,9 +1480,9 @@ mod serde {
 #[cfg(test)]
 mod tests {
     use super::NaiveTime;
-    use Timelike;
+    use crate::Timelike;
     use std::u32;
-    use oldtime::Duration;
+    use crate::oldtime::Duration;
 
     #[test]
     fn test_time_from_hms_milli() {

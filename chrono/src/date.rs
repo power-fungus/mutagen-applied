@@ -6,13 +6,13 @@
 use std::{fmt, hash};
 use std::cmp::Ordering;
 use std::ops::{Add, Sub};
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use {Weekday, Datelike};
-use offset::{TimeZone, Utc};
-use naive::{self, NaiveDate, NaiveTime, IsoWeek};
-use DateTime;
-use format::{Item, DelayedFormat, StrftimeItems};
+use crate::{Weekday, Datelike};
+use crate::offset::{TimeZone, Utc};
+use crate::naive::{self, NaiveDate, NaiveTime, IsoWeek};
+use crate::DateTime;
+use crate::format::{Item, DelayedFormat, StrftimeItems};
 
 /// ISO 8601 calendar date with time zone.
 ///

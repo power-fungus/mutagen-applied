@@ -6,13 +6,13 @@
 use std::{str, fmt, hash};
 use std::ops::{Add, Sub, AddAssign, SubAssign};
 use num_traits::ToPrimitive;
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use {Weekday, Timelike, Datelike};
-use div::div_mod_floor;
-use naive::{NaiveTime, NaiveDate, IsoWeek};
-use format::{Item, Numeric, Pad, Fixed};
-use format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
+use crate::{Weekday, Timelike, Datelike};
+use crate::div::div_mod_floor;
+use crate::naive::{NaiveTime, NaiveDate, IsoWeek};
+use crate::format::{Item, Numeric, Pad, Fixed};
+use crate::format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
 
 /// The tight upper bound guarantees that a duration with `|Duration| >= 2^MAX_SECS_BITS`
 /// will always overflow the addition with any date and time type.
@@ -206,7 +206,7 @@ impl NaiveDateTime {
     /// ~~~~
     pub fn parse_from_str(s: &str, fmt: &str) -> ParseResult<NaiveDateTime> {
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
+        r#try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
         parsed.to_naive_datetime_with_offset(0) // no offset adjustment
     }
 
@@ -1483,7 +1483,7 @@ impl str::FromStr for NaiveDateTime {
         ];
 
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_naive_datetime_with_offset(0)
     }
 }
@@ -1828,7 +1828,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<NaiveDateTime, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(NaiveDateTimeFromNanoSecondsVisitor)))
+            Ok(r#try!(d.deserialize_i64(NaiveDateTimeFromNanoSecondsVisitor)))
         }
 
         struct NaiveDateTimeFromNanoSecondsVisitor;
@@ -1973,7 +1973,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<NaiveDateTime, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(NaiveDateTimeFromMilliSecondsVisitor)))
+            Ok(r#try!(d.deserialize_i64(NaiveDateTimeFromMilliSecondsVisitor)))
         }
 
         struct NaiveDateTimeFromMilliSecondsVisitor;
@@ -2118,7 +2118,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<NaiveDateTime, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(NaiveDateTimeFromSecondsVisitor)))
+            Ok(r#try!(d.deserialize_i64(NaiveDateTimeFromSecondsVisitor)))
         }
 
         struct NaiveDateTimeFromSecondsVisitor;
@@ -2177,10 +2177,10 @@ pub mod serde {
 #[cfg(test)]
 mod tests {
     use super::NaiveDateTime;
-    use Datelike;
-    use naive::{NaiveDate, MIN_DATE, MAX_DATE};
+    use crate::Datelike;
+    use crate::naive::{NaiveDate, MIN_DATE, MAX_DATE};
     use std::i64;
-    use oldtime::Duration;
+    use crate::oldtime::Duration;
 
     #[test]
     fn test_datetime_from_timestamp() {

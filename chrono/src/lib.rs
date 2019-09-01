@@ -423,30 +423,30 @@ extern crate js_sys;
 doctest!("../README.md");
 
 // this reexport is to aid the transition and should not be in the prelude!
-pub use oldtime::Duration;
+pub use crate::oldtime::Duration;
 
 #[cfg(feature="clock")]
-#[doc(no_inline)] pub use offset::Local;
-#[doc(no_inline)] pub use offset::{TimeZone, Offset, LocalResult, Utc, FixedOffset};
-#[doc(no_inline)] pub use naive::{NaiveDate, IsoWeek, NaiveTime, NaiveDateTime};
-pub use date::{Date, MIN_DATE, MAX_DATE};
-pub use datetime::{DateTime, SecondsFormat};
+#[doc(no_inline)] pub use crate::offset::Local;
+#[doc(no_inline)] pub use crate::offset::{TimeZone, Offset, LocalResult, Utc, FixedOffset};
+#[doc(no_inline)] pub use crate::naive::{NaiveDate, IsoWeek, NaiveTime, NaiveDateTime};
+pub use crate::date::{Date, MIN_DATE, MAX_DATE};
+pub use crate::datetime::{DateTime, SecondsFormat};
 #[cfg(feature = "rustc-serialize")]
 pub use datetime::rustc_serialize::TsSeconds;
-pub use format::{ParseError, ParseResult};
-pub use round::SubsecRound;
+pub use crate::format::{ParseError, ParseResult};
+pub use crate::round::SubsecRound;
 
 /// A convenience module appropriate for glob imports (`use chrono::prelude::*;`).
 pub mod prelude {
-    #[doc(no_inline)] pub use {Datelike, Timelike, Weekday};
-    #[doc(no_inline)] pub use {TimeZone, Offset};
+    #[doc(no_inline)] pub use crate::{Datelike, Timelike, Weekday};
+    #[doc(no_inline)] pub use crate::{TimeZone, Offset};
     #[cfg(feature="clock")]
-    #[doc(no_inline)] pub use Local;
-    #[doc(no_inline)] pub use {Utc, FixedOffset};
-    #[doc(no_inline)] pub use {NaiveDate, NaiveTime, NaiveDateTime};
-    #[doc(no_inline)] pub use Date;
-    #[doc(no_inline)] pub use {DateTime, SecondsFormat};
-    #[doc(no_inline)] pub use SubsecRound;
+    #[doc(no_inline)] pub use crate::Local;
+    #[doc(no_inline)] pub use crate::{Utc, FixedOffset};
+    #[doc(no_inline)] pub use crate::{NaiveDate, NaiveTime, NaiveDateTime};
+    #[doc(no_inline)] pub use crate::Date;
+    #[doc(no_inline)] pub use crate::{DateTime, SecondsFormat};
+    #[doc(no_inline)] pub use crate::SubsecRound;
 }
 
 // useful throughout the codebase

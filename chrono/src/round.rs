@@ -1,9 +1,9 @@
 // This is a part of Chrono.
 // See README.md and LICENSE.txt for details.
 
-use Timelike;
+use crate::Timelike;
 use std::ops::{Add, Sub};
-use oldtime::Duration;
+use crate::oldtime::Duration;
 
 /// Extension trait for subsecond rounding or truncation to a maximum number
 /// of digits. Rounding can be used to decrease the error variance when
@@ -86,8 +86,8 @@ fn span_for_digits(digits: u16) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use Timelike;
-    use offset::{FixedOffset, TimeZone, Utc};
+    use crate::Timelike;
+    use crate::offset::{FixedOffset, TimeZone, Utc};
     use super::SubsecRound;
 
     #[test]

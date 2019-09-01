@@ -17,8 +17,8 @@
 
 use std::{i32, fmt};
 use num_traits::FromPrimitive;
-use Weekday;
-use div::{div_rem, mod_floor};
+use crate::Weekday;
+use crate::div::{div_rem, mod_floor};
 
 /// The internal date representation. This also includes the packed `Mdf` value.
 pub type DateImpl = i32;
@@ -472,7 +472,7 @@ mod tests {
     #[cfg(test)] extern crate num_iter;
     #[cfg(bench)] extern crate test;
 
-    use Weekday;
+    use crate::Weekday;
     use super::{Of, Mdf};
     use super::{YearFlags, A, B, C, D, E, F, G, AG, BA, CB, DC, ED, FE, GF};
     use self::num_iter::range_inclusive;

@@ -7,16 +7,16 @@ use std::{str, fmt, hash};
 use std::cmp::Ordering;
 use std::ops::{Add, Sub};
 use std::time::{SystemTime, UNIX_EPOCH};
-use oldtime::Duration as OldDuration;
+use crate::oldtime::Duration as OldDuration;
 
-use {Weekday, Timelike, Datelike};
+use crate::{Weekday, Timelike, Datelike};
 #[cfg(feature="clock")]
-use offset::Local;
-use offset::{TimeZone, Offset, Utc, FixedOffset};
-use naive::{NaiveTime, NaiveDateTime, IsoWeek};
-use Date;
-use format::{Item, Numeric, Pad, Fixed};
-use format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
+use crate::offset::Local;
+use crate::offset::{TimeZone, Offset, Utc, FixedOffset};
+use crate::naive::{NaiveTime, NaiveDateTime, IsoWeek};
+use crate::Date;
+use crate::format::{Item, Numeric, Pad, Fixed};
+use crate::format::{parse, Parsed, ParseError, ParseResult, DelayedFormat, StrftimeItems};
 
 /// Specific formatting options for seconds. This may be extended in the
 /// future, so exhaustive matching in external code is not recommended.
@@ -316,7 +316,7 @@ impl DateTime<FixedOffset> {
     pub fn parse_from_rfc2822(s: &str) -> ParseResult<DateTime<FixedOffset>> {
         const ITEMS: &'static [Item<'static>] = &[Item::Fixed(Fixed::RFC2822)];
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_datetime()
     }
 
@@ -328,7 +328,7 @@ impl DateTime<FixedOffset> {
     pub fn parse_from_rfc3339(s: &str) -> ParseResult<DateTime<FixedOffset>> {
         const ITEMS: &'static [Item<'static>] = &[Item::Fixed(Fixed::RFC3339)];
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_datetime()
     }
 
@@ -354,7 +354,7 @@ impl DateTime<FixedOffset> {
     /// ```
     pub fn parse_from_str(s: &str, fmt: &str) -> ParseResult<DateTime<FixedOffset>> {
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
+        r#try!(parse(&mut parsed, s, StrftimeItems::new(fmt)));
         parsed.to_datetime()
     }
 }
@@ -397,9 +397,9 @@ impl<Tz: TimeZone> DateTime<Tz> where Tz::Offset: fmt::Display {
     ///            "2018-01-26T10:30:09+08:00");
     /// ```
     pub fn to_rfc3339_opts(&self, secform: SecondsFormat, use_z: bool) -> String {
-        use format::Numeric::*;
-        use format::Pad::Zero;
-        use SecondsFormat::*;
+        use crate::format::Numeric::*;
+        use crate::format::Pad::Zero;
+        use crate::SecondsFormat::*;
 
         debug_assert!(secform != __NonExhaustive, "Do not use __NonExhaustive!");
 
@@ -623,7 +623,7 @@ impl str::FromStr for DateTime<FixedOffset> {
         ];
 
         let mut parsed = Parsed::new();
-        try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
+        r#try!(parse(&mut parsed, s, ITEMS.iter().cloned()));
         parsed.to_datetime()
     }
 }
@@ -1042,7 +1042,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<DateTime<Utc>, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(NanoSecondsTimestampVisitor)))
+            Ok(r#try!(d.deserialize_i64(NanoSecondsTimestampVisitor)))
         }
 
         struct NanoSecondsTimestampVisitor;
@@ -1189,7 +1189,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<DateTime<Utc>, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(MilliSecondsTimestampVisitor).map(|dt| dt.with_timezone(&Utc))))
+            Ok(r#try!(d.deserialize_i64(MilliSecondsTimestampVisitor).map(|dt| dt.with_timezone(&Utc))))
         }
 
         struct MilliSecondsTimestampVisitor;
@@ -1336,7 +1336,7 @@ pub mod serde {
         pub fn deserialize<'de, D>(d: D) -> Result<DateTime<Utc>, D::Error>
             where D: de::Deserializer<'de>
         {
-            Ok(try!(d.deserialize_i64(SecondsTimestampVisitor)))
+            Ok(r#try!(d.deserialize_i64(SecondsTimestampVisitor)))
         }
 
         struct SecondsTimestampVisitor;
@@ -1483,12 +1483,12 @@ pub mod serde {
 mod tests {
     use super::DateTime;
     #[cfg(feature="clock")]
-    use Datelike;
-    use naive::{NaiveTime, NaiveDate};
+    use crate::Datelike;
+    use crate::naive::{NaiveTime, NaiveDate};
     #[cfg(feature="clock")]
-    use offset::Local;
-    use offset::{TimeZone, Utc, FixedOffset};
-    use oldtime::Duration;
+    use crate::offset::Local;
+    use crate::offset::{TimeZone, Utc, FixedOffset};
+    use crate::oldtime::Duration;
     use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
@@ -1598,7 +1598,7 @@ mod tests {
 
     #[test]
     fn test_rfc3339_opts() {
-        use SecondsFormat::*;
+        use crate::SecondsFormat::*;
         let pst = FixedOffset::east(8 * 60 * 60);
         let dt = pst.ymd(2018, 1, 11).and_hms_nano(10, 5, 13, 084_660_000);
         assert_eq!(dt.to_rfc3339_opts(Secs, false),   "2018-01-11T10:05:13+08:00");
@@ -1621,7 +1621,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_rfc3339_opts_nonexhaustive() {
-        use SecondsFormat;
+        use crate::SecondsFormat;
         let dt = Utc.ymd(1999, 10, 9).and_hms(1, 2, 3);
         dt.to_rfc3339_opts(SecondsFormat::__NonExhaustive, true);
     }

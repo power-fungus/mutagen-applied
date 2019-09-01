@@ -3,11 +3,11 @@
 
 //! The local (system) time zone.
 
-use oldtime;
+use crate::oldtime;
 
-use {Datelike, Timelike};
-use naive::{NaiveDate, NaiveTime, NaiveDateTime};
-use {Date, DateTime};
+use crate::{Datelike, Timelike};
+use crate::naive::{NaiveDate, NaiveTime, NaiveDateTime};
+use crate::{Date, DateTime};
 use super::{TimeZone, LocalResult};
 use super::fixed::FixedOffset;
 
@@ -165,8 +165,8 @@ impl TimeZone for Local {
 
 #[cfg(test)]
 mod tests {
-    use Datelike;
-    use offset::TimeZone;
+    use crate::Datelike;
+    use crate::offset::TimeZone;
     use super::Local;
 
     #[test]
