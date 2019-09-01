@@ -49,7 +49,7 @@ pub const MIN_DATE: Date<Utc> = Date { date: naive::MIN_DATE, offset: Utc };
 /// The maximum possible `Date`.
 pub const MAX_DATE: Date<Utc> = Date { date: naive::MAX_DATE, offset: Utc };
 
-impl<Tz: TimeZone> Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Date<Tz> {
     /// Makes a new `Date` with given *UTC* date and offset.
     /// The local date should be constructed via the `TimeZone` trait.
     //
@@ -248,12 +248,12 @@ impl<Tz: TimeZone> Date<Tz> {
 }
 
 /// Maps the local date to other date with given conversion function.
-fn map_local<Tz: TimeZone, F>(d: &Date<Tz>, mut f: F) -> Option<Date<Tz>>
+#[cfg_attr(test, ::mutagen::mutate)] fn map_local<Tz: TimeZone, F>(d: &Date<Tz>, mut f: F) -> Option<Date<Tz>>
         where F: FnMut(NaiveDate) -> Option<NaiveDate> {
     f(d.naive_local()).and_then(|date| d.timezone().from_local_date(&date).single())
 }
 
-impl<Tz: TimeZone> Date<Tz> where Tz::Offset: fmt::Display {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Date<Tz> where Tz::Offset: fmt::Display {
     /// Formats the date with the specified formatting items.
     #[inline]
     pub fn format_with_items<'a, I>(&self, items: I) -> DelayedFormat<I>
@@ -270,7 +270,7 @@ impl<Tz: TimeZone> Date<Tz> where Tz::Offset: fmt::Display {
     }
 }
 
-impl<Tz: TimeZone> Datelike for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Datelike for Date<Tz> {
     #[inline] fn year(&self) -> i32 { self.naive_local().year() }
     #[inline] fn month(&self) -> u32 { self.naive_local().month() }
     #[inline] fn month0(&self) -> u32 { self.naive_local().month0() }
@@ -318,31 +318,31 @@ impl<Tz: TimeZone> Datelike for Date<Tz> {
 }
 
 // we need them as automatic impls cannot handle associated types
-impl<Tz: TimeZone> Copy for Date<Tz> where <Tz as TimeZone>::Offset: Copy {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Copy for Date<Tz> where <Tz as TimeZone>::Offset: Copy {}
 unsafe impl<Tz: TimeZone> Send for Date<Tz> where <Tz as TimeZone>::Offset: Send {}
 
-impl<Tz: TimeZone, Tz2: TimeZone> PartialEq<Date<Tz2>> for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone, Tz2: TimeZone> PartialEq<Date<Tz2>> for Date<Tz> {
     fn eq(&self, other: &Date<Tz2>) -> bool { self.date == other.date }
 }
 
-impl<Tz: TimeZone> Eq for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Eq for Date<Tz> {
 }
 
-impl<Tz: TimeZone> PartialOrd for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> PartialOrd for Date<Tz> {
     fn partial_cmp(&self, other: &Date<Tz>) -> Option<Ordering> {
         self.date.partial_cmp(&other.date)
     }
 }
 
-impl<Tz: TimeZone> Ord for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Ord for Date<Tz> {
     fn cmp(&self, other: &Date<Tz>) -> Ordering { self.date.cmp(&other.date) }
 }
 
-impl<Tz: TimeZone> hash::Hash for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> hash::Hash for Date<Tz> {
     fn hash<H: hash::Hasher>(&self, state: &mut H) { self.date.hash(state) }
 }
 
-impl<Tz: TimeZone> Add<OldDuration> for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Add<OldDuration> for Date<Tz> {
     type Output = Date<Tz>;
 
     #[inline]
@@ -351,7 +351,7 @@ impl<Tz: TimeZone> Add<OldDuration> for Date<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Sub<OldDuration> for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Sub<OldDuration> for Date<Tz> {
     type Output = Date<Tz>;
 
     #[inline]
@@ -360,7 +360,7 @@ impl<Tz: TimeZone> Sub<OldDuration> for Date<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Sub<Date<Tz>> for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Sub<Date<Tz>> for Date<Tz> {
     type Output = OldDuration;
 
     #[inline]
@@ -369,13 +369,13 @@ impl<Tz: TimeZone> Sub<Date<Tz>> for Date<Tz> {
     }
 }
 
-impl<Tz: TimeZone> fmt::Debug for Date<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> fmt::Debug for Date<Tz> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}{:?}", self.naive_local(), self.offset)
     }
 }
 
-impl<Tz: TimeZone> fmt::Display for Date<Tz> where Tz::Offset: fmt::Display {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> fmt::Display for Date<Tz> where Tz::Offset: fmt::Display {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}{}", self.naive_local(), self.offset)
     }

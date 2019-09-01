@@ -38,7 +38,7 @@ pub trait SubsecRound {
     fn trunc_subsecs(self, digits: u16) -> Self;
 }
 
-impl<T> SubsecRound for T
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> SubsecRound for T
 where T: Timelike + Add<Duration, Output=T> + Sub<Duration, Output=T>
 {
     fn round_subsecs(self, digits: u16) -> T {
@@ -68,7 +68,7 @@ where T: Timelike + Add<Duration, Output=T> + Sub<Duration, Output=T>
 }
 
 // Return the maximum span in nanoseconds for the target number of digits.
-fn span_for_digits(digits: u16) -> u32 {
+#[cfg_attr(test, ::mutagen::mutate)] fn span_for_digits(digits: u16) -> u32 {
     // fast lookup form of: 10^(9-min(9,digits))
     match digits {
         0 => 1_000_000_000,

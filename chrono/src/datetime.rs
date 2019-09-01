@@ -60,7 +60,7 @@ pub struct DateTime<Tz: TimeZone> {
     offset: Tz::Offset,
 }
 
-impl<Tz: TimeZone> DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> DateTime<Tz> {
     /// Makes a new `DateTime` with given *UTC* datetime and offset.
     /// The local datetime should be constructed via the `TimeZone` trait.
     ///
@@ -236,7 +236,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
 }
 
 /// Convert a `DateTime<Utc>` instance into a `DateTime<FixedOffset>` instance.
-impl From<DateTime<Utc>> for DateTime<FixedOffset> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<Utc>> for DateTime<FixedOffset> {
     /// Convert this `DateTime<Utc>` instance into a `DateTime<FixedOffset>` instance.
     ///
     /// Conversion is done via [`DateTime::with_timezone`]. Note that the converted value returned by
@@ -248,7 +248,7 @@ impl From<DateTime<Utc>> for DateTime<FixedOffset> {
 
 /// Convert a `DateTime<Utc>` instance into a `DateTime<Local>` instance.
 #[cfg(feature="clock")]
-impl From<DateTime<Utc>> for DateTime<Local> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<Utc>> for DateTime<Local> {
     /// Convert this `DateTime<Utc>` instance into a `DateTime<Local>` instance.
     ///
     /// Conversion is performed via [`DateTime::with_timezone`], accounting for the difference in timezones.
@@ -258,7 +258,7 @@ impl From<DateTime<Utc>> for DateTime<Local> {
 }
 
 /// Convert a `DateTime<FixedOffset>` instance into a `DateTime<Utc>` instance.
-impl From<DateTime<FixedOffset>> for DateTime<Utc> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<FixedOffset>> for DateTime<Utc> {
     /// Convert this `DateTime<FixedOffset>` instance into a `DateTime<Utc>` instance.
     ///
     /// Conversion is performed via [`DateTime::with_timezone`], accounting for the timezone
@@ -270,7 +270,7 @@ impl From<DateTime<FixedOffset>> for DateTime<Utc> {
 
 /// Convert a `DateTime<FixedOffset>` instance into a `DateTime<Local>` instance.
 #[cfg(feature="clock")]
-impl From<DateTime<FixedOffset>> for DateTime<Local> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<FixedOffset>> for DateTime<Local> {
     /// Convert this `DateTime<FixedOffset>` instance into a `DateTime<Local>` instance.
     ///
     /// Conversion is performed via [`DateTime::with_timezone`]. Returns the equivalent value in local
@@ -282,7 +282,7 @@ impl From<DateTime<FixedOffset>> for DateTime<Local> {
 
 /// Convert a `DateTime<Local>` instance into a `DateTime<Utc>` instance.
 #[cfg(feature="clock")]
-impl From<DateTime<Local>> for DateTime<Utc> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<Local>> for DateTime<Utc> {
     /// Convert this `DateTime<Local>` instance into a `DateTime<Utc>` instance.
     ///
     /// Conversion is performed via [`DateTime::with_timezone`], accounting for the difference in
@@ -294,7 +294,7 @@ impl From<DateTime<Local>> for DateTime<Utc> {
 
 /// Convert a `DateTime<Local>` instance into a `DateTime<FixedOffset>` instance.
 #[cfg(feature="clock")]
-impl From<DateTime<Local>> for DateTime<FixedOffset> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<DateTime<Local>> for DateTime<FixedOffset> {
     /// Convert this `DateTime<Local>` instance into a `DateTime<FixedOffset>` instance.
     ///
     /// Conversion is performed via [`DateTime::with_timezone`]. Note that the converted value returned
@@ -305,12 +305,12 @@ impl From<DateTime<Local>> for DateTime<FixedOffset> {
 }
 
 /// Maps the local datetime to other datetime with given conversion function.
-fn map_local<Tz: TimeZone, F>(dt: &DateTime<Tz>, mut f: F) -> Option<DateTime<Tz>>
+#[cfg_attr(test, ::mutagen::mutate)] fn map_local<Tz: TimeZone, F>(dt: &DateTime<Tz>, mut f: F) -> Option<DateTime<Tz>>
         where F: FnMut(NaiveDateTime) -> Option<NaiveDateTime> {
     f(dt.naive_local()).and_then(|datetime| dt.timezone().from_local_datetime(&datetime).single())
 }
 
-impl DateTime<FixedOffset> {
+#[cfg_attr(test, ::mutagen::mutate)] impl DateTime<FixedOffset> {
     /// Parses an RFC 2822 date and time string such as `Tue, 1 Jul 2003 10:52:37 +0200`,
     /// then returns a new `DateTime` with a parsed `FixedOffset`.
     pub fn parse_from_rfc2822(s: &str) -> ParseResult<DateTime<FixedOffset>> {
@@ -359,7 +359,7 @@ impl DateTime<FixedOffset> {
     }
 }
 
-impl<Tz: TimeZone> DateTime<Tz> where Tz::Offset: fmt::Display {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> DateTime<Tz> where Tz::Offset: fmt::Display {
     /// Returns an RFC 2822 date and time string such as `Tue, 1 Jul 2003 10:52:37 +0200`.
     pub fn to_rfc2822(&self) -> String {
         const ITEMS: &'static [Item<'static>] = &[Item::Fixed(Fixed::RFC2822)];
@@ -463,7 +463,7 @@ impl<Tz: TimeZone> DateTime<Tz> where Tz::Offset: fmt::Display {
     }
 }
 
-impl<Tz: TimeZone> Datelike for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Datelike for DateTime<Tz> {
     #[inline] fn year(&self) -> i32 { self.naive_local().year() }
     #[inline] fn month(&self) -> u32 { self.naive_local().month() }
     #[inline] fn month0(&self) -> u32 { self.naive_local().month0() }
@@ -510,7 +510,7 @@ impl<Tz: TimeZone> Datelike for DateTime<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Timelike for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Timelike for DateTime<Tz> {
     #[inline] fn hour(&self) -> u32 { self.naive_local().hour() }
     #[inline] fn minute(&self) -> u32 { self.naive_local().minute() }
     #[inline] fn second(&self) -> u32 { self.naive_local().second() }
@@ -538,31 +538,31 @@ impl<Tz: TimeZone> Timelike for DateTime<Tz> {
 }
 
 // we need them as automatic impls cannot handle associated types
-impl<Tz: TimeZone> Copy for DateTime<Tz> where <Tz as TimeZone>::Offset: Copy {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Copy for DateTime<Tz> where <Tz as TimeZone>::Offset: Copy {}
 unsafe impl<Tz: TimeZone> Send for DateTime<Tz> where <Tz as TimeZone>::Offset: Send {}
 
-impl<Tz: TimeZone, Tz2: TimeZone> PartialEq<DateTime<Tz2>> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone, Tz2: TimeZone> PartialEq<DateTime<Tz2>> for DateTime<Tz> {
     fn eq(&self, other: &DateTime<Tz2>) -> bool { self.datetime == other.datetime }
 }
 
-impl<Tz: TimeZone> Eq for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Eq for DateTime<Tz> {
 }
 
-impl<Tz: TimeZone> PartialOrd for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> PartialOrd for DateTime<Tz> {
     fn partial_cmp(&self, other: &DateTime<Tz>) -> Option<Ordering> {
         self.datetime.partial_cmp(&other.datetime)
     }
 }
 
-impl<Tz: TimeZone> Ord for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Ord for DateTime<Tz> {
     fn cmp(&self, other: &DateTime<Tz>) -> Ordering { self.datetime.cmp(&other.datetime) }
 }
 
-impl<Tz: TimeZone> hash::Hash for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> hash::Hash for DateTime<Tz> {
     fn hash<H: hash::Hasher>(&self, state: &mut H) { self.datetime.hash(state) }
 }
 
-impl<Tz: TimeZone> Add<OldDuration> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Add<OldDuration> for DateTime<Tz> {
     type Output = DateTime<Tz>;
 
     #[inline]
@@ -571,7 +571,7 @@ impl<Tz: TimeZone> Add<OldDuration> for DateTime<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Sub<OldDuration> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Sub<OldDuration> for DateTime<Tz> {
     type Output = DateTime<Tz>;
 
     #[inline]
@@ -580,7 +580,7 @@ impl<Tz: TimeZone> Sub<OldDuration> for DateTime<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Sub<DateTime<Tz>> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Sub<DateTime<Tz>> for DateTime<Tz> {
     type Output = OldDuration;
 
     #[inline]
@@ -589,19 +589,19 @@ impl<Tz: TimeZone> Sub<DateTime<Tz>> for DateTime<Tz> {
     }
 }
 
-impl<Tz: TimeZone> fmt::Debug for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> fmt::Debug for DateTime<Tz> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}{:?}", self.naive_local(), self.offset)
     }
 }
 
-impl<Tz: TimeZone> fmt::Display for DateTime<Tz> where Tz::Offset: fmt::Display {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> fmt::Display for DateTime<Tz> where Tz::Offset: fmt::Display {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{} {}", self.naive_local(), self.offset)
     }
 }
 
-impl str::FromStr for DateTime<FixedOffset> {
+#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for DateTime<FixedOffset> {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<DateTime<FixedOffset>> {
@@ -628,7 +628,7 @@ impl str::FromStr for DateTime<FixedOffset> {
     }
 }
 
-impl str::FromStr for DateTime<Utc> {
+#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for DateTime<Utc> {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<DateTime<Utc>> {
@@ -637,7 +637,7 @@ impl str::FromStr for DateTime<Utc> {
 }
 
 #[cfg(feature="clock")]
-impl str::FromStr for DateTime<Local> {
+#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for DateTime<Local> {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<DateTime<Local>> {
@@ -645,7 +645,7 @@ impl str::FromStr for DateTime<Local> {
     }
 }
 
-impl From<SystemTime> for DateTime<Utc> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<SystemTime> for DateTime<Utc> {
     fn from(t: SystemTime) -> DateTime<Utc> {
         let (sec, nsec) = match t.duration_since(UNIX_EPOCH) {
             Ok(dur) => (dur.as_secs() as i64, dur.subsec_nanos()),
@@ -664,13 +664,13 @@ impl From<SystemTime> for DateTime<Utc> {
 }
 
 #[cfg(feature="clock")]
-impl From<SystemTime> for DateTime<Local> {
+#[cfg_attr(test, ::mutagen::mutate)] impl From<SystemTime> for DateTime<Local> {
     fn from(t: SystemTime) -> DateTime<Local> {
         DateTime::<Utc>::from(t).with_timezone(&Local)
     }
 }
 
-impl<Tz: TimeZone> From<DateTime<Tz>> for SystemTime {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> From<DateTime<Tz>> for SystemTime {
     fn from(dt: DateTime<Tz>) -> SystemTime {
         use std::time::Duration;
 
@@ -686,7 +686,7 @@ impl<Tz: TimeZone> From<DateTime<Tz>> for SystemTime {
 }
 
 #[test]
-fn test_auto_conversion() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_auto_conversion() {
     let utc_dt = Utc.ymd(2018, 9, 5).and_hms(23, 58, 0);
     let cdt_dt = FixedOffset::west(5 * 60 * 60).ymd(2018, 9, 5).and_hms(18, 58, 0);
     let utc_dt2: DateTime<Utc> = cdt_dt.into();
@@ -694,7 +694,7 @@ fn test_auto_conversion() {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-fn test_encodable_json<FUtc, FFixed, E>(to_string_utc: FUtc, to_string_fixed: FFixed)
+#[cfg_attr(test, ::mutagen::mutate)] fn test_encodable_json<FUtc, FFixed, E>(to_string_utc: FUtc, to_string_fixed: FFixed)
     where FUtc: Fn(&DateTime<Utc>) -> Result<String, E>,
           FFixed: Fn(&DateTime<FixedOffset>) -> Result<String, E>,
           E: ::std::fmt::Debug
@@ -709,7 +709,7 @@ fn test_encodable_json<FUtc, FFixed, E>(to_string_utc: FUtc, to_string_fixed: FF
 }
 
 #[cfg(all(test, feature="clock", any(feature = "rustc-serialize", feature = "serde")))]
-fn test_decodable_json<FUtc, FFixed, FLocal, E>(utc_from_str: FUtc,
+#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json<FUtc, FFixed, FLocal, E>(utc_from_str: FUtc,
                                                 fixed_from_str: FFixed,
                                                 local_from_str: FLocal)
     where FUtc: Fn(&str) -> Result<DateTime<Utc>, E>,
@@ -746,7 +746,7 @@ fn test_decodable_json<FUtc, FFixed, FLocal, E>(utc_from_str: FUtc,
 }
 
 #[cfg(all(test, feature="clock", feature = "rustc-serialize"))]
-fn test_decodable_json_timestamps<FUtc, FFixed, FLocal, E>(utc_from_str: FUtc,
+#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json_timestamps<FUtc, FFixed, FLocal, E>(utc_from_str: FUtc,
                                                            fixed_from_str: FFixed,
                                                            local_from_str: FLocal)
     where FUtc: Fn(&str) -> Result<rustc_serialize::TsSeconds<Utc>, E>,

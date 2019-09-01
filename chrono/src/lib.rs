@@ -535,7 +535,7 @@ pub enum Weekday {
     Sun = 6,
 }
 
-impl Weekday {
+#[cfg_attr(test, ::mutagen::mutate)] impl Weekday {
     /// The next day in the week.
     ///
     /// `w`:        | `Mon` | `Tue` | `Wed` | `Thu` | `Fri` | `Sat` | `Sun`
@@ -648,7 +648,7 @@ impl Weekday {
 /// Any weekday can be represented as an integer from 0 to 6, which equals to
 /// [`Weekday::num_days_from_monday`](#method.num_days_from_monday) in this implementation.
 /// Do not heavily depend on this though; use explicit methods whenever possible.
-impl num_traits::FromPrimitive for Weekday {
+#[cfg_attr(test, ::mutagen::mutate)] impl num_traits::FromPrimitive for Weekday {
     #[inline]
     fn from_i64(n: i64) -> Option<Weekday> {
         match n {
@@ -686,7 +686,7 @@ pub struct ParseWeekdayError {
     _dummy: (),
 }
 
-impl fmt::Debug for ParseWeekdayError {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for ParseWeekdayError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "ParseWeekdayError {{ .. }}")
     }
@@ -975,7 +975,7 @@ pub trait Timelike: Sized {
 #[cfg(test)] extern crate num_iter;
 
 #[test]
-fn test_readme_doomsday() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_readme_doomsday() {
     use num_iter::range_inclusive;
 
     for y in range_inclusive(naive::MIN_DATE.year(), naive::MAX_DATE.year()) {

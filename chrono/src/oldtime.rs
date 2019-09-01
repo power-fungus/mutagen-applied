@@ -59,7 +59,7 @@ pub const MAX: Duration = Duration {
     nanos: (i64::MAX % MILLIS_PER_SEC) as i32 * NANOS_PER_MILLI
 };
 
-impl Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Duration {
     /// Makes a new `Duration` with given number of weeks.
     /// Equivalent to `Duration::seconds(weeks * 7 * 24 * 60 * 60)` with overflow checks.
     /// Panics when the duration is out of bounds.
@@ -279,7 +279,7 @@ impl Duration {
     }
 }
 
-impl Neg for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Neg for Duration {
     type Output = Duration;
 
     #[inline]
@@ -292,7 +292,7 @@ impl Neg for Duration {
     }
 }
 
-impl Add for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Add for Duration {
     type Output = Duration;
 
     fn add(self, rhs: Duration) -> Duration {
@@ -306,7 +306,7 @@ impl Add for Duration {
     }
 }
 
-impl Sub for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Sub for Duration {
     type Output = Duration;
 
     fn sub(self, rhs: Duration) -> Duration {
@@ -320,7 +320,7 @@ impl Sub for Duration {
     }
 }
 
-impl Mul<i32> for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Mul<i32> for Duration {
     type Output = Duration;
 
     fn mul(self, rhs: i32) -> Duration {
@@ -332,7 +332,7 @@ impl Mul<i32> for Duration {
     }
 }
 
-impl Div<i32> for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl Div<i32> for Duration {
     type Output = Duration;
 
     fn div(self, rhs: i32) -> Duration {
@@ -352,7 +352,7 @@ impl Div<i32> for Duration {
     }
 }
 
-impl fmt::Display for Duration {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for Duration {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         // technically speaking, negative duration is not valid ISO 8601,
         // but we need to print it anyway.
@@ -392,13 +392,13 @@ impl fmt::Display for Duration {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct OutOfRangeError(());
 
-impl fmt::Display for OutOfRangeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for OutOfRangeError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.description())
     }
 }
 
-impl Error for OutOfRangeError {
+#[cfg_attr(test, ::mutagen::mutate)] impl Error for OutOfRangeError {
     fn description(&self) -> &str {
         "Source duration value is out of range for the target type"
     }
@@ -406,12 +406,12 @@ impl Error for OutOfRangeError {
 
 // Copied from libnum
 #[inline]
-fn div_mod_floor_64(this: i64, other: i64) -> (i64, i64) {
+#[cfg_attr(test, ::mutagen::mutate)] fn div_mod_floor_64(this: i64, other: i64) -> (i64, i64) {
     (div_floor_64(this, other), mod_floor_64(this, other))
 }
 
 #[inline]
-fn div_floor_64(this: i64, other: i64) -> i64 {
+#[cfg_attr(test, ::mutagen::mutate)] fn div_floor_64(this: i64, other: i64) -> i64 {
     match div_rem_64(this, other) {
         (d, r) if (r > 0 && other < 0)
                || (r < 0 && other > 0) => d - 1,
@@ -420,7 +420,7 @@ fn div_floor_64(this: i64, other: i64) -> i64 {
 }
 
 #[inline]
-fn mod_floor_64(this: i64, other: i64) -> i64 {
+#[cfg_attr(test, ::mutagen::mutate)] fn mod_floor_64(this: i64, other: i64) -> i64 {
     match this % other {
         r if (r > 0 && other < 0)
           || (r < 0 && other > 0) => r + other,
@@ -429,7 +429,7 @@ fn mod_floor_64(this: i64, other: i64) -> i64 {
 }
 
 #[inline]
-fn div_rem_64(this: i64, other: i64) -> (i64, i64) {
+#[cfg_attr(test, ::mutagen::mutate)] fn div_rem_64(this: i64, other: i64) -> (i64, i64) {
     (this / other, this % other)
 }
 
