@@ -1,0 +1,693 @@
+
+Tests without mutations
+target/debug/deps/actix-5a6281c43caacb98 ... ok
+target/debug/deps/test_fut-d24949b9d87a9de5 ... ok
+target/debug/deps/test_context-dc6c6e12319a8e48 ... ok
+target/debug/deps/test_supervisor-58b6305cbcb74f01 ... ok
+target/debug/deps/test_actors-6fca5a35043d555c ... ok
+target/debug/deps/test_arbiter-1804ebfa8988d7d7 ... ok
+target/debug/deps/test_sync-340c81b13fd5420b ... ok
+target/debug/deps/test_address-3a470ea74a953078 ... ok
+target/debug/deps/test_lifecycle-c9f8513c5145fc03 ... ok
+target/debug/deps/test_actor-6e844e61fe7fc53b ... ok
+target/debug/deps/derive-cb5a14f48ffb03a3 ... ok
+target/debug/deps/test_sink-ff22e63a31258442 ... ok
+
+Mutants
+1: binop_eq, replace `==` with `!=`, at src/actor.rs@240:13-240:15(fn ActorState::alive) ... NOT COVERED
+2: binop_eq, replace `==` with `!=`, at src/actor.rs@240:44-240:46(fn ActorState::alive) ... NOT COVERED
+3: binop_bool, replace `||` with `&&`, at src/actor.rs@240:36-240:38(fn ActorState::alive) ... NOT COVERED
+4: binop_eq, replace `==` with `!=`, at src/actor.rs@244:13-244:15(fn ActorState::stopping) ... NOT COVERED
+5: binop_eq, replace `==` with `!=`, at src/actor.rs@244:45-244:47(fn ActorState::stopping) ... NOT COVERED
+6: binop_bool, replace `||` with `&&`, at src/actor.rs@244:37-244:39(fn ActorState::stopping) ... NOT COVERED
+7: lit_int, replace `1` with `2`, at src/actor.rs@471:29-471:30(fn SpawnHandle::next) ... NOT COVERED
+8: lit_int, replace `1` with `0`, at src/actor.rs@471:29-471:30(fn SpawnHandle::next) ... NOT COVERED
+9: binop_add, replace `+` with `-`, at src/actor.rs@471:27-471:28(fn SpawnHandle::next) ... NOT COVERED
+10: lit_int, replace `0` with `1`, at src/actor.rs@481:20-481:21(fn SpawnHandle::default) ... SURVIVED
+11: stmt_call, remove `actix_rt :: spawn (fut) ;`, at src/context.rs@107:8-107:28(fn Context < A >::run) ... killed
+12: stmt_call, remove `ctx . wait (self) ;`, at src/context.rs@188:8-188:22(fn T::wait) ... NOT COVERED
+13: stmt_call, remove `self . flags . remove (ContextFlags :: RUNNING) ;`, at src/contextimpl.rs@88:12-88:52(fn ContextParts < A >::stop) ... NOT COVERED
+14: stmt_call, remove `self . flags . insert (ContextFlags :: STOPPING) ;`, at src/contextimpl.rs@89:12-89:53(fn ContextParts < A >::stop) ... NOT COVERED
+15: unop_not, remove `!`, at src/contextimpl.rs@116:8-116:9(fn ContextParts < A >::waiting) ... killed (timeout)
+16: binop_bool, replace `||` with `&&`, at src/contextimpl.rs@117:12-117:14(fn ContextParts < A >::waiting) ... SURVIVED
+17: lit_int, replace `1` with `2`, at src/contextimpl.rs@125:21-125:22(fn ContextParts < A >::curr_handle) ... NOT COVERED
+18: lit_int, replace `1` with `0`, at src/contextimpl.rs@125:21-125:22(fn ContextParts < A >::curr_handle) ... NOT COVERED
+19: lit_int, replace `0` with `1`, at src/contextimpl.rs@134:34-134:35(fn ContextParts < A >::spawn) ... NOT COVERED
+20: lit_int, replace `0` with `1`, at src/contextimpl.rs@135:21-135:22(fn ContextParts < A >::spawn) ... NOT COVERED
+21: stmt_call, remove `self . items . push ((handle, fut)) ;`, at src/contextimpl.rs@137:8-137:38(fn ContextParts < A >::spawn) ... NOT COVERED
+22: stmt_call, remove `self . wait . push (ActorWaitItem :: new (f)) ;`, at src/contextimpl.rs@149:8-149:45(fn ContextParts < A >::wait) ... NOT COVERED
+23: stmt_call, remove `self . handles . push (handle) ;`, at src/contextimpl.rs@155:8-155:33(fn ContextParts < A >::cancel_future) ... NOT COVERED
+24: lit_bool, replace `true` with `false`, at src/contextimpl.rs@156:8-156:12(fn ContextParts < A >::cancel_future) ... NOT COVERED
+25: stmt_call, remove `self . flags . insert (ContextFlags :: MB_CAP_CHANGED) ;`, at src/contextimpl.rs@166:8-166:55(fn ContextParts < A >::set_mailbox_capacity) ... SURVIVED
+26: stmt_call, remove `self . addr . set_capacity (cap) ;`, at src/contextimpl.rs@167:8-167:35(fn ContextParts < A >::set_mailbox_capacity) ... killed
+27: lit_int, replace `0` with `1`, at src/contextimpl.rs@181:21-181:22(fn ContextParts < A >::restart) ... NOT COVERED
+28: stmt_call, remove `self . ctx . parts () . stop () ;`, at src/contextimpl.rs@219:12-219:35(fn ContextFut < A, C >::drop) ... NOT COVERED
+29: lit_bool, replace `false` with `true`, at src/contextimpl.rs@261:12-261:17(fn ContextFut < A, C >::alive) ... SURVIVED
+30: unop_not, remove `!`, at src/contextimpl.rs@263:12-263:13(fn ContextFut < A, C >::alive) ... SURVIVED
+31: binop_bool, replace `||` with `&&`, at src/contextimpl.rs@264:16-264:18(fn ContextFut < A, C >::alive) ... killed
+32: unop_not, remove `!`, at src/contextimpl.rs@265:19-265:20(fn ContextFut < A, C >::alive) ... SURVIVED
+33: binop_bool, replace `||` with `&&`, at src/contextimpl.rs@265:16-265:18(fn ContextFut < A, C >::alive) ... killed
+34: unop_not, remove `!`, at src/contextimpl.rs@266:19-266:20(fn ContextFut < A, C >::alive) ... SURVIVED
+35: binop_bool, replace `||` with `&&`, at src/contextimpl.rs@266:16-266:18(fn ContextFut < A, C >::alive) ... killed
+36: stmt_call, remove `self . ctx . parts () . restart () ;`, at src/contextimpl.rs@279:12-279:38(fn ContextFut < A, C >::restart) ... NOT COVERED
+37: stmt_call, remove `self . act . restarting (& mut self . ctx) ;`, at src/contextimpl.rs@280:12-280:46(fn ContextFut < A, C >::restart) ... NOT COVERED
+38: lit_bool, replace `true` with `false`, at src/contextimpl.rs@281:12-281:16(fn ContextFut < A, C >::restart) ... NOT COVERED
+39: lit_bool, replace `false` with `true`, at src/contextimpl.rs@283:12-283:17(fn ContextFut < A, C >::restart) ... NOT COVERED
+40: lit_bool, replace `false` with `true`, at src/contextimpl.rs@288:27-288:32(fn ContextFut < A, C >::merge) ... killed (timeout)
+41: unop_not, remove `!`, at src/contextimpl.rs@291:11-291:12(fn ContextFut < A, C >::merge) ... killed (timeout)
+42: lit_bool, replace `true` with `false`, at src/contextimpl.rs@292:23-292:27(fn ContextFut < A, C >::merge) ... NOT COVERED
+43: stmt_call, remove `self . wait . extend (parts . wait . drain ()) ;`, at src/contextimpl.rs@293:12-293:48(fn ContextFut < A, C >::merge) ... NOT COVERED
+44: unop_not, remove `!`, at src/contextimpl.rs@295:11-295:12(fn ContextFut < A, C >::merge) ... killed (timeout)
+45: lit_bool, replace `true` with `false`, at src/contextimpl.rs@296:23-296:27(fn ContextFut < A, C >::merge) ... NOT COVERED
+46: stmt_call, remove `self . items . extend (parts . items . drain ()) ;`, at src/contextimpl.rs@297:12-297:50(fn ContextFut < A, C >::merge) ... NOT COVERED
+47: lit_bool, replace `true` with `false`, at src/contextimpl.rs@301:23-301:27(fn ContextFut < A, C >::merge) ... SURVIVED
+48: stmt_call, remove `parts . flags . remove (ContextFlags :: MB_CAP_CHANGED) ;`, at src/contextimpl.rs@302:12-302:60(fn ContextFut < A, C >::merge) ... killed (timeout)
+49: lit_int, replace `2` with `3`, at src/contextimpl.rs@304:33-304:34(fn ContextFut < A, C >::merge) ... SURVIVED
+50: lit_int, replace `2` with `1`, at src/contextimpl.rs@304:33-304:34(fn ContextFut < A, C >::merge) ... killed (timeout)
+51: binop_cmp, replace `>` with `<`, at src/contextimpl.rs@304:31-304:32(fn ContextFut < A, C >::merge) ... SURVIVED
+52: binop_cmp, replace `>` with `<=`, at src/contextimpl.rs@304:31-304:32(fn ContextFut < A, C >::merge) ... killed (timeout)
+53: binop_cmp, replace `>` with `>=`, at src/contextimpl.rs@304:31-304:32(fn ContextFut < A, C >::merge) ... killed (timeout)
+54: lit_bool, replace `true` with `false`, at src/contextimpl.rs@305:23-305:27(fn ContextFut < A, C >::merge) ... NOT COVERED
+55: lit_int, replace `2` with `3`, at src/contextimpl.rs@312:47-312:48(fn ContextFut < A, C >::clean_cancled_handle) ... SURVIVED
+56: lit_int, replace `2` with `1`, at src/contextimpl.rs@312:47-312:48(fn ContextFut < A, C >::clean_cancled_handle) ... killed
+57: binop_cmp, replace `>` with `<`, at src/contextimpl.rs@312:45-312:46(fn ContextFut < A, C >::clean_cancled_handle) ... SURVIVED
+58: binop_cmp, replace `>` with `<=`, at src/contextimpl.rs@312:45-312:46(fn ContextFut < A, C >::clean_cancled_handle) ... killed
+59: binop_cmp, replace `>` with `>=`, at src/contextimpl.rs@312:45-312:46(fn ContextFut < A, C >::clean_cancled_handle) ... killed
+60: lit_int, replace `0` with `1`, at src/contextimpl.rs@314:26-314:27(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+61: binop_cmp, replace `<` with `<=`, at src/contextimpl.rs@315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+62: binop_cmp, replace `<` with `>=`, at src/contextimpl.rs@315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+63: binop_cmp, replace `<` with `>`, at src/contextimpl.rs@315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+64: binop_eq, replace `==` with `!=`, at src/contextimpl.rs@316:37-316:39(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+65: stmt_call, remove `self . items . swap_remove (idx) ;`, at src/contextimpl.rs@317:20-317:47(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+66: lit_int, replace `1` with `2`, at src/contextimpl.rs@319:27-319:28(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+67: lit_int, replace `1` with `0`, at src/contextimpl.rs@319:27-319:28(fn ContextFut < A, C >::clean_cancled_handle) ... NOT COVERED
+68: unop_not, remove `!`, at src/contextimpl.rs@337:11-337:12(fn ContextFut < A, C >::poll) ... SURVIVED
+69: stmt_call, remove `self . ctx . parts () . flags . insert (ContextFlags :: STARTED) ;`, at src/contextimpl.rs@338:12-338:64(fn ContextFut < A, C >::poll) ... SURVIVED
+70: stmt_call, remove `Actor :: started (& mut self . act, & mut self . ctx) ;`, at src/contextimpl.rs@339:12-339:56(fn ContextFut < A, C >::poll) ... SURVIVED
+71: stmt_call, remove `self . clean_cancled_handle () ;`, at src/contextimpl.rs@343:16-343:43(fn ContextFut < A, C >::poll) ... SURVIVED
+72: unop_not, remove `!`, at src/contextimpl.rs@351:18-351:19(fn ContextFut < A, C >::poll) ... killed
+73: unop_not, remove `!`, at src/contextimpl.rs@351:43-351:44(fn ContextFut < A, C >::poll) ... NOT COVERED
+74: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@351:40-351:42(fn ContextFut < A, C >::poll) ... killed
+75: lit_int, replace `1` with `2`, at src/contextimpl.rs@352:44-352:45(fn ContextFut < A, C >::poll) ... NOT COVERED
+76: lit_int, replace `1` with `0`, at src/contextimpl.rs@352:44-352:45(fn ContextFut < A, C >::poll) ... NOT COVERED
+77: stmt_call, remove `self . wait . remove (idx) ;`, at src/contextimpl.rs@359:16-359:37(fn ContextFut < A, C >::poll) ... NOT COVERED
+78: stmt_call, remove `self . merge () ;`, at src/contextimpl.rs@360:16-360:28(fn ContextFut < A, C >::poll) ... NOT COVERED
+79: stmt_call, remove `self . mailbox . poll (& mut self . act, & mut self . ctx) ;`, at src/contextimpl.rs@364:12-364:59(fn ContextFut < A, C >::poll) ... killed (timeout)
+80: unop_not, remove `!`, at src/contextimpl.rs@365:15-365:16(fn ContextFut < A, C >::poll) ... killed (timeout)
+81: unop_not, remove `!`, at src/contextimpl.rs@365:40-365:41(fn ContextFut < A, C >::poll) ... NOT COVERED
+82: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@365:37-365:39(fn ContextFut < A, C >::poll) ... killed (timeout)
+83: lit_int, replace `0` with `1`, at src/contextimpl.rs@370:26-370:27(fn ContextFut < A, C >::poll) ... SURVIVED
+84: binop_cmp, replace `<` with `<=`, at src/contextimpl.rs@371:22-371:23(fn ContextFut < A, C >::poll) ... killed
+85: binop_cmp, replace `<` with `>=`, at src/contextimpl.rs@371:22-371:23(fn ContextFut < A, C >::poll) ... killed
+86: binop_cmp, replace `<` with `>`, at src/contextimpl.rs@371:22-371:23(fn ContextFut < A, C >::poll) ... SURVIVED
+87: unop_not, remove `!`, at src/contextimpl.rs@371:44-371:45(fn ContextFut < A, C >::poll) ... NOT COVERED
+88: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@371:41-371:43(fn ContextFut < A, C >::poll) ... killed
+89: lit_int, replace `1` with `2`, at src/contextimpl.rs@372:41-372:42(fn ContextFut < A, C >::poll) ... NOT COVERED
+90: lit_int, replace `1` with `0`, at src/contextimpl.rs@372:41-372:42(fn ContextFut < A, C >::poll) ... NOT COVERED
+91: lit_int, replace `2` with `3`, at src/contextimpl.rs@376:60-376:61(fn ContextFut < A, C >::poll) ... NOT COVERED
+92: lit_int, replace `2` with `1`, at src/contextimpl.rs@376:60-376:61(fn ContextFut < A, C >::poll) ... NOT COVERED
+93: binop_cmp, replace `>` with `<`, at src/contextimpl.rs@376:58-376:59(fn ContextFut < A, C >::poll) ... NOT COVERED
+94: binop_cmp, replace `>` with `<=`, at src/contextimpl.rs@376:58-376:59(fn ContextFut < A, C >::poll) ... NOT COVERED
+95: binop_cmp, replace `>` with `>=`, at src/contextimpl.rs@376:58-376:59(fn ContextFut < A, C >::poll) ... NOT COVERED
+96: stmt_call, remove `self . clean_cancled_handle () ;`, at src/contextimpl.rs@380:28-380:55(fn ContextFut < A, C >::poll) ... NOT COVERED
+97: unop_not, remove `!`, at src/contextimpl.rs@386:27-386:28(fn ContextFut < A, C >::poll) ... NOT COVERED
+98: unop_not, remove `!`, at src/contextimpl.rs@386:52-386:53(fn ContextFut < A, C >::poll) ... NOT COVERED
+99: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@386:49-386:51(fn ContextFut < A, C >::poll) ... NOT COVERED
+100: lit_int, replace `1` with `2`, at src/contextimpl.rs@391:58-391:59(fn ContextFut < A, C >::poll) ... NOT COVERED
+101: lit_int, replace `1` with `0`, at src/contextimpl.rs@391:58-391:59(fn ContextFut < A, C >::poll) ... NOT COVERED
+102: binop_eq, replace `!=` with `==`, at src/contextimpl.rs@392:35-392:37(fn ContextFut < A, C >::poll) ... NOT COVERED
+103: stmt_call, remove `self . items . swap (idx, next) ;`, at src/contextimpl.rs@393:32-393:58(fn ContextFut < A, C >::poll) ... NOT COVERED
+104: lit_int, replace `1` with `2`, at src/contextimpl.rs@397:35-397:36(fn ContextFut < A, C >::poll) ... NOT COVERED
+105: lit_int, replace `1` with `0`, at src/contextimpl.rs@397:35-397:36(fn ContextFut < A, C >::poll) ... NOT COVERED
+106: stmt_call, remove `self . items . swap_remove (idx) ;`, at src/contextimpl.rs@401:24-401:51(fn ContextFut < A, C >::poll) ... NOT COVERED
+107: unop_not, remove `!`, at src/contextimpl.rs@403:27-403:28(fn ContextFut < A, C >::poll) ... NOT COVERED
+108: unop_not, remove `!`, at src/contextimpl.rs@403:52-403:53(fn ContextFut < A, C >::poll) ... NOT COVERED
+109: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@403:49-403:51(fn ContextFut < A, C >::poll) ... NOT COVERED
+110: lit_int, replace `1` with `2`, at src/contextimpl.rs@409:37-409:38(fn ContextFut < A, C >::poll) ... killed
+111: lit_int, replace `1` with `0`, at src/contextimpl.rs@409:37-409:38(fn ContextFut < A, C >::poll) ... SURVIVED
+112: unop_not, remove `!`, at src/contextimpl.rs@412:31-412:32(fn ContextFut < A, C >::poll) ... NOT COVERED
+113: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@412:28-412:30(fn ContextFut < A, C >::poll) ... killed (timeout)
+114: lit_int, replace `2` with `3`, at src/contextimpl.rs@418:54-418:55(fn ContextFut < A, C >::poll) ... NOT COVERED
+115: lit_int, replace `2` with `1`, at src/contextimpl.rs@418:54-418:55(fn ContextFut < A, C >::poll) ... NOT COVERED
+116: stmt_call, remove `self . ctx . parts () . handles . truncate (2) ;`, at src/contextimpl.rs@418:20-418:56(fn ContextFut < A, C >::poll) ... NOT COVERED
+117: unop_not, remove `!`, at src/contextimpl.rs@426:19-426:20(fn ContextFut < A, C >::poll) ... killed
+118: binop_eq, replace `==` with `!=`, at src/contextimpl.rs@427:69-427:71(fn ContextFut < A, C >::poll) ... SURVIVED
+119: binop_bool, replace `&&` with `||`, at src/contextimpl.rs@427:20-427:22(fn ContextFut < A, C >::poll) ... killed
+120: stmt_call, remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;`, at src/contextimpl.rs@431:20-431:64(fn ContextFut < A, C >::poll) ... SURVIVED
+121: binop_eq, replace `==` with `!=`, at src/contextimpl.rs@435:65-435:67(fn ContextFut < A, C >::poll) ... NOT COVERED
+122: stmt_call, remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;`, at src/contextimpl.rs@438:20-438:64(fn ContextFut < A, C >::poll) ... NOT COVERED
+123: stmt_call, remove `self . ctx . parts () . flags . remove (ContextFlags :: STOPPING) ;`, at src/contextimpl.rs@441:20-441:73(fn ContextFut < A, C >::poll) ... NOT COVERED
+124: stmt_call, remove `self . ctx . parts () . flags . insert (ContextFlags :: RUNNING) ;`, at src/contextimpl.rs@442:20-442:72(fn ContextFut < A, C >::poll) ... NOT COVERED
+125: stmt_call, remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;`, at src/contextimpl.rs@446:16-446:60(fn ContextFut < A, C >::poll) ... NOT COVERED
+126: binop_add, replace `+` with `-`, at src/contextitems.rs@61:45-61:46(fn ActorDelayedMessageItem < A, M >::new) ... NOT COVERED
+127: stmt_call, remove `fut . handle :: < () > (ctx, None) ;`, at src/contextitems.rs@87:16-87:43(fn ActorDelayedMessageItem < A, M >::poll) ... NOT COVERED
+128: stmt_call, remove `fut . handle :: < () > (ctx, None) ;`, at src/contextitems.rs@133:8-133:35(fn ActorMessageItem < A, M >::poll) ... NOT COVERED
+129: stmt_call, remove `fut . handle :: < () > (ctx, None) ;`, at src/contextitems.rs@182:20-182:47(fn ActorMessageStreamItem < A, M, S >::poll) ... NOT COVERED
+130: lit_bool, replace `true` with `false`, at src/handler.rs@90:8-90:12(fn ()::is_canceled) ... NOT COVERED
+131: stmt_call, remove `tx . send (self . 0) ;`, at src/handler.rs@102:12-102:27(fn MessageResult < M >::handle) ... NOT COVERED
+132: stmt_call, remove `tx . send (self) ;`, at src/handler.rs@114:12-114:25(fn Result < I, E >::handle) ... NOT COVERED
+133: stmt_call, remove `tx . send (self) ;`, at src/handler.rs@126:12-126:25(fn Arc < I >::handle) ... NOT COVERED
+134: stmt_call, remove `tx . send (self) ;`, at src/handler.rs@138:12-138:25(fn Option < I >::handle) ... NOT COVERED
+135: stmt_call, remove `tx . send (self) ;`, at src/handler.rs@151:12-151:25(fn Addr < B >::handle) ... NOT COVERED
+136: stmt_call, remove `tx . send (res) ;`, at src/handler.rs@165:16-165:28(fn ResponseActFuture < A, I, E >::handle) ... NOT COVERED
+137: stmt_call, remove `ctx . spawn (self . then  (move | res, _, _ |   { if let Some (tx) = tx { tx . send (res) ; } fut :: ok (()) })) ;`, at src/handler.rs@163:8-168:11(fn ResponseActFuture < A, I, E >::handle) ... NOT COVERED
+138: stmt_call, remove `actix_rt :: spawn (self . then  (move | res | { if let Some (tx) = tx { tx . send (res) } Ok (()) })) ;`, at src/handler.rs@180:8-185:11(fn ResponseFuture < I, E >::handle) ... NOT COVERED
+139: stmt_call, remove `tx . send (res) ;`, at src/handler.rs@240:24-240:36(fn Response < I, E >::handle) ... NOT COVERED
+140: stmt_call, remove `actix_rt :: spawn (fut . then  (move | res | { if let Some (tx) = tx { tx . send (res) ; } Ok (()) })) ;`, at src/handler.rs@238:16-243:19(fn Response < I, E >::handle) ... NOT COVERED
+141: stmt_call, remove `tx . send (res) ;`, at src/handler.rs@247:20-247:32(fn Response < I, E >::handle) ... NOT COVERED
+142: stmt_call, remove `ctx . spawn (fut . then  (move | res, _, _ |   { if let Some (tx) = tx { tx . send (res) } fut :: ok (()) })) ;`, at src/handler.rs@305:16-310:19(fn ActorResponse < A, I, E >::handle) ... NOT COVERED
+143: stmt_call, remove `tx . send (res) ;`, at src/handler.rs@314:20-314:32(fn ActorResponse < A, I, E >::handle) ... NOT COVERED
+144: lit_bool, replace `false` with `true`, at src/stream.rs@114:21-114:26(fn ActorStream < A, M, E, S >::new) ... NOT COVERED
+145: unop_not, remove `!`, at src/stream.rs@137:11-137:12(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+146: lit_bool, replace `true` with `false`, at src/stream.rs@138:27-138:31(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+147: stmt_call, remove `< A as StreamHandler < M, E > > :: started (act, ctx) ;`, at src/stream.rs@139:12-139:57(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+148: stmt_call, remove `A :: handle (act, msg, ctx) ;`, at src/stream.rs@145:20-145:44(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+149: binop_eq, replace `==` with `!=`, at src/stream.rs@151:47-151:49(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+150: stmt_call, remove `A :: finished (act, ctx) ;`, at src/stream.rs@152:24-152:45(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+151: stmt_call, remove `A :: finished (act, ctx) ;`, at src/stream.rs@157:20-157:41(fn ActorStream < A, M, E, S >::poll) ... NOT COVERED
+152: stmt_call, remove `actix_rt :: spawn (Self { fut }) ;`, at src/supervisor.rs@108:8-108:37(fn Supervisor < A >::start) ... NOT COVERED
+153: stmt_call, remove `actix_rt :: spawn (Self { fut }) ;`, at src/supervisor.rs@126:12-126:41(fn Supervisor < A >::start_in_arbiter) ... NOT COVERED
+154: stmt_call, remove `sys . exec_fn (move | |  {      let mut ctx = Context :: with_receiver (rx) ; let act = f (& mut ctx) ;      let fut = ctx . into_future (act) ; actix_rt :: spawn (Self { fut }) ;  }) ;`, at src/supervisor.rs@121:8-127:10(fn Supervisor < A >::start_in_arbiter) ... NOT COVERED
+155: unop_not, remove `!`, at src/supervisor.rs@147:23-147:24(fn Supervisor < A >::poll) ... NOT COVERED
+156: lit_bool, replace `false` with `true`, at src/address/channel.rs@163:23-163:28(fn SenderTask::new) ... SURVIVED
+157: lit_bool, replace `false` with `true`, at src/address/channel.rs@168:25-168:30(fn SenderTask::notify) ... SURVIVED
+158: stmt_call, remove `task . notify () ;`, at src/address/channel.rs@171:12-171:25(fn SenderTask::notify) ... SURVIVED
+159: lit_bool, replace `true` with `false`, at src/address/channel.rs@172:12-172:16(fn SenderTask::notify) ... SURVIVED
+160: lit_bool, replace `false` with `true`, at src/address/channel.rs@174:12-174:17(fn SenderTask::notify) ... SURVIVED
+161: lit_bool, replace `false` with `true`, at src/address/channel.rs@245:31-245:36(fn AddressSender < A >::send) ... SURVIVED
+162: unop_not, remove `!`, at src/address/channel.rs@245:11-245:12(fn AddressSender < A >::send) ... killed
+163: lit_bool, replace `true` with `false`, at src/address/channel.rs@264:22-264:26(fn AddressSender < A >::send) ... SURVIVED
+164: stmt_call, remove `self . park (true) ;`, at src/address/channel.rs@264:12-264:27(fn AddressSender < A >::send) ... killed
+165: stmt_call, remove `self . queue_push_and_signal (env) ;`, at src/address/channel.rs@268:8-268:39(fn AddressSender < A >::send) ... killed
+166: lit_bool, replace `false` with `true`, at src/address/channel.rs@281:31-281:36(fn AddressSender < A >::try_send) ... NOT COVERED
+167: unop_not, remove `!`, at src/address/channel.rs@281:11-281:12(fn AddressSender < A >::try_send) ... NOT COVERED
+168: binop_bool, replace `&&` with `||`, at src/address/channel.rs@290:21-290:23(fn AddressSender < A >::try_send) ... NOT COVERED
+169: lit_bool, replace `true` with `false`, at src/address/channel.rs@291:22-291:26(fn AddressSender < A >::try_send) ... NOT COVERED
+170: stmt_call, remove `self . park (true) ;`, at src/address/channel.rs@291:12-291:27(fn AddressSender < A >::try_send) ... NOT COVERED
+171: stmt_call, remove `self . queue_push_and_signal (env) ;`, at src/address/channel.rs@294:8-294:39(fn AddressSender < A >::try_send) ... NOT COVERED
+172: stmt_call, remove `self . queue_push_and_signal (env) ;`, at src/address/channel.rs@315:12-315:43(fn AddressSender < A >::do_send) ... NOT COVERED
+173: stmt_call, remove `self . inner . message_queue . push (msg) ;`, at src/address/channel.rs@330:8-330:42(fn AddressSender < A >::queue_push_and_signal) ... killed
+174: stmt_call, remove `self . signal () ;`, at src/address/channel.rs@334:8-334:21(fn AddressSender < A >::queue_push_and_signal) ... SURVIVED
+175: unop_not, remove `!`, at src/address/channel.rs@343:15-343:16(fn AddressSender < A >::inc_num_messages) ... killed
+176: lit_int, replace `1` with `2`, at src/address/channel.rs@346:34-346:35(fn AddressSender < A >::inc_num_messages) ... killed
+177: lit_int, replace `1` with `0`, at src/address/channel.rs@346:34-346:35(fn AddressSender < A >::inc_num_messages) ... killed
+178: lit_int, replace `0` with `1`, at src/address/channel.rs@357:46-357:47(fn AddressSender < A >::inc_num_messages) ... killed
+179: binop_eq, replace `!=` with `==`, at src/address/channel.rs@357:43-357:45(fn AddressSender < A >::inc_num_messages) ... killed
+180: binop_cmp, replace `>=` with `<`, at src/address/channel.rs@357:70-357:72(fn AddressSender < A >::inc_num_messages) ... killed
+181: binop_cmp, replace `>=` with `<=`, at src/address/channel.rs@357:70-357:72(fn AddressSender < A >::inc_num_messages) ... killed
+182: binop_cmp, replace `>=` with `>`, at src/address/channel.rs@357:70-357:72(fn AddressSender < A >::inc_num_messages) ... SURVIVED
+183: binop_bool, replace `&&` with `||`, at src/address/channel.rs@357:48-357:50(fn AddressSender < A >::inc_num_messages) ... SURVIVED
+184: lit_bool, replace `true` with `false`, at src/address/channel.rs@385:33-385:37(fn AddressSender < A >::signal) ... SURVIVED
+185: stmt_call, remove `task . notify () ;`, at src/address/channel.rs@390:12-390:25(fn AddressSender < A >::signal) ... killed (timeout)
+186: lit_bool, replace `true` with `false`, at src/address/channel.rs@405:31-405:35(fn AddressSender < A >::park) ... killed
+187: stmt_call, remove `self . inner . parked_queue . push (Arc :: clone (& self . sender_task)) ;`, at src/address/channel.rs@409:8-409:67(fn AddressSender < A >::park) ... killed
+188: stmt_call, remove `self . maybe_parked . store (state . is_open, Relaxed) ;`, at src/address/channel.rs@413:8-413:55(fn AddressSender < A >::park) ... killed
+189: unop_not, remove `!`, at src/address/channel.rs@423:15-423:16(fn AddressSender < A >::poll_unparked) ... killed
+190: lit_bool, replace `false` with `true`, at src/address/channel.rs@424:40-424:45(fn AddressSender < A >::poll_unparked) ... NOT COVERED
+191: stmt_call, remove `self . maybe_parked . store (false, Relaxed) ;`, at src/address/channel.rs@424:16-424:55(fn AddressSender < A >::poll_unparked) ... NOT COVERED
+192: lit_bool, replace `true` with `false`, at src/address/channel.rs@454:27-454:31(fn AddressSender < A >::try_send) ... NOT COVERED
+193: binop_eq, replace `==` with `!=`, at src/address/channel.rs@481:20-481:22(fn AddressSender < A >::clone) ... killed
+194: lit_int, replace `1` with `2`, at src/address/channel.rs@487:30-487:31(fn AddressSender < A >::clone) ... SURVIVED
+195: lit_int, replace `1` with `0`, at src/address/channel.rs@487:30-487:31(fn AddressSender < A >::clone) ... SURVIVED
+196: binop_add, replace `+` with `-`, at src/address/channel.rs@487:28-487:29(fn AddressSender < A >::clone) ... killed
+197: binop_eq, replace `==` with `!=`, at src/address/channel.rs@492:22-492:24(fn AddressSender < A >::clone) ... SURVIVED
+198: lit_bool, replace `false` with `true`, at src/address/channel.rs@496:59-496:64(fn AddressSender < A >::clone) ... SURVIVED
+199: lit_int, replace `1` with `2`, at src/address/channel.rs@508:52-508:53(fn AddressSender < A >::drop) ... killed
+200: lit_int, replace `1` with `0`, at src/address/channel.rs@508:52-508:53(fn AddressSender < A >::drop) ... SURVIVED
+201: lit_int, replace `1` with `2`, at src/address/channel.rs@510:19-510:20(fn AddressSender < A >::drop) ... SURVIVED
+202: lit_int, replace `1` with `0`, at src/address/channel.rs@510:19-510:20(fn AddressSender < A >::drop) ... SURVIVED
+203: binop_eq, replace `==` with `!=`, at src/address/channel.rs@510:16-510:18(fn AddressSender < A >::drop) ... SURVIVED
+204: stmt_call, remove `self . signal () ;`, at src/address/channel.rs@511:12-511:25(fn AddressSender < A >::drop) ... SURVIVED
+205: stmt_call, remove `(self . inner . as_ref () as * const Inner < A >) . hash (state) ;`, at src/address/channel.rs@526:8-526:60(fn AddressSender < A >::hash) ... NOT COVERED
+206: lit_int, replace `0` with `1`, at src/address/channel.rs@555:47-555:48(fn AddressSenderProducer < A >::connected) ... NOT COVERED
+207: binop_eq, replace `!=` with `==`, at src/address/channel.rs@555:44-555:46(fn AddressSenderProducer < A >::connected) ... NOT COVERED
+208: stmt_call, remove `self . inner . buffer . store (cap, Relaxed) ;`, at src/address/channel.rs@569:8-569:45(fn AddressSenderProducer < A >::set_capacity) ... killed
+209: binop_cmp, replace `>` with `<`, at src/address/channel.rs@572:15-572:16(fn AddressSenderProducer < A >::set_capacity) ... SURVIVED
+210: binop_cmp, replace `>` with `<=`, at src/address/channel.rs@572:15-572:16(fn AddressSenderProducer < A >::set_capacity) ... SURVIVED
+211: binop_cmp, replace `>` with `>=`, at src/address/channel.rs@572:15-572:16(fn AddressSenderProducer < A >::set_capacity) ... SURVIVED
+212: stmt_call, remove `task . lock () . notify () ;`, at src/address/channel.rs@576:24-576:44(fn AddressSenderProducer < A >::set_capacity) ... NOT COVERED
+213: stmt_call, remove `thread :: yield_now () ;`, at src/address/channel.rs@584:24-584:43(fn AddressSenderProducer < A >::set_capacity) ... NOT COVERED
+214: binop_eq, replace `==` with `!=`, at src/address/channel.rs@598:20-598:22(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+215: lit_int, replace `1` with `2`, at src/address/channel.rs@602:30-602:31(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+216: lit_int, replace `1` with `0`, at src/address/channel.rs@602:30-602:31(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+217: binop_add, replace `+` with `-`, at src/address/channel.rs@602:28-602:29(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+218: binop_eq, replace `==` with `!=`, at src/address/channel.rs@607:22-607:24(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+219: lit_bool, replace `false` with `true`, at src/address/channel.rs@611:59-611:64(fn AddressSenderProducer < A >::sender) ... NOT COVERED
+220: lit_int, replace `0` with `1`, at src/address/channel.rs@628:47-628:48(fn AddressReceiver < A >::connected) ... killed
+221: binop_eq, replace `!=` with `==`, at src/address/channel.rs@628:44-628:46(fn AddressReceiver < A >::connected) ... killed
+222: stmt_call, remove `self . inner . buffer . store (cap, Relaxed) ;`, at src/address/channel.rs@642:8-642:45(fn AddressReceiver < A >::set_capacity) ... SURVIVED
+223: binop_cmp, replace `>` with `<`, at src/address/channel.rs@645:15-645:16(fn AddressReceiver < A >::set_capacity) ... killed
+224: binop_cmp, replace `>` with `<=`, at src/address/channel.rs@645:15-645:16(fn AddressReceiver < A >::set_capacity) ... killed
+225: binop_cmp, replace `>` with `>=`, at src/address/channel.rs@645:15-645:16(fn AddressReceiver < A >::set_capacity) ... SURVIVED
+226: stmt_call, remove `task . lock () . notify () ;`, at src/address/channel.rs@649:24-649:44(fn AddressReceiver < A >::set_capacity) ... SURVIVED
+227: stmt_call, remove `thread :: yield_now () ;`, at src/address/channel.rs@657:24-657:43(fn AddressReceiver < A >::set_capacity) ... NOT COVERED
+228: binop_eq, replace `==` with `!=`, at src/address/channel.rs@671:20-671:22(fn AddressReceiver < A >::sender) ... killed
+229: lit_int, replace `1` with `2`, at src/address/channel.rs@675:30-675:31(fn AddressReceiver < A >::sender) ... SURVIVED
+230: lit_int, replace `1` with `0`, at src/address/channel.rs@675:30-675:31(fn AddressReceiver < A >::sender) ... killed
+231: binop_add, replace `+` with `-`, at src/address/channel.rs@675:28-675:29(fn AddressReceiver < A >::sender) ... killed
+232: binop_eq, replace `==` with `!=`, at src/address/channel.rs@680:22-680:24(fn AddressReceiver < A >::sender) ... SURVIVED
+233: lit_bool, replace `false` with `true`, at src/address/channel.rs@684:59-684:64(fn AddressReceiver < A >::sender) ... SURVIVED
+234: stmt_call, remove `thread :: yield_now () ;`, at src/address/channel.rs@722:20-722:39(fn AddressReceiver < A >::next_message) ... NOT COVERED
+235: stmt_call, remove `thread :: yield_now () ;`, at src/address/channel.rs@743:20-743:39(fn AddressReceiver < A >::unpark_one) ... NOT COVERED
+236: lit_bool, replace `false` with `true`, at src/address/channel.rs@756:33-756:38(fn AddressReceiver < A >::try_park) ... killed (timeout)
+237: lit_int, replace `1` with `2`, at src/address/channel.rs@770:34-770:35(fn AddressReceiver < A >::dec_num_messages) ... killed
+238: lit_int, replace `1` with `0`, at src/address/channel.rs@770:34-770:35(fn AddressReceiver < A >::dec_num_messages) ... SURVIVED
+239: stmt_call, remove `self . unpark_one () ;`, at src/address/channel.rs@816:12-816:29(fn AddressReceiver < A >::poll) ... SURVIVED
+240: stmt_call, remove `self . dec_num_messages () ;`, at src/address/channel.rs@819:12-819:35(fn AddressReceiver < A >::poll) ... SURVIVED
+241: unop_not, remove `!`, at src/address/channel.rs@833:15-833:16(fn AddressReceiver < A >::drop) ... SURVIVED
+242: lit_bool, replace `false` with `true`, at src/address/channel.rs@836:28-836:33(fn AddressReceiver < A >::drop) ... SURVIVED
+243: stmt_call, remove `task . lock () . notify () ;`, at src/address/channel.rs@854:20-854:40(fn AddressReceiver < A >::drop) ... NOT COVERED
+244: binop_eq, replace `==` with `!=`, at src/address/channel.rs@891:33-891:35(fn decode_state) ... killed
+245: binop_bool, replace `&&` with `||`, at src/address/envelope.rs@107:24-107:26(fn SyncEnvelopeProxy < A, M >::handle) ... killed
+246: binop_add, replace `+` with `-`, at src/address/message.rs@54:52-54:53(fn Request < A, M >::timeout) ... NOT COVERED
+247: binop_add, replace `+` with `-`, at src/address/message.rs@135:52-135:53(fn RecipientRequest < M >::timeout) ... NOT COVERED
+248: stmt_call, remove `(* prev) . next . store (n, Ordering :: Release) ;`, at src/address/queue.rs@108:12-108:52(fn Queue < T >::push) ... killed (timeout)
+249: unop_not, remove `!`, at src/address/queue.rs@128:11-128:12(fn Queue < T >::pop) ... killed (timeout)
+250: stmt_call, remove `drop (Box :: from_raw (tail)) ;`, at src/address/queue.rs@133:12-133:37(fn Queue < T >::pop) ... SURVIVED
+251: binop_eq, replace `==` with `!=`, at src/address/queue.rs@137:45-137:47(fn Queue < T >::pop) ... killed (timeout)
+252: unop_not, remove `!`, at src/address/queue.rs@149:18-149:19(fn Queue < T >::drop) ... SURVIVED
+253: stmt_call, remove `drop (Box :: from_raw (cur)) ;`, at src/address/queue.rs@151:16-151:40(fn Queue < T >::drop) ... SURVIVED
+254: lit_bool, replace `true` with `false`, at src/address/mod.rs@112:30-112:34(fn Addr < A >::try_send) ... NOT COVERED
+255: binop_eq, replace `==` with `!=`, at src/address/mod.rs@166:16-166:18(fn Addr < A >::eq) ... NOT COVERED
+256: binop_eq, replace `==` with `!=`, at src/address/mod.rs@292:23-292:25(fn Recipient < M >::eq) ... NOT COVERED
+257: stmt_call, remove `self . msgs . set_capacity (cap) ;`, at src/mailbox.rs@62:8-62:35(fn Mailbox < A >::set_capacity) ... NOT COVERED
+258: lit_int, replace `0` with `1`, at src/mailbox.rs@80:26-80:30(fn Mailbox < A >::poll) ... NOT COVERED
+259: lit_bool, replace `true` with `false`, at src/mailbox.rs@83:32-83:36(fn Mailbox < A >::poll) ... killed (timeout)
+260: lit_bool, replace `false` with `true`, at src/mailbox.rs@93:36-93:41(fn Mailbox < A >::poll) ... SURVIVED
+261: stmt_call, remove `msg . handle (act, ctx) ;`, at src/mailbox.rs@94:24-94:44(fn Mailbox < A >::poll) ... killed
+262: lit_int, replace `1` with `2`, at src/mailbox.rs@101:31-101:32(fn Mailbox < A >::poll) ... NOT COVERED
+263: lit_int, replace `1` with `0`, at src/mailbox.rs@101:31-101:32(fn Mailbox < A >::poll) ... NOT COVERED
+264: lit_int, replace `1` with `2`, at src/actors/resolver.rs@103:41-103:42(fn Connect::host) ... NOT COVERED
+265: lit_int, replace `1` with `0`, at src/actors/resolver.rs@103:41-103:42(fn Connect::host) ... NOT COVERED
+266: lit_int, replace `1` with `2`, at src/actors/resolver.rs@111:41-111:42(fn Connect::host_and_port) ... NOT COVERED
+267: lit_int, replace `1` with `0`, at src/actors/resolver.rs@111:41-111:42(fn Connect::host_and_port) ... NOT COVERED
+268: stmt_call, remove `ctx . spawn (wrap_future :: < _, Self > (parts . 1)) ;`, at src/actors/resolver.rs@181:8-181:50(fn Resolver::start_resolver) ... NOT COVERED
+269: lit_int, replace `0` with `1`, at src/actors/resolver.rs@241:35-241:36(fn Resolver::handle) ... NOT COVERED
+270: lit_int, replace `0` with `1`, at src/actors/resolver.rs@256:35-256:36(fn Resolver::handle) ... NOT COVERED
+271: stmt_call, remove `v . push_back (msg . 0) ;`, at src/actors/resolver.rs@269:8-269:26(fn Resolver::handle) ... NOT COVERED
+272: stmt_call, remove `addrs . push_back (addr) ;`, at src/actors/resolver.rs@292:12-292:33(fn ResolveFut::new) ... NOT COVERED
+273: lit_int, replace `0` with `1`, at src/actors/resolver.rs@324:18-324:19(fn ResolveFut::err) ... NOT COVERED
+274: lit_int, replace `2` with `3`, at src/actors/resolver.rs@343:41-343:42(fn ResolveFut::parse) ... NOT COVERED
+275: lit_int, replace `2` with `1`, at src/actors/resolver.rs@343:41-343:42(fn ResolveFut::parse) ... NOT COVERED
+276: lit_int, replace `1` with `2`, at src/actors/resolver.rs@399:62-399:63(fn TcpConnector::new) ... NOT COVERED
+277: lit_int, replace `1` with `0`, at src/actors/resolver.rs@399:62-399:63(fn TcpConnector::new) ... NOT COVERED
+278: binop_add, replace `+` with `-`, at src/actors/resolver.rs@406:45-406:46(fn TcpConnector::with_timeout) ... NOT COVERED
+279: stmt_call, remove `self . timeout . take () ;`, at src/fut/stream_timeout.rs@55:16-55:35(fn StreamTimeout < S >::poll) ... NOT COVERED
+280: binop_add, replace `+` with `-`, at src/fut/stream_timeout.rs@63:56-63:57(fn StreamTimeout < S >::poll) ... NOT COVERED
+281: stmt_call, remove `self . timeout . take () ;`, at src/fut/stream_timeout.rs@72:8-72:27(fn StreamTimeout < S >::poll) ... NOT COVERED
+282: stmt_call, remove `self . inner . 0 . borrow_mut () . flags . insert (Flags :: CLOSING) ;`, at src/io.rs@111:8-111:62(fn Writer < T, E >::close) ... NOT COVERED
+283: stmt_call, remove `inner . buffer . extend_from_slice (msg) ;`, at src/io.rs@129:8-129:43(fn Writer < T, E >::write) ... NOT COVERED
+284: stmt_call, remove `task . notify () ;`, at src/io.rs@131:12-131:25(fn Writer < T, E >::write) ... NOT COVERED
+285: binop_eq, replace `==` with `!=`, at src/io.rs@168:35-168:37(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+286: stmt_call, remove `act . finished (ctx) ;`, at src/io.rs@169:16-169:33(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+287: unop_not, remove `!`, at src/io.rs@176:14-176:15(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+288: lit_int, replace `0` with `1`, at src/io.rs@179:28-179:29(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+289: binop_eq, replace `==` with `!=`, at src/io.rs@179:25-179:27(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+290: binop_eq, replace `==` with `!=`, at src/io.rs@187:26-187:28(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+291: binop_bool, replace `&&` with `||`, at src/io.rs@180:24-180:26(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+292: stmt_call, remove `act . finished (ctx) ;`, at src/io.rs@189:24-189:41(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+293: binop_eq, replace `==` with `!=`, at src/io.rs@194:39-194:41(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+294: binop_cmp, replace `>` with `<`, at src/io.rs@195:42-195:43(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+295: binop_cmp, replace `>` with `<=`, at src/io.rs@195:42-195:43(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+296: binop_cmp, replace `>` with `>=`, at src/io.rs@195:42-195:43(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+297: stmt_call, remove `ctx . wait (WriterDrain { inner : self . inner . clone (), act : PhantomData, }) ;`, at src/io.rs@196:24-199:26(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+298: binop_eq, replace `==` with `!=`, at src/io.rs@204:48-204:50(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+299: stmt_call, remove `act . finished (ctx) ;`, at src/io.rs@205:24-205:41(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+300: binop_eq, replace `==` with `!=`, at src/io.rs@215:35-215:37(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+301: binop_eq, replace `==` with `!=`, at src/io.rs@219:44-219:46(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+302: stmt_call, remove `act . finished (ctx) ;`, at src/io.rs@220:20-220:37(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+303: stmt_call, remove `act . finished (ctx) ;`, at src/io.rs@229:12-229:29(fn WriterFut < T, E, A >::poll) ... NOT COVERED
+304: unop_not, remove `!`, at src/io.rs@265:14-265:15(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+305: lit_int, replace `0` with `1`, at src/io.rs@268:28-268:29(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+306: binop_eq, replace `==` with `!=`, at src/io.rs@268:25-268:27(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+307: binop_eq, replace `==` with `!=`, at src/io.rs@280:39-280:41(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+308: binop_cmp, replace `<` with `<=`, at src/io.rs@281:49-281:50(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+309: binop_cmp, replace `<` with `>=`, at src/io.rs@281:49-281:50(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+310: binop_cmp, replace `<` with `>`, at src/io.rs@281:49-281:50(fn WriterDrain < T, E, A >::poll) ... NOT COVERED
+311: stmt_call, remove `self . inner . 0 . borrow_mut () . flags . insert (Flags :: CLOSING) ;`, at src/io.rs@367:8-367:62(fn FramedWrite < T, U >::close) ... NOT COVERED
+312: stmt_call, remove `task . notify () ;`, at src/io.rs@389:12-389:25(fn FramedWrite < T, U >::write) ... NOT COVERED
+313: unop_not, remove `!`, at src/io.rs@404:11-404:12(fn FramedWrite < T, U >::drop) ... NOT COVERED
+314: stmt_call, remove `self . inner . borrow_mut () . closing_flag . insert (Flags :: CLOSING) ;`, at src/io.rs@454:8-454:67(fn SinkWrite < S >::close) ... NOT COVERED
+315: stmt_call, remove `self . notify_task () ;`, at src/io.rs@455:8-455:26(fn SinkWrite < S >::close) ... NOT COVERED
+316: unop_not, remove `!`, at src/io.rs@505:11-505:12(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+317: binop_eq, replace `==` with `!=`, at src/io.rs@508:42-508:44(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+318: stmt_call, remove `act . finished (ctxt) ;`, at src/io.rs@509:24-509:42(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+319: binop_eq, replace `==` with `!=`, at src/io.rs@520:42-520:44(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+320: stmt_call, remove `act . finished (ctxt) ;`, at src/io.rs@521:24-521:42(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+321: stmt_call, remove `act . finished (ctxt) ;`, at src/io.rs@527:20-527:38(fn SinkWriteFuture < S, A >::poll) ... NOT COVERED
+322: stmt_call, remove `self . registry . borrow_mut () . insert (id, Box :: new (addr . clone ())) ;`, at src/registry.rs@130:8-132:47(fn Registry::get) ... NOT COVERED
+323: stmt_call, remove `reg . registry . borrow_mut () . insert (id, Box :: new (addr)) ;`, at src/registry.rs@159:12-159:64(fn Registry::set) ... NOT COVERED
+324: stmt_call, remove `self . registry . insert (TypeId :: of :: < A > (), Box :: new (addr . clone ())) ;`, at src/registry.rs@287:8-288:62(fn SystemRegistry::get) ... NOT COVERED
+325: stmt_call, remove `reg . registry . insert (TypeId :: of :: < A > (), Box :: new (addr)) ;`, at src/registry.rs@320:12-320:66(fn SystemRegistry::set) ... NOT COVERED
+326: lit_int, replace `0` with `1`, at src/sync.rs@115:17-115:18(fn SyncArbiter < A >::start) ... NOT COVERED
+327: stmt_call, remove `System :: set_current (sys) ;`, at src/sync.rs@121:16-121:40(fn SyncArbiter < A >::start) ... NOT COVERED
+328: stmt_call, remove `SyncContext :: new (f, actor_queue) . run () ;`, at src/sync.rs@122:16-122:54(fn SyncArbiter < A >::start) ... NOT COVERED
+329: stmt_call, remove `thread :: spawn (move | |  {      System :: set_current (sys) ; SyncContext :: new (f, actor_queue) . run      () ;  }) ;`, at src/sync.rs@120:12-123:14(fn SyncArbiter < A >::start) ... NOT COVERED
+330: lit_int, replace `0` with `1`, at src/sync.rs@126:40-126:41(fn SyncArbiter < A >::start) ... NOT COVERED
+331: stmt_call, remove `actix_rt :: spawn (Self { queue : Some (sender), msgs : rx, }) ;`, at src/sync.rs@127:8-130:10(fn SyncArbiter < A >::start) ... NOT COVERED
+332: stmt_call, remove `queue . send (msg) . is_ok () ;`, at src/sync.rs@156:24-156:47(fn SyncArbiter < A >::poll) ... NOT COVERED
+333: lit_bool, replace `false` with `true`, at src/sync.rs@239:22-239:27(fn SyncContext < A >::new) ... NOT COVERED
+334: stmt_call, remove `A :: started (& mut act, self) ;`, at src/sync.rs@248:8-248:34(fn SyncContext < A >::run) ... NOT COVERED
+335: stmt_call, remove `env . handle (& mut act, self) ;`, at src/sync.rs@254:20-254:46(fn SyncContext < A >::run) ... NOT COVERED
+336: binop_eq, replace `!=` with `==`, at src/sync.rs@258:51-258:53(fn SyncContext < A >::run) ... NOT COVERED
+337: stmt_call, remove `A :: stopped (& mut act, self) ;`, at src/sync.rs@262:20-262:46(fn SyncContext < A >::run) ... NOT COVERED
+338: lit_bool, replace `false` with `true`, at src/sync.rs@268:32-268:37(fn SyncContext < A >::run) ... NOT COVERED
+339: stmt_call, remove `A :: stopping (& mut act, self) ;`, at src/sync.rs@271:16-271:43(fn SyncContext < A >::run) ... NOT COVERED
+340: stmt_call, remove `A :: stopped (& mut act, self) ;`, at src/sync.rs@273:16-273:42(fn SyncContext < A >::run) ... NOT COVERED
+341: stmt_call, remove `A :: started (& mut act, self) ;`, at src/sync.rs@278:16-278:42(fn SyncContext < A >::run) ... NOT COVERED
+342: lit_bool, replace `true` with `false`, at src/sync.rs@292:24-292:28(fn SyncContext < A >::stop) ... NOT COVERED
+343: lit_bool, replace `true` with `false`, at src/sync.rs@299:24-299:28(fn SyncContext < A >::terminate) ... NOT COVERED
+344: binop_bool, replace `&&` with `||`, at src/sync.rs@351:24-351:26(fn SyncContextEnvelope < A, M >::handle) ... NOT COVERED
+345: stmt_call, remove `self . waiters . push (tx) ;`, at src/utils.rs@24:8-24:29(fn Condition < T >::wait) ... NOT COVERED
+346: binop_add, replace `+` with `-`, at src/utils.rs@101:45-101:46(fn TimerFunc < A >::new) ... NOT COVERED
+347: stmt_call, remove `f . call (act, ctx) ;`, at src/utils.rs@133:20-133:36(fn TimerFunc < A >::poll) ... NOT COVERED
+348: binop_add, replace `+` with `-`, at src/utils.rs@194:49-194:50(fn IntervalFunc < A >::new) ... NOT COVERED
+349: stmt_call, remove `self . f . call (act, ctx) ;`, at src/utils.rs@224:20-224:41(fn IntervalFunc < A >::poll) ... NOT COVERED
+SURVIVED
+    src/actor.rs
+            all 10 mutants survived
+        1: replace `==` with `!=` at 240:13-240:15(fn ActorState::alive) NOT COVERED
+        2: replace `==` with `!=` at 240:44-240:46(fn ActorState::alive) NOT COVERED
+        3: replace `||` with `&&` at 240:36-240:38(fn ActorState::alive) NOT COVERED
+        4: replace `==` with `!=` at 244:13-244:15(fn ActorState::stopping) NOT COVERED
+        5: replace `==` with `!=` at 244:45-244:47(fn ActorState::stopping) NOT COVERED
+        6: replace `||` with `&&` at 244:37-244:39(fn ActorState::stopping) NOT COVERED
+        7: replace `1` with `2` at 471:29-471:30(fn SpawnHandle::next) NOT COVERED
+        8: replace `1` with `0` at 471:29-471:30(fn SpawnHandle::next) NOT COVERED
+        9: replace `+` with `-` at 471:27-471:28(fn SpawnHandle::next) NOT COVERED
+        10: replace `0` with `1` at 481:20-481:21(fn SpawnHandle::default)
+    src/actors/resolver.rs
+            all 15 mutants survived
+        264: replace `1` with `2` at 103:41-103:42(fn Connect::host) NOT COVERED
+        265: replace `1` with `0` at 103:41-103:42(fn Connect::host) NOT COVERED
+        266: replace `1` with `2` at 111:41-111:42(fn Connect::host_and_port) NOT COVERED
+        267: replace `1` with `0` at 111:41-111:42(fn Connect::host_and_port) NOT COVERED
+        268: remove `ctx . spawn (wrap_future :: < _, Self > (parts . 1)) ;` at 181:8-181:50(fn Resolver::start_resolver) NOT COVERED
+        269: replace `0` with `1` at 241:35-241:36(fn Resolver::handle) NOT COVERED
+        270: replace `0` with `1` at 256:35-256:36(fn Resolver::handle) NOT COVERED
+        271: remove `v . push_back (msg . 0) ;` at 269:8-269:26(fn Resolver::handle) NOT COVERED
+        272: remove `addrs . push_back (addr) ;` at 292:12-292:33(fn ResolveFut::new) NOT COVERED
+        273: replace `0` with `1` at 324:18-324:19(fn ResolveFut::err) NOT COVERED
+        274: replace `2` with `3` at 343:41-343:42(fn ResolveFut::parse) NOT COVERED
+        275: replace `2` with `1` at 343:41-343:42(fn ResolveFut::parse) NOT COVERED
+        276: replace `1` with `2` at 399:62-399:63(fn TcpConnector::new) NOT COVERED
+        277: replace `1` with `0` at 399:62-399:63(fn TcpConnector::new) NOT COVERED
+        278: replace `+` with `-` at 406:45-406:46(fn TcpConnector::with_timeout) NOT COVERED
+    src/address/channel.rs
+            59/89(66.29%) mutants survived
+        156: replace `false` with `true` at 163:23-163:28(fn SenderTask::new)
+        157: replace `false` with `true` at 168:25-168:30(fn SenderTask::notify)
+        158: remove `task . notify () ;` at 171:12-171:25(fn SenderTask::notify)
+        159: replace `true` with `false` at 172:12-172:16(fn SenderTask::notify)
+        160: replace `false` with `true` at 174:12-174:17(fn SenderTask::notify)
+        161: replace `false` with `true` at 245:31-245:36(fn AddressSender < A >::send)
+        163: replace `true` with `false` at 264:22-264:26(fn AddressSender < A >::send)
+        166: replace `false` with `true` at 281:31-281:36(fn AddressSender < A >::try_send) NOT COVERED
+        167: remove `!` at 281:11-281:12(fn AddressSender < A >::try_send) NOT COVERED
+        168: replace `&&` with `||` at 290:21-290:23(fn AddressSender < A >::try_send) NOT COVERED
+        169: replace `true` with `false` at 291:22-291:26(fn AddressSender < A >::try_send) NOT COVERED
+        170: remove `self . park (true) ;` at 291:12-291:27(fn AddressSender < A >::try_send) NOT COVERED
+        171: remove `self . queue_push_and_signal (env) ;` at 294:8-294:39(fn AddressSender < A >::try_send) NOT COVERED
+        172: remove `self . queue_push_and_signal (env) ;` at 315:12-315:43(fn AddressSender < A >::do_send) NOT COVERED
+        174: remove `self . signal () ;` at 334:8-334:21(fn AddressSender < A >::queue_push_and_signal)
+        182: replace `>=` with `>` at 357:70-357:72(fn AddressSender < A >::inc_num_messages)
+        183: replace `&&` with `||` at 357:48-357:50(fn AddressSender < A >::inc_num_messages)
+        184: replace `true` with `false` at 385:33-385:37(fn AddressSender < A >::signal)
+        190: replace `false` with `true` at 424:40-424:45(fn AddressSender < A >::poll_unparked) NOT COVERED
+        191: remove `self . maybe_parked . store (false, Relaxed) ;` at 424:16-424:55(fn AddressSender < A >::poll_unparked) NOT COVERED
+        192: replace `true` with `false` at 454:27-454:31(fn AddressSender < A >::try_send) NOT COVERED
+        194: replace `1` with `2` at 487:30-487:31(fn AddressSender < A >::clone)
+        195: replace `1` with `0` at 487:30-487:31(fn AddressSender < A >::clone)
+        197: replace `==` with `!=` at 492:22-492:24(fn AddressSender < A >::clone)
+        198: replace `false` with `true` at 496:59-496:64(fn AddressSender < A >::clone)
+        200: replace `1` with `0` at 508:52-508:53(fn AddressSender < A >::drop)
+        201: replace `1` with `2` at 510:19-510:20(fn AddressSender < A >::drop)
+        202: replace `1` with `0` at 510:19-510:20(fn AddressSender < A >::drop)
+        203: replace `==` with `!=` at 510:16-510:18(fn AddressSender < A >::drop)
+        204: remove `self . signal () ;` at 511:12-511:25(fn AddressSender < A >::drop)
+        205: remove `(self . inner . as_ref () as * const Inner < A >) . hash (state) ;` at 526:8-526:60(fn AddressSender < A >::hash) NOT COVERED
+        206: replace `0` with `1` at 555:47-555:48(fn AddressSenderProducer < A >::connected) NOT COVERED
+        207: replace `!=` with `==` at 555:44-555:46(fn AddressSenderProducer < A >::connected) NOT COVERED
+        209: replace `>` with `<` at 572:15-572:16(fn AddressSenderProducer < A >::set_capacity)
+        210: replace `>` with `<=` at 572:15-572:16(fn AddressSenderProducer < A >::set_capacity)
+        211: replace `>` with `>=` at 572:15-572:16(fn AddressSenderProducer < A >::set_capacity)
+        212: remove `task . lock () . notify () ;` at 576:24-576:44(fn AddressSenderProducer < A >::set_capacity) NOT COVERED
+        213: remove `thread :: yield_now () ;` at 584:24-584:43(fn AddressSenderProducer < A >::set_capacity) NOT COVERED
+        214: replace `==` with `!=` at 598:20-598:22(fn AddressSenderProducer < A >::sender) NOT COVERED
+        215: replace `1` with `2` at 602:30-602:31(fn AddressSenderProducer < A >::sender) NOT COVERED
+        216: replace `1` with `0` at 602:30-602:31(fn AddressSenderProducer < A >::sender) NOT COVERED
+        217: replace `+` with `-` at 602:28-602:29(fn AddressSenderProducer < A >::sender) NOT COVERED
+        218: replace `==` with `!=` at 607:22-607:24(fn AddressSenderProducer < A >::sender) NOT COVERED
+        219: replace `false` with `true` at 611:59-611:64(fn AddressSenderProducer < A >::sender) NOT COVERED
+        222: remove `self . inner . buffer . store (cap, Relaxed) ;` at 642:8-642:45(fn AddressReceiver < A >::set_capacity)
+        225: replace `>` with `>=` at 645:15-645:16(fn AddressReceiver < A >::set_capacity)
+        226: remove `task . lock () . notify () ;` at 649:24-649:44(fn AddressReceiver < A >::set_capacity)
+        227: remove `thread :: yield_now () ;` at 657:24-657:43(fn AddressReceiver < A >::set_capacity) NOT COVERED
+        229: replace `1` with `2` at 675:30-675:31(fn AddressReceiver < A >::sender)
+        232: replace `==` with `!=` at 680:22-680:24(fn AddressReceiver < A >::sender)
+        233: replace `false` with `true` at 684:59-684:64(fn AddressReceiver < A >::sender)
+        234: remove `thread :: yield_now () ;` at 722:20-722:39(fn AddressReceiver < A >::next_message) NOT COVERED
+        235: remove `thread :: yield_now () ;` at 743:20-743:39(fn AddressReceiver < A >::unpark_one) NOT COVERED
+        238: replace `1` with `0` at 770:34-770:35(fn AddressReceiver < A >::dec_num_messages)
+        239: remove `self . unpark_one () ;` at 816:12-816:29(fn AddressReceiver < A >::poll)
+        240: remove `self . dec_num_messages () ;` at 819:12-819:35(fn AddressReceiver < A >::poll)
+        241: remove `!` at 833:15-833:16(fn AddressReceiver < A >::drop)
+        242: replace `false` with `true` at 836:28-836:33(fn AddressReceiver < A >::drop)
+        243: remove `task . lock () . notify () ;` at 854:20-854:40(fn AddressReceiver < A >::drop) NOT COVERED
+    src/address/envelope.rs
+            all 1 mutants killed
+    src/address/message.rs
+            all 2 mutants survived
+        246: replace `+` with `-` at 54:52-54:53(fn Request < A, M >::timeout) NOT COVERED
+        247: replace `+` with `-` at 135:52-135:53(fn RecipientRequest < M >::timeout) NOT COVERED
+    src/address/mod.rs
+            all 3 mutants survived
+        254: replace `true` with `false` at 112:30-112:34(fn Addr < A >::try_send) NOT COVERED
+        255: replace `==` with `!=` at 166:16-166:18(fn Addr < A >::eq) NOT COVERED
+        256: replace `==` with `!=` at 292:23-292:25(fn Recipient < M >::eq) NOT COVERED
+    src/address/queue.rs
+            3/6(50.00%) mutants survived
+        250: remove `drop (Box :: from_raw (tail)) ;` at 133:12-133:37(fn Queue < T >::pop)
+        252: remove `!` at 149:18-149:19(fn Queue < T >::drop)
+        253: remove `drop (Box :: from_raw (cur)) ;` at 151:16-151:40(fn Queue < T >::drop)
+    src/context.rs
+            1/2(50.00%) mutants survived
+        12: remove `ctx . wait (self) ;` at 188:8-188:22(fn T::wait) NOT COVERED
+    src/contextimpl.rs
+            86/113(76.11%) mutants survived
+        13: remove `self . flags . remove (ContextFlags :: RUNNING) ;` at 88:12-88:52(fn ContextParts < A >::stop) NOT COVERED
+        14: remove `self . flags . insert (ContextFlags :: STOPPING) ;` at 89:12-89:53(fn ContextParts < A >::stop) NOT COVERED
+        16: replace `||` with `&&` at 117:12-117:14(fn ContextParts < A >::waiting)
+        17: replace `1` with `2` at 125:21-125:22(fn ContextParts < A >::curr_handle) NOT COVERED
+        18: replace `1` with `0` at 125:21-125:22(fn ContextParts < A >::curr_handle) NOT COVERED
+        19: replace `0` with `1` at 134:34-134:35(fn ContextParts < A >::spawn) NOT COVERED
+        20: replace `0` with `1` at 135:21-135:22(fn ContextParts < A >::spawn) NOT COVERED
+        21: remove `self . items . push ((handle, fut)) ;` at 137:8-137:38(fn ContextParts < A >::spawn) NOT COVERED
+        22: remove `self . wait . push (ActorWaitItem :: new (f)) ;` at 149:8-149:45(fn ContextParts < A >::wait) NOT COVERED
+        23: remove `self . handles . push (handle) ;` at 155:8-155:33(fn ContextParts < A >::cancel_future) NOT COVERED
+        24: replace `true` with `false` at 156:8-156:12(fn ContextParts < A >::cancel_future) NOT COVERED
+        25: remove `self . flags . insert (ContextFlags :: MB_CAP_CHANGED) ;` at 166:8-166:55(fn ContextParts < A >::set_mailbox_capacity)
+        27: replace `0` with `1` at 181:21-181:22(fn ContextParts < A >::restart) NOT COVERED
+        28: remove `self . ctx . parts () . stop () ;` at 219:12-219:35(fn ContextFut < A, C >::drop) NOT COVERED
+        29: replace `false` with `true` at 261:12-261:17(fn ContextFut < A, C >::alive)
+        30: remove `!` at 263:12-263:13(fn ContextFut < A, C >::alive)
+        32: remove `!` at 265:19-265:20(fn ContextFut < A, C >::alive)
+        34: remove `!` at 266:19-266:20(fn ContextFut < A, C >::alive)
+        36: remove `self . ctx . parts () . restart () ;` at 279:12-279:38(fn ContextFut < A, C >::restart) NOT COVERED
+        37: remove `self . act . restarting (& mut self . ctx) ;` at 280:12-280:46(fn ContextFut < A, C >::restart) NOT COVERED
+        38: replace `true` with `false` at 281:12-281:16(fn ContextFut < A, C >::restart) NOT COVERED
+        39: replace `false` with `true` at 283:12-283:17(fn ContextFut < A, C >::restart) NOT COVERED
+        42: replace `true` with `false` at 292:23-292:27(fn ContextFut < A, C >::merge) NOT COVERED
+        43: remove `self . wait . extend (parts . wait . drain ()) ;` at 293:12-293:48(fn ContextFut < A, C >::merge) NOT COVERED
+        45: replace `true` with `false` at 296:23-296:27(fn ContextFut < A, C >::merge) NOT COVERED
+        46: remove `self . items . extend (parts . items . drain ()) ;` at 297:12-297:50(fn ContextFut < A, C >::merge) NOT COVERED
+        47: replace `true` with `false` at 301:23-301:27(fn ContextFut < A, C >::merge)
+        49: replace `2` with `3` at 304:33-304:34(fn ContextFut < A, C >::merge)
+        51: replace `>` with `<` at 304:31-304:32(fn ContextFut < A, C >::merge)
+        54: replace `true` with `false` at 305:23-305:27(fn ContextFut < A, C >::merge) NOT COVERED
+        55: replace `2` with `3` at 312:47-312:48(fn ContextFut < A, C >::clean_cancled_handle)
+        57: replace `>` with `<` at 312:45-312:46(fn ContextFut < A, C >::clean_cancled_handle)
+        60: replace `0` with `1` at 314:26-314:27(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        61: replace `<` with `<=` at 315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        62: replace `<` with `>=` at 315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        63: replace `<` with `>` at 315:22-315:23(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        64: replace `==` with `!=` at 316:37-316:39(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        65: remove `self . items . swap_remove (idx) ;` at 317:20-317:47(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        66: replace `1` with `2` at 319:27-319:28(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        67: replace `1` with `0` at 319:27-319:28(fn ContextFut < A, C >::clean_cancled_handle) NOT COVERED
+        68: remove `!` at 337:11-337:12(fn ContextFut < A, C >::poll)
+        69: remove `self . ctx . parts () . flags . insert (ContextFlags :: STARTED) ;` at 338:12-338:64(fn ContextFut < A, C >::poll)
+        70: remove `Actor :: started (& mut self . act, & mut self . ctx) ;` at 339:12-339:56(fn ContextFut < A, C >::poll)
+        71: remove `self . clean_cancled_handle () ;` at 343:16-343:43(fn ContextFut < A, C >::poll)
+        73: remove `!` at 351:43-351:44(fn ContextFut < A, C >::poll) NOT COVERED
+        75: replace `1` with `2` at 352:44-352:45(fn ContextFut < A, C >::poll) NOT COVERED
+        76: replace `1` with `0` at 352:44-352:45(fn ContextFut < A, C >::poll) NOT COVERED
+        77: remove `self . wait . remove (idx) ;` at 359:16-359:37(fn ContextFut < A, C >::poll) NOT COVERED
+        78: remove `self . merge () ;` at 360:16-360:28(fn ContextFut < A, C >::poll) NOT COVERED
+        81: remove `!` at 365:40-365:41(fn ContextFut < A, C >::poll) NOT COVERED
+        83: replace `0` with `1` at 370:26-370:27(fn ContextFut < A, C >::poll)
+        86: replace `<` with `>` at 371:22-371:23(fn ContextFut < A, C >::poll)
+        87: remove `!` at 371:44-371:45(fn ContextFut < A, C >::poll) NOT COVERED
+        89: replace `1` with `2` at 372:41-372:42(fn ContextFut < A, C >::poll) NOT COVERED
+        90: replace `1` with `0` at 372:41-372:42(fn ContextFut < A, C >::poll) NOT COVERED
+        91: replace `2` with `3` at 376:60-376:61(fn ContextFut < A, C >::poll) NOT COVERED
+        92: replace `2` with `1` at 376:60-376:61(fn ContextFut < A, C >::poll) NOT COVERED
+        93: replace `>` with `<` at 376:58-376:59(fn ContextFut < A, C >::poll) NOT COVERED
+        94: replace `>` with `<=` at 376:58-376:59(fn ContextFut < A, C >::poll) NOT COVERED
+        95: replace `>` with `>=` at 376:58-376:59(fn ContextFut < A, C >::poll) NOT COVERED
+        96: remove `self . clean_cancled_handle () ;` at 380:28-380:55(fn ContextFut < A, C >::poll) NOT COVERED
+        97: remove `!` at 386:27-386:28(fn ContextFut < A, C >::poll) NOT COVERED
+        98: remove `!` at 386:52-386:53(fn ContextFut < A, C >::poll) NOT COVERED
+        99: replace `&&` with `||` at 386:49-386:51(fn ContextFut < A, C >::poll) NOT COVERED
+        100: replace `1` with `2` at 391:58-391:59(fn ContextFut < A, C >::poll) NOT COVERED
+        101: replace `1` with `0` at 391:58-391:59(fn ContextFut < A, C >::poll) NOT COVERED
+        102: replace `!=` with `==` at 392:35-392:37(fn ContextFut < A, C >::poll) NOT COVERED
+        103: remove `self . items . swap (idx, next) ;` at 393:32-393:58(fn ContextFut < A, C >::poll) NOT COVERED
+        104: replace `1` with `2` at 397:35-397:36(fn ContextFut < A, C >::poll) NOT COVERED
+        105: replace `1` with `0` at 397:35-397:36(fn ContextFut < A, C >::poll) NOT COVERED
+        106: remove `self . items . swap_remove (idx) ;` at 401:24-401:51(fn ContextFut < A, C >::poll) NOT COVERED
+        107: remove `!` at 403:27-403:28(fn ContextFut < A, C >::poll) NOT COVERED
+        108: remove `!` at 403:52-403:53(fn ContextFut < A, C >::poll) NOT COVERED
+        109: replace `&&` with `||` at 403:49-403:51(fn ContextFut < A, C >::poll) NOT COVERED
+        111: replace `1` with `0` at 409:37-409:38(fn ContextFut < A, C >::poll)
+        112: remove `!` at 412:31-412:32(fn ContextFut < A, C >::poll) NOT COVERED
+        114: replace `2` with `3` at 418:54-418:55(fn ContextFut < A, C >::poll) NOT COVERED
+        115: replace `2` with `1` at 418:54-418:55(fn ContextFut < A, C >::poll) NOT COVERED
+        116: remove `self . ctx . parts () . handles . truncate (2) ;` at 418:20-418:56(fn ContextFut < A, C >::poll) NOT COVERED
+        118: replace `==` with `!=` at 427:69-427:71(fn ContextFut < A, C >::poll)
+        120: remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;` at 431:20-431:64(fn ContextFut < A, C >::poll)
+        121: replace `==` with `!=` at 435:65-435:67(fn ContextFut < A, C >::poll) NOT COVERED
+        122: remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;` at 438:20-438:64(fn ContextFut < A, C >::poll) NOT COVERED
+        123: remove `self . ctx . parts () . flags . remove (ContextFlags :: STOPPING) ;` at 441:20-441:73(fn ContextFut < A, C >::poll) NOT COVERED
+        124: remove `self . ctx . parts () . flags . insert (ContextFlags :: RUNNING) ;` at 442:20-442:72(fn ContextFut < A, C >::poll) NOT COVERED
+        125: remove `Actor :: stopped (& mut self . act, & mut self . ctx) ;` at 446:16-446:60(fn ContextFut < A, C >::poll) NOT COVERED
+    src/contextitems.rs
+            all 4 mutants survived
+        126: replace `+` with `-` at 61:45-61:46(fn ActorDelayedMessageItem < A, M >::new) NOT COVERED
+        127: remove `fut . handle :: < () > (ctx, None) ;` at 87:16-87:43(fn ActorDelayedMessageItem < A, M >::poll) NOT COVERED
+        128: remove `fut . handle :: < () > (ctx, None) ;` at 133:8-133:35(fn ActorMessageItem < A, M >::poll) NOT COVERED
+        129: remove `fut . handle :: < () > (ctx, None) ;` at 182:20-182:47(fn ActorMessageStreamItem < A, M, S >::poll) NOT COVERED
+    src/fut/stream_timeout.rs
+            all 3 mutants survived
+        279: remove `self . timeout . take () ;` at 55:16-55:35(fn StreamTimeout < S >::poll) NOT COVERED
+        280: replace `+` with `-` at 63:56-63:57(fn StreamTimeout < S >::poll) NOT COVERED
+        281: remove `self . timeout . take () ;` at 72:8-72:27(fn StreamTimeout < S >::poll) NOT COVERED
+    src/handler.rs
+            all 14 mutants survived
+        130: replace `true` with `false` at 90:8-90:12(fn ()::is_canceled) NOT COVERED
+        131: remove `tx . send (self . 0) ;` at 102:12-102:27(fn MessageResult < M >::handle) NOT COVERED
+        132: remove `tx . send (self) ;` at 114:12-114:25(fn Result < I, E >::handle) NOT COVERED
+        133: remove `tx . send (self) ;` at 126:12-126:25(fn Arc < I >::handle) NOT COVERED
+        134: remove `tx . send (self) ;` at 138:12-138:25(fn Option < I >::handle) NOT COVERED
+        135: remove `tx . send (self) ;` at 151:12-151:25(fn Addr < B >::handle) NOT COVERED
+        136: remove `tx . send (res) ;` at 165:16-165:28(fn ResponseActFuture < A, I, E >::handle) NOT COVERED
+        137: remove `ctx . spawn (self . then  (move | res, _, _ |   { if let Some (tx) = tx { tx . send (res) ; } fut :: ok (()) })) ;` at 163:8-168:11(fn ResponseActFuture < A, I, E >::handle) NOT COVERED
+        138: remove `actix_rt :: spawn (self . then  (move | res | { if let Some (tx) = tx { tx . send (res) } Ok (()) })) ;` at 180:8-185:11(fn ResponseFuture < I, E >::handle) NOT COVERED
+        139: remove `tx . send (res) ;` at 240:24-240:36(fn Response < I, E >::handle) NOT COVERED
+        140: remove `actix_rt :: spawn (fut . then  (move | res | { if let Some (tx) = tx { tx . send (res) ; } Ok (()) })) ;` at 238:16-243:19(fn Response < I, E >::handle) NOT COVERED
+        141: remove `tx . send (res) ;` at 247:20-247:32(fn Response < I, E >::handle) NOT COVERED
+        142: remove `ctx . spawn (fut . then  (move | res, _, _ |   { if let Some (tx) = tx { tx . send (res) } fut :: ok (()) })) ;` at 305:16-310:19(fn ActorResponse < A, I, E >::handle) NOT COVERED
+        143: remove `tx . send (res) ;` at 314:20-314:32(fn ActorResponse < A, I, E >::handle) NOT COVERED
+    src/io.rs
+            all 40 mutants survived
+        282: remove `self . inner . 0 . borrow_mut () . flags . insert (Flags :: CLOSING) ;` at 111:8-111:62(fn Writer < T, E >::close) NOT COVERED
+        283: remove `inner . buffer . extend_from_slice (msg) ;` at 129:8-129:43(fn Writer < T, E >::write) NOT COVERED
+        284: remove `task . notify () ;` at 131:12-131:25(fn Writer < T, E >::write) NOT COVERED
+        285: replace `==` with `!=` at 168:35-168:37(fn WriterFut < T, E, A >::poll) NOT COVERED
+        286: remove `act . finished (ctx) ;` at 169:16-169:33(fn WriterFut < T, E, A >::poll) NOT COVERED
+        287: remove `!` at 176:14-176:15(fn WriterFut < T, E, A >::poll) NOT COVERED
+        288: replace `0` with `1` at 179:28-179:29(fn WriterFut < T, E, A >::poll) NOT COVERED
+        289: replace `==` with `!=` at 179:25-179:27(fn WriterFut < T, E, A >::poll) NOT COVERED
+        290: replace `==` with `!=` at 187:26-187:28(fn WriterFut < T, E, A >::poll) NOT COVERED
+        291: replace `&&` with `||` at 180:24-180:26(fn WriterFut < T, E, A >::poll) NOT COVERED
+        292: remove `act . finished (ctx) ;` at 189:24-189:41(fn WriterFut < T, E, A >::poll) NOT COVERED
+        293: replace `==` with `!=` at 194:39-194:41(fn WriterFut < T, E, A >::poll) NOT COVERED
+        294: replace `>` with `<` at 195:42-195:43(fn WriterFut < T, E, A >::poll) NOT COVERED
+        295: replace `>` with `<=` at 195:42-195:43(fn WriterFut < T, E, A >::poll) NOT COVERED
+        296: replace `>` with `>=` at 195:42-195:43(fn WriterFut < T, E, A >::poll) NOT COVERED
+        297: remove `ctx . wait (WriterDrain { inner : self . inner . clone (), act : PhantomData, }) ;` at 196:24-199:26(fn WriterFut < T, E, A >::poll) NOT COVERED
+        298: replace `==` with `!=` at 204:48-204:50(fn WriterFut < T, E, A >::poll) NOT COVERED
+        299: remove `act . finished (ctx) ;` at 205:24-205:41(fn WriterFut < T, E, A >::poll) NOT COVERED
+        300: replace `==` with `!=` at 215:35-215:37(fn WriterFut < T, E, A >::poll) NOT COVERED
+        301: replace `==` with `!=` at 219:44-219:46(fn WriterFut < T, E, A >::poll) NOT COVERED
+        302: remove `act . finished (ctx) ;` at 220:20-220:37(fn WriterFut < T, E, A >::poll) NOT COVERED
+        303: remove `act . finished (ctx) ;` at 229:12-229:29(fn WriterFut < T, E, A >::poll) NOT COVERED
+        304: remove `!` at 265:14-265:15(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        305: replace `0` with `1` at 268:28-268:29(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        306: replace `==` with `!=` at 268:25-268:27(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        307: replace `==` with `!=` at 280:39-280:41(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        308: replace `<` with `<=` at 281:49-281:50(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        309: replace `<` with `>=` at 281:49-281:50(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        310: replace `<` with `>` at 281:49-281:50(fn WriterDrain < T, E, A >::poll) NOT COVERED
+        311: remove `self . inner . 0 . borrow_mut () . flags . insert (Flags :: CLOSING) ;` at 367:8-367:62(fn FramedWrite < T, U >::close) NOT COVERED
+        312: remove `task . notify () ;` at 389:12-389:25(fn FramedWrite < T, U >::write) NOT COVERED
+        313: remove `!` at 404:11-404:12(fn FramedWrite < T, U >::drop) NOT COVERED
+        314: remove `self . inner . borrow_mut () . closing_flag . insert (Flags :: CLOSING) ;` at 454:8-454:67(fn SinkWrite < S >::close) NOT COVERED
+        315: remove `self . notify_task () ;` at 455:8-455:26(fn SinkWrite < S >::close) NOT COVERED
+        316: remove `!` at 505:11-505:12(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+        317: replace `==` with `!=` at 508:42-508:44(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+        318: remove `act . finished (ctxt) ;` at 509:24-509:42(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+        319: replace `==` with `!=` at 520:42-520:44(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+        320: remove `act . finished (ctxt) ;` at 521:24-521:42(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+        321: remove `act . finished (ctxt) ;` at 527:20-527:38(fn SinkWriteFuture < S, A >::poll) NOT COVERED
+    src/mailbox.rs
+            5/7(71.43%) mutants survived
+        257: remove `self . msgs . set_capacity (cap) ;` at 62:8-62:35(fn Mailbox < A >::set_capacity) NOT COVERED
+        258: replace `0` with `1` at 80:26-80:30(fn Mailbox < A >::poll) NOT COVERED
+        260: replace `false` with `true` at 93:36-93:41(fn Mailbox < A >::poll)
+        262: replace `1` with `2` at 101:31-101:32(fn Mailbox < A >::poll) NOT COVERED
+        263: replace `1` with `0` at 101:31-101:32(fn Mailbox < A >::poll) NOT COVERED
+    src/registry.rs
+            all 4 mutants survived
+        322: remove `self . registry . borrow_mut () . insert (id, Box :: new (addr . clone ())) ;` at 130:8-132:47(fn Registry::get) NOT COVERED
+        323: remove `reg . registry . borrow_mut () . insert (id, Box :: new (addr)) ;` at 159:12-159:64(fn Registry::set) NOT COVERED
+        324: remove `self . registry . insert (TypeId :: of :: < A > (), Box :: new (addr . clone ())) ;` at 287:8-288:62(fn SystemRegistry::get) NOT COVERED
+        325: remove `reg . registry . insert (TypeId :: of :: < A > (), Box :: new (addr)) ;` at 320:12-320:66(fn SystemRegistry::set) NOT COVERED
+    src/stream.rs
+            all 8 mutants survived
+        144: replace `false` with `true` at 114:21-114:26(fn ActorStream < A, M, E, S >::new) NOT COVERED
+        145: remove `!` at 137:11-137:12(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        146: replace `true` with `false` at 138:27-138:31(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        147: remove `< A as StreamHandler < M, E > > :: started (act, ctx) ;` at 139:12-139:57(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        148: remove `A :: handle (act, msg, ctx) ;` at 145:20-145:44(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        149: replace `==` with `!=` at 151:47-151:49(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        150: remove `A :: finished (act, ctx) ;` at 152:24-152:45(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+        151: remove `A :: finished (act, ctx) ;` at 157:20-157:41(fn ActorStream < A, M, E, S >::poll) NOT COVERED
+    src/supervisor.rs
+            all 4 mutants survived
+        152: remove `actix_rt :: spawn (Self { fut }) ;` at 108:8-108:37(fn Supervisor < A >::start) NOT COVERED
+        153: remove `actix_rt :: spawn (Self { fut }) ;` at 126:12-126:41(fn Supervisor < A >::start_in_arbiter) NOT COVERED
+        154: remove `sys . exec_fn (move | |  {      let mut ctx = Context :: with_receiver (rx) ; let act = f (& mut ctx) ;      let fut = ctx . into_future (act) ; actix_rt :: spawn (Self { fut }) ;  }) ;` at 121:8-127:10(fn Supervisor < A >::start_in_arbiter) NOT COVERED
+        155: remove `!` at 147:23-147:24(fn Supervisor < A >::poll) NOT COVERED
+    src/sync.rs
+            all 19 mutants survived
+        326: replace `0` with `1` at 115:17-115:18(fn SyncArbiter < A >::start) NOT COVERED
+        327: remove `System :: set_current (sys) ;` at 121:16-121:40(fn SyncArbiter < A >::start) NOT COVERED
+        328: remove `SyncContext :: new (f, actor_queue) . run () ;` at 122:16-122:54(fn SyncArbiter < A >::start) NOT COVERED
+        329: remove `thread :: spawn (move | |  {      System :: set_current (sys) ; SyncContext :: new (f, actor_queue) . run      () ;  }) ;` at 120:12-123:14(fn SyncArbiter < A >::start) NOT COVERED
+        330: replace `0` with `1` at 126:40-126:41(fn SyncArbiter < A >::start) NOT COVERED
+        331: remove `actix_rt :: spawn (Self { queue : Some (sender), msgs : rx, }) ;` at 127:8-130:10(fn SyncArbiter < A >::start) NOT COVERED
+        332: remove `queue . send (msg) . is_ok () ;` at 156:24-156:47(fn SyncArbiter < A >::poll) NOT COVERED
+        333: replace `false` with `true` at 239:22-239:27(fn SyncContext < A >::new) NOT COVERED
+        334: remove `A :: started (& mut act, self) ;` at 248:8-248:34(fn SyncContext < A >::run) NOT COVERED
+        335: remove `env . handle (& mut act, self) ;` at 254:20-254:46(fn SyncContext < A >::run) NOT COVERED
+        336: replace `!=` with `==` at 258:51-258:53(fn SyncContext < A >::run) NOT COVERED
+        337: remove `A :: stopped (& mut act, self) ;` at 262:20-262:46(fn SyncContext < A >::run) NOT COVERED
+        338: replace `false` with `true` at 268:32-268:37(fn SyncContext < A >::run) NOT COVERED
+        339: remove `A :: stopping (& mut act, self) ;` at 271:16-271:43(fn SyncContext < A >::run) NOT COVERED
+        340: remove `A :: stopped (& mut act, self) ;` at 273:16-273:42(fn SyncContext < A >::run) NOT COVERED
+        341: remove `A :: started (& mut act, self) ;` at 278:16-278:42(fn SyncContext < A >::run) NOT COVERED
+        342: replace `true` with `false` at 292:24-292:28(fn SyncContext < A >::stop) NOT COVERED
+        343: replace `true` with `false` at 299:24-299:28(fn SyncContext < A >::terminate) NOT COVERED
+        344: replace `&&` with `||` at 351:24-351:26(fn SyncContextEnvelope < A, M >::handle) NOT COVERED
+    src/utils.rs
+            all 5 mutants survived
+        345: remove `self . waiters . push (tx) ;` at 24:8-24:29(fn Condition < T >::wait) NOT COVERED
+        346: replace `+` with `-` at 101:45-101:46(fn TimerFunc < A >::new) NOT COVERED
+        347: remove `f . call (act, ctx) ;` at 133:20-133:36(fn TimerFunc < A >::poll) NOT COVERED
+        348: replace `+` with `-` at 194:49-194:50(fn IntervalFunc < A >::new) NOT COVERED
+        349: remove `self . f . call (act, ctx) ;` at 224:20-224:41(fn IntervalFunc < A >::poll) NOT COVERED
+
+349 generated mutations
+64(18.34%) mutants killed, 18(5.16%) by timeout
+285(81.66%) mutants SURVIVED, 226(64.76%) NOT COVERED

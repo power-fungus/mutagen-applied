@@ -1,0 +1,832 @@
+
+Tests without mutations
+target/debug/deps/wasm-c33b0531978b6451 ... ok
+target/debug/deps/chrono-bc821a0b9728db9d ... ok
+
+Mutants
+1: lit_int, replace `86400` with `86401`, at src/offset/fixed.rs@51:12-51:18(fn FixedOffset::east_opt) ... SURVIVED
+2: lit_int, replace `86400` with `86399`, at src/offset/fixed.rs@51:12-51:18(fn FixedOffset::east_opt) ... SURVIVED
+3: binop_cmp, replace `<` with `<=`, at src/offset/fixed.rs@51:19-51:20(fn FixedOffset::east_opt) ... SURVIVED
+4: binop_cmp, replace `<` with `>=`, at src/offset/fixed.rs@51:19-51:20(fn FixedOffset::east_opt) ... killed
+5: binop_cmp, replace `<` with `>`, at src/offset/fixed.rs@51:19-51:20(fn FixedOffset::east_opt) ... killed
+6: lit_int, replace `86400` with `86401`, at src/offset/fixed.rs@51:36-51:42(fn FixedOffset::east_opt) ... killed
+7: lit_int, replace `86400` with `86399`, at src/offset/fixed.rs@51:36-51:42(fn FixedOffset::east_opt) ... killed
+8: binop_cmp, replace `<` with `<=`, at src/offset/fixed.rs@51:34-51:35(fn FixedOffset::east_opt) ... killed
+9: binop_cmp, replace `<` with `>=`, at src/offset/fixed.rs@51:34-51:35(fn FixedOffset::east_opt) ... killed
+10: binop_cmp, replace `<` with `>`, at src/offset/fixed.rs@51:34-51:35(fn FixedOffset::east_opt) ... killed
+11: binop_bool, replace `&&` with `||`, at src/offset/fixed.rs@51:26-51:28(fn FixedOffset::east_opt) ... killed
+12: lit_int, replace `86400` with `86401`, at src/offset/fixed.rs@81:12-81:18(fn FixedOffset::west_opt) ... SURVIVED
+13: lit_int, replace `86400` with `86399`, at src/offset/fixed.rs@81:12-81:18(fn FixedOffset::west_opt) ... SURVIVED
+14: binop_cmp, replace `<` with `<=`, at src/offset/fixed.rs@81:19-81:20(fn FixedOffset::west_opt) ... SURVIVED
+15: binop_cmp, replace `<` with `>=`, at src/offset/fixed.rs@81:19-81:20(fn FixedOffset::west_opt) ... killed
+16: binop_cmp, replace `<` with `>`, at src/offset/fixed.rs@81:19-81:20(fn FixedOffset::west_opt) ... killed
+17: lit_int, replace `86400` with `86401`, at src/offset/fixed.rs@81:36-81:42(fn FixedOffset::west_opt) ... SURVIVED
+18: lit_int, replace `86400` with `86399`, at src/offset/fixed.rs@81:36-81:42(fn FixedOffset::west_opt) ... killed
+19: binop_cmp, replace `<` with `<=`, at src/offset/fixed.rs@81:34-81:35(fn FixedOffset::west_opt) ... SURVIVED
+20: binop_cmp, replace `<` with `>=`, at src/offset/fixed.rs@81:34-81:35(fn FixedOffset::west_opt) ... killed
+21: binop_cmp, replace `<` with `>`, at src/offset/fixed.rs@81:34-81:35(fn FixedOffset::west_opt) ... killed
+22: binop_bool, replace `&&` with `||`, at src/offset/fixed.rs@81:26-81:28(fn FixedOffset::west_opt) ... SURVIVED
+23: lit_int, replace `0` with `1`, at src/offset/fixed.rs@124:41-124:42(fn FixedOffset::fmt) ... SURVIVED
+24: binop_cmp, replace `<` with `<=`, at src/offset/fixed.rs@124:39-124:40(fn FixedOffset::fmt) ... SURVIVED
+25: binop_cmp, replace `<` with `>=`, at src/offset/fixed.rs@124:39-124:40(fn FixedOffset::fmt) ... killed
+26: binop_cmp, replace `<` with `>`, at src/offset/fixed.rs@124:39-124:40(fn FixedOffset::fmt) ... killed
+27: lit_int, replace `60` with `61`, at src/offset/fixed.rs@125:48-125:50(fn FixedOffset::fmt) ... killed
+28: lit_int, replace `60` with `59`, at src/offset/fixed.rs@125:48-125:50(fn FixedOffset::fmt) ... killed
+29: lit_int, replace `60` with `61`, at src/offset/fixed.rs@126:46-126:48(fn FixedOffset::fmt) ... killed
+30: lit_int, replace `60` with `59`, at src/offset/fixed.rs@126:46-126:48(fn FixedOffset::fmt) ... killed
+31: lit_int, replace `0` with `1`, at src/offset/fixed.rs@127:18-127:19(fn FixedOffset::fmt) ... killed
+32: binop_eq, replace `==` with `!=`, at src/offset/fixed.rs@127:15-127:17(fn FixedOffset::fmt) ... killed
+33: lit_int, replace `0` with `1`, at src/offset/fixed.rs@149:34-149:35(fn add_with_leapsecond) ... SURVIVED
+34: binop_add, replace `+` with `-`, at src/offset/fixed.rs@150:9-150:10(fn add_with_leapsecond) ... killed
+35: lit_int, replace `60` with `61`, at src/offset/local.rs@17:20-17:22(fn tm_to_datetime) ... SURVIVED
+36: lit_int, replace `60` with `59`, at src/offset/local.rs@17:20-17:22(fn tm_to_datetime) ... SURVIVED
+37: binop_cmp, replace `>=` with `<`, at src/offset/local.rs@17:17-17:19(fn tm_to_datetime) ... killed
+38: binop_cmp, replace `>=` with `<=`, at src/offset/local.rs@17:17-17:19(fn tm_to_datetime) ... killed
+39: binop_cmp, replace `>=` with `>`, at src/offset/local.rs@17:17-17:19(fn tm_to_datetime) ... SURVIVED
+40: lit_int, replace `59` with `60`, at src/offset/local.rs@18:35-18:37(fn tm_to_datetime) ... NOT COVERED
+41: lit_int, replace `59` with `58`, at src/offset/local.rs@18:35-18:37(fn tm_to_datetime) ... NOT COVERED
+42: lit_int, replace `1000000000` with `1000000001`, at src/offset/local.rs@18:41-18:54(fn tm_to_datetime) ... NOT COVERED
+43: lit_int, replace `1000000000` with `999999999`, at src/offset/local.rs@18:41-18:54(fn tm_to_datetime) ... NOT COVERED
+44: lit_int, replace `59` with `60`, at src/offset/local.rs@19:20-19:22(fn tm_to_datetime) ... NOT COVERED
+45: lit_int, replace `59` with `58`, at src/offset/local.rs@19:20-19:22(fn tm_to_datetime) ... NOT COVERED
+46: lit_int, replace `1900` with `1901`, at src/offset/local.rs@25:40-25:44(fn tm_to_naive_date) ... killed
+47: lit_int, replace `1900` with `1899`, at src/offset/local.rs@25:40-25:44(fn tm_to_naive_date) ... killed
+48: binop_add, replace `+` with `-`, at src/offset/local.rs@25:38-25:39(fn tm_to_naive_date) ... killed
+49: lit_int, replace `1` with `2`, at src/offset/local.rs@25:66-25:67(fn tm_to_naive_date) ... killed
+50: lit_int, replace `1` with `0`, at src/offset/local.rs@25:66-25:67(fn tm_to_naive_date) ... killed
+51: binop_add, replace `+` with `-`, at src/offset/local.rs@25:64-25:65(fn tm_to_naive_date) ... killed
+52: lit_int, replace `1900` with `1901`, at src/offset/local.rs@31:41-31:45(fn tm_to_naive_date) ... NOT COVERED
+53: lit_int, replace `1900` with `1899`, at src/offset/local.rs@31:41-31:45(fn tm_to_naive_date) ... NOT COVERED
+54: binop_add, replace `+` with `-`, at src/offset/local.rs@31:39-31:40(fn tm_to_naive_date) ... NOT COVERED
+55: lit_int, replace `1` with `2`, at src/offset/local.rs@31:66-31:67(fn tm_to_naive_date) ... NOT COVERED
+56: lit_int, replace `1` with `0`, at src/offset/local.rs@31:66-31:67(fn tm_to_naive_date) ... NOT COVERED
+57: binop_add, replace `+` with `-`, at src/offset/local.rs@31:64-31:65(fn tm_to_naive_date) ... NOT COVERED
+58: lit_int, replace `1` with `2`, at src/offset/local.rs@46:30-46:31(fn datetime_to_timespec) ... SURVIVED
+59: lit_int, replace `1` with `0`, at src/offset/local.rs@46:30-46:31(fn datetime_to_timespec) ... killed
+60: lit_int, replace `0` with `1`, at src/offset/local.rs@46:39-46:40(fn datetime_to_timespec) ... killed
+61: lit_int, replace `1900` with `1901`, at src/offset/local.rs@54:28-54:32(fn datetime_to_timespec) ... killed
+62: lit_int, replace `1900` with `1899`, at src/offset/local.rs@54:28-54:32(fn datetime_to_timespec) ... killed
+63: lit_int, replace `0` with `1`, at src/offset/local.rs@55:17-55:18(fn datetime_to_timespec) ... SURVIVED
+64: lit_int, replace `0` with `1`, at src/offset/local.rs@56:17-56:18(fn datetime_to_timespec) ... SURVIVED
+65: lit_int, replace `1` with `2`, at src/offset/local.rs@57:19-57:20(fn datetime_to_timespec) ... SURVIVED
+66: lit_int, replace `1` with `0`, at src/offset/local.rs@57:19-57:20(fn datetime_to_timespec) ... killed
+67: lit_int, replace `0` with `1`, at src/offset/local.rs@60:17-60:18(fn datetime_to_timespec) ... killed
+68: lit_int, replace `60` with `61`, at src/offset/local.rs@102:94-102:96(fn Local::now) ... NOT COVERED
+69: lit_int, replace `60` with `59`, at src/offset/local.rs@102:94-102:96(fn Local::now) ... NOT COVERED
+70: lit_int, replace `0` with `1`, at src/offset/local.rs@134:63-134:64(fn Local::from_local_date) ... SURVIVED
+71: lit_int, replace `0` with `1`, at src/offset/local.rs@134:66-134:67(fn Local::from_local_date) ... SURVIVED
+72: lit_int, replace `0` with `1`, at src/offset/local.rs@134:69-134:70(fn Local::from_local_date) ... SURVIVED
+73: lit_bool, replace `true` with `false`, at src/offset/local.rs@139:51-139:55(fn Local::from_local_datetime) ... killed
+74: lit_int, replace `0` with `1`, at src/offset/local.rs@150:59-150:60(fn Local::from_utc_date) ... NOT COVERED
+75: lit_int, replace `0` with `1`, at src/offset/local.rs@150:62-150:63(fn Local::from_utc_date) ... NOT COVERED
+76: lit_int, replace `0` with `1`, at src/offset/local.rs@150:65-150:66(fn Local::from_utc_date) ... NOT COVERED
+77: lit_bool, replace `false` with `true`, at src/offset/local.rs@155:49-155:54(fn Local::from_utc_datetime) ... killed
+78: lit_int, replace `1000` with `1001`, at src/offset/utc.rs@53:49-53:53(fn Utc::now) ... NOT COVERED
+79: lit_int, replace `1000` with `999`, at src/offset/utc.rs@53:49-53:53(fn Utc::now) ... NOT COVERED
+80: lit_int, replace `1000000` with `1000001`, at src/offset/utc.rs@54:20-54:29(fn Utc::now) ... NOT COVERED
+81: lit_int, replace `1000000` with `999999`, at src/offset/utc.rs@54:20-54:29(fn Utc::now) ... NOT COVERED
+82: lit_int, replace `1000` with `1001`, at src/offset/utc.rs@54:62-54:66(fn Utc::now) ... NOT COVERED
+83: lit_int, replace `1000` with `999`, at src/offset/utc.rs@54:62-54:66(fn Utc::now) ... NOT COVERED
+84: lit_int, replace `0` with `1`, at src/offset/utc.rs@77:53-77:54(fn Utc::fix) ... killed
+85: binop_eq, replace `==` with `!=`, at src/date.rs@325:56-325:58(fn Date < Tz >::eq) ... killed
+86: binop_add, replace `+` with `-`, at src/datetime.rs@92:29-92:30(fn DateTime < Tz >::time) ... killed
+87: binop_add, replace `+` with `-`, at src/datetime.rs@234:22-234:23(fn DateTime < Tz >::naive_local) ... killed
+88: lit_int, replace `0` with `1`, at src/datetime.rs@245:45-245:46(fn DateTime < FixedOffset >::from) ... NOT COVERED
+89: lit_int, replace `0` with `1`, at src/datetime.rs@303:45-303:46(fn DateTime < FixedOffset >::from) ... NOT COVERED
+90: binop_eq, replace `==` with `!=`, at src/datetime.rs@545:64-545:66(fn DateTime < Tz >::eq) ... killed
+91: lit_int, replace `0` with `1`, at src/datetime.rs@655:27-655:28(fn DateTime < Utc >::from) ... SURVIVED
+92: binop_eq, replace `==` with `!=`, at src/datetime.rs@655:24-655:26(fn DateTime < Utc >::from) ... killed
+93: lit_int, replace `0` with `1`, at src/datetime.rs@656:27-656:28(fn DateTime < Utc >::from) ... NOT COVERED
+94: lit_int, replace `1` with `2`, at src/datetime.rs@658:28-658:29(fn DateTime < Utc >::from) ... killed
+95: lit_int, replace `1` with `0`, at src/datetime.rs@658:28-658:29(fn DateTime < Utc >::from) ... killed
+96: lit_int, replace `1000000000` with `1000000001`, at src/datetime.rs@658:31-658:44(fn DateTime < Utc >::from) ... killed
+97: lit_int, replace `1000000000` with `999999999`, at src/datetime.rs@658:31-658:44(fn DateTime < Utc >::from) ... killed
+98: lit_int, replace `0` with `1`, at src/datetime.rs@679:17-679:18(fn SystemTime::from) ... SURVIVED
+99: binop_cmp, replace `<` with `<=`, at src/datetime.rs@679:15-679:16(fn SystemTime::from) ... SURVIVED
+100: binop_cmp, replace `<` with `>=`, at src/datetime.rs@679:15-679:16(fn SystemTime::from) ... killed
+101: binop_cmp, replace `<` with `>`, at src/datetime.rs@679:15-679:16(fn SystemTime::from) ... killed
+102: lit_int, replace `0` with `1`, at src/datetime.rs@681:52-681:53(fn SystemTime::from) ... killed
+103: lit_int, replace `0` with `1`, at src/datetime.rs@681:71-681:72(fn SystemTime::from) ... killed
+104: binop_add, replace `+` with `-`, at src/datetime.rs@681:55-681:56(fn SystemTime::from) ... killed
+105: binop_add, replace `+` with `-`, at src/datetime.rs@683:23-683:24(fn SystemTime::from) ... killed
+106: lit_int, replace `2018` with `2019`, at src/datetime.rs@690:25-690:29(fn test_auto_conversion) ... killed
+107: lit_int, replace `2018` with `2017`, at src/datetime.rs@690:25-690:29(fn test_auto_conversion) ... killed
+108: lit_int, replace `9` with `10`, at src/datetime.rs@690:31-690:32(fn test_auto_conversion) ... killed
+109: lit_int, replace `9` with `8`, at src/datetime.rs@690:31-690:32(fn test_auto_conversion) ... killed
+110: lit_int, replace `5` with `6`, at src/datetime.rs@690:34-690:35(fn test_auto_conversion) ... killed
+111: lit_int, replace `5` with `4`, at src/datetime.rs@690:34-690:35(fn test_auto_conversion) ... killed
+112: lit_int, replace `23` with `24`, at src/datetime.rs@690:45-690:47(fn test_auto_conversion) ... killed
+113: lit_int, replace `23` with `22`, at src/datetime.rs@690:45-690:47(fn test_auto_conversion) ... killed
+114: lit_int, replace `58` with `59`, at src/datetime.rs@690:49-690:51(fn test_auto_conversion) ... killed
+115: lit_int, replace `58` with `57`, at src/datetime.rs@690:49-690:51(fn test_auto_conversion) ... killed
+116: lit_int, replace `0` with `1`, at src/datetime.rs@690:53-690:54(fn test_auto_conversion) ... killed
+117: lit_int, replace `5` with `6`, at src/datetime.rs@691:35-691:36(fn test_auto_conversion) ... killed
+118: lit_int, replace `5` with `4`, at src/datetime.rs@691:35-691:36(fn test_auto_conversion) ... killed
+119: lit_int, replace `60` with `61`, at src/datetime.rs@691:39-691:41(fn test_auto_conversion) ... killed
+120: lit_int, replace `60` with `59`, at src/datetime.rs@691:39-691:41(fn test_auto_conversion) ... killed
+121: lit_int, replace `60` with `61`, at src/datetime.rs@691:44-691:46(fn test_auto_conversion) ... killed
+122: lit_int, replace `60` with `59`, at src/datetime.rs@691:44-691:46(fn test_auto_conversion) ... killed
+123: lit_int, replace `2018` with `2019`, at src/datetime.rs@691:52-691:56(fn test_auto_conversion) ... killed
+124: lit_int, replace `2018` with `2017`, at src/datetime.rs@691:52-691:56(fn test_auto_conversion) ... killed
+125: lit_int, replace `9` with `10`, at src/datetime.rs@691:58-691:59(fn test_auto_conversion) ... killed
+126: lit_int, replace `9` with `8`, at src/datetime.rs@691:58-691:59(fn test_auto_conversion) ... killed
+127: lit_int, replace `5` with `6`, at src/datetime.rs@691:61-691:62(fn test_auto_conversion) ... killed
+128: lit_int, replace `5` with `4`, at src/datetime.rs@691:61-691:62(fn test_auto_conversion) ... killed
+129: lit_int, replace `18` with `19`, at src/datetime.rs@691:72-691:74(fn test_auto_conversion) ... killed
+130: lit_int, replace `18` with `17`, at src/datetime.rs@691:72-691:74(fn test_auto_conversion) ... killed
+131: lit_int, replace `58` with `59`, at src/datetime.rs@691:76-691:78(fn test_auto_conversion) ... killed
+132: lit_int, replace `58` with `57`, at src/datetime.rs@691:76-691:78(fn test_auto_conversion) ... killed
+133: lit_int, replace `0` with `1`, at src/datetime.rs@691:80-691:81(fn test_auto_conversion) ... killed
+134: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@117:16-117:18(fn set_if_consistent) ... killed
+135: lit_int, replace `0` with `1`, at src/format/parsed.rs@150:19-150:20(fn Parsed::set_year_div_100) ... killed
+136: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@150:17-150:18(fn Parsed::set_year_div_100) ... killed
+137: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@150:17-150:18(fn Parsed::set_year_div_100) ... killed
+138: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@150:17-150:18(fn Parsed::set_year_div_100) ... killed
+139: lit_int, replace `0` with `1`, at src/format/parsed.rs@156:19-156:20(fn Parsed::set_year_mod_100) ... killed
+140: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@156:17-156:18(fn Parsed::set_year_mod_100) ... killed
+141: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@156:17-156:18(fn Parsed::set_year_mod_100) ... killed
+142: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@156:17-156:18(fn Parsed::set_year_mod_100) ... killed
+143: lit_int, replace `0` with `1`, at src/format/parsed.rs@167:19-167:20(fn Parsed::set_isoyear_div_100) ... SURVIVED
+144: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@167:17-167:18(fn Parsed::set_isoyear_div_100) ... SURVIVED
+145: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@167:17-167:18(fn Parsed::set_isoyear_div_100) ... killed
+146: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@167:17-167:18(fn Parsed::set_isoyear_div_100) ... killed
+147: lit_int, replace `0` with `1`, at src/format/parsed.rs@173:19-173:20(fn Parsed::set_isoyear_mod_100) ... SURVIVED
+148: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@173:17-173:18(fn Parsed::set_isoyear_mod_100) ... SURVIVED
+149: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@173:17-173:18(fn Parsed::set_isoyear_mod_100) ... killed
+150: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@173:17-173:18(fn Parsed::set_isoyear_mod_100) ... killed
+151: lit_int, replace `1` with `2`, at src/format/parsed.rs@215:59-215:60(fn Parsed::set_ampm) ... killed
+152: lit_int, replace `1` with `0`, at src/format/parsed.rs@215:59-215:60(fn Parsed::set_ampm) ... killed
+153: lit_int, replace `0` with `1`, at src/format/parsed.rs@215:68-215:69(fn Parsed::set_ampm) ... killed
+154: lit_int, replace `1` with `2`, at src/format/parsed.rs@221:19-221:20(fn Parsed::set_hour12) ... killed
+155: lit_int, replace `1` with `0`, at src/format/parsed.rs@221:19-221:20(fn Parsed::set_hour12) ... killed
+156: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@221:17-221:18(fn Parsed::set_hour12) ... killed
+157: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@221:17-221:18(fn Parsed::set_hour12) ... killed
+158: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@221:17-221:18(fn Parsed::set_hour12) ... killed
+159: lit_int, replace `12` with `13`, at src/format/parsed.rs@221:32-221:34(fn Parsed::set_hour12) ... SURVIVED
+160: lit_int, replace `12` with `11`, at src/format/parsed.rs@221:32-221:34(fn Parsed::set_hour12) ... killed
+161: binop_cmp, replace `>` with `<`, at src/format/parsed.rs@221:30-221:31(fn Parsed::set_hour12) ... killed
+162: binop_cmp, replace `>` with `<=`, at src/format/parsed.rs@221:30-221:31(fn Parsed::set_hour12) ... killed
+163: binop_cmp, replace `>` with `>=`, at src/format/parsed.rs@221:30-221:31(fn Parsed::set_hour12) ... killed
+164: binop_bool, replace `||` with `&&`, at src/format/parsed.rs@221:21-221:23(fn Parsed::set_hour12) ... killed
+165: lit_int, replace `12` with `13`, at src/format/parsed.rs@222:64-222:66(fn Parsed::set_hour12) ... killed
+166: lit_int, replace `12` with `11`, at src/format/parsed.rs@222:64-222:66(fn Parsed::set_hour12) ... killed
+167: lit_int, replace `0` with `1`, at src/format/parsed.rs@283:27-283:28(fn Parsed::resolve_year) ... SURVIVED
+168: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@283:25-283:26(fn Parsed::resolve_year) ... SURVIVED
+169: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@283:25-283:26(fn Parsed::resolve_year) ... killed
+170: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@283:25-283:26(fn Parsed::resolve_year) ... killed
+171: lit_int, replace `100` with `101`, at src/format/parsed.rs@284:46-284:49(fn Parsed::resolve_year) ... killed
+172: lit_int, replace `100` with `99`, at src/format/parsed.rs@284:46-284:49(fn Parsed::resolve_year) ... killed
+173: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@285:39-285:41(fn Parsed::resolve_year) ... killed
+174: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@285:64-285:66(fn Parsed::resolve_year) ... killed
+175: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@285:45-285:47(fn Parsed::resolve_year) ... killed
+176: lit_int, replace `0` with `1`, at src/format/parsed.rs@295:27-295:28(fn Parsed::resolve_year) ... killed
+177: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@295:25-295:26(fn Parsed::resolve_year) ... killed
+178: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@295:25-295:26(fn Parsed::resolve_year) ... killed
+179: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@295:25-295:26(fn Parsed::resolve_year) ... killed
+180: lit_int, replace `100` with `101`, at src/format/parsed.rs@296:42-296:45(fn Parsed::resolve_year) ... killed
+181: lit_int, replace `100` with `99`, at src/format/parsed.rs@296:42-296:45(fn Parsed::resolve_year) ... killed
+182: lit_int, replace `70` with `71`, at src/format/parsed.rs@302:69-302:71(fn Parsed::resolve_year) ... killed
+183: lit_int, replace `70` with `69`, at src/format/parsed.rs@302:69-302:71(fn Parsed::resolve_year) ... killed
+184: binop_cmp, replace `<` with `<=`, at src/format/parsed.rs@302:67-302:68(fn Parsed::resolve_year) ... killed
+185: binop_cmp, replace `<` with `>=`, at src/format/parsed.rs@302:67-302:68(fn Parsed::resolve_year) ... killed
+186: binop_cmp, replace `<` with `>`, at src/format/parsed.rs@302:67-302:68(fn Parsed::resolve_year) ... killed
+187: lit_int, replace `2000` with `2001`, at src/format/parsed.rs@302:73-302:77(fn Parsed::resolve_year) ... killed
+188: lit_int, replace `2000` with `1999`, at src/format/parsed.rs@302:73-302:77(fn Parsed::resolve_year) ... killed
+189: lit_int, replace `1900` with `1901`, at src/format/parsed.rs@302:85-302:89(fn Parsed::resolve_year) ... killed
+190: lit_int, replace `1900` with `1899`, at src/format/parsed.rs@302:85-302:89(fn Parsed::resolve_year) ... killed
+191: binop_add, replace `+` with `-`, at src/format/parsed.rs@302:60-302:61(fn Parsed::resolve_year) ... killed
+192: lit_int, replace `0` with `1`, at src/format/parsed.rs@318:58-318:59(fn Parsed::to_naive_date) ... SURVIVED
+193: binop_cmp, replace `>=` with `<`, at src/format/parsed.rs@318:55-318:57(fn Parsed::to_naive_date) ... SURVIVED
+194: binop_cmp, replace `>=` with `<=`, at src/format/parsed.rs@318:55-318:57(fn Parsed::to_naive_date) ... SURVIVED
+195: binop_cmp, replace `>=` with `>`, at src/format/parsed.rs@318:55-318:57(fn Parsed::to_naive_date) ... SURVIVED
+196: lit_int, replace `100` with `101`, at src/format/parsed.rs@319:43-319:46(fn Parsed::to_naive_date) ... SURVIVED
+197: lit_int, replace `100` with `99`, at src/format/parsed.rs@319:43-319:46(fn Parsed::to_naive_date) ... SURVIVED
+198: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@326:39-326:41(fn Parsed::to_naive_date) ... killed
+199: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@327:48-327:50(fn Parsed::to_naive_date) ... killed
+200: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@326:47-326:49(fn Parsed::to_naive_date) ... SURVIVED
+201: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@328:48-328:50(fn Parsed::to_naive_date) ... killed
+202: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@327:64-327:66(fn Parsed::to_naive_date) ... SURVIVED
+203: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@329:41-329:43(fn Parsed::to_naive_date) ... killed
+204: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@328:64-328:66(fn Parsed::to_naive_date) ... SURVIVED
+205: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@330:37-330:39(fn Parsed::to_naive_date) ... killed
+206: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@329:50-329:52(fn Parsed::to_naive_date) ... SURVIVED
+207: lit_int, replace `0` with `1`, at src/format/parsed.rs@339:67-339:68(fn Parsed::to_naive_date) ... SURVIVED
+208: binop_cmp, replace `>=` with `<`, at src/format/parsed.rs@339:64-339:66(fn Parsed::to_naive_date) ... killed
+209: binop_cmp, replace `>=` with `<=`, at src/format/parsed.rs@339:64-339:66(fn Parsed::to_naive_date) ... killed
+210: binop_cmp, replace `>=` with `>`, at src/format/parsed.rs@339:64-339:66(fn Parsed::to_naive_date) ... SURVIVED
+211: lit_int, replace `100` with `101`, at src/format/parsed.rs@340:46-340:49(fn Parsed::to_naive_date) ... killed
+212: lit_int, replace `100` with `99`, at src/format/parsed.rs@340:46-340:49(fn Parsed::to_naive_date) ... killed
+213: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@345:45-345:47(fn Parsed::to_naive_date) ... killed
+214: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@346:54-346:56(fn Parsed::to_naive_date) ... killed
+215: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@345:56-345:58(fn Parsed::to_naive_date) ... SURVIVED
+216: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@347:54-347:56(fn Parsed::to_naive_date) ... killed
+217: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@346:73-346:75(fn Parsed::to_naive_date) ... SURVIVED
+218: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@348:45-348:47(fn Parsed::to_naive_date) ... killed
+219: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@347:73-347:75(fn Parsed::to_naive_date) ... SURVIVED
+220: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@349:45-349:47(fn Parsed::to_naive_date) ... killed
+221: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@348:56-348:58(fn Parsed::to_naive_date) ... killed
+222: lit_int, replace `7` with `8`, at src/format/parsed.rs@356:90-356:91(fn Parsed::to_naive_date) ... SURVIVED
+223: lit_int, replace `7` with `6`, at src/format/parsed.rs@356:90-356:91(fn Parsed::to_naive_date) ... SURVIVED
+224: binop_add, replace `+` with `-`, at src/format/parsed.rs@356:88-356:89(fn Parsed::to_naive_date) ... killed
+225: lit_int, replace `7` with `8`, at src/format/parsed.rs@356:95-356:96(fn Parsed::to_naive_date) ... killed
+226: lit_int, replace `7` with `6`, at src/format/parsed.rs@356:95-356:96(fn Parsed::to_naive_date) ... killed
+227: lit_int, replace `7` with `8`, at src/format/parsed.rs@357:90-357:91(fn Parsed::to_naive_date) ... killed
+228: lit_int, replace `7` with `6`, at src/format/parsed.rs@357:90-357:91(fn Parsed::to_naive_date) ... SURVIVED
+229: binop_add, replace `+` with `-`, at src/format/parsed.rs@357:88-357:89(fn Parsed::to_naive_date) ... killed
+230: lit_int, replace `7` with `8`, at src/format/parsed.rs@357:95-357:96(fn Parsed::to_naive_date) ... killed
+231: lit_int, replace `7` with `6`, at src/format/parsed.rs@357:95-357:96(fn Parsed::to_naive_date) ... killed
+232: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@358:45-358:47(fn Parsed::to_naive_date) ... killed
+233: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@359:68-359:70(fn Parsed::to_naive_date) ... killed
+234: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@358:56-358:58(fn Parsed::to_naive_date) ... SURVIVED
+235: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@360:68-360:70(fn Parsed::to_naive_date) ... killed
+236: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@359:85-359:87(fn Parsed::to_naive_date) ... killed
+237: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@370:42-370:44(fn Parsed::to_naive_date) ... killed
+238: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@376:34-376:36(fn Parsed::to_naive_date) ... SURVIVED
+239: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@376:62-376:64(fn Parsed::to_naive_date) ... SURVIVED
+240: lit_int, replace `0` with `1`, at src/format/parsed.rs@384:36-384:37(fn Parsed::to_naive_date) ... killed
+241: lit_int, replace `6` with `7`, at src/format/parsed.rs@385:36-385:37(fn Parsed::to_naive_date) ... NOT COVERED
+242: lit_int, replace `6` with `5`, at src/format/parsed.rs@385:36-385:37(fn Parsed::to_naive_date) ... NOT COVERED
+243: lit_int, replace `5` with `6`, at src/format/parsed.rs@386:36-386:37(fn Parsed::to_naive_date) ... NOT COVERED
+244: lit_int, replace `5` with `4`, at src/format/parsed.rs@386:36-386:37(fn Parsed::to_naive_date) ... NOT COVERED
+245: lit_int, replace `4` with `5`, at src/format/parsed.rs@387:36-387:37(fn Parsed::to_naive_date) ... NOT COVERED
+246: lit_int, replace `4` with `3`, at src/format/parsed.rs@387:36-387:37(fn Parsed::to_naive_date) ... NOT COVERED
+247: lit_int, replace `3` with `4`, at src/format/parsed.rs@388:36-388:37(fn Parsed::to_naive_date) ... NOT COVERED
+248: lit_int, replace `3` with `2`, at src/format/parsed.rs@388:36-388:37(fn Parsed::to_naive_date) ... NOT COVERED
+249: lit_int, replace `2` with `3`, at src/format/parsed.rs@389:36-389:37(fn Parsed::to_naive_date) ... NOT COVERED
+250: lit_int, replace `2` with `1`, at src/format/parsed.rs@389:36-389:37(fn Parsed::to_naive_date) ... NOT COVERED
+251: lit_int, replace `1` with `2`, at src/format/parsed.rs@390:36-390:37(fn Parsed::to_naive_date) ... killed
+252: lit_int, replace `1` with `0`, at src/format/parsed.rs@390:36-390:37(fn Parsed::to_naive_date) ... killed
+253: lit_int, replace `53` with `54`, at src/format/parsed.rs@394:35-394:37(fn Parsed::to_naive_date) ... SURVIVED
+254: lit_int, replace `53` with `52`, at src/format/parsed.rs@394:35-394:37(fn Parsed::to_naive_date) ... killed
+255: binop_cmp, replace `>` with `<`, at src/format/parsed.rs@394:33-394:34(fn Parsed::to_naive_date) ... killed
+256: binop_cmp, replace `>` with `<=`, at src/format/parsed.rs@394:33-394:34(fn Parsed::to_naive_date) ... killed
+257: binop_cmp, replace `>` with `>=`, at src/format/parsed.rs@394:33-394:34(fn Parsed::to_naive_date) ... killed
+258: lit_int, replace `1` with `2`, at src/format/parsed.rs@395:64-395:65(fn Parsed::to_naive_date) ... killed
+259: lit_int, replace `1` with `0`, at src/format/parsed.rs@395:64-395:65(fn Parsed::to_naive_date) ... killed
+260: lit_int, replace `7` with `8`, at src/format/parsed.rs@395:69-395:70(fn Parsed::to_naive_date) ... killed
+261: lit_int, replace `7` with `6`, at src/format/parsed.rs@395:69-395:70(fn Parsed::to_naive_date) ... killed
+262: binop_add, replace `+` with `-`, at src/format/parsed.rs@395:38-395:39(fn Parsed::to_naive_date) ... killed
+263: binop_add, replace `+` with `-`, at src/format/parsed.rs@395:71-395:72(fn Parsed::to_naive_date) ... killed
+264: binop_eq, replace `!=` with `==`, at src/format/parsed.rs@399:31-399:33(fn Parsed::to_naive_date) ... killed
+265: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@401:34-401:36(fn Parsed::to_naive_date) ... SURVIVED
+266: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@401:62-401:64(fn Parsed::to_naive_date) ... killed
+267: lit_int, replace `1` with `2`, at src/format/parsed.rs@409:36-409:37(fn Parsed::to_naive_date) ... NOT COVERED
+268: lit_int, replace `1` with `0`, at src/format/parsed.rs@409:36-409:37(fn Parsed::to_naive_date) ... NOT COVERED
+269: lit_int, replace `0` with `1`, at src/format/parsed.rs@410:36-410:37(fn Parsed::to_naive_date) ... NOT COVERED
+270: lit_int, replace `6` with `7`, at src/format/parsed.rs@411:36-411:37(fn Parsed::to_naive_date) ... NOT COVERED
+271: lit_int, replace `6` with `5`, at src/format/parsed.rs@411:36-411:37(fn Parsed::to_naive_date) ... NOT COVERED
+272: lit_int, replace `5` with `6`, at src/format/parsed.rs@412:36-412:37(fn Parsed::to_naive_date) ... NOT COVERED
+273: lit_int, replace `5` with `4`, at src/format/parsed.rs@412:36-412:37(fn Parsed::to_naive_date) ... NOT COVERED
+274: lit_int, replace `4` with `5`, at src/format/parsed.rs@413:36-413:37(fn Parsed::to_naive_date) ... NOT COVERED
+275: lit_int, replace `4` with `3`, at src/format/parsed.rs@413:36-413:37(fn Parsed::to_naive_date) ... NOT COVERED
+276: lit_int, replace `3` with `4`, at src/format/parsed.rs@414:36-414:37(fn Parsed::to_naive_date) ... NOT COVERED
+277: lit_int, replace `3` with `2`, at src/format/parsed.rs@414:36-414:37(fn Parsed::to_naive_date) ... NOT COVERED
+278: lit_int, replace `2` with `3`, at src/format/parsed.rs@415:36-415:37(fn Parsed::to_naive_date) ... killed
+279: lit_int, replace `2` with `1`, at src/format/parsed.rs@415:36-415:37(fn Parsed::to_naive_date) ... killed
+280: lit_int, replace `53` with `54`, at src/format/parsed.rs@419:35-419:37(fn Parsed::to_naive_date) ... SURVIVED
+281: lit_int, replace `53` with `52`, at src/format/parsed.rs@419:35-419:37(fn Parsed::to_naive_date) ... SURVIVED
+282: binop_cmp, replace `>` with `<`, at src/format/parsed.rs@419:33-419:34(fn Parsed::to_naive_date) ... killed
+283: binop_cmp, replace `>` with `<=`, at src/format/parsed.rs@419:33-419:34(fn Parsed::to_naive_date) ... killed
+284: binop_cmp, replace `>` with `>=`, at src/format/parsed.rs@419:33-419:34(fn Parsed::to_naive_date) ... SURVIVED
+285: lit_int, replace `1` with `2`, at src/format/parsed.rs@420:64-420:65(fn Parsed::to_naive_date) ... killed
+286: lit_int, replace `1` with `0`, at src/format/parsed.rs@420:64-420:65(fn Parsed::to_naive_date) ... killed
+287: lit_int, replace `7` with `8`, at src/format/parsed.rs@420:69-420:70(fn Parsed::to_naive_date) ... killed
+288: lit_int, replace `7` with `6`, at src/format/parsed.rs@420:69-420:70(fn Parsed::to_naive_date) ... killed
+289: binop_add, replace `+` with `-`, at src/format/parsed.rs@420:38-420:39(fn Parsed::to_naive_date) ... killed
+290: binop_add, replace `+` with `-`, at src/format/parsed.rs@420:71-420:72(fn Parsed::to_naive_date) ... killed
+291: binop_eq, replace `!=` with `==`, at src/format/parsed.rs@424:31-424:33(fn Parsed::to_naive_date) ... killed
+292: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@426:34-426:36(fn Parsed::to_naive_date) ... SURVIVED
+293: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@426:62-426:64(fn Parsed::to_naive_date) ... SURVIVED
+294: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@433:34-433:36(fn Parsed::to_naive_date) ... SURVIVED
+295: lit_int, replace `12` with `13`, at src/format/parsed.rs@466:33-466:35(fn Parsed::to_naive_time) ... killed
+296: lit_int, replace `12` with `11`, at src/format/parsed.rs@466:33-466:35(fn Parsed::to_naive_time) ... killed
+297: binop_add, replace `+` with `-`, at src/format/parsed.rs@466:36-466:37(fn Parsed::to_naive_time) ... killed
+298: lit_int, replace `0` with `1`, at src/format/parsed.rs@475:61-475:62(fn Parsed::to_naive_time) ... killed
+299: lit_int, replace `0` with `1`, at src/format/parsed.rs@476:30-476:31(fn Parsed::to_naive_time) ... killed
+300: lit_int, replace `59` with `60`, at src/format/parsed.rs@477:19-477:21(fn Parsed::to_naive_time) ... killed
+301: lit_int, replace `59` with `58`, at src/format/parsed.rs@477:19-477:21(fn Parsed::to_naive_time) ... killed
+302: lit_int, replace `1000000000` with `1000000001`, at src/format/parsed.rs@477:23-477:36(fn Parsed::to_naive_time) ... killed
+303: lit_int, replace `1000000000` with `999999999`, at src/format/parsed.rs@477:23-477:36(fn Parsed::to_naive_time) ... killed
+304: lit_int, replace `0` with `1`, at src/format/parsed.rs@484:20-484:21(fn Parsed::to_naive_time) ... killed
+305: binop_eq, replace `!=` with `==`, at src/format/parsed.rs@508:35-508:37(fn Parsed::to_naive_datetime_with_offset) ... killed
+306: lit_int, replace `1000000000` with `1000000001`, at src/format/parsed.rs@509:46-509:59(fn Parsed::to_naive_datetime_with_offset) ... killed
+307: lit_int, replace `1000000000` with `999999999`, at src/format/parsed.rs@509:46-509:59(fn Parsed::to_naive_datetime_with_offset) ... SURVIVED
+308: binop_cmp, replace `>=` with `<`, at src/format/parsed.rs@509:43-509:45(fn Parsed::to_naive_datetime_with_offset) ... killed
+309: binop_cmp, replace `>=` with `<=`, at src/format/parsed.rs@509:43-509:45(fn Parsed::to_naive_datetime_with_offset) ... killed
+310: binop_cmp, replace `>=` with `>`, at src/format/parsed.rs@509:43-509:45(fn Parsed::to_naive_datetime_with_offset) ... killed
+311: lit_int, replace `1` with `2`, at src/format/parsed.rs@509:94-509:95(fn Parsed::to_naive_datetime_with_offset) ... killed
+312: lit_int, replace `1` with `0`, at src/format/parsed.rs@509:94-509:95(fn Parsed::to_naive_datetime_with_offset) ... killed
+313: binop_add, replace `+` with `-`, at src/format/parsed.rs@509:92-509:93(fn Parsed::to_naive_datetime_with_offset) ... killed
+314: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@509:79-509:81(fn Parsed::to_naive_datetime_with_offset) ... killed
+315: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@509:60-509:62(fn Parsed::to_naive_datetime_with_offset) ... killed
+316: unop_not, remove `!`, at src/format/parsed.rs@509:19-509:20(fn Parsed::to_naive_datetime_with_offset) ... killed
+317: binop_bool, replace `&&` with `||`, at src/format/parsed.rs@508:48-508:50(fn Parsed::to_naive_datetime_with_offset) ... killed
+318: lit_int, replace `0` with `1`, at src/format/parsed.rs@529:65-529:66(fn Parsed::to_naive_datetime_with_offset) ... SURVIVED
+319: lit_int, replace `60` with `61`, at src/format/parsed.rs@535:37-535:39(fn Parsed::to_naive_datetime_with_offset) ... killed
+320: lit_int, replace `60` with `59`, at src/format/parsed.rs@535:37-535:39(fn Parsed::to_naive_datetime_with_offset) ... killed
+321: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@535:29-535:31(fn Parsed::to_naive_datetime_with_offset) ... killed
+322: lit_int, replace `1` with `2`, at src/format/parsed.rs@541:60-541:61(fn Parsed::to_naive_datetime_with_offset) ... SURVIVED
+323: lit_int, replace `1` with `0`, at src/format/parsed.rs@541:60-541:61(fn Parsed::to_naive_datetime_with_offset) ... killed
+324: lit_int, replace `0` with `1`, at src/format/parsed.rs@599:33-599:34(fn Parsed::to_datetime_with_timezone) ... SURVIVED
+325: lit_int, replace `0` with `1`, at src/format/parsed.rs@603:55-603:56(fn Parsed::to_datetime_with_timezone) ... SURVIVED
+326: binop_eq, replace `==` with `!=`, at src/format/parsed.rs@612:52-612:54(fn Parsed::to_datetime_with_timezone) ... killed
+327: lit_bool, replace `true` with `false`, at src/format/parsed.rs@614:16-614:20(fn Parsed::to_datetime_with_timezone) ... killed
+328: lit_int, replace `32` with `33`, at src/format/scan.rs@16:75-16:77(fn equals) ... killed
+329: lit_int, replace `32` with `31`, at src/format/scan.rs@16:75-16:77(fn equals) ... killed
+330: binop_add, replace `+` with `-`, at src/format/scan.rs@16:73-16:74(fn equals) ... killed
+331: lit_bool, replace `true` with `false`, at src/format/scan.rs@20:35-20:39(fn equals) ... killed
+332: lit_bool, replace `false` with `true`, at src/format/scan.rs@21:44-21:49(fn equals) ... NOT COVERED
+333: binop_eq, replace `!=` with `==`, at src/format/scan.rs@22:36-22:38(fn equals) ... killed
+334: lit_bool, replace `false` with `true`, at src/format/scan.rs@22:51-22:56(fn equals) ... killed
+335: lit_int, replace `2` with `3`, at src/format/scan.rs@201:21-201:22(fn digits) ... killed
+336: lit_int, replace `2` with `1`, at src/format/scan.rs@201:21-201:22(fn digits) ... killed
+337: binop_cmp, replace `<` with `<=`, at src/format/scan.rs@201:19-201:20(fn digits) ... killed
+338: binop_cmp, replace `<` with `>=`, at src/format/scan.rs@201:19-201:20(fn digits) ... killed
+339: binop_cmp, replace `<` with `>`, at src/format/scan.rs@201:19-201:20(fn digits) ... killed
+340: lit_int, replace `0` with `1`, at src/format/scan.rs@204:18-204:19(fn digits) ... killed
+341: lit_int, replace `1` with `2`, at src/format/scan.rs@204:24-204:25(fn digits) ... killed
+342: lit_int, replace `1` with `0`, at src/format/scan.rs@204:24-204:25(fn digits) ... killed
+343: lit_bool, replace `false` with `true`, at src/format/scan.rs@208:23-208:28(fn timezone_offset_internal) ... killed
+344: lit_bool, replace `true` with `false`, at src/format/scan.rs@209:23-209:27(fn timezone_offset_internal) ... killed
+345: lit_int, replace `1` with `2`, at src/format/scan.rs@213:11-213:12(fn timezone_offset_internal) ... killed
+346: lit_int, replace `1` with `0`, at src/format/scan.rs@213:11-213:12(fn timezone_offset_internal) ... killed
+347: lit_int, replace `10` with `11`, at src/format/scan.rs@217:72-217:74(fn timezone_offset_internal) ... killed
+348: lit_int, replace `10` with `9`, at src/format/scan.rs@217:72-217:74(fn timezone_offset_internal) ... killed
+349: binop_add, replace `+` with `-`, at src/format/scan.rs@217:75-217:76(fn timezone_offset_internal) ... killed
+350: lit_int, replace `2` with `3`, at src/format/scan.rs@220:11-220:12(fn timezone_offset_internal) ... killed
+351: lit_int, replace `2` with `1`, at src/format/scan.rs@220:11-220:12(fn timezone_offset_internal) ... killed
+352: lit_int, replace `10` with `11`, at src/format/scan.rs@229:76-229:78(fn timezone_offset_internal) ... killed
+353: lit_int, replace `10` with `9`, at src/format/scan.rs@229:76-229:78(fn timezone_offset_internal) ... killed
+354: binop_add, replace `+` with `-`, at src/format/scan.rs@229:79-229:80(fn timezone_offset_internal) ... killed
+355: lit_int, replace `0` with `1`, at src/format/scan.rs@234:8-234:9(fn timezone_offset_internal) ... killed
+356: lit_int, replace `2` with `3`, at src/format/scan.rs@239:22-239:23(fn timezone_offset_internal) ... killed
+357: lit_int, replace `2` with `1`, at src/format/scan.rs@239:22-239:23(fn timezone_offset_internal) ... SURVIVED
+358: binop_cmp, replace `>=` with `<`, at src/format/scan.rs@239:19-239:21(fn timezone_offset_internal) ... killed
+359: binop_cmp, replace `>=` with `<=`, at src/format/scan.rs@239:19-239:21(fn timezone_offset_internal) ... killed
+360: binop_cmp, replace `>=` with `>`, at src/format/scan.rs@239:19-239:21(fn timezone_offset_internal) ... killed
+361: lit_int, replace `2` with `3`, at src/format/scan.rs@239:30-239:31(fn timezone_offset_internal) ... killed
+362: lit_int, replace `2` with `1`, at src/format/scan.rs@239:30-239:31(fn timezone_offset_internal) ... killed
+363: lit_int, replace `0` with `1`, at src/format/scan.rs@240:22-240:23(fn timezone_offset_internal) ... killed
+364: binop_eq, replace `==` with `!=`, at src/format/scan.rs@240:19-240:21(fn timezone_offset_internal) ... killed
+365: lit_int, replace `3600` with `3601`, at src/format/scan.rs@244:26-244:30(fn timezone_offset_internal) ... killed
+366: lit_int, replace `3600` with `3599`, at src/format/scan.rs@244:26-244:30(fn timezone_offset_internal) ... killed
+367: lit_int, replace `60` with `61`, at src/format/scan.rs@244:43-244:45(fn timezone_offset_internal) ... killed
+368: lit_int, replace `60` with `59`, at src/format/scan.rs@244:43-244:45(fn timezone_offset_internal) ... killed
+369: binop_add, replace `+` with `-`, at src/format/scan.rs@244:31-244:32(fn timezone_offset_internal) ... killed
+370: unop_not, remove `!`, at src/format/parse.rs@90:11-90:12(fn parse_rfc2822) ... killed
+371: lit_int, replace `1` with `2`, at src/format/parse.rs@91:16-91:17(fn parse_rfc2822) ... SURVIVED
+372: lit_int, replace `1` with `0`, at src/format/parse.rs@91:16-91:17(fn parse_rfc2822) ... killed
+373: lit_int, replace `2000` with `2001`, at src/format/parse.rs@106:34-106:38(fn parse_rfc2822) ... NOT COVERED
+374: lit_int, replace `2000` with `1999`, at src/format/parse.rs@106:34-106:38(fn parse_rfc2822) ... NOT COVERED
+375: lit_int, replace `1900` with `1901`, at src/format/parse.rs@107:34-107:38(fn parse_rfc2822) ... NOT COVERED
+376: lit_int, replace `1900` with `1899`, at src/format/parse.rs@107:34-107:38(fn parse_rfc2822) ... NOT COVERED
+377: lit_int, replace `1900` with `1901`, at src/format/parse.rs@108:34-108:38(fn parse_rfc2822) ... NOT COVERED
+378: lit_int, replace `1900` with `1899`, at src/format/parse.rs@108:34-108:38(fn parse_rfc2822) ... NOT COVERED
+379: lit_int, replace `1` with `2`, at src/format/parse.rs@169:40-169:41(fn parse_rfc3339) ... killed
+380: lit_int, replace `1` with `0`, at src/format/parse.rs@169:40-169:41(fn parse_rfc3339) ... killed
+381: lit_int, replace `86400` with `86401`, at src/format/parse.rs@185:18-185:24(fn parse_rfc3339) ... SURVIVED
+382: lit_int, replace `86400` with `86399`, at src/format/parse.rs@185:18-185:24(fn parse_rfc3339) ... SURVIVED
+383: binop_cmp, replace `<=` with `<`, at src/format/parse.rs@185:14-185:16(fn parse_rfc3339) ... SURVIVED
+384: binop_cmp, replace `<=` with `>=`, at src/format/parse.rs@185:14-185:16(fn parse_rfc3339) ... killed
+385: binop_cmp, replace `<=` with `>`, at src/format/parse.rs@185:14-185:16(fn parse_rfc3339) ... killed
+386: lit_int, replace `86400` with `86401`, at src/format/parse.rs@185:38-185:44(fn parse_rfc3339) ... SURVIVED
+387: lit_int, replace `86400` with `86399`, at src/format/parse.rs@185:38-185:44(fn parse_rfc3339) ... SURVIVED
+388: binop_cmp, replace `>=` with `<`, at src/format/parse.rs@185:35-185:37(fn parse_rfc3339) ... killed
+389: binop_cmp, replace `>=` with `<=`, at src/format/parse.rs@185:35-185:37(fn parse_rfc3339) ... killed
+390: binop_cmp, replace `>=` with `>`, at src/format/parse.rs@185:35-185:37(fn parse_rfc3339) ... SURVIVED
+391: binop_bool, replace `||` with `&&`, at src/format/parse.rs@185:25-185:27(fn parse_rfc3339) ... SURVIVED
+392: binop_eq, replace `!=` with `==`, at src/format/parse.rs@711:14-711:16(fn test_rfc2822) ... killed
+393: lit_int, replace `1994` with `1995`, at src/format/parse.rs@728:21-728:25(fn parse_rfc850) ... killed
+394: lit_int, replace `1994` with `1993`, at src/format/parse.rs@728:21-728:25(fn parse_rfc850) ... killed
+395: lit_int, replace `11` with `12`, at src/format/parse.rs@728:27-728:29(fn parse_rfc850) ... killed
+396: lit_int, replace `11` with `10`, at src/format/parse.rs@728:27-728:29(fn parse_rfc850) ... killed
+397: lit_int, replace `6` with `7`, at src/format/parse.rs@728:31-728:32(fn parse_rfc850) ... killed
+398: lit_int, replace `6` with `5`, at src/format/parse.rs@728:31-728:32(fn parse_rfc850) ... killed
+399: lit_int, replace `8` with `9`, at src/format/parse.rs@728:42-728:43(fn parse_rfc850) ... killed
+400: lit_int, replace `8` with `7`, at src/format/parse.rs@728:42-728:43(fn parse_rfc850) ... killed
+401: lit_int, replace `49` with `50`, at src/format/parse.rs@728:45-728:47(fn parse_rfc850) ... killed (timeout)
+402: lit_int, replace `49` with `48`, at src/format/parse.rs@728:45-728:47(fn parse_rfc850) ... killed
+403: lit_int, replace `37` with `38`, at src/format/parse.rs@728:49-728:51(fn parse_rfc850) ... killed
+404: lit_int, replace `37` with `36`, at src/format/parse.rs@728:49-728:51(fn parse_rfc850) ... killed
+405: lit_int, replace `1994` with `1995`, at src/format/parse.rs@739:17-739:21(fn parse_rfc850) ... killed
+406: lit_int, replace `1994` with `1993`, at src/format/parse.rs@739:17-739:21(fn parse_rfc850) ... killed
+407: lit_int, replace `11` with `12`, at src/format/parse.rs@739:23-739:25(fn parse_rfc850) ... killed
+408: lit_int, replace `11` with `10`, at src/format/parse.rs@739:23-739:25(fn parse_rfc850) ... killed
+409: lit_int, replace `7` with `8`, at src/format/parse.rs@739:27-739:28(fn parse_rfc850) ... killed
+410: lit_int, replace `7` with `6`, at src/format/parse.rs@739:27-739:28(fn parse_rfc850) ... killed
+411: lit_int, replace `8` with `9`, at src/format/parse.rs@739:38-739:39(fn parse_rfc850) ... killed
+412: lit_int, replace `8` with `7`, at src/format/parse.rs@739:38-739:39(fn parse_rfc850) ... killed
+413: lit_int, replace `49` with `50`, at src/format/parse.rs@739:41-739:43(fn parse_rfc850) ... killed
+414: lit_int, replace `49` with `48`, at src/format/parse.rs@739:41-739:43(fn parse_rfc850) ... killed
+415: lit_int, replace `37` with `38`, at src/format/parse.rs@739:45-739:47(fn parse_rfc850) ... killed
+416: lit_int, replace `37` with `36`, at src/format/parse.rs@739:45-739:47(fn parse_rfc850) ... killed
+417: lit_int, replace `1994` with `1995`, at src/format/parse.rs@740:17-740:21(fn parse_rfc850) ... killed
+418: lit_int, replace `1994` with `1993`, at src/format/parse.rs@740:17-740:21(fn parse_rfc850) ... killed
+419: lit_int, replace `11` with `12`, at src/format/parse.rs@740:23-740:25(fn parse_rfc850) ... killed
+420: lit_int, replace `11` with `10`, at src/format/parse.rs@740:23-740:25(fn parse_rfc850) ... killed
+421: lit_int, replace `8` with `9`, at src/format/parse.rs@740:27-740:28(fn parse_rfc850) ... killed
+422: lit_int, replace `8` with `7`, at src/format/parse.rs@740:27-740:28(fn parse_rfc850) ... killed
+423: lit_int, replace `8` with `9`, at src/format/parse.rs@740:38-740:39(fn parse_rfc850) ... killed
+424: lit_int, replace `8` with `7`, at src/format/parse.rs@740:38-740:39(fn parse_rfc850) ... killed
+425: lit_int, replace `49` with `50`, at src/format/parse.rs@740:41-740:43(fn parse_rfc850) ... killed
+426: lit_int, replace `49` with `48`, at src/format/parse.rs@740:41-740:43(fn parse_rfc850) ... killed
+427: lit_int, replace `37` with `38`, at src/format/parse.rs@740:45-740:47(fn parse_rfc850) ... killed
+428: lit_int, replace `37` with `36`, at src/format/parse.rs@740:45-740:47(fn parse_rfc850) ... killed
+429: lit_int, replace `1994` with `1995`, at src/format/parse.rs@741:17-741:21(fn parse_rfc850) ... killed
+430: lit_int, replace `1994` with `1993`, at src/format/parse.rs@741:17-741:21(fn parse_rfc850) ... killed
+431: lit_int, replace `11` with `12`, at src/format/parse.rs@741:23-741:25(fn parse_rfc850) ... killed
+432: lit_int, replace `11` with `10`, at src/format/parse.rs@741:23-741:25(fn parse_rfc850) ... killed
+433: lit_int, replace `9` with `10`, at src/format/parse.rs@741:27-741:28(fn parse_rfc850) ... killed
+434: lit_int, replace `9` with `8`, at src/format/parse.rs@741:27-741:28(fn parse_rfc850) ... killed (timeout)
+435: lit_int, replace `8` with `9`, at src/format/parse.rs@741:38-741:39(fn parse_rfc850) ... killed
+436: lit_int, replace `8` with `7`, at src/format/parse.rs@741:38-741:39(fn parse_rfc850) ... killed
+437: lit_int, replace `49` with `50`, at src/format/parse.rs@741:41-741:43(fn parse_rfc850) ... killed
+438: lit_int, replace `49` with `48`, at src/format/parse.rs@741:41-741:43(fn parse_rfc850) ... killed
+439: lit_int, replace `37` with `38`, at src/format/parse.rs@741:45-741:47(fn parse_rfc850) ... killed
+440: lit_int, replace `37` with `36`, at src/format/parse.rs@741:45-741:47(fn parse_rfc850) ... killed
+441: lit_int, replace `1994` with `1995`, at src/format/parse.rs@742:17-742:21(fn parse_rfc850) ... killed
+442: lit_int, replace `1994` with `1993`, at src/format/parse.rs@742:17-742:21(fn parse_rfc850) ... killed
+443: lit_int, replace `11` with `12`, at src/format/parse.rs@742:23-742:25(fn parse_rfc850) ... killed
+444: lit_int, replace `11` with `10`, at src/format/parse.rs@742:23-742:25(fn parse_rfc850) ... killed
+445: lit_int, replace `10` with `11`, at src/format/parse.rs@742:27-742:29(fn parse_rfc850) ... killed
+446: lit_int, replace `10` with `9`, at src/format/parse.rs@742:27-742:29(fn parse_rfc850) ... killed
+447: lit_int, replace `8` with `9`, at src/format/parse.rs@742:39-742:40(fn parse_rfc850) ... killed
+448: lit_int, replace `8` with `7`, at src/format/parse.rs@742:39-742:40(fn parse_rfc850) ... killed
+449: lit_int, replace `49` with `50`, at src/format/parse.rs@742:42-742:44(fn parse_rfc850) ... killed
+450: lit_int, replace `49` with `48`, at src/format/parse.rs@742:42-742:44(fn parse_rfc850) ... killed
+451: lit_int, replace `37` with `38`, at src/format/parse.rs@742:46-742:48(fn parse_rfc850) ... killed
+452: lit_int, replace `37` with `36`, at src/format/parse.rs@742:46-742:48(fn parse_rfc850) ... killed
+453: lit_int, replace `1994` with `1995`, at src/format/parse.rs@743:17-743:21(fn parse_rfc850) ... killed
+454: lit_int, replace `1994` with `1993`, at src/format/parse.rs@743:17-743:21(fn parse_rfc850) ... killed
+455: lit_int, replace `11` with `12`, at src/format/parse.rs@743:23-743:25(fn parse_rfc850) ... killed
+456: lit_int, replace `11` with `10`, at src/format/parse.rs@743:23-743:25(fn parse_rfc850) ... killed
+457: lit_int, replace `11` with `12`, at src/format/parse.rs@743:27-743:29(fn parse_rfc850) ... killed
+458: lit_int, replace `11` with `10`, at src/format/parse.rs@743:27-743:29(fn parse_rfc850) ... killed
+459: lit_int, replace `8` with `9`, at src/format/parse.rs@743:39-743:40(fn parse_rfc850) ... killed
+460: lit_int, replace `8` with `7`, at src/format/parse.rs@743:39-743:40(fn parse_rfc850) ... killed
+461: lit_int, replace `49` with `50`, at src/format/parse.rs@743:42-743:44(fn parse_rfc850) ... killed
+462: lit_int, replace `49` with `48`, at src/format/parse.rs@743:42-743:44(fn parse_rfc850) ... killed
+463: lit_int, replace `37` with `38`, at src/format/parse.rs@743:46-743:48(fn parse_rfc850) ... killed
+464: lit_int, replace `37` with `36`, at src/format/parse.rs@743:46-743:48(fn parse_rfc850) ... killed
+465: lit_int, replace `1994` with `1995`, at src/format/parse.rs@744:17-744:21(fn parse_rfc850) ... killed
+466: lit_int, replace `1994` with `1993`, at src/format/parse.rs@744:17-744:21(fn parse_rfc850) ... killed
+467: lit_int, replace `11` with `12`, at src/format/parse.rs@744:23-744:25(fn parse_rfc850) ... killed
+468: lit_int, replace `11` with `10`, at src/format/parse.rs@744:23-744:25(fn parse_rfc850) ... killed
+469: lit_int, replace `12` with `13`, at src/format/parse.rs@744:27-744:29(fn parse_rfc850) ... killed
+470: lit_int, replace `12` with `11`, at src/format/parse.rs@744:27-744:29(fn parse_rfc850) ... killed
+471: lit_int, replace `8` with `9`, at src/format/parse.rs@744:39-744:40(fn parse_rfc850) ... killed
+472: lit_int, replace `8` with `7`, at src/format/parse.rs@744:39-744:40(fn parse_rfc850) ... killed
+473: lit_int, replace `49` with `50`, at src/format/parse.rs@744:42-744:44(fn parse_rfc850) ... killed
+474: lit_int, replace `49` with `48`, at src/format/parse.rs@744:42-744:44(fn parse_rfc850) ... killed
+475: lit_int, replace `37` with `38`, at src/format/parse.rs@744:46-744:48(fn parse_rfc850) ... killed
+476: lit_int, replace `37` with `36`, at src/format/parse.rs@744:46-744:48(fn parse_rfc850) ... killed
+477: binop_eq, replace `!=` with `==`, at src/format/parse.rs@792:14-792:16(fn test_rfc3339) ... killed
+478: unop_not, remove `!`, at src/format/strftime.rs@187:11-187:12(fn StrftimeItems < 'a >::next) ... killed
+479: lit_int, replace `0` with `1`, at src/format/strftime.rs@188:35-188:36(fn StrftimeItems < 'a >::next) ... killed
+480: lit_int, replace `1` with `2`, at src/format/strftime.rs@189:39-189:40(fn StrftimeItems < 'a >::next) ... killed
+481: lit_int, replace `1` with `0`, at src/format/strftime.rs@189:39-189:40(fn StrftimeItems < 'a >::next) ... killed (timeout)
+482: lit_int, replace `1` with `2`, at src/format/strftime.rs@199:49-199:50(fn StrftimeItems < 'a >::next) ... killed
+483: lit_int, replace `1` with `0`, at src/format/strftime.rs@199:49-199:50(fn StrftimeItems < 'a >::next) ... killed
+484: binop_eq, replace `==` with `!=`, at src/format/strftime.rs@220:40-220:42(fn StrftimeItems < 'a >::next) ... killed
+485: binop_bool, replace `||` with `&&`, at src/format/strftime.rs@221:53-221:55(fn StrftimeItems < 'a >::next) ... killed
+486: unop_not, remove `!`, at src/format/strftime.rs@222:35-222:36(fn StrftimeItems < 'a >::next) ... killed
+487: binop_bool, replace `&&` with `||`, at src/format/strftime.rs@222:32-222:34(fn StrftimeItems < 'a >::next) ... killed
+488: unop_not, remove `!`, at src/format/strftime.rs@338:61-338:62(fn StrftimeItems < 'a >::next) ... killed
+489: binop_eq, replace `==` with `!=`, at src/format/strftime.rs@348:84-348:86(fn StrftimeItems < 'a >::next) ... killed
+490: binop_bool, replace `||` with `&&`, at src/format/strftime.rs@348:79-348:81(fn StrftimeItems < 'a >::next) ... killed
+491: binop_eq, replace `==` with `!=`, at src/format/strftime.rs@365:45-365:47(fn parse_and_collect) ... killed
+492: lit_int, replace `34200` with `34201`, at src/format/strftime.rs@413:31-413:36(fn test_strftime_docs) ... killed
+493: lit_int, replace `34200` with `34199`, at src/format/strftime.rs@413:31-413:36(fn test_strftime_docs) ... killed
+494: lit_int, replace `2001` with `2002`, at src/format/strftime.rs@413:42-413:46(fn test_strftime_docs) ... killed
+495: lit_int, replace `2001` with `2000`, at src/format/strftime.rs@413:42-413:46(fn test_strftime_docs) ... killed
+496: lit_int, replace `7` with `8`, at src/format/strftime.rs@413:48-413:49(fn test_strftime_docs) ... killed
+497: lit_int, replace `7` with `6`, at src/format/strftime.rs@413:48-413:49(fn test_strftime_docs) ... killed
+498: lit_int, replace `8` with `9`, at src/format/strftime.rs@413:51-413:52(fn test_strftime_docs) ... killed
+499: lit_int, replace `8` with `7`, at src/format/strftime.rs@413:51-413:52(fn test_strftime_docs) ... killed
+500: lit_int, replace `0` with `1`, at src/format/strftime.rs@413:67-413:68(fn test_strftime_docs) ... killed
+501: lit_int, replace `34` with `35`, at src/format/strftime.rs@413:70-413:72(fn test_strftime_docs) ... killed
+502: lit_int, replace `34` with `33`, at src/format/strftime.rs@413:70-413:72(fn test_strftime_docs) ... killed
+503: lit_int, replace `59` with `60`, at src/format/strftime.rs@413:74-413:76(fn test_strftime_docs) ... killed
+504: lit_int, replace `59` with `58`, at src/format/strftime.rs@413:74-413:76(fn test_strftime_docs) ... killed
+505: lit_int, replace `1026490708` with `1026490709`, at src/format/strftime.rs@413:78-413:91(fn test_strftime_docs) ... killed
+506: lit_int, replace `1026490708` with `1026490707`, at src/format/strftime.rs@413:78-413:91(fn test_strftime_docs) ... killed
+507: lit_int, replace `0` with `1`, at src/round.rs@47:24-47:25(fn T::round_subsecs) ... SURVIVED
+508: binop_cmp, replace `>` with `<`, at src/round.rs@47:22-47:23(fn T::round_subsecs) ... killed
+509: binop_cmp, replace `>` with `<=`, at src/round.rs@47:22-47:23(fn T::round_subsecs) ... killed
+510: binop_cmp, replace `>` with `>=`, at src/round.rs@47:22-47:23(fn T::round_subsecs) ... SURVIVED
+511: binop_cmp, replace `<=` with `<`, at src/round.rs@49:24-49:26(fn T::round_subsecs) ... killed
+512: binop_cmp, replace `<=` with `>=`, at src/round.rs@49:24-49:26(fn T::round_subsecs) ... killed
+513: binop_cmp, replace `<=` with `>`, at src/round.rs@49:24-49:26(fn T::round_subsecs) ... killed
+514: binop_add, replace `+` with `-`, at src/round.rs@50:21-50:22(fn T::round_subsecs) ... killed
+515: lit_int, replace `0` with `1`, at src/round.rs@62:24-62:25(fn T::trunc_subsecs) ... SURVIVED
+516: binop_cmp, replace `>` with `<`, at src/round.rs@62:22-62:23(fn T::trunc_subsecs) ... killed
+517: binop_cmp, replace `>` with `<=`, at src/round.rs@62:22-62:23(fn T::trunc_subsecs) ... killed
+518: binop_cmp, replace `>` with `>=`, at src/round.rs@62:22-62:23(fn T::trunc_subsecs) ... SURVIVED
+519: lit_int, replace `1000000000` with `1000000001`, at src/round.rs@74:13-74:26(fn span_for_digits) ... killed
+520: lit_int, replace `1000000000` with `999999999`, at src/round.rs@74:13-74:26(fn span_for_digits) ... killed
+521: lit_int, replace `100000000` with `100000001`, at src/round.rs@75:15-75:26(fn span_for_digits) ... killed
+522: lit_int, replace `100000000` with `99999999`, at src/round.rs@75:15-75:26(fn span_for_digits) ... killed
+523: lit_int, replace `10000000` with `10000001`, at src/round.rs@76:16-76:26(fn span_for_digits) ... killed
+524: lit_int, replace `10000000` with `9999999`, at src/round.rs@76:16-76:26(fn span_for_digits) ... killed
+525: lit_int, replace `1000000` with `1000001`, at src/round.rs@77:17-77:26(fn span_for_digits) ... killed
+526: lit_int, replace `1000000` with `999999`, at src/round.rs@77:17-77:26(fn span_for_digits) ... killed
+527: lit_int, replace `100000` with `100001`, at src/round.rs@78:19-78:26(fn span_for_digits) ... killed
+528: lit_int, replace `100000` with `99999`, at src/round.rs@78:19-78:26(fn span_for_digits) ... killed
+529: lit_int, replace `10000` with `10001`, at src/round.rs@79:20-79:26(fn span_for_digits) ... killed
+530: lit_int, replace `10000` with `9999`, at src/round.rs@79:20-79:26(fn span_for_digits) ... killed
+531: lit_int, replace `1000` with `1001`, at src/round.rs@80:21-80:26(fn span_for_digits) ... killed
+532: lit_int, replace `1000` with `999`, at src/round.rs@80:21-80:26(fn span_for_digits) ... killed
+533: lit_int, replace `100` with `101`, at src/round.rs@81:23-81:26(fn span_for_digits) ... killed
+534: lit_int, replace `100` with `99`, at src/round.rs@81:23-81:26(fn span_for_digits) ... killed
+535: lit_int, replace `10` with `11`, at src/round.rs@82:24-82:26(fn span_for_digits) ... killed
+536: lit_int, replace `10` with `9`, at src/round.rs@82:24-82:26(fn span_for_digits) ... killed
+537: lit_int, replace `1` with `2`, at src/round.rs@83:25-83:26(fn span_for_digits) ... SURVIVED
+538: lit_int, replace `1` with `0`, at src/round.rs@83:25-83:26(fn span_for_digits) ... killed
+539: lit_int, replace `1` with `2`, at src/lib.rs@584:28-584:29(fn Weekday::number_from_monday) ... NOT COVERED
+540: lit_int, replace `1` with `0`, at src/lib.rs@584:28-584:29(fn Weekday::number_from_monday) ... NOT COVERED
+541: lit_int, replace `2` with `3`, at src/lib.rs@585:28-585:29(fn Weekday::number_from_monday) ... NOT COVERED
+542: lit_int, replace `2` with `1`, at src/lib.rs@585:28-585:29(fn Weekday::number_from_monday) ... NOT COVERED
+543: lit_int, replace `3` with `4`, at src/lib.rs@586:28-586:29(fn Weekday::number_from_monday) ... NOT COVERED
+544: lit_int, replace `3` with `2`, at src/lib.rs@586:28-586:29(fn Weekday::number_from_monday) ... NOT COVERED
+545: lit_int, replace `4` with `5`, at src/lib.rs@587:28-587:29(fn Weekday::number_from_monday) ... NOT COVERED
+546: lit_int, replace `4` with `3`, at src/lib.rs@587:28-587:29(fn Weekday::number_from_monday) ... NOT COVERED
+547: lit_int, replace `5` with `6`, at src/lib.rs@588:28-588:29(fn Weekday::number_from_monday) ... NOT COVERED
+548: lit_int, replace `5` with `4`, at src/lib.rs@588:28-588:29(fn Weekday::number_from_monday) ... NOT COVERED
+549: lit_int, replace `6` with `7`, at src/lib.rs@589:28-589:29(fn Weekday::number_from_monday) ... NOT COVERED
+550: lit_int, replace `6` with `5`, at src/lib.rs@589:28-589:29(fn Weekday::number_from_monday) ... NOT COVERED
+551: lit_int, replace `7` with `8`, at src/lib.rs@590:28-590:29(fn Weekday::number_from_monday) ... killed
+552: lit_int, replace `7` with `6`, at src/lib.rs@590:28-590:29(fn Weekday::number_from_monday) ... killed
+553: lit_int, replace `2` with `3`, at src/lib.rs@602:28-602:29(fn Weekday::number_from_sunday) ... NOT COVERED
+554: lit_int, replace `2` with `1`, at src/lib.rs@602:28-602:29(fn Weekday::number_from_sunday) ... NOT COVERED
+555: lit_int, replace `3` with `4`, at src/lib.rs@603:28-603:29(fn Weekday::number_from_sunday) ... NOT COVERED
+556: lit_int, replace `3` with `2`, at src/lib.rs@603:28-603:29(fn Weekday::number_from_sunday) ... NOT COVERED
+557: lit_int, replace `4` with `5`, at src/lib.rs@604:28-604:29(fn Weekday::number_from_sunday) ... NOT COVERED
+558: lit_int, replace `4` with `3`, at src/lib.rs@604:28-604:29(fn Weekday::number_from_sunday) ... NOT COVERED
+559: lit_int, replace `5` with `6`, at src/lib.rs@605:28-605:29(fn Weekday::number_from_sunday) ... NOT COVERED
+560: lit_int, replace `5` with `4`, at src/lib.rs@605:28-605:29(fn Weekday::number_from_sunday) ... NOT COVERED
+561: lit_int, replace `6` with `7`, at src/lib.rs@606:28-606:29(fn Weekday::number_from_sunday) ... NOT COVERED
+562: lit_int, replace `6` with `5`, at src/lib.rs@606:28-606:29(fn Weekday::number_from_sunday) ... NOT COVERED
+563: lit_int, replace `7` with `8`, at src/lib.rs@607:28-607:29(fn Weekday::number_from_sunday) ... NOT COVERED
+564: lit_int, replace `7` with `6`, at src/lib.rs@607:28-607:29(fn Weekday::number_from_sunday) ... NOT COVERED
+565: lit_int, replace `1` with `2`, at src/lib.rs@608:28-608:29(fn Weekday::number_from_sunday) ... NOT COVERED
+566: lit_int, replace `1` with `0`, at src/lib.rs@608:28-608:29(fn Weekday::number_from_sunday) ... NOT COVERED
+567: lit_int, replace `0` with `1`, at src/lib.rs@620:28-620:29(fn Weekday::num_days_from_monday) ... killed
+568: lit_int, replace `1` with `2`, at src/lib.rs@621:28-621:29(fn Weekday::num_days_from_monday) ... killed
+569: lit_int, replace `1` with `0`, at src/lib.rs@621:28-621:29(fn Weekday::num_days_from_monday) ... killed
+570: lit_int, replace `2` with `3`, at src/lib.rs@622:28-622:29(fn Weekday::num_days_from_monday) ... killed
+571: lit_int, replace `2` with `1`, at src/lib.rs@622:28-622:29(fn Weekday::num_days_from_monday) ... killed
+572: lit_int, replace `3` with `4`, at src/lib.rs@623:28-623:29(fn Weekday::num_days_from_monday) ... killed
+573: lit_int, replace `3` with `2`, at src/lib.rs@623:28-623:29(fn Weekday::num_days_from_monday) ... killed
+574: lit_int, replace `4` with `5`, at src/lib.rs@624:28-624:29(fn Weekday::num_days_from_monday) ... killed
+575: lit_int, replace `4` with `3`, at src/lib.rs@624:28-624:29(fn Weekday::num_days_from_monday) ... killed
+576: lit_int, replace `5` with `6`, at src/lib.rs@625:28-625:29(fn Weekday::num_days_from_monday) ... killed
+577: lit_int, replace `5` with `4`, at src/lib.rs@625:28-625:29(fn Weekday::num_days_from_monday) ... killed
+578: lit_int, replace `6` with `7`, at src/lib.rs@626:28-626:29(fn Weekday::num_days_from_monday) ... killed
+579: lit_int, replace `6` with `5`, at src/lib.rs@626:28-626:29(fn Weekday::num_days_from_monday) ... killed
+580: lit_int, replace `1` with `2`, at src/lib.rs@638:28-638:29(fn Weekday::num_days_from_sunday) ... killed
+581: lit_int, replace `1` with `0`, at src/lib.rs@638:28-638:29(fn Weekday::num_days_from_sunday) ... killed
+582: lit_int, replace `2` with `3`, at src/lib.rs@639:28-639:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+583: lit_int, replace `2` with `1`, at src/lib.rs@639:28-639:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+584: lit_int, replace `3` with `4`, at src/lib.rs@640:28-640:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+585: lit_int, replace `3` with `2`, at src/lib.rs@640:28-640:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+586: lit_int, replace `4` with `5`, at src/lib.rs@641:28-641:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+587: lit_int, replace `4` with `3`, at src/lib.rs@641:28-641:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+588: lit_int, replace `5` with `6`, at src/lib.rs@642:28-642:29(fn Weekday::num_days_from_sunday) ... killed
+589: lit_int, replace `5` with `4`, at src/lib.rs@642:28-642:29(fn Weekday::num_days_from_sunday) ... SURVIVED
+590: lit_int, replace `6` with `7`, at src/lib.rs@643:28-643:29(fn Weekday::num_days_from_sunday) ... killed
+591: lit_int, replace `6` with `5`, at src/lib.rs@643:28-643:29(fn Weekday::num_days_from_sunday) ... killed
+592: lit_int, replace `0` with `1`, at src/lib.rs@644:28-644:29(fn Weekday::num_days_from_sunday) ... killed
+593: lit_int, replace `4` with `5`, at src/lib.rs@984:40-984:41(fn test_readme_doomsday) ... killed
+594: lit_int, replace `4` with `3`, at src/lib.rs@984:40-984:41(fn test_readme_doomsday) ... killed
+595: lit_int, replace `4` with `5`, at src/lib.rs@984:43-984:44(fn test_readme_doomsday) ... killed
+596: lit_int, replace `4` with `3`, at src/lib.rs@984:43-984:44(fn test_readme_doomsday) ... killed
+597: lit_int, replace `6` with `7`, at src/lib.rs@985:40-985:41(fn test_readme_doomsday) ... killed
+598: lit_int, replace `6` with `5`, at src/lib.rs@985:40-985:41(fn test_readme_doomsday) ... killed
+599: lit_int, replace `6` with `7`, at src/lib.rs@985:43-985:44(fn test_readme_doomsday) ... killed
+600: lit_int, replace `6` with `5`, at src/lib.rs@985:43-985:44(fn test_readme_doomsday) ... killed
+601: lit_int, replace `8` with `9`, at src/lib.rs@986:40-986:41(fn test_readme_doomsday) ... killed
+602: lit_int, replace `8` with `7`, at src/lib.rs@986:40-986:41(fn test_readme_doomsday) ... killed
+603: lit_int, replace `8` with `9`, at src/lib.rs@986:43-986:44(fn test_readme_doomsday) ... killed
+604: lit_int, replace `8` with `7`, at src/lib.rs@986:43-986:44(fn test_readme_doomsday) ... killed
+605: lit_int, replace `10` with `11`, at src/lib.rs@987:41-987:43(fn test_readme_doomsday) ... killed
+606: lit_int, replace `10` with `9`, at src/lib.rs@987:41-987:43(fn test_readme_doomsday) ... killed
+607: lit_int, replace `10` with `11`, at src/lib.rs@987:45-987:47(fn test_readme_doomsday) ... killed
+608: lit_int, replace `10` with `9`, at src/lib.rs@987:45-987:47(fn test_readme_doomsday) ... killed
+609: lit_int, replace `12` with `13`, at src/lib.rs@988:41-988:43(fn test_readme_doomsday) ... killed
+610: lit_int, replace `12` with `11`, at src/lib.rs@988:41-988:43(fn test_readme_doomsday) ... killed
+611: lit_int, replace `12` with `13`, at src/lib.rs@988:45-988:47(fn test_readme_doomsday) ... killed
+612: lit_int, replace `12` with `11`, at src/lib.rs@988:45-988:47(fn test_readme_doomsday) ... killed
+613: lit_int, replace `5` with `6`, at src/lib.rs@991:41-991:42(fn test_readme_doomsday) ... killed
+614: lit_int, replace `5` with `4`, at src/lib.rs@991:41-991:42(fn test_readme_doomsday) ... killed
+615: lit_int, replace `9` with `10`, at src/lib.rs@991:44-991:45(fn test_readme_doomsday) ... killed
+616: lit_int, replace `9` with `8`, at src/lib.rs@991:44-991:45(fn test_readme_doomsday) ... killed
+617: lit_int, replace `9` with `10`, at src/lib.rs@992:41-992:42(fn test_readme_doomsday) ... killed
+618: lit_int, replace `9` with `8`, at src/lib.rs@992:41-992:42(fn test_readme_doomsday) ... killed
+619: lit_int, replace `5` with `6`, at src/lib.rs@992:44-992:45(fn test_readme_doomsday) ... killed
+620: lit_int, replace `5` with `4`, at src/lib.rs@992:44-992:45(fn test_readme_doomsday) ... killed
+621: lit_int, replace `7` with `8`, at src/lib.rs@993:42-993:43(fn test_readme_doomsday) ... killed
+622: lit_int, replace `7` with `6`, at src/lib.rs@993:42-993:43(fn test_readme_doomsday) ... killed
+623: lit_int, replace `11` with `12`, at src/lib.rs@993:45-993:47(fn test_readme_doomsday) ... killed
+624: lit_int, replace `11` with `10`, at src/lib.rs@993:45-993:47(fn test_readme_doomsday) ... killed
+625: lit_int, replace `11` with `12`, at src/lib.rs@994:42-994:44(fn test_readme_doomsday) ... killed
+626: lit_int, replace `11` with `10`, at src/lib.rs@994:42-994:44(fn test_readme_doomsday) ... killed
+627: lit_int, replace `7` with `8`, at src/lib.rs@994:46-994:47(fn test_readme_doomsday) ... killed
+628: lit_int, replace `7` with `6`, at src/lib.rs@994:46-994:47(fn test_readme_doomsday) ... killed
+629: lit_int, replace `3` with `4`, at src/lib.rs@997:41-997:42(fn test_readme_doomsday) ... killed
+630: lit_int, replace `3` with `2`, at src/lib.rs@997:41-997:42(fn test_readme_doomsday) ... killed
+631: lit_int, replace `1` with `2`, at src/lib.rs@997:44-997:45(fn test_readme_doomsday) ... killed
+632: lit_int, replace `1` with `0`, at src/lib.rs@997:44-997:45(fn test_readme_doomsday) ... killed
+SURVIVED
+    src/date.rs
+            all 1 mutants killed
+    src/datetime.rs
+            6/48(12.50%) mutants survived
+        88: replace `0` with `1` at 245:45-245:46(fn DateTime < FixedOffset >::from) NOT COVERED
+        89: replace `0` with `1` at 303:45-303:46(fn DateTime < FixedOffset >::from) NOT COVERED
+        91: replace `0` with `1` at 655:27-655:28(fn DateTime < Utc >::from)
+        93: replace `0` with `1` at 656:27-656:28(fn DateTime < Utc >::from) NOT COVERED
+        98: replace `0` with `1` at 679:17-679:18(fn SystemTime::from)
+        99: replace `<` with `<=` at 679:15-679:16(fn SystemTime::from)
+    src/format/parse.rs
+            14/108(12.96%) mutants survived
+        371: replace `1` with `2` at 91:16-91:17(fn parse_rfc2822)
+        373: replace `2000` with `2001` at 106:34-106:38(fn parse_rfc2822) NOT COVERED
+        374: replace `2000` with `1999` at 106:34-106:38(fn parse_rfc2822) NOT COVERED
+        375: replace `1900` with `1901` at 107:34-107:38(fn parse_rfc2822) NOT COVERED
+        376: replace `1900` with `1899` at 107:34-107:38(fn parse_rfc2822) NOT COVERED
+        377: replace `1900` with `1901` at 108:34-108:38(fn parse_rfc2822) NOT COVERED
+        378: replace `1900` with `1899` at 108:34-108:38(fn parse_rfc2822) NOT COVERED
+        381: replace `86400` with `86401` at 185:18-185:24(fn parse_rfc3339)
+        382: replace `86400` with `86399` at 185:18-185:24(fn parse_rfc3339)
+        383: replace `<=` with `<` at 185:14-185:16(fn parse_rfc3339)
+        386: replace `86400` with `86401` at 185:38-185:44(fn parse_rfc3339)
+        387: replace `86400` with `86399` at 185:38-185:44(fn parse_rfc3339)
+        390: replace `>=` with `>` at 185:35-185:37(fn parse_rfc3339)
+        391: replace `||` with `&&` at 185:25-185:27(fn parse_rfc3339)
+    src/format/parsed.rs
+            62/194(31.96%) mutants survived
+        143: replace `0` with `1` at 167:19-167:20(fn Parsed::set_isoyear_div_100)
+        144: replace `<` with `<=` at 167:17-167:18(fn Parsed::set_isoyear_div_100)
+        147: replace `0` with `1` at 173:19-173:20(fn Parsed::set_isoyear_mod_100)
+        148: replace `<` with `<=` at 173:17-173:18(fn Parsed::set_isoyear_mod_100)
+        159: replace `12` with `13` at 221:32-221:34(fn Parsed::set_hour12)
+        167: replace `0` with `1` at 283:27-283:28(fn Parsed::resolve_year)
+        168: replace `<` with `<=` at 283:25-283:26(fn Parsed::resolve_year)
+        192: replace `0` with `1` at 318:58-318:59(fn Parsed::to_naive_date)
+        193: replace `>=` with `<` at 318:55-318:57(fn Parsed::to_naive_date)
+        194: replace `>=` with `<=` at 318:55-318:57(fn Parsed::to_naive_date)
+        195: replace `>=` with `>` at 318:55-318:57(fn Parsed::to_naive_date)
+        196: replace `100` with `101` at 319:43-319:46(fn Parsed::to_naive_date)
+        197: replace `100` with `99` at 319:43-319:46(fn Parsed::to_naive_date)
+        200: replace `&&` with `||` at 326:47-326:49(fn Parsed::to_naive_date)
+        202: replace `&&` with `||` at 327:64-327:66(fn Parsed::to_naive_date)
+        204: replace `&&` with `||` at 328:64-328:66(fn Parsed::to_naive_date)
+        206: replace `&&` with `||` at 329:50-329:52(fn Parsed::to_naive_date)
+        207: replace `0` with `1` at 339:67-339:68(fn Parsed::to_naive_date)
+        210: replace `>=` with `>` at 339:64-339:66(fn Parsed::to_naive_date)
+        215: replace `&&` with `||` at 345:56-345:58(fn Parsed::to_naive_date)
+        217: replace `&&` with `||` at 346:73-346:75(fn Parsed::to_naive_date)
+        219: replace `&&` with `||` at 347:73-347:75(fn Parsed::to_naive_date)
+        222: replace `7` with `8` at 356:90-356:91(fn Parsed::to_naive_date)
+        223: replace `7` with `6` at 356:90-356:91(fn Parsed::to_naive_date)
+        228: replace `7` with `6` at 357:90-357:91(fn Parsed::to_naive_date)
+        234: replace `&&` with `||` at 358:56-358:58(fn Parsed::to_naive_date)
+        238: replace `&&` with `||` at 376:34-376:36(fn Parsed::to_naive_date)
+        239: replace `&&` with `||` at 376:62-376:64(fn Parsed::to_naive_date)
+        241: replace `6` with `7` at 385:36-385:37(fn Parsed::to_naive_date) NOT COVERED
+        242: replace `6` with `5` at 385:36-385:37(fn Parsed::to_naive_date) NOT COVERED
+        243: replace `5` with `6` at 386:36-386:37(fn Parsed::to_naive_date) NOT COVERED
+        244: replace `5` with `4` at 386:36-386:37(fn Parsed::to_naive_date) NOT COVERED
+        245: replace `4` with `5` at 387:36-387:37(fn Parsed::to_naive_date) NOT COVERED
+        246: replace `4` with `3` at 387:36-387:37(fn Parsed::to_naive_date) NOT COVERED
+        247: replace `3` with `4` at 388:36-388:37(fn Parsed::to_naive_date) NOT COVERED
+        248: replace `3` with `2` at 388:36-388:37(fn Parsed::to_naive_date) NOT COVERED
+        249: replace `2` with `3` at 389:36-389:37(fn Parsed::to_naive_date) NOT COVERED
+        250: replace `2` with `1` at 389:36-389:37(fn Parsed::to_naive_date) NOT COVERED
+        253: replace `53` with `54` at 394:35-394:37(fn Parsed::to_naive_date)
+        265: replace `&&` with `||` at 401:34-401:36(fn Parsed::to_naive_date)
+        267: replace `1` with `2` at 409:36-409:37(fn Parsed::to_naive_date) NOT COVERED
+        268: replace `1` with `0` at 409:36-409:37(fn Parsed::to_naive_date) NOT COVERED
+        269: replace `0` with `1` at 410:36-410:37(fn Parsed::to_naive_date) NOT COVERED
+        270: replace `6` with `7` at 411:36-411:37(fn Parsed::to_naive_date) NOT COVERED
+        271: replace `6` with `5` at 411:36-411:37(fn Parsed::to_naive_date) NOT COVERED
+        272: replace `5` with `6` at 412:36-412:37(fn Parsed::to_naive_date) NOT COVERED
+        273: replace `5` with `4` at 412:36-412:37(fn Parsed::to_naive_date) NOT COVERED
+        274: replace `4` with `5` at 413:36-413:37(fn Parsed::to_naive_date) NOT COVERED
+        275: replace `4` with `3` at 413:36-413:37(fn Parsed::to_naive_date) NOT COVERED
+        276: replace `3` with `4` at 414:36-414:37(fn Parsed::to_naive_date) NOT COVERED
+        277: replace `3` with `2` at 414:36-414:37(fn Parsed::to_naive_date) NOT COVERED
+        280: replace `53` with `54` at 419:35-419:37(fn Parsed::to_naive_date)
+        281: replace `53` with `52` at 419:35-419:37(fn Parsed::to_naive_date)
+        284: replace `>` with `>=` at 419:33-419:34(fn Parsed::to_naive_date)
+        292: replace `&&` with `||` at 426:34-426:36(fn Parsed::to_naive_date)
+        293: replace `&&` with `||` at 426:62-426:64(fn Parsed::to_naive_date)
+        294: replace `&&` with `||` at 433:34-433:36(fn Parsed::to_naive_date)
+        307: replace `1000000000` with `999999999` at 509:46-509:59(fn Parsed::to_naive_datetime_with_offset)
+        318: replace `0` with `1` at 529:65-529:66(fn Parsed::to_naive_datetime_with_offset)
+        322: replace `1` with `2` at 541:60-541:61(fn Parsed::to_naive_datetime_with_offset)
+        324: replace `0` with `1` at 599:33-599:34(fn Parsed::to_datetime_with_timezone)
+        325: replace `0` with `1` at 603:55-603:56(fn Parsed::to_datetime_with_timezone)
+    src/format/scan.rs
+            2/42(4.76%) mutants survived
+        332: replace `false` with `true` at 21:44-21:49(fn equals) NOT COVERED
+        357: replace `2` with `1` at 239:22-239:23(fn timezone_offset_internal)
+    src/format/strftime.rs
+            all 29 mutants killed
+    src/lib.rs
+            33/94(35.11%) mutants survived
+        539: replace `1` with `2` at 584:28-584:29(fn Weekday::number_from_monday) NOT COVERED
+        540: replace `1` with `0` at 584:28-584:29(fn Weekday::number_from_monday) NOT COVERED
+        541: replace `2` with `3` at 585:28-585:29(fn Weekday::number_from_monday) NOT COVERED
+        542: replace `2` with `1` at 585:28-585:29(fn Weekday::number_from_monday) NOT COVERED
+        543: replace `3` with `4` at 586:28-586:29(fn Weekday::number_from_monday) NOT COVERED
+        544: replace `3` with `2` at 586:28-586:29(fn Weekday::number_from_monday) NOT COVERED
+        545: replace `4` with `5` at 587:28-587:29(fn Weekday::number_from_monday) NOT COVERED
+        546: replace `4` with `3` at 587:28-587:29(fn Weekday::number_from_monday) NOT COVERED
+        547: replace `5` with `6` at 588:28-588:29(fn Weekday::number_from_monday) NOT COVERED
+        548: replace `5` with `4` at 588:28-588:29(fn Weekday::number_from_monday) NOT COVERED
+        549: replace `6` with `7` at 589:28-589:29(fn Weekday::number_from_monday) NOT COVERED
+        550: replace `6` with `5` at 589:28-589:29(fn Weekday::number_from_monday) NOT COVERED
+        553: replace `2` with `3` at 602:28-602:29(fn Weekday::number_from_sunday) NOT COVERED
+        554: replace `2` with `1` at 602:28-602:29(fn Weekday::number_from_sunday) NOT COVERED
+        555: replace `3` with `4` at 603:28-603:29(fn Weekday::number_from_sunday) NOT COVERED
+        556: replace `3` with `2` at 603:28-603:29(fn Weekday::number_from_sunday) NOT COVERED
+        557: replace `4` with `5` at 604:28-604:29(fn Weekday::number_from_sunday) NOT COVERED
+        558: replace `4` with `3` at 604:28-604:29(fn Weekday::number_from_sunday) NOT COVERED
+        559: replace `5` with `6` at 605:28-605:29(fn Weekday::number_from_sunday) NOT COVERED
+        560: replace `5` with `4` at 605:28-605:29(fn Weekday::number_from_sunday) NOT COVERED
+        561: replace `6` with `7` at 606:28-606:29(fn Weekday::number_from_sunday) NOT COVERED
+        562: replace `6` with `5` at 606:28-606:29(fn Weekday::number_from_sunday) NOT COVERED
+        563: replace `7` with `8` at 607:28-607:29(fn Weekday::number_from_sunday) NOT COVERED
+        564: replace `7` with `6` at 607:28-607:29(fn Weekday::number_from_sunday) NOT COVERED
+        565: replace `1` with `2` at 608:28-608:29(fn Weekday::number_from_sunday) NOT COVERED
+        566: replace `1` with `0` at 608:28-608:29(fn Weekday::number_from_sunday) NOT COVERED
+        582: replace `2` with `3` at 639:28-639:29(fn Weekday::num_days_from_sunday)
+        583: replace `2` with `1` at 639:28-639:29(fn Weekday::num_days_from_sunday)
+        584: replace `3` with `4` at 640:28-640:29(fn Weekday::num_days_from_sunday)
+        585: replace `3` with `2` at 640:28-640:29(fn Weekday::num_days_from_sunday)
+        586: replace `4` with `5` at 641:28-641:29(fn Weekday::num_days_from_sunday)
+        587: replace `4` with `3` at 641:28-641:29(fn Weekday::num_days_from_sunday)
+        589: replace `5` with `4` at 642:28-642:29(fn Weekday::num_days_from_sunday)
+    src/offset/fixed.rs
+            12/34(35.29%) mutants survived
+        1: replace `86400` with `86401` at 51:12-51:18(fn FixedOffset::east_opt)
+        2: replace `86400` with `86399` at 51:12-51:18(fn FixedOffset::east_opt)
+        3: replace `<` with `<=` at 51:19-51:20(fn FixedOffset::east_opt)
+        12: replace `86400` with `86401` at 81:12-81:18(fn FixedOffset::west_opt)
+        13: replace `86400` with `86399` at 81:12-81:18(fn FixedOffset::west_opt)
+        14: replace `<` with `<=` at 81:19-81:20(fn FixedOffset::west_opt)
+        17: replace `86400` with `86401` at 81:36-81:42(fn FixedOffset::west_opt)
+        19: replace `<` with `<=` at 81:34-81:35(fn FixedOffset::west_opt)
+        22: replace `&&` with `||` at 81:26-81:28(fn FixedOffset::west_opt)
+        23: replace `0` with `1` at 124:41-124:42(fn FixedOffset::fmt)
+        24: replace `<` with `<=` at 124:39-124:40(fn FixedOffset::fmt)
+        33: replace `0` with `1` at 149:34-149:35(fn add_with_leapsecond)
+    src/offset/local.rs
+            27/43(62.79%) mutants survived
+        35: replace `60` with `61` at 17:20-17:22(fn tm_to_datetime)
+        36: replace `60` with `59` at 17:20-17:22(fn tm_to_datetime)
+        39: replace `>=` with `>` at 17:17-17:19(fn tm_to_datetime)
+        40: replace `59` with `60` at 18:35-18:37(fn tm_to_datetime) NOT COVERED
+        41: replace `59` with `58` at 18:35-18:37(fn tm_to_datetime) NOT COVERED
+        42: replace `1000000000` with `1000000001` at 18:41-18:54(fn tm_to_datetime) NOT COVERED
+        43: replace `1000000000` with `999999999` at 18:41-18:54(fn tm_to_datetime) NOT COVERED
+        44: replace `59` with `60` at 19:20-19:22(fn tm_to_datetime) NOT COVERED
+        45: replace `59` with `58` at 19:20-19:22(fn tm_to_datetime) NOT COVERED
+        52: replace `1900` with `1901` at 31:41-31:45(fn tm_to_naive_date) NOT COVERED
+        53: replace `1900` with `1899` at 31:41-31:45(fn tm_to_naive_date) NOT COVERED
+        54: replace `+` with `-` at 31:39-31:40(fn tm_to_naive_date) NOT COVERED
+        55: replace `1` with `2` at 31:66-31:67(fn tm_to_naive_date) NOT COVERED
+        56: replace `1` with `0` at 31:66-31:67(fn tm_to_naive_date) NOT COVERED
+        57: replace `+` with `-` at 31:64-31:65(fn tm_to_naive_date) NOT COVERED
+        58: replace `1` with `2` at 46:30-46:31(fn datetime_to_timespec)
+        63: replace `0` with `1` at 55:17-55:18(fn datetime_to_timespec)
+        64: replace `0` with `1` at 56:17-56:18(fn datetime_to_timespec)
+        65: replace `1` with `2` at 57:19-57:20(fn datetime_to_timespec)
+        68: replace `60` with `61` at 102:94-102:96(fn Local::now) NOT COVERED
+        69: replace `60` with `59` at 102:94-102:96(fn Local::now) NOT COVERED
+        70: replace `0` with `1` at 134:63-134:64(fn Local::from_local_date)
+        71: replace `0` with `1` at 134:66-134:67(fn Local::from_local_date)
+        72: replace `0` with `1` at 134:69-134:70(fn Local::from_local_date)
+        74: replace `0` with `1` at 150:59-150:60(fn Local::from_utc_date) NOT COVERED
+        75: replace `0` with `1` at 150:62-150:63(fn Local::from_utc_date) NOT COVERED
+        76: replace `0` with `1` at 150:65-150:66(fn Local::from_utc_date) NOT COVERED
+    src/offset/utc.rs
+            6/7(85.71%) mutants survived
+        78: replace `1000` with `1001` at 53:49-53:53(fn Utc::now) NOT COVERED
+        79: replace `1000` with `999` at 53:49-53:53(fn Utc::now) NOT COVERED
+        80: replace `1000000` with `1000001` at 54:20-54:29(fn Utc::now) NOT COVERED
+        81: replace `1000000` with `999999` at 54:20-54:29(fn Utc::now) NOT COVERED
+        82: replace `1000` with `1001` at 54:62-54:66(fn Utc::now) NOT COVERED
+        83: replace `1000` with `999` at 54:62-54:66(fn Utc::now) NOT COVERED
+    src/round.rs
+            5/32(15.62%) mutants survived
+        507: replace `0` with `1` at 47:24-47:25(fn T::round_subsecs)
+        510: replace `>` with `>=` at 47:22-47:23(fn T::round_subsecs)
+        515: replace `0` with `1` at 62:24-62:25(fn T::trunc_subsecs)
+        518: replace `>` with `>=` at 62:22-62:23(fn T::trunc_subsecs)
+        537: replace `1` with `2` at 83:25-83:26(fn span_for_digits)
+
+632 generated mutations
+465(73.58%) mutants killed, 3(0.47%) by timeout
+167(26.42%) mutants SURVIVED, 80(12.66%) NOT COVERED

@@ -1,0 +1,550 @@
+
+Tests without mutations
+target/debug/deps/test_server-bbf409e55106183f ... ok
+target/debug/deps/test_httpserver-c025e7a0b0d993a5 ... ok
+target/debug/deps/actix_web-e91a294059231055 ... ok
+
+Mutants
+1: stmt_call, remove `self . data . push (Box :: new (Data :: new (data))) ;`, at src/app.rs@103:8-103:49(fn App < T, B >::data) ... killed
+2: stmt_call, remove `self . data_factories . push (Box :: new  (move | |   {       Box :: new       (data () . into_future () . map_err        (| e |         { log :: error ! ("Can not construct data instance: {:?}", e) ; }) .        map        (| data |         {             let data : Box < dyn DataFactory > = Box :: new             (Data :: new (data)) ; data         }),)   })) ;`, at src/app.rs@116:8-128:11(fn App < T, B >::data_factory) ... killed
+3: stmt_call, remove `self . data . push (Box :: new (data)) ;`, at src/app.rs@135:8-135:38(fn App < T, B >::register_data) ... killed
+4: stmt_call, remove `f (& mut cfg) ;`, at src/app.rs@170:8-170:19(fn App < T, B >::configure) ... killed
+5: stmt_call, remove `self . data . extend (cfg . data) ;`, at src/app.rs@171:8-171:34(fn App < T, B >::configure) ... killed
+6: stmt_call, remove `self . services . extend (cfg . services) ;`, at src/app.rs@172:8-172:42(fn App < T, B >::configure) ... killed
+7: stmt_call, remove `self . external . extend (cfg . external) ;`, at src/app.rs@173:8-173:42(fn App < T, B >::configure) ... killed
+8: stmt_call, remove `self . services . push (Box :: new (ServiceFactoryWrapper :: new (factory))) ;`, at src/app.rs@217:8-218:64(fn App < T, B >::service) ... killed
+9: stmt_call, remove `self . external . push (rdef) ;`, at src/app.rs@318:8-318:32(fn App < T, B >::external_resource) ... killed
+10: stmt_call, remove `std :: mem :: replace (& mut * self . services . borrow_mut (), Vec :: new ()) . into_iter () . for_each (| mut srv | srv . register (& mut config)) ;`, at src/app_service.rs@94:8-96:58(fn AppInit < T, B >::new_service) ... killed
+11: stmt_call, remove `rmap . add (& mut rdef, nested) ;`, at src/app_service.rs@109:24-109:51(fn AppInit < T, B >::new_service) ... killed
+12: stmt_call, remove `rmap . add (& mut rdef, None) ;`, at src/app_service.rs@118:12-118:37(fn AppInit < T, B >::new_service) ... killed
+13: stmt_call, remove `rmap . finish (rmap . clone ()) ;`, at src/app_service.rs@123:8-123:33(fn AppInit < T, B >::new_service) ... killed
+14: lit_int, replace `0` with `1`, at src/app_service.rs@167:22-167:23(fn AppInitResult < T, B >::poll) ... killed (timeout)
+15: binop_cmp, replace `<` with `<=`, at src/app_service.rs@168:18-168:19(fn AppInitResult < T, B >::poll) ... killed
+16: binop_cmp, replace `<` with `>=`, at src/app_service.rs@168:18-168:19(fn AppInitResult < T, B >::poll) ... killed (timeout)
+17: binop_cmp, replace `<` with `>`, at src/app_service.rs@168:18-168:19(fn AppInitResult < T, B >::poll) ... killed (timeout)
+18: stmt_call, remove `self . data_factories . push (f) ;`, at src/app_service.rs@171:20-171:47(fn AppInitResult < T, B >::poll) ... killed
+19: stmt_call, remove `self . data_factories_fut . remove (idx) ;`, at src/app_service.rs@172:20-172:55(fn AppInitResult < T, B >::poll) ... killed
+20: lit_int, replace `1` with `2`, at src/app_service.rs@174:42-174:43(fn AppInitResult < T, B >::poll) ... NOT COVERED
+21: lit_int, replace `1` with `0`, at src/app_service.rs@174:42-174:43(fn AppInitResult < T, B >::poll) ... NOT COVERED
+22: binop_bool, replace `&&` with `||`, at src/app_service.rs@184:35-184:37(fn AppInitResult < T, B >::poll) ... SURVIVED
+23: stmt_call, remove `f . create (& mut data) ;`, at src/app_service.rs@188:16-188:35(fn AppInitResult < T, B >::poll) ... killed
+24: stmt_call, remove `f . create (& mut data) ;`, at src/app_service.rs@192:16-192:35(fn AppInitResult < T, B >::poll) ... killed
+25: stmt_call, remove `inner . path . get_mut () . update (& head . uri) ;`, at src/app_service.rs@238:12-238:50(fn AppInitService < T, B >::call) ... SURVIVED
+26: stmt_call, remove `inner . path . reset () ;`, at src/app_service.rs@239:12-239:30(fn AppInitService < T, B >::call) ... SURVIVED
+27: stmt_call, remove `self . pool . clear () ;`, at src/app_service.rs@264:8-264:25(fn AppInitService < T, B >::drop) ... killed
+28: lit_bool, replace `true` with `false`, at src/app_service.rs@321:23-321:27(fn AppRoutingFactoryResponse::poll) ... killed (timeout)
+29: lit_bool, replace `false` with `true`, at src/app_service.rs@326:42-326:47(fn AppRoutingFactoryResponse::poll) ... NOT COVERED
+30: lit_bool, replace `false` with `true`, at src/app_service.rs@342:31-342:36(fn AppRoutingFactoryResponse::poll) ... NOT COVERED
+31: unop_not, remove `!`, at src/app_service.rs@402:23-402:24(fn AppRouting::call) ... killed
+32: lit_bool, replace `false` with `true`, at src/app_service.rs@403:31-403:36(fn AppRouting::call) ... killed
+33: lit_bool, replace `true` with `false`, at src/app_service.rs@407:12-407:16(fn AppRouting::call) ... killed
+34: lit_bool, replace `true` with `false`, at src/config.rs@48:18-48:22(fn AppService::new) ... SURVIVED
+35: lit_bool, replace `false` with `true`, at src/config.rs@77:18-77:23(fn AppService::clone_config) ... SURVIVED
+36: stmt_call, remove `f . create (extensions) ;`, at src/config.rs@95:12-95:32(fn AppService::set_service_data) ... SURVIVED
+37: unop_not, remove `!`, at src/config.rs@97:8-97:9(fn AppService::set_service_data) ... SURVIVED
+38: stmt_call, remove `self . services . push ((rdef, boxed :: new_service (service . into_new_service ()), guards,   nested,)) ;`, at src/config.rs@117:8-122:10(fn AppService::register_service) ... killed
+39: lit_bool, replace `false` with `true`, at src/config.rs@165:20-165:25(fn AppConfigInner::default) ... killed
+40: stmt_call, remove `self . data . push (Box :: new (Data :: new (data))) ;`, at src/config.rs@196:8-196:49(fn ServiceConfig::data) ... killed
+41: stmt_call, remove `self . services . push (Box :: new (ServiceFactoryWrapper :: new (factory))) ;`, at src/config.rs@218:8-219:64(fn ServiceConfig::service) ... killed
+42: stmt_call, remove `self . external . push (rdef) ;`, at src/config.rs@237:8-237:32(fn ServiceConfig::external_resource) ... killed
+43: unop_not, remove `!`, at src/data.rs@125:11-125:12(fn Data < T >::create) ... killed
+44: stmt_call, remove `extensions . insert (Data (self . 0 . clone ())) ;`, at src/data.rs@126:12-126:51(fn Data < T >::create) ... killed
+45: lit_bool, replace `true` with `false`, at src/data.rs@127:12-127:16(fn Data < T >::create) ... SURVIVED
+46: lit_bool, replace `false` with `true`, at src/data.rs@129:12-129:17(fn Data < T >::create) ... SURVIVED
+47: stmt_call, remove `self . 0 . push (Box :: new (guard)) ;`, at src/guard.rs@108:8-108:36(fn AnyGuard::or) ... killed
+48: lit_bool, replace `true` with `false`, at src/guard.rs@117:23-117:27(fn AnyGuard::check) ... killed
+49: lit_bool, replace `false` with `true`, at src/guard.rs@120:8-120:13(fn AnyGuard::check) ... killed
+50: stmt_call, remove `self . 0 . push (Box :: new (guard)) ;`, at src/guard.rs@148:8-148:36(fn AllGuard::and) ... SURVIVED
+51: unop_not, remove `!`, at src/guard.rs@156:15-156:16(fn AllGuard::check) ... killed
+52: lit_bool, replace `false` with `true`, at src/guard.rs@157:23-157:28(fn AllGuard::check) ... killed
+53: lit_bool, replace `true` with `false`, at src/guard.rs@160:8-160:12(fn AllGuard::check) ... killed
+54: unop_not, remove `!`, at src/guard.rs@174:8-174:9(fn NotGuard::check) ... killed
+55: binop_eq, replace `==` with `!=`, at src/guard.rs@184:23-184:25(fn MethodGuard::check) ... killed
+56: binop_eq, replace `==` with `!=`, at src/guard.rs@253:23-253:25(fn HeaderGuard::check) ... killed
+57: lit_bool, replace `false` with `true`, at src/guard.rs@255:8-255:13(fn HeaderGuard::check) ... killed
+58: lit_bool, replace `false` with `true`, at src/guard.rs@301:19-301:24(fn HostGuard::check) ... NOT COVERED
+59: binop_eq, replace `!=` with `==`, at src/guard.rs@305:22-305:24(fn HostGuard::check) ... killed
+60: lit_bool, replace `false` with `true`, at src/guard.rs@306:23-306:28(fn HostGuard::check) ... killed
+61: lit_bool, replace `false` with `true`, at src/guard.rs@309:19-309:24(fn HostGuard::check) ... NOT COVERED
+62: binop_eq, replace `==` with `!=`, at src/guard.rs@314:30-314:32(fn HostGuard::check) ... killed
+63: lit_bool, replace `true` with `false`, at src/guard.rs@318:8-318:12(fn HostGuard::check) ... killed
+64: unop_not, remove `!`, at src/info.rs@22:11-22:12(fn ConnectionInfo::get) ... killed
+65: stmt_call, remove `req . extensions_mut () . insert (ConnectionInfo :: new (req, cfg)) ;`, at src/info.rs@23:12-23:70(fn ConnectionInfo::get) ... killed
+66: lit_int, replace `2` with `3`, at src/info.rs@40:57-40:58(fn ConnectionInfo::new) ... SURVIVED
+67: lit_int, replace `2` with `1`, at src/info.rs@40:57-40:58(fn ConnectionInfo::new) ... killed
+68: binop_bool, replace `&&` with `||`, at src/info.rs@80:36-80:38(fn ConnectionInfo::new) ... killed
+69: stmt_call, remove `self . extensions_mut () . insert (Enc (encoding)) ;`, at src/middleware/compress.rs@25:8-25:51(fn ResponseBuilder::encoding) ... NOT COVERED
+70: stmt_call, remove `self . extensions_mut () . insert (Enc (encoding)) ;`, at src/middleware/compress.rs@32:8-32:51(fn Response < B >::encoding) ... NOT COVERED
+71: binop_cmp, replace `>` with `<`, at src/middleware/compress.rs@173:24-173:25(fn AcceptEncoding::cmp) ... NOT COVERED
+72: binop_cmp, replace `>` with `<=`, at src/middleware/compress.rs@173:24-173:25(fn AcceptEncoding::cmp) ... NOT COVERED
+73: binop_cmp, replace `>` with `>=`, at src/middleware/compress.rs@173:24-173:25(fn AcceptEncoding::cmp) ... NOT COVERED
+74: binop_cmp, replace `<` with `<=`, at src/middleware/compress.rs@175:31-175:32(fn AcceptEncoding::cmp) ... NOT COVERED
+75: binop_cmp, replace `<` with `>=`, at src/middleware/compress.rs@175:31-175:32(fn AcceptEncoding::cmp) ... NOT COVERED
+76: binop_cmp, replace `<` with `>`, at src/middleware/compress.rs@175:31-175:32(fn AcceptEncoding::cmp) ... NOT COVERED
+77: binop_eq, replace `==` with `!=`, at src/middleware/compress.rs@191:21-191:23(fn AcceptEncoding::eq) ... NOT COVERED
+78: lit_int, replace `0` with `1`, at src/middleware/compress.rs@200:45-200:46(fn AcceptEncoding::new) ... NOT COVERED
+79: lit_int, replace `1` with `2`, at src/middleware/compress.rs@204:43-204:44(fn AcceptEncoding::new) ... NOT COVERED
+80: lit_int, replace `1` with `0`, at src/middleware/compress.rs@204:43-204:44(fn AcceptEncoding::new) ... NOT COVERED
+81: stmt_call, remove `encodings . sort () ;`, at src/middleware/compress.rs@219:8-219:24(fn AcceptEncoding::parse) ... NOT COVERED
+82: binop_eq, replace `==` with `!=`, at src/middleware/compress.rs@223:28-223:30(fn AcceptEncoding::parse) ... NOT COVERED
+83: binop_eq, replace `==` with `!=`, at src/middleware/compress.rs@225:35-225:37(fn AcceptEncoding::parse) ... NOT COVERED
+84: lit_bool, replace `false` with `true`, at src/middleware/defaultheaders.rs@44:20-44:25(fn DefaultHeaders::default) ... SURVIVED
+85: stmt_call, remove `Rc :: get_mut (& mut self . inner) . expect ("Multiple copies exist") . headers . append (key, value) ;`, at src/middleware/defaultheaders.rs@68:20-71:43(fn DefaultHeaders::header) ... killed
+86: lit_bool, replace `true` with `false`, at src/middleware/defaultheaders.rs@84:18-84:22(fn DefaultHeaders::content_type) ... killed
+87: unop_not, remove `!`, at src/middleware/defaultheaders.rs@134:19-134:20(fn DefaultHeadersMiddleware < S >::call) ... killed
+88: stmt_call, remove `res . headers_mut () . insert (key . clone (), value . clone ()) ;`, at src/middleware/defaultheaders.rs@135:20-135:72(fn DefaultHeadersMiddleware < S >::call) ... killed
+89: unop_not, remove `!`, at src/middleware/defaultheaders.rs@139:27-139:28(fn DefaultHeadersMiddleware < S >::call) ... killed
+90: binop_bool, replace `&&` with `||`, at src/middleware/defaultheaders.rs@139:24-139:26(fn DefaultHeadersMiddleware < S >::call) ... SURVIVED
+91: stmt_call, remove `res . headers_mut () . insert (CONTENT_TYPE, HeaderValue :: from_static ("application/octet-stream"),) ;`, at src/middleware/defaultheaders.rs@140:16-143:17(fn DefaultHeadersMiddleware < S >::call) ... killed
+92: stmt_call, remove `Rc :: get_mut (& mut self . handlers) . unwrap () . insert (status, Box :: new (handler)) ;`, at src/middleware/errhandlers.rs@77:8-79:46(fn ErrorHandlers < B >::handler) ... killed
+93: stmt_call, remove `Rc :: get_mut (& mut self . 0) . unwrap () . exclude . insert (path . into ()) ;`, at src/middleware/logger.rs@96:8-99:32(fn Logger::exclude) ... NOT COVERED
+94: stmt_call, remove `unit . render_request (now, & req) ;`, at src/middleware/logger.rs@171:16-171:46(fn LoggerMiddleware < S >::call) ... SURVIVED
+95: binop_eq, replace `!=` with `==`, at src/middleware/logger.rs@207:44-207:46(fn LoggerResponse < S, B >::poll) ... NOT COVERED
+96: stmt_call, remove `unit . render_response (res . response ()) ;`, at src/middleware/logger.rs@214:16-214:52(fn LoggerResponse < S, B >::poll) ... SURVIVED
+97: lit_int, replace `0` with `1`, at src/middleware/logger.rs@221:22-221:23(fn LoggerResponse < S, B >::poll) ... SURVIVED
+98: lit_int, replace `0` with `1`, at src/middleware/logger.rs@287:22-287:23(fn Format::new) ... killed
+99: lit_int, replace `0` with `1`, at src/middleware/logger.rs@290:28-290:29(fn Format::new) ... killed
+100: binop_eq, replace `!=` with `==`, at src/middleware/logger.rs@292:19-292:21(fn Format::new) ... killed
+101: stmt_call, remove `results . push (FormatText :: Str (s [idx .. pos] . to_owned ())) ;`, at src/middleware/logger.rs@293:16-293:69(fn Format::new) ... killed
+102: lit_int, replace `2` with `3`, at src/middleware/logger.rs@297:39-297:40(fn Format::new) ... killed
+103: lit_int, replace `2` with `1`, at src/middleware/logger.rs@297:39-297:40(fn Format::new) ... killed
+104: lit_int, replace `3` with `4`, at src/middleware/logger.rs@298:43-298:44(fn Format::new) ... killed
+105: lit_int, replace `3` with `2`, at src/middleware/logger.rs@298:43-298:44(fn Format::new) ... killed
+106: lit_int, replace `1` with `2`, at src/middleware/logger.rs@309:32-309:33(fn Format::new) ... killed
+107: lit_int, replace `1` with `0`, at src/middleware/logger.rs@309:32-309:33(fn Format::new) ... killed
+108: stmt_call, remove `results . push (match m . as_str ()  {      "%" => FormatText :: Percent, "a" => FormatText :: RemoteAddr, "t" =>      FormatText :: RequestTime, "r" => FormatText :: RequestLine, "s" =>      FormatText :: ResponseStatus, "b" => FormatText :: ResponseSize, "U" =>      FormatText :: UrlPath, "T" => FormatText :: Time, "D" => FormatText ::      TimeMillis, _ => FormatText :: Str (m . as_str () . to_owned ()),  }) ;`, at src/middleware/logger.rs@310:16-321:18(fn Format::new) ... killed
+109: binop_eq, replace `!=` with `==`, at src/middleware/logger.rs@324:15-324:17(fn Format::new) ... SURVIVED
+110: stmt_call, remove `results . push (FormatText :: Str (s [idx ..] . to_owned ())) ;`, at src/middleware/logger.rs@325:12-325:62(fn Format::new) ... SURVIVED
+111: lit_int, replace `0` with `1`, at src/middleware/logger.rs@365:57-365:58(fn FormatText::render) ... SURVIVED
+112: lit_int, replace `0` with `1`, at src/middleware/logger.rs@370:57-370:58(fn FormatText::render) ... NOT COVERED
+113: binop_eq, replace `!=` with `==`, at src/middleware/normalize.rs@81:24-81:26(fn NormalizePathNormalization < S >::call) ... killed
+114: stmt_call, remove `req . match_info_mut () . get_mut () . update (& uri) ;`, at src/middleware/normalize.rs@93:12-93:55(fn NormalizePathNormalization < S >::call) ... killed
+115: lit_int, replace `1` with `2`, at src/request.rs@259:40-259:41(fn HttpRequest::drop) ... killed
+116: lit_int, replace `1` with `0`, at src/request.rs@259:40-259:41(fn HttpRequest::drop) ... killed
+117: binop_eq, replace `==` with `!=`, at src/request.rs@259:37-259:39(fn HttpRequest::drop) ... killed
+118: lit_int, replace `128` with `129`, at src/request.rs@261:25-261:28(fn HttpRequest::drop) ... SURVIVED
+119: lit_int, replace `128` with `127`, at src/request.rs@261:25-261:28(fn HttpRequest::drop) ... SURVIVED
+120: binop_cmp, replace `<` with `<=`, at src/request.rs@261:23-261:24(fn HttpRequest::drop) ... SURVIVED
+121: binop_cmp, replace `<` with `>=`, at src/request.rs@261:23-261:24(fn HttpRequest::drop) ... killed
+122: binop_cmp, replace `<` with `>`, at src/request.rs@261:23-261:24(fn HttpRequest::drop) ... killed
+123: stmt_call, remove `self . extensions_mut () . clear () ;`, at src/request.rs@262:16-262:45(fn HttpRequest::drop) ... killed
+124: stmt_call, remove `v . push (self . 0 . clone ()) ;`, at src/request.rs@263:16-263:38(fn HttpRequest::drop) ... SURVIVED
+125: unop_not, remove `!`, at src/request.rs@309:11-309:12(fn HttpRequest::fmt) ... SURVIVED
+126: unop_not, remove `!`, at src/request.rs@312:11-312:12(fn HttpRequest::fmt) ... SURVIVED
+127: lit_int, replace `128` with `129`, at src/request.rs@328:67-328:70(fn HttpRequestPool::create) ... SURVIVED
+128: lit_int, replace `128` with `127`, at src/request.rs@328:67-328:70(fn HttpRequestPool::create) ... SURVIVED
+129: stmt_call, remove `self . guards . push (Box :: new (guard)) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::guard) ... killed
+130: stmt_call, remove `self . guards . extend (guards) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::add_guards) ... killed
+131: stmt_call, remove `self . routes . push (route) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::route) ... killed
+132: stmt_call, remove `self . data . as_mut () . unwrap () . insert (Data :: new (data)) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::data) ... killed
+133: stmt_call, remove `self . routes . push (Route :: new () . to (handler)) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::to) ... killed
+134: stmt_call, remove `self . routes . push (Route :: new () . to_async (handler)) ;`, at src/resource.rs@75:17-75:34(fn Resource < T >::to_async) ... killed
+135: unop_not, remove `!`, at src/resource.rs@400:46-400:47(fn Resource < T >::register) ... killed
+136: binop_bool, replace `||` with `&&`, at src/resource.rs@400:43-400:45(fn Resource < T >::register) ... killed
+137: stmt_call, remove `config . set_service_data (ext) ;`, at src/resource.rs@410:12-410:40(fn Resource < T >::register) ... SURVIVED
+138: lit_bool, replace `true` with `false`, at src/resource.rs@489:23-489:27(fn CreateResourceService::poll) ... killed (timeout)
+139: lit_bool, replace `false` with `true`, at src/resource.rs@494:42-494:47(fn CreateResourceService::poll) ... NOT COVERED
+140: lit_bool, replace `false` with `true`, at src/resource.rs@506:31-506:36(fn CreateResourceService::poll) ... NOT COVERED
+141: stmt_call, remove `req . set_data_container (data . clone ()) ;`, at src/resource.rs@556:20-556:56(fn ResourceService::call) ... killed
+142: stmt_call, remove `self . headers . as_mut () . unwrap () . append (key, value) ;`, at src/responder.rs@286:20-286:69(fn CustomResponder < T >::with_header) ... killed
+143: stmt_call, remove `res . headers_mut () . insert (k . clone (), v . clone ()) ;`, at src/responder.rs@326:16-326:62(fn CustomResponderFut < T >::poll) ... killed
+144: stmt_call, remove `pattern . set_id (self . patterns . len () as u16) ;`, at src/rmap.rs@30:8-30:50(fn ResourceMap::add) ... SURVIVED
+145: stmt_call, remove `self . patterns . push ((pattern . clone (), nested)) ;`, at src/rmap.rs@31:8-31:53(fn ResourceMap::add) ... killed
+146: unop_not, remove `!`, at src/rmap.rs@32:11-32:12(fn ResourceMap::add) ... killed
+147: stmt_call, remove `self . named . insert (pattern . name () . to_string (), pattern . clone ()) ;`, at src/rmap.rs@33:12-34:68(fn ResourceMap::add) ... killed
+148: stmt_call, remove `nested . finish (nested . clone ()) ;`, at src/rmap.rs@42:16-42:45(fn ResourceMap::finish) ... killed
+149: lit_bool, replace `true` with `false`, at src/rmap.rs@92:23-92:27(fn ResourceMap::has_resource) ... killed
+150: lit_bool, replace `false` with `true`, at src/rmap.rs@95:8-95:13(fn ResourceMap::has_resource) ... killed
+151: unop_not, remove `!`, at src/route.rs@113:15-113:16(fn RouteService::check) ... killed
+152: lit_bool, replace `false` with `true`, at src/route.rs@114:23-114:28(fn RouteService::check) ... killed
+153: lit_bool, replace `true` with `false`, at src/route.rs@117:8-117:12(fn RouteService::check) ... killed
+154: stmt_call, remove `Rc :: get_mut (& mut self . guards) . unwrap () . push (Box :: new (guard :: Method (method))) ;`, at src/route.rs@154:8-156:50(fn Route::method) ... killed
+155: stmt_call, remove `Rc :: get_mut (& mut self . guards) . unwrap () . push (Box :: new (f)) ;`, at src/route.rs@174:8-174:64(fn Route::guard) ... NOT COVERED
+156: stmt_call, remove `self . guards . push (Box :: new (guard)) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::guard) ... killed
+157: stmt_call, remove `self . data . as_mut () . unwrap () . insert (Data :: new (data)) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::data) ... killed
+158: stmt_call, remove `f (& mut cfg) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::configure) ... killed
+159: stmt_call, remove `self . services . extend (cfg . services) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::configure) ... killed
+160: stmt_call, remove `self . external . extend (cfg . external) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::configure) ... killed
+161: unop_not, remove `!`, at src/scope.rs@91:17-91:34(fn Scope < T >::configure) ... SURVIVED
+162: stmt_call, remove `value . create (& mut data) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::configure) ... NOT COVERED
+163: stmt_call, remove `self . services . push (Box :: new (ServiceFactoryWrapper :: new (factory))) ;`, at src/scope.rs@91:17-91:34(fn Scope < T >::service) ... killed
+164: stmt_call, remove `self . services . into_iter () . for_each (| mut srv | srv . register (& mut cfg)) ;`, at src/scope.rs@410:8-412:55(fn Scope < T >::register) ... killed
+165: stmt_call, remove `rmap . add (& mut rdef, None) ;`, at src/scope.rs@418:12-418:37(fn Scope < T >::register) ... killed
+166: stmt_call, remove `config . set_service_data (ext) ;`, at src/scope.rs@423:12-423:40(fn Scope < T >::register) ... SURVIVED
+167: stmt_call, remove `rmap . add (& mut rdef, nested) ;`, at src/scope.rs@435:24-435:51(fn Scope < T >::register) ... killed
+168: lit_bool, replace `true` with `false`, at src/scope.rs@521:23-521:27(fn ScopeFactoryResponse::poll) ... killed (timeout)
+169: lit_bool, replace `false` with `true`, at src/scope.rs@526:42-526:47(fn ScopeFactoryResponse::poll) ... NOT COVERED
+170: lit_bool, replace `false` with `true`, at src/scope.rs@542:31-542:36(fn ScopeFactoryResponse::poll) ... NOT COVERED
+171: unop_not, remove `!`, at src/scope.rs@600:23-600:24(fn ScopeService::call) ... killed
+172: lit_bool, replace `false` with `true`, at src/scope.rs@601:31-601:36(fn ScopeService::call) ... killed
+173: lit_bool, replace `true` with `false`, at src/scope.rs@605:12-605:16(fn ScopeService::call) ... killed
+174: stmt_call, remove `req . set_data_container (data . clone ()) ;`, at src/scope.rs@610:16-610:52(fn ScopeService::call) ... killed
+175: lit_int, replace `5` with `6`, at src/server.rs@88:47-88:48(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+176: lit_int, replace `5` with `4`, at src/server.rs@88:47-88:48(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+177: lit_int, replace `5000` with `5001`, at src/server.rs@89:32-89:36(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+178: lit_int, replace `5000` with `4999`, at src/server.rs@89:32-89:36(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+179: lit_int, replace `5000` with `5001`, at src/server.rs@90:33-90:37(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+180: lit_int, replace `5000` with `4999`, at src/server.rs@90:33-90:37(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+181: lit_int, replace `1024` with `1025`, at src/server.rs@92:21-92:25(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+182: lit_int, replace `1024` with `1023`, at src/server.rs@92:21-92:25(fn HttpServer < F, I, S, B >::new) ... NOT COVERED
+183: stmt_call, remove `self . sockets . push (Socket { addr, scheme : "http", }) ;`, at src/server.rs@238:8-241:10(fn HttpServer < F, I, S, B >::listen) ... NOT COVERED
+184: stmt_call, remove `self . sockets . push (Socket { addr, scheme : "https", }) ;`, at src/server.rs@281:8-284:10(fn HttpServer < F, I, S, B >::listen_ssl_inner) ... NOT COVERED
+185: stmt_call, remove `config . set_protocols (& protos) ;`, at src/server.rs@326:8-326:37(fn HttpServer < F, I, S, B >::listen_rustls_inner) ... NOT COVERED
+186: stmt_call, remove `self . sockets . push (Socket { addr, scheme : "https", }) ;`, at src/server.rs@332:8-335:10(fn HttpServer < F, I, S, B >::listen_rustls_inner) ... NOT COVERED
+187: lit_bool, replace `false` with `true`, at src/server.rs@374:23-374:28(fn HttpServer < F, I, S, B >::bind2) ... NOT COVERED
+188: lit_bool, replace `true` with `false`, at src/server.rs@379:27-379:31(fn HttpServer < F, I, S, B >::bind2) ... NOT COVERED
+189: stmt_call, remove `sockets . push (lst) ;`, at src/server.rs@380:20-380:37(fn HttpServer < F, I, S, B >::bind2) ... NOT COVERED
+190: unop_not, remove `!`, at src/server.rs@386:11-386:12(fn HttpServer < F, I, S, B >::bind2) ... NOT COVERED
+191: lit_int, replace `127` with `128`, at src/server.rs@451:51-451:54(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+192: lit_int, replace `127` with `126`, at src/server.rs@451:51-451:54(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+193: lit_int, replace `0` with `1`, at src/server.rs@451:56-451:57(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+194: lit_int, replace `0` with `1`, at src/server.rs@451:59-451:60(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+195: lit_int, replace `1` with `2`, at src/server.rs@451:62-451:63(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+196: lit_int, replace `1` with `0`, at src/server.rs@451:62-451:63(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+197: lit_int, replace `8080` with `8081`, at src/server.rs@452:16-452:20(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+198: lit_int, replace `8080` with `8079`, at src/server.rs@452:16-452:20(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+199: stmt_call, remove `self . sockets . push (Socket  {      scheme : "http", addr : net :: SocketAddr :: new      (net :: IpAddr :: V4 (net :: Ipv4Addr :: new (127, 0, 0, 1)), 8080,),  }) ;`, at src/server.rs@448:8-454:10(fn HttpServer < F, I, S, B >::bind_uds) ... NOT COVERED
+200: stmt_call, remove `self . start () ;`, at src/server.rs@531:8-531:20(fn HttpServer < F, I, S, B >::run) ... NOT COVERED
+201: lit_bool, replace `true` with `false`, at src/server.rs@544:26-544:30(fn create_tcp_listener) ... NOT COVERED
+202: unop_not, remove `!`, at src/service.rs@254:11-254:12(fn ServiceRequest::fmt) ... killed
+203: unop_not, remove `!`, at src/service.rs@257:11-257:12(fn ServiceRequest::fmt) ... SURVIVED
+204: stmt_call, remove `self . guards . push (Box :: new (guard)) ;`, at src/service.rs@450:8-450:41(fn WebService::guard) ... killed
+205: unop_not, remove `!`, at src/service.rs@499:46-499:47(fn WebServiceImpl < T >::register) ... NOT COVERED
+206: binop_bool, replace `||` with `&&`, at src/service.rs@499:43-499:45(fn WebServiceImpl < T >::register) ... SURVIVED
+207: stmt_call, remove `self . req . version (ver) ;`, at src/test.rs@431:8-431:29(fn TestRequest::version) ... killed
+208: stmt_call, remove `self . req . method (meth) ;`, at src/test.rs@437:8-437:29(fn TestRequest::method) ... killed
+209: stmt_call, remove `self . req . uri (path) ;`, at src/test.rs@443:8-443:26(fn TestRequest::uri) ... killed
+210: stmt_call, remove `self . req . set (hdr) ;`, at src/test.rs@449:8-449:25(fn TestRequest::set) ... killed
+211: stmt_call, remove `self . req . header (key, value) ;`, at src/test.rs@459:8-459:35(fn TestRequest::header) ... killed
+212: stmt_call, remove `self . req . cookie (cookie) ;`, at src/test.rs@465:8-465:31(fn TestRequest::cookie) ... NOT COVERED
+213: stmt_call, remove `self . path . add_static (name, value) ;`, at src/test.rs@471:8-471:41(fn TestRequest::param) ... killed
+214: stmt_call, remove `self . req . set_payload (data) ;`, at src/test.rs@477:8-477:34(fn TestRequest::set_payload) ... killed
+215: stmt_call, remove `self . req . set_payload (bytes) ;`, at src/test.rs@486:8-486:35(fn TestRequest::set_form) ... killed
+216: stmt_call, remove `self . req . set (ContentType :: form_url_encoded ()) ;`, at src/test.rs@487:8-487:53(fn TestRequest::set_form) ... killed
+217: stmt_call, remove `self . req . set_payload (bytes) ;`, at src/test.rs@496:8-496:35(fn TestRequest::set_json) ... killed
+218: stmt_call, remove `self . req . set (ContentType :: json ()) ;`, at src/test.rs@497:8-497:41(fn TestRequest::set_json) ... killed
+219: stmt_call, remove `self . app_data . insert (Data :: new (data)) ;`, at src/test.rs@504:8-504:45(fn TestRequest::data) ... killed
+220: stmt_call, remove `self . path . get_mut () . update (& head . uri) ;`, at src/test.rs@523:8-523:45(fn TestRequest::to_srv_request) ... killed
+221: stmt_call, remove `self . path . get_mut () . update (& head . uri) ;`, at src/test.rs@544:8-544:45(fn TestRequest::to_http_request) ... SURVIVED
+222: stmt_call, remove `self . path . get_mut () . update (& head . uri) ;`, at src/test.rs@560:8-560:45(fn TestRequest::to_http_parts) ... SURVIVED
+223: lit_int, replace `16384` with `16385`, at src/types/form.rs@122:24-122:29(fn Form < T >::from_request) ... SURVIVED
+224: lit_int, replace `16384` with `16383`, at src/types/form.rs@122:24-122:29(fn Form < T >::from_request) ... SURVIVED
+225: lit_int, replace `16384` with `16385`, at src/types/form.rs@221:19-221:24(fn FormConfig::default) ... SURVIVED
+226: lit_int, replace `16384` with `16383`, at src/types/form.rs@221:19-221:24(fn FormConfig::default) ... SURVIVED
+227: binop_eq, replace `!=` with `==`, at src/types/form.rs@251:45-251:47(fn UrlEncoded < U >::new) ... killed
+228: lit_int, replace `32768` with `32769`, at src/types/form.rs@276:19-276:25(fn UrlEncoded < U >::new) ... SURVIVED
+229: lit_int, replace `32768` with `32767`, at src/types/form.rs@276:19-276:25(fn UrlEncoded < U >::new) ... SURVIVED
+230: lit_int, replace `32768` with `32769`, at src/types/form.rs@286:19-286:25(fn UrlEncoded < U >::err) ... SURVIVED
+231: lit_int, replace `32768` with `32767`, at src/types/form.rs@286:19-286:25(fn UrlEncoded < U >::err) ... SURVIVED
+232: binop_cmp, replace `>` with `<`, at src/types/form.rs@320:19-320:20(fn UrlEncoded < U >::poll) ... killed
+233: binop_cmp, replace `>` with `<=`, at src/types/form.rs@320:19-320:20(fn UrlEncoded < U >::poll) ... killed
+234: binop_cmp, replace `>` with `>=`, at src/types/form.rs@320:19-320:20(fn UrlEncoded < U >::poll) ... SURVIVED
+235: lit_int, replace `8192` with `8193`, at src/types/form.rs@332:42-332:46(fn UrlEncoded < U >::poll) ... SURVIVED
+236: lit_int, replace `8192` with `8191`, at src/types/form.rs@332:42-332:46(fn UrlEncoded < U >::poll) ... SURVIVED
+237: binop_add, replace `+` with `-`, at src/types/form.rs@333:31-333:32(fn UrlEncoded < U >::poll) ... killed
+238: binop_cmp, replace `>` with `<`, at src/types/form.rs@333:46-333:47(fn UrlEncoded < U >::poll) ... killed
+239: binop_cmp, replace `>` with `<=`, at src/types/form.rs@333:46-333:47(fn UrlEncoded < U >::poll) ... killed
+240: binop_cmp, replace `>` with `>=`, at src/types/form.rs@333:46-333:47(fn UrlEncoded < U >::poll) ... SURVIVED
+241: stmt_call, remove `body . extend_from_slice (& chunk) ;`, at src/types/form.rs@336:20-336:50(fn UrlEncoded < U >::poll) ... killed
+242: binop_eq, replace `==` with `!=`, at src/types/form.rs@341:28-341:30(fn UrlEncoded < U >::poll) ... SURVIVED
+243: lit_int, replace `32768` with `32769`, at src/types/json.rs@181:24-181:29(fn Json < T >::from_request) ... SURVIVED
+244: lit_int, replace `32768` with `32767`, at src/types/json.rs@181:24-181:29(fn Json < T >::from_request) ... SURVIVED
+245: lit_int, replace `32768` with `32769`, at src/types/json.rs@273:19-273:24(fn JsonConfig::default) ... SURVIVED
+246: lit_int, replace `32768` with `32767`, at src/types/json.rs@273:19-273:24(fn JsonConfig::default) ... SURVIVED
+247: binop_eq, replace `==` with `!=`, at src/types/json.rs@308:27-308:29(fn JsonBody < U >::new) ... killed
+248: binop_eq, replace `==` with `!=`, at src/types/json.rs@309:33-309:35(fn JsonBody < U >::new) ... killed
+249: binop_bool, replace `||` with `&&`, at src/types/json.rs@309:16-309:18(fn JsonBody < U >::new) ... killed
+250: lit_bool, replace `false` with `true`, at src/types/json.rs@310:41-310:46(fn JsonBody < U >::new) ... killed
+251: binop_bool, replace `||` with `&&`, at src/types/json.rs@310:16-310:18(fn JsonBody < U >::new) ... killed
+252: lit_bool, replace `false` with `true`, at src/types/json.rs@312:12-312:17(fn JsonBody < U >::new) ... killed
+253: unop_not, remove `!`, at src/types/json.rs@315:11-315:12(fn JsonBody < U >::new) ... killed
+254: lit_int, replace `262144` with `262145`, at src/types/json.rs@317:23-317:30(fn JsonBody < U >::new) ... SURVIVED
+255: lit_int, replace `262144` with `262143`, at src/types/json.rs@317:23-317:30(fn JsonBody < U >::new) ... SURVIVED
+256: lit_int, replace `262144` with `262145`, at src/types/json.rs@333:19-333:26(fn JsonBody < U >::new) ... SURVIVED
+257: lit_int, replace `262144` with `262143`, at src/types/json.rs@333:19-333:26(fn JsonBody < U >::new) ... SURVIVED
+258: binop_cmp, replace `>` with `<`, at src/types/json.rs@366:19-366:20(fn JsonBody < U >::poll) ... killed
+259: binop_cmp, replace `>` with `<=`, at src/types/json.rs@366:19-366:20(fn JsonBody < U >::poll) ... killed
+260: binop_cmp, replace `>` with `>=`, at src/types/json.rs@366:19-366:20(fn JsonBody < U >::poll) ... SURVIVED
+261: lit_int, replace `8192` with `8193`, at src/types/json.rs@376:42-376:46(fn JsonBody < U >::poll) ... SURVIVED
+262: lit_int, replace `8192` with `8191`, at src/types/json.rs@376:42-376:46(fn JsonBody < U >::poll) ... SURVIVED
+263: binop_add, replace `+` with `-`, at src/types/json.rs@377:31-377:32(fn JsonBody < U >::poll) ... killed
+264: binop_cmp, replace `>` with `<`, at src/types/json.rs@377:46-377:47(fn JsonBody < U >::poll) ... killed
+265: binop_cmp, replace `>` with `<=`, at src/types/json.rs@377:46-377:47(fn JsonBody < U >::poll) ... killed
+266: binop_cmp, replace `>` with `>=`, at src/types/json.rs@377:46-377:47(fn JsonBody < U >::poll) ... SURVIVED
+267: stmt_call, remove `body . extend_from_slice (& chunk) ;`, at src/types/json.rs@380:20-380:50(fn JsonBody < U >::poll) ... killed
+268: binop_eq, replace `==` with `!=`, at src/types/payload.rs@177:17-177:34(fn String::from_request) ... SURVIVED
+269: binop_eq, replace `!=` with `==`, at src/types/payload.rs@259:26-259:28(fn PayloadConfig::check_mimetype) ... killed
+270: lit_int, replace `262144` with `262145`, at src/types/payload.rs@278:19-278:26(fn PayloadConfig::default) ... SURVIVED
+271: lit_int, replace `262144` with `262143`, at src/types/payload.rs@278:19-278:26(fn PayloadConfig::default) ... SURVIVED
+272: lit_int, replace `262144` with `262145`, at src/types/payload.rs@317:19-317:26(fn HttpMessageBody::new) ... SURVIVED
+273: lit_int, replace `262144` with `262143`, at src/types/payload.rs@317:19-317:26(fn HttpMessageBody::new) ... SURVIVED
+274: lit_int, replace `262144` with `262145`, at src/types/payload.rs@333:19-333:26(fn HttpMessageBody::err) ... SURVIVED
+275: lit_int, replace `262144` with `262143`, at src/types/payload.rs@333:19-333:26(fn HttpMessageBody::err) ... SURVIVED
+276: binop_cmp, replace `>` with `<`, at src/types/payload.rs@355:19-355:20(fn HttpMessageBody::poll) ... killed
+277: binop_cmp, replace `>` with `<=`, at src/types/payload.rs@355:19-355:20(fn HttpMessageBody::poll) ... killed
+278: binop_cmp, replace `>` with `>=`, at src/types/payload.rs@355:19-355:20(fn HttpMessageBody::poll) ... SURVIVED
+279: lit_int, replace `8192` with `8193`, at src/types/payload.rs@367:46-367:50(fn HttpMessageBody::poll) ... SURVIVED
+280: lit_int, replace `8192` with `8191`, at src/types/payload.rs@367:46-367:50(fn HttpMessageBody::poll) ... SURVIVED
+281: binop_add, replace `+` with `-`, at src/types/payload.rs@368:35-368:36(fn HttpMessageBody::poll) ... killed
+282: binop_cmp, replace `>` with `<`, at src/types/payload.rs@368:50-368:51(fn HttpMessageBody::poll) ... killed
+283: binop_cmp, replace `>` with `<=`, at src/types/payload.rs@368:50-368:51(fn HttpMessageBody::poll) ... killed
+284: binop_cmp, replace `>` with `>=`, at src/types/payload.rs@368:50-368:51(fn HttpMessageBody::poll) ... SURVIVED
+285: stmt_call, remove `body . extend_from_slice (& chunk) ;`, at src/types/payload.rs@371:24-371:54(fn HttpMessageBody::poll) ... killed
+286: lit_int, replace `262144` with `262145`, at src/types/readlines.rs@36:42-36:49(fn Readlines < T >::new) ... SURVIVED
+287: lit_int, replace `262144` with `262143`, at src/types/readlines.rs@36:42-36:49(fn Readlines < T >::new) ... SURVIVED
+288: lit_int, replace `262144` with `262145`, at src/types/readlines.rs@37:19-37:26(fn Readlines < T >::new) ... SURVIVED
+289: lit_int, replace `262144` with `262143`, at src/types/readlines.rs@37:19-37:26(fn Readlines < T >::new) ... SURVIVED
+290: lit_bool, replace `true` with `false`, at src/types/readlines.rs@38:26-38:30(fn Readlines < T >::new) ... SURVIVED
+291: lit_int, replace `262144` with `262145`, at src/types/readlines.rs@54:19-54:26(fn Readlines < T >::err) ... NOT COVERED
+292: lit_int, replace `262144` with `262143`, at src/types/readlines.rs@54:19-54:26(fn Readlines < T >::err) ... NOT COVERED
+293: lit_bool, replace `true` with `false`, at src/types/readlines.rs@55:26-55:30(fn Readlines < T >::err) ... NOT COVERED
+294: unop_not, remove `!`, at src/types/readlines.rs@76:11-76:12(fn Readlines < T >::poll) ... killed
+295: binop_eq, replace `==` with `!=`, at src/types/readlines.rs@79:22-79:24(fn Readlines < T >::poll) ... killed
+296: lit_int, replace `1` with `2`, at src/types/readlines.rs@86:25-86:26(fn Readlines < T >::poll) ... SURVIVED
+297: lit_int, replace `1` with `0`, at src/types/readlines.rs@86:25-86:26(fn Readlines < T >::poll) ... SURVIVED
+298: binop_add, replace `+` with `-`, at src/types/readlines.rs@86:23-86:24(fn Readlines < T >::poll) ... SURVIVED
+299: binop_cmp, replace `>` with `<`, at src/types/readlines.rs@86:27-86:28(fn Readlines < T >::poll) ... killed
+300: binop_cmp, replace `>` with `<=`, at src/types/readlines.rs@86:27-86:28(fn Readlines < T >::poll) ... killed
+301: binop_cmp, replace `>` with `>=`, at src/types/readlines.rs@86:27-86:28(fn Readlines < T >::poll) ... SURVIVED
+302: binop_eq, replace `==` with `!=`, at src/types/readlines.rs@89:44-89:46(fn Readlines < T >::poll) ... SURVIVED
+303: lit_int, replace `1` with `2`, at src/types/readlines.rs@90:61-90:62(fn Readlines < T >::poll) ... killed
+304: lit_int, replace `1` with `0`, at src/types/readlines.rs@90:61-90:62(fn Readlines < T >::poll) ... killed
+305: binop_add, replace `+` with `-`, at src/types/readlines.rs@90:59-90:60(fn Readlines < T >::poll) ... killed
+306: lit_int, replace `1` with `2`, at src/types/readlines.rs@96:54-96:55(fn Readlines < T >::poll) ... NOT COVERED
+307: lit_int, replace `1` with `0`, at src/types/readlines.rs@96:54-96:55(fn Readlines < T >::poll) ... NOT COVERED
+308: binop_add, replace `+` with `-`, at src/types/readlines.rs@96:52-96:53(fn Readlines < T >::poll) ... NOT COVERED
+309: lit_bool, replace `true` with `false`, at src/types/readlines.rs@103:32-103:36(fn Readlines < T >::poll) ... SURVIVED
+310: binop_eq, replace `==` with `!=`, at src/types/readlines.rs@111:26-111:28(fn Readlines < T >::poll) ... killed
+311: lit_int, replace `1` with `2`, at src/types/readlines.rs@118:29-118:30(fn Readlines < T >::poll) ... SURVIVED
+312: lit_int, replace `1` with `0`, at src/types/readlines.rs@118:29-118:30(fn Readlines < T >::poll) ... SURVIVED
+313: binop_add, replace `+` with `-`, at src/types/readlines.rs@118:27-118:28(fn Readlines < T >::poll) ... SURVIVED
+314: binop_cmp, replace `>` with `<`, at src/types/readlines.rs@118:31-118:32(fn Readlines < T >::poll) ... killed
+315: binop_cmp, replace `>` with `<=`, at src/types/readlines.rs@118:31-118:32(fn Readlines < T >::poll) ... killed
+316: binop_cmp, replace `>` with `>=`, at src/types/readlines.rs@118:31-118:32(fn Readlines < T >::poll) ... SURVIVED
+317: binop_eq, replace `==` with `!=`, at src/types/readlines.rs@121:48-121:50(fn Readlines < T >::poll) ... SURVIVED
+318: lit_int, replace `1` with `2`, at src/types/readlines.rs@122:61-122:62(fn Readlines < T >::poll) ... killed
+319: lit_int, replace `1` with `0`, at src/types/readlines.rs@122:61-122:62(fn Readlines < T >::poll) ... killed
+320: binop_add, replace `+` with `-`, at src/types/readlines.rs@122:59-122:60(fn Readlines < T >::poll) ... killed
+321: lit_int, replace `1` with `2`, at src/types/readlines.rs@128:54-128:55(fn Readlines < T >::poll) ... NOT COVERED
+322: lit_int, replace `1` with `0`, at src/types/readlines.rs@128:54-128:55(fn Readlines < T >::poll) ... NOT COVERED
+323: binop_add, replace `+` with `-`, at src/types/readlines.rs@128:52-128:53(fn Readlines < T >::poll) ... NOT COVERED
+324: stmt_call, remove `self . buff . extend_from_slice (& bytes) ;`, at src/types/readlines.rs@134:20-134:55(fn Readlines < T >::poll) ... killed
+325: lit_bool, replace `false` with `true`, at src/types/readlines.rs@135:40-135:45(fn Readlines < T >::poll) ... killed
+326: stmt_call, remove `self . buff . extend_from_slice (& bytes) ;`, at src/types/readlines.rs@138:16-138:51(fn Readlines < T >::poll) ... NOT COVERED
+327: binop_cmp, replace `>` with `<`, at src/types/readlines.rs@146:35-146:36(fn Readlines < T >::poll) ... killed
+328: binop_cmp, replace `>` with `<=`, at src/types/readlines.rs@146:35-146:36(fn Readlines < T >::poll) ... killed
+329: binop_cmp, replace `>` with `>=`, at src/types/readlines.rs@146:35-146:36(fn Readlines < T >::poll) ... SURVIVED
+330: binop_eq, replace `==` with `!=`, at src/types/readlines.rs@149:44-149:46(fn Readlines < T >::poll) ... SURVIVED
+331: stmt_call, remove `self . buff . clear () ;`, at src/types/readlines.rs@159:16-159:33(fn Readlines < T >::poll) ... SURVIVED
+SURVIVED
+    src/app.rs
+            all 9 mutants killed
+    src/app_service.rs
+            7/24(29.17%) mutants survived
+        20: replace `1` with `2` at 174:42-174:43(fn AppInitResult < T, B >::poll) NOT COVERED
+        21: replace `1` with `0` at 174:42-174:43(fn AppInitResult < T, B >::poll) NOT COVERED
+        22: replace `&&` with `||` at 184:35-184:37(fn AppInitResult < T, B >::poll)
+        25: remove `inner . path . get_mut () . update (& head . uri) ;` at 238:12-238:50(fn AppInitService < T, B >::call)
+        26: remove `inner . path . reset () ;` at 239:12-239:30(fn AppInitService < T, B >::call)
+        29: replace `false` with `true` at 326:42-326:47(fn AppRoutingFactoryResponse::poll) NOT COVERED
+        30: replace `false` with `true` at 342:31-342:36(fn AppRoutingFactoryResponse::poll) NOT COVERED
+    src/config.rs
+            4/9(44.44%) mutants survived
+        34: replace `true` with `false` at 48:18-48:22(fn AppService::new)
+        35: replace `false` with `true` at 77:18-77:23(fn AppService::clone_config)
+        36: remove `f . create (extensions) ;` at 95:12-95:32(fn AppService::set_service_data)
+        37: remove `!` at 97:8-97:9(fn AppService::set_service_data)
+    src/data.rs
+            2/4(50.00%) mutants survived
+        45: replace `true` with `false` at 127:12-127:16(fn Data < T >::create)
+        46: replace `false` with `true` at 129:12-129:17(fn Data < T >::create)
+    src/guard.rs
+            3/17(17.65%) mutants survived
+        50: remove `self . 0 . push (Box :: new (guard)) ;` at 148:8-148:36(fn AllGuard::and)
+        58: replace `false` with `true` at 301:19-301:24(fn HostGuard::check) NOT COVERED
+        61: replace `false` with `true` at 309:19-309:24(fn HostGuard::check) NOT COVERED
+    src/info.rs
+            1/5(20.00%) mutants survived
+        66: replace `2` with `3` at 40:57-40:58(fn ConnectionInfo::new)
+    src/middleware/compress.rs
+            all 15 mutants survived
+        69: remove `self . extensions_mut () . insert (Enc (encoding)) ;` at 25:8-25:51(fn ResponseBuilder::encoding) NOT COVERED
+        70: remove `self . extensions_mut () . insert (Enc (encoding)) ;` at 32:8-32:51(fn Response < B >::encoding) NOT COVERED
+        71: replace `>` with `<` at 173:24-173:25(fn AcceptEncoding::cmp) NOT COVERED
+        72: replace `>` with `<=` at 173:24-173:25(fn AcceptEncoding::cmp) NOT COVERED
+        73: replace `>` with `>=` at 173:24-173:25(fn AcceptEncoding::cmp) NOT COVERED
+        74: replace `<` with `<=` at 175:31-175:32(fn AcceptEncoding::cmp) NOT COVERED
+        75: replace `<` with `>=` at 175:31-175:32(fn AcceptEncoding::cmp) NOT COVERED
+        76: replace `<` with `>` at 175:31-175:32(fn AcceptEncoding::cmp) NOT COVERED
+        77: replace `==` with `!=` at 191:21-191:23(fn AcceptEncoding::eq) NOT COVERED
+        78: replace `0` with `1` at 200:45-200:46(fn AcceptEncoding::new) NOT COVERED
+        79: replace `1` with `2` at 204:43-204:44(fn AcceptEncoding::new) NOT COVERED
+        80: replace `1` with `0` at 204:43-204:44(fn AcceptEncoding::new) NOT COVERED
+        81: remove `encodings . sort () ;` at 219:8-219:24(fn AcceptEncoding::parse) NOT COVERED
+        82: replace `==` with `!=` at 223:28-223:30(fn AcceptEncoding::parse) NOT COVERED
+        83: replace `==` with `!=` at 225:35-225:37(fn AcceptEncoding::parse) NOT COVERED
+    src/middleware/defaultheaders.rs
+            2/8(25.00%) mutants survived
+        84: replace `false` with `true` at 44:20-44:25(fn DefaultHeaders::default)
+        90: replace `&&` with `||` at 139:24-139:26(fn DefaultHeadersMiddleware < S >::call)
+    src/middleware/errhandlers.rs
+            all 1 mutants killed
+    src/middleware/logger.rs
+            9/20(45.00%) mutants survived
+        93: remove `Rc :: get_mut (& mut self . 0) . unwrap () . exclude . insert (path . into ()) ;` at 96:8-99:32(fn Logger::exclude) NOT COVERED
+        94: remove `unit . render_request (now, & req) ;` at 171:16-171:46(fn LoggerMiddleware < S >::call)
+        95: replace `!=` with `==` at 207:44-207:46(fn LoggerResponse < S, B >::poll) NOT COVERED
+        96: remove `unit . render_response (res . response ()) ;` at 214:16-214:52(fn LoggerResponse < S, B >::poll)
+        97: replace `0` with `1` at 221:22-221:23(fn LoggerResponse < S, B >::poll)
+        109: replace `!=` with `==` at 324:15-324:17(fn Format::new)
+        110: remove `results . push (FormatText :: Str (s [idx ..] . to_owned ())) ;` at 325:12-325:62(fn Format::new)
+        111: replace `0` with `1` at 365:57-365:58(fn FormatText::render)
+        112: replace `0` with `1` at 370:57-370:58(fn FormatText::render) NOT COVERED
+    src/middleware/normalize.rs
+            all 2 mutants killed
+    src/request.rs
+            8/14(57.14%) mutants survived
+        118: replace `128` with `129` at 261:25-261:28(fn HttpRequest::drop)
+        119: replace `128` with `127` at 261:25-261:28(fn HttpRequest::drop)
+        120: replace `<` with `<=` at 261:23-261:24(fn HttpRequest::drop)
+        124: remove `v . push (self . 0 . clone ()) ;` at 263:16-263:38(fn HttpRequest::drop)
+        125: remove `!` at 309:11-309:12(fn HttpRequest::fmt)
+        126: remove `!` at 312:11-312:12(fn HttpRequest::fmt)
+        127: replace `128` with `129` at 328:67-328:70(fn HttpRequestPool::create)
+        128: replace `128` with `127` at 328:67-328:70(fn HttpRequestPool::create)
+    src/resource.rs
+            3/13(23.08%) mutants survived
+        137: remove `config . set_service_data (ext) ;` at 410:12-410:40(fn Resource < T >::register)
+        139: replace `false` with `true` at 494:42-494:47(fn CreateResourceService::poll) NOT COVERED
+        140: replace `false` with `true` at 506:31-506:36(fn CreateResourceService::poll) NOT COVERED
+    src/responder.rs
+            all 2 mutants killed
+    src/rmap.rs
+            1/7(14.29%) mutants survived
+        144: remove `pattern . set_id (self . patterns . len () as u16) ;` at 30:8-30:50(fn ResourceMap::add)
+    src/route.rs
+            1/5(20.00%) mutants survived
+        155: remove `Rc :: get_mut (& mut self . guards) . unwrap () . push (Box :: new (f)) ;` at 174:8-174:64(fn Route::guard) NOT COVERED
+    src/scope.rs
+            5/19(26.32%) mutants survived
+        161: remove `!` at 91:17-91:34(fn Scope < T >::configure)
+        162: remove `value . create (& mut data) ;` at 91:17-91:34(fn Scope < T >::configure) NOT COVERED
+        166: remove `config . set_service_data (ext) ;` at 423:12-423:40(fn Scope < T >::register)
+        169: replace `false` with `true` at 526:42-526:47(fn ScopeFactoryResponse::poll) NOT COVERED
+        170: replace `false` with `true` at 542:31-542:36(fn ScopeFactoryResponse::poll) NOT COVERED
+    src/server.rs
+            all 27 mutants survived
+        175: replace `5` with `6` at 88:47-88:48(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        176: replace `5` with `4` at 88:47-88:48(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        177: replace `5000` with `5001` at 89:32-89:36(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        178: replace `5000` with `4999` at 89:32-89:36(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        179: replace `5000` with `5001` at 90:33-90:37(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        180: replace `5000` with `4999` at 90:33-90:37(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        181: replace `1024` with `1025` at 92:21-92:25(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        182: replace `1024` with `1023` at 92:21-92:25(fn HttpServer < F, I, S, B >::new) NOT COVERED
+        183: remove `self . sockets . push (Socket { addr, scheme : "http", }) ;` at 238:8-241:10(fn HttpServer < F, I, S, B >::listen) NOT COVERED
+        184: remove `self . sockets . push (Socket { addr, scheme : "https", }) ;` at 281:8-284:10(fn HttpServer < F, I, S, B >::listen_ssl_inner) NOT COVERED
+        185: remove `config . set_protocols (& protos) ;` at 326:8-326:37(fn HttpServer < F, I, S, B >::listen_rustls_inner) NOT COVERED
+        186: remove `self . sockets . push (Socket { addr, scheme : "https", }) ;` at 332:8-335:10(fn HttpServer < F, I, S, B >::listen_rustls_inner) NOT COVERED
+        187: replace `false` with `true` at 374:23-374:28(fn HttpServer < F, I, S, B >::bind2) NOT COVERED
+        188: replace `true` with `false` at 379:27-379:31(fn HttpServer < F, I, S, B >::bind2) NOT COVERED
+        189: remove `sockets . push (lst) ;` at 380:20-380:37(fn HttpServer < F, I, S, B >::bind2) NOT COVERED
+        190: remove `!` at 386:11-386:12(fn HttpServer < F, I, S, B >::bind2) NOT COVERED
+        191: replace `127` with `128` at 451:51-451:54(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        192: replace `127` with `126` at 451:51-451:54(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        193: replace `0` with `1` at 451:56-451:57(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        194: replace `0` with `1` at 451:59-451:60(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        195: replace `1` with `2` at 451:62-451:63(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        196: replace `1` with `0` at 451:62-451:63(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        197: replace `8080` with `8081` at 452:16-452:20(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        198: replace `8080` with `8079` at 452:16-452:20(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        199: remove `self . sockets . push (Socket  {      scheme : "http", addr : net :: SocketAddr :: new      (net :: IpAddr :: V4 (net :: Ipv4Addr :: new (127, 0, 0, 1)), 8080,),  }) ;` at 448:8-454:10(fn HttpServer < F, I, S, B >::bind_uds) NOT COVERED
+        200: remove `self . start () ;` at 531:8-531:20(fn HttpServer < F, I, S, B >::run) NOT COVERED
+        201: replace `true` with `false` at 544:26-544:30(fn create_tcp_listener) NOT COVERED
+    src/service.rs
+            3/5(60.00%) mutants survived
+        203: remove `!` at 257:11-257:12(fn ServiceRequest::fmt)
+        205: remove `!` at 499:46-499:47(fn WebServiceImpl < T >::register) NOT COVERED
+        206: replace `||` with `&&` at 499:43-499:45(fn WebServiceImpl < T >::register)
+    src/test.rs
+            3/16(18.75%) mutants survived
+        212: remove `self . req . cookie (cookie) ;` at 465:8-465:31(fn TestRequest::cookie) NOT COVERED
+        221: remove `self . path . get_mut () . update (& head . uri) ;` at 544:8-544:45(fn TestRequest::to_http_request)
+        222: remove `self . path . get_mut () . update (& head . uri) ;` at 560:8-560:45(fn TestRequest::to_http_parts)
+    src/types/form.rs
+            13/20(65.00%) mutants survived
+        223: replace `16384` with `16385` at 122:24-122:29(fn Form < T >::from_request)
+        224: replace `16384` with `16383` at 122:24-122:29(fn Form < T >::from_request)
+        225: replace `16384` with `16385` at 221:19-221:24(fn FormConfig::default)
+        226: replace `16384` with `16383` at 221:19-221:24(fn FormConfig::default)
+        228: replace `32768` with `32769` at 276:19-276:25(fn UrlEncoded < U >::new)
+        229: replace `32768` with `32767` at 276:19-276:25(fn UrlEncoded < U >::new)
+        230: replace `32768` with `32769` at 286:19-286:25(fn UrlEncoded < U >::err)
+        231: replace `32768` with `32767` at 286:19-286:25(fn UrlEncoded < U >::err)
+        234: replace `>` with `>=` at 320:19-320:20(fn UrlEncoded < U >::poll)
+        235: replace `8192` with `8193` at 332:42-332:46(fn UrlEncoded < U >::poll)
+        236: replace `8192` with `8191` at 332:42-332:46(fn UrlEncoded < U >::poll)
+        240: replace `>` with `>=` at 333:46-333:47(fn UrlEncoded < U >::poll)
+        242: replace `==` with `!=` at 341:28-341:30(fn UrlEncoded < U >::poll)
+    src/types/json.rs
+            12/25(48.00%) mutants survived
+        243: replace `32768` with `32769` at 181:24-181:29(fn Json < T >::from_request)
+        244: replace `32768` with `32767` at 181:24-181:29(fn Json < T >::from_request)
+        245: replace `32768` with `32769` at 273:19-273:24(fn JsonConfig::default)
+        246: replace `32768` with `32767` at 273:19-273:24(fn JsonConfig::default)
+        254: replace `262144` with `262145` at 317:23-317:30(fn JsonBody < U >::new)
+        255: replace `262144` with `262143` at 317:23-317:30(fn JsonBody < U >::new)
+        256: replace `262144` with `262145` at 333:19-333:26(fn JsonBody < U >::new)
+        257: replace `262144` with `262143` at 333:19-333:26(fn JsonBody < U >::new)
+        260: replace `>` with `>=` at 366:19-366:20(fn JsonBody < U >::poll)
+        261: replace `8192` with `8193` at 376:42-376:46(fn JsonBody < U >::poll)
+        262: replace `8192` with `8191` at 376:42-376:46(fn JsonBody < U >::poll)
+        266: replace `>` with `>=` at 377:46-377:47(fn JsonBody < U >::poll)
+    src/types/payload.rs
+            11/18(61.11%) mutants survived
+        268: replace `==` with `!=` at 177:17-177:34(fn String::from_request)
+        270: replace `262144` with `262145` at 278:19-278:26(fn PayloadConfig::default)
+        271: replace `262144` with `262143` at 278:19-278:26(fn PayloadConfig::default)
+        272: replace `262144` with `262145` at 317:19-317:26(fn HttpMessageBody::new)
+        273: replace `262144` with `262143` at 317:19-317:26(fn HttpMessageBody::new)
+        274: replace `262144` with `262145` at 333:19-333:26(fn HttpMessageBody::err)
+        275: replace `262144` with `262143` at 333:19-333:26(fn HttpMessageBody::err)
+        278: replace `>` with `>=` at 355:19-355:20(fn HttpMessageBody::poll)
+        279: replace `8192` with `8193` at 367:46-367:50(fn HttpMessageBody::poll)
+        280: replace `8192` with `8191` at 367:46-367:50(fn HttpMessageBody::poll)
+        284: replace `>` with `>=` at 368:50-368:51(fn HttpMessageBody::poll)
+    src/types/readlines.rs
+            29/46(63.04%) mutants survived
+        286: replace `262144` with `262145` at 36:42-36:49(fn Readlines < T >::new)
+        287: replace `262144` with `262143` at 36:42-36:49(fn Readlines < T >::new)
+        288: replace `262144` with `262145` at 37:19-37:26(fn Readlines < T >::new)
+        289: replace `262144` with `262143` at 37:19-37:26(fn Readlines < T >::new)
+        290: replace `true` with `false` at 38:26-38:30(fn Readlines < T >::new)
+        291: replace `262144` with `262145` at 54:19-54:26(fn Readlines < T >::err) NOT COVERED
+        292: replace `262144` with `262143` at 54:19-54:26(fn Readlines < T >::err) NOT COVERED
+        293: replace `true` with `false` at 55:26-55:30(fn Readlines < T >::err) NOT COVERED
+        296: replace `1` with `2` at 86:25-86:26(fn Readlines < T >::poll)
+        297: replace `1` with `0` at 86:25-86:26(fn Readlines < T >::poll)
+        298: replace `+` with `-` at 86:23-86:24(fn Readlines < T >::poll)
+        301: replace `>` with `>=` at 86:27-86:28(fn Readlines < T >::poll)
+        302: replace `==` with `!=` at 89:44-89:46(fn Readlines < T >::poll)
+        306: replace `1` with `2` at 96:54-96:55(fn Readlines < T >::poll) NOT COVERED
+        307: replace `1` with `0` at 96:54-96:55(fn Readlines < T >::poll) NOT COVERED
+        308: replace `+` with `-` at 96:52-96:53(fn Readlines < T >::poll) NOT COVERED
+        309: replace `true` with `false` at 103:32-103:36(fn Readlines < T >::poll)
+        311: replace `1` with `2` at 118:29-118:30(fn Readlines < T >::poll)
+        312: replace `1` with `0` at 118:29-118:30(fn Readlines < T >::poll)
+        313: replace `+` with `-` at 118:27-118:28(fn Readlines < T >::poll)
+        316: replace `>` with `>=` at 118:31-118:32(fn Readlines < T >::poll)
+        317: replace `==` with `!=` at 121:48-121:50(fn Readlines < T >::poll)
+        321: replace `1` with `2` at 128:54-128:55(fn Readlines < T >::poll) NOT COVERED
+        322: replace `1` with `0` at 128:54-128:55(fn Readlines < T >::poll) NOT COVERED
+        323: replace `+` with `-` at 128:52-128:53(fn Readlines < T >::poll) NOT COVERED
+        326: remove `self . buff . extend_from_slice (& bytes) ;` at 138:16-138:51(fn Readlines < T >::poll) NOT COVERED
+        329: replace `>` with `>=` at 146:35-146:36(fn Readlines < T >::poll)
+        330: replace `==` with `!=` at 149:44-149:46(fn Readlines < T >::poll)
+        331: remove `self . buff . clear () ;` at 159:16-159:33(fn Readlines < T >::poll)
+
+331 generated mutations
+172(51.96%) mutants killed, 6(1.81%) by timeout
+159(48.04%) mutants SURVIVED, 69(20.85%) NOT COVERED
