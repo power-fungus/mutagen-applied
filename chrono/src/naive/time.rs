@@ -177,7 +177,7 @@ pub struct NaiveTime {
     frac: u32,
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl NaiveTime {
+impl NaiveTime {
     /// Makes a new `NaiveTime` from hour, minute and second.
     ///
     /// No [leap second](#leap-second-handling) is allowed here;
@@ -776,7 +776,7 @@ pub struct NaiveTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl Timelike for NaiveTime {
+impl Timelike for NaiveTime {
     /// Returns the hour number from 0 to 23.
     ///
     /// # Example
@@ -982,7 +982,7 @@ pub struct NaiveTime {
 /// Practically this also takes account of fractional seconds, so it is not recommended.
 /// (For the obvious reason this also distinguishes leap seconds from non-leap seconds.)
 #[cfg_attr(feature = "cargo-clippy", allow(derive_hash_xor_eq))]
-#[cfg_attr(test, ::mutagen::mutate)] impl hash::Hash for NaiveTime {
+impl hash::Hash for NaiveTime {
     fn hash<H: hash::Hasher>(&self, state: &mut H) {
         self.secs.hash(state);
         self.frac.hash(state);
@@ -1047,7 +1047,7 @@ pub struct NaiveTime {
 /// assert_eq!(leap + Duration::days(1),            from_hmsm(3, 5, 59, 300));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Add<OldDuration> for NaiveTime {
+impl Add<OldDuration> for NaiveTime {
     type Output = NaiveTime;
 
     #[inline]
@@ -1056,7 +1056,7 @@ pub struct NaiveTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl AddAssign<OldDuration> for NaiveTime {
+impl AddAssign<OldDuration> for NaiveTime {
     #[inline]
     fn add_assign(&mut self, rhs: OldDuration) {
         *self = self.add(rhs);
@@ -1117,7 +1117,7 @@ pub struct NaiveTime {
 /// assert_eq!(leap - Duration::days(1),           from_hmsm(3, 6, 0, 300));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Sub<OldDuration> for NaiveTime {
+impl Sub<OldDuration> for NaiveTime {
     type Output = NaiveTime;
 
     #[inline]
@@ -1126,7 +1126,7 @@ pub struct NaiveTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl SubAssign<OldDuration> for NaiveTime {
+impl SubAssign<OldDuration> for NaiveTime {
     #[inline]
     fn sub_assign(&mut self, rhs: OldDuration) {
         *self = self.sub(rhs);
@@ -1184,7 +1184,7 @@ pub struct NaiveTime {
 ///            Duration::seconds(61));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Sub<NaiveTime> for NaiveTime {
+impl Sub<NaiveTime> for NaiveTime {
     type Output = OldDuration;
 
     #[inline]
@@ -1221,7 +1221,7 @@ pub struct NaiveTime {
 /// # use chrono::NaiveTime;
 /// assert_eq!(format!("{:?}", NaiveTime::from_hms_milli(6, 59, 59, 1_500)), "06:59:60.500");
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for NaiveTime {
+impl fmt::Debug for NaiveTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let (hour, min, sec) = self.hms();
         let (sec, nano) = if self.frac >= 1_000_000_000 {
@@ -1271,7 +1271,7 @@ pub struct NaiveTime {
 /// # use chrono::NaiveTime;
 /// assert_eq!(format!("{}", NaiveTime::from_hms_milli(6, 59, 59, 1_500)), "06:59:60.500");
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for NaiveTime {
+impl fmt::Display for NaiveTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { fmt::Debug::fmt(self, f) }
 }
 
@@ -1294,7 +1294,7 @@ pub struct NaiveTime {
 ///
 /// assert!("foo".parse::<NaiveTime>().is_err());
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for NaiveTime {
+impl str::FromStr for NaiveTime {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<NaiveTime> {
@@ -1314,7 +1314,7 @@ pub struct NaiveTime {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-#[cfg_attr(test, ::mutagen::mutate)] fn test_encodable_json<F, E>(to_string: F)
+fn test_encodable_json<F, E>(to_string: F)
     where F: Fn(&NaiveTime) -> Result<String, E>, E: ::std::fmt::Debug
 {
     assert_eq!(to_string(&NaiveTime::from_hms(0, 0, 0)).ok(),
@@ -1336,7 +1336,7 @@ pub struct NaiveTime {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json<F, E>(from_str: F)
+fn test_decodable_json<F, E>(from_str: F)
     where F: Fn(&str) -> Result<NaiveTime, E>, E: ::std::fmt::Debug
 {
     assert_eq!(from_str(r#""00:00:00""#).ok(),

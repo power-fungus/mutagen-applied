@@ -53,7 +53,7 @@ pub struct NaiveDateTime {
     time: NaiveTime,
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl NaiveDateTime {
+impl NaiveDateTime {
     /// Makes a new `NaiveDateTime` from date and time components.
     /// Equivalent to [`date.and_time(time)`](./struct.NaiveDate.html#method.and_time)
     /// and many other helper constructors on `NaiveDate`.
@@ -689,7 +689,7 @@ pub struct NaiveDateTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl Datelike for NaiveDateTime {
+impl Datelike for NaiveDateTime {
     /// Returns the year number in the [calendar date](./index.html#calendar-date).
     ///
     /// See also the [`NaiveDate::year`](./struct.NaiveDate.html#method.year) method.
@@ -1007,7 +1007,7 @@ pub struct NaiveDateTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl Timelike for NaiveDateTime {
+impl Timelike for NaiveDateTime {
     /// Returns the hour number from 0 to 23.
     ///
     /// See also the [`NaiveTime::hour`](./struct.NaiveTime.html#method.hour) method.
@@ -1180,7 +1180,7 @@ pub struct NaiveDateTime {
 /// Practically this also takes account of fractional seconds, so it is not recommended.
 /// (For the obvious reason this also distinguishes leap seconds from non-leap seconds.)
 #[cfg_attr(feature = "cargo-clippy", allow(derive_hash_xor_eq))]
-#[cfg_attr(test, ::mutagen::mutate)] impl hash::Hash for NaiveDateTime {
+impl hash::Hash for NaiveDateTime {
     fn hash<H: hash::Hasher>(&self, state: &mut H) {
         self.date.hash(state);
         self.time.hash(state);
@@ -1242,7 +1242,7 @@ pub struct NaiveDateTime {
 ///            from_ymd(2016, 7, 9).and_hms_milli(3, 5, 59, 300));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Add<OldDuration> for NaiveDateTime {
+impl Add<OldDuration> for NaiveDateTime {
     type Output = NaiveDateTime;
 
     #[inline]
@@ -1251,7 +1251,7 @@ pub struct NaiveDateTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl AddAssign<OldDuration> for NaiveDateTime {
+impl AddAssign<OldDuration> for NaiveDateTime {
     #[inline]
     fn add_assign(&mut self, rhs: OldDuration) {
         *self = self.add(rhs);
@@ -1312,7 +1312,7 @@ pub struct NaiveDateTime {
 ///            from_ymd(2016, 7, 7).and_hms_milli(3, 6, 0, 300));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Sub<OldDuration> for NaiveDateTime {
+impl Sub<OldDuration> for NaiveDateTime {
     type Output = NaiveDateTime;
 
     #[inline]
@@ -1321,7 +1321,7 @@ pub struct NaiveDateTime {
     }
 }
 
-#[cfg_attr(test, ::mutagen::mutate)] impl SubAssign<OldDuration> for NaiveDateTime {
+impl SubAssign<OldDuration> for NaiveDateTime {
     #[inline]
     fn sub_assign(&mut self, rhs: OldDuration) {
         *self = self.sub(rhs);
@@ -1374,7 +1374,7 @@ pub struct NaiveDateTime {
 ///            Duration::seconds(3600) - Duration::milliseconds(500));
 /// # }
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl Sub<NaiveDateTime> for NaiveDateTime {
+impl Sub<NaiveDateTime> for NaiveDateTime {
     type Output = OldDuration;
 
     #[inline]
@@ -1410,7 +1410,7 @@ pub struct NaiveDateTime {
 /// let dt = NaiveDate::from_ymd(2015, 6, 30).and_hms_milli(23, 59, 59, 1_500);
 /// assert_eq!(format!("{:?}", dt), "2015-06-30T23:59:60.500");
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for NaiveDateTime {
+impl fmt::Debug for NaiveDateTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}T{:?}", self.date, self.time)
     }
@@ -1441,7 +1441,7 @@ pub struct NaiveDateTime {
 /// let dt = NaiveDate::from_ymd(2015, 6, 30).and_hms_milli(23, 59, 59, 1_500);
 /// assert_eq!(format!("{}", dt), "2015-06-30 23:59:60.500");
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for NaiveDateTime {
+impl fmt::Display for NaiveDateTime {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{} {}", self.date, self.time)
     }
@@ -1463,7 +1463,7 @@ pub struct NaiveDateTime {
 ///
 /// assert!("foo".parse::<NaiveDateTime>().is_err());
 /// ~~~~
-#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for NaiveDateTime {
+impl str::FromStr for NaiveDateTime {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<NaiveDateTime> {
@@ -1489,7 +1489,7 @@ pub struct NaiveDateTime {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-#[cfg_attr(test, ::mutagen::mutate)] fn test_encodable_json<F, E>(to_string: F)
+fn test_encodable_json<F, E>(to_string: F)
     where F: Fn(&NaiveDateTime) -> Result<String, E>, E: ::std::fmt::Debug
 {
     use naive::{MIN_DATE, MAX_DATE};
@@ -1515,7 +1515,7 @@ pub struct NaiveDateTime {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json<F, E>(from_str: F)
+fn test_decodable_json<F, E>(from_str: F)
     where F: Fn(&str) -> Result<NaiveDateTime, E>, E: ::std::fmt::Debug
 {
     use naive::{MIN_DATE, MAX_DATE};
@@ -1572,7 +1572,7 @@ pub struct NaiveDateTime {
 
 
 #[cfg(all(test, feature = "rustc-serialize"))]
-#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json_timestamp<F, E>(from_str: F)
+fn test_decodable_json_timestamp<F, E>(from_str: F)
     where F: Fn(&str) -> Result<rustc_serialize::TsSeconds, E>, E: ::std::fmt::Debug
 {
     assert_eq!(
