@@ -33,7 +33,7 @@ use super::{TimeZone, Offset, LocalResult, FixedOffset};
 pub struct Utc;
 
 #[cfg(feature="clock")]
-impl Utc {
+#[cfg_attr(test, ::mutagen::mutate)] impl Utc {
     /// Returns a `Date` which corresponds to the current date.
     pub fn today() -> Date<Utc> { Utc::now().date() }
 
@@ -57,7 +57,7 @@ impl Utc {
     }
 }
 
-impl TimeZone for Utc {
+#[cfg_attr(test, ::mutagen::mutate)] impl TimeZone for Utc {
     type Offset = Utc;
 
     fn from_offset(_state: &Utc) -> Utc { Utc }
@@ -73,14 +73,14 @@ impl TimeZone for Utc {
     fn offset_from_utc_datetime(&self, _utc: &NaiveDateTime) -> Utc { Utc }
 }
 
-impl Offset for Utc {
+#[cfg_attr(test, ::mutagen::mutate)] impl Offset for Utc {
     fn fix(&self) -> FixedOffset { FixedOffset::east(0) }
 }
 
-impl fmt::Debug for Utc {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Utc {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { write!(f, "Z") }
 }
 
-impl fmt::Display for Utc {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for Utc {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { write!(f, "UTC") }
 }

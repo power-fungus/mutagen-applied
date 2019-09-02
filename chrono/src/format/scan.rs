@@ -12,7 +12,7 @@ use super::{ParseResult, TOO_SHORT, INVALID, OUT_OF_RANGE};
 
 /// Returns true when two slices are equal case-insensitively (in ASCII).
 /// Assumes that the `pattern` is already converted to lower case.
-fn equals(s: &str, pattern: &str) -> bool {
+#[cfg_attr(test, ::mutagen::mutate)] fn equals(s: &str, pattern: &str) -> bool {
     let mut xs = s.as_bytes().iter().map(|&c| match c { b'A'...b'Z' => c + 32, _ => c });
     let mut ys = pattern.as_bytes().iter().cloned();
     loop {
@@ -192,7 +192,7 @@ pub fn timezone_offset<F>(s: &str, consume_colon: F) -> ParseResult<(&str, i32)>
     timezone_offset_internal(s, consume_colon, false)
 }
 
-fn timezone_offset_internal<F>(mut s: &str, mut consume_colon: F, allow_missing_minutes: bool)
+#[cfg_attr(test, ::mutagen::mutate)] fn timezone_offset_internal<F>(mut s: &str, mut consume_colon: F, allow_missing_minutes: bool)
 -> ParseResult<(&str, i32)>
     where F: FnMut(&str) -> ParseResult<&str>
 {

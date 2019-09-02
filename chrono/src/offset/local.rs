@@ -13,7 +13,7 @@ use super::fixed::FixedOffset;
 
 /// Converts a `time::Tm` struct into the timezone-aware `DateTime`.
 /// This assumes that `time` is working correctly, i.e. any error is fatal.
-fn tm_to_datetime(mut tm: oldtime::Tm) -> DateTime<Local> {
+#[cfg_attr(test, ::mutagen::mutate)] fn tm_to_datetime(mut tm: oldtime::Tm) -> DateTime<Local> {
     if tm.tm_sec >= 60 {
         tm.tm_nsec += (tm.tm_sec - 59) * 1_000_000_000;
         tm.tm_sec = 59;
@@ -39,7 +39,7 @@ fn tm_to_datetime(mut tm: oldtime::Tm) -> DateTime<Local> {
 }
 
 /// Converts a local `NaiveDateTime` to the `time::Timespec`.
-fn datetime_to_timespec(d: &NaiveDateTime, local: bool) -> oldtime::Timespec {
+#[cfg_attr(test, ::mutagen::mutate)] fn datetime_to_timespec(d: &NaiveDateTime, local: bool) -> oldtime::Timespec {
     // well, this exploits an undocumented `Tm::to_timespec` behavior
     // to get the exact function we want (either `timegm` or `mktime`).
     // the number 1 is arbitrary but should be non-zero to trigger `mktime`.
@@ -80,7 +80,7 @@ fn datetime_to_timespec(d: &NaiveDateTime, local: bool) -> oldtime::Timespec {
 #[derive(Copy, Clone, Debug)]
 pub struct Local;
 
-impl Local {
+#[cfg_attr(test, ::mutagen::mutate)] impl Local {
     /// Returns a `Date` which corresponds to the current date.
     pub fn today() -> Date<Local> {
         Local::now().date()
@@ -104,7 +104,7 @@ impl Local {
     }
 }
 
-impl TimeZone for Local {
+#[cfg_attr(test, ::mutagen::mutate)] impl TimeZone for Local {
     type Offset = FixedOffset;
 
     fn from_offset(_offset: &FixedOffset) -> Local { Local }

@@ -106,7 +106,7 @@ pub const MAX_DATE: NaiveDate = NaiveDate { ymdf: (MAX_YEAR << 13) | (365 << 4) 
 // as it is hard to verify year flags in `MIN_DATE` and `MAX_DATE`,
 // we use a separate run-time test.
 #[test]
-fn test_date_bounds() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_date_bounds() {
     let calculated_min = NaiveDate::from_ymd(MIN_YEAR, 1, 1);
     let calculated_max = NaiveDate::from_ymd(MAX_YEAR, 12, 31);
     assert!(MIN_DATE == calculated_min,
@@ -122,7 +122,7 @@ fn test_date_bounds() {
             "The entire `NaiveDate` range somehow exceeds 2^{} seconds", MAX_BITS);
 }
 
-impl NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl NaiveDate {
     /// Makes a new `NaiveDate` from year and packed ordinal-flags, with a verification.
     fn from_of(year: i32, of: Of) -> Option<NaiveDate> {
         if year >= MIN_YEAR && year <= MAX_YEAR && of.valid() {
@@ -960,7 +960,7 @@ impl NaiveDate {
     }
 }
 
-impl Datelike for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl Datelike for NaiveDate {
     /// Returns the year number in the [calendar date](#calendar-date).
     ///
     /// # Example
@@ -1327,7 +1327,7 @@ impl Datelike for NaiveDate {
 /// assert_eq!(from_ymd(2014, 1, 1) + Duration::days(365*400 + 97), from_ymd(2414, 1, 1));
 /// # }
 /// ~~~~
-impl Add<OldDuration> for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl Add<OldDuration> for NaiveDate {
     type Output = NaiveDate;
 
     #[inline]
@@ -1336,7 +1336,7 @@ impl Add<OldDuration> for NaiveDate {
     }
 }
 
-impl AddAssign<OldDuration> for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl AddAssign<OldDuration> for NaiveDate {
     #[inline]
     fn add_assign(&mut self, rhs: OldDuration) {
         *self = self.add(rhs);
@@ -1369,7 +1369,7 @@ impl AddAssign<OldDuration> for NaiveDate {
 /// assert_eq!(from_ymd(2014, 1, 1) - Duration::days(365*400 + 97), from_ymd(1614, 1, 1));
 /// # }
 /// ~~~~
-impl Sub<OldDuration> for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl Sub<OldDuration> for NaiveDate {
     type Output = NaiveDate;
 
     #[inline]
@@ -1378,7 +1378,7 @@ impl Sub<OldDuration> for NaiveDate {
     }
 }
 
-impl SubAssign<OldDuration> for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl SubAssign<OldDuration> for NaiveDate {
     #[inline]
     fn sub_assign(&mut self, rhs: OldDuration) {
         *self = self.sub(rhs);
@@ -1412,7 +1412,7 @@ impl SubAssign<OldDuration> for NaiveDate {
 /// assert_eq!(from_ymd(2014, 1, 1) - from_ymd(1614, 1, 1), Duration::days(365*400 + 97));
 /// # }
 /// ~~~~
-impl Sub<NaiveDate> for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl Sub<NaiveDate> for NaiveDate {
     type Output = OldDuration;
 
     #[inline]
@@ -1443,7 +1443,7 @@ impl Sub<NaiveDate> for NaiveDate {
 /// assert_eq!(format!("{:?}", NaiveDate::from_ymd(   -1,  1,  1)),  "-0001-01-01");
 /// assert_eq!(format!("{:?}", NaiveDate::from_ymd(10000, 12, 31)), "+10000-12-31");
 /// ~~~~
-impl fmt::Debug for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for NaiveDate {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let year = self.year();
         let mdf = self.mdf();
@@ -1478,7 +1478,7 @@ impl fmt::Debug for NaiveDate {
 /// assert_eq!(format!("{}", NaiveDate::from_ymd(   -1,  1,  1)),  "-0001-01-01");
 /// assert_eq!(format!("{}", NaiveDate::from_ymd(10000, 12, 31)), "+10000-12-31");
 /// ~~~~
-impl fmt::Display for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for NaiveDate {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { fmt::Debug::fmt(self, f) }
 }
 
@@ -1498,7 +1498,7 @@ impl fmt::Display for NaiveDate {
 ///
 /// assert!("foo".parse::<NaiveDate>().is_err());
 /// ~~~~
-impl str::FromStr for NaiveDate {
+#[cfg_attr(test, ::mutagen::mutate)] impl str::FromStr for NaiveDate {
     type Err = ParseError;
 
     fn from_str(s: &str) -> ParseResult<NaiveDate> {
@@ -1518,7 +1518,7 @@ impl str::FromStr for NaiveDate {
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-fn test_encodable_json<F, E>(to_string: F)
+#[cfg_attr(test, ::mutagen::mutate)] fn test_encodable_json<F, E>(to_string: F)
     where F: Fn(&NaiveDate) -> Result<String, E>, E: ::std::fmt::Debug
 {
     assert_eq!(to_string(&NaiveDate::from_ymd(2014, 7, 24)).ok(),
@@ -1534,7 +1534,7 @@ fn test_encodable_json<F, E>(to_string: F)
 }
 
 #[cfg(all(test, any(feature = "rustc-serialize", feature = "serde")))]
-fn test_decodable_json<F, E>(from_str: F)
+#[cfg_attr(test, ::mutagen::mutate)] fn test_decodable_json<F, E>(from_str: F)
     where F: Fn(&str) -> Result<NaiveDate, E>, E: ::std::fmt::Debug
 {
     use std::{i32, i64};

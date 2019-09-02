@@ -169,7 +169,7 @@ pub struct StrftimeItems<'a> {
     recons: &'static [Item<'static>],
 }
 
-impl<'a> StrftimeItems<'a> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a> StrftimeItems<'a> {
     /// Creates a new parsing iterator from the `strftime`-like format string.
     pub fn new(s: &'a str) -> StrftimeItems<'a> {
         static FMT_NONE: [Item<'static>; 0] = [];
@@ -179,7 +179,7 @@ impl<'a> StrftimeItems<'a> {
 
 const HAVE_ALTERNATES: &'static str = "z";
 
-impl<'a> Iterator for StrftimeItems<'a> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a> Iterator for StrftimeItems<'a> {
     type Item = Item<'a>;
 
     fn next(&mut self) -> Option<Item<'a>> {
@@ -358,7 +358,7 @@ impl<'a> Iterator for StrftimeItems<'a> {
 
 #[cfg(test)]
 #[test]
-fn test_strftime_items() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_strftime_items() {
     fn parse_and_collect<'a>(s: &'a str) -> Vec<Item<'a>> {
         // map any error into `[Item::Error]`. useful for easy testing.
         let items = StrftimeItems::new(s);
@@ -407,7 +407,7 @@ fn test_strftime_items() {
 
 #[cfg(test)]
 #[test]
-fn test_strftime_docs() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_strftime_docs() {
     use crate::{FixedOffset, TimeZone, Timelike};
 
     let dt = FixedOffset::east(34200).ymd(2001, 7, 8).and_hms_nano(0, 34, 59, 1_026_490_708);

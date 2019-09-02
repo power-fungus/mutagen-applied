@@ -24,7 +24,7 @@ pub struct FixedOffset {
     local_minus_utc: i32,
 }
 
-impl FixedOffset {
+#[cfg_attr(test, ::mutagen::mutate)] impl FixedOffset {
     /// Makes a new `FixedOffset` for the Eastern Hemisphere with given timezone difference.
     /// The negative `secs` means the Western Hemisphere.
     ///
@@ -98,7 +98,7 @@ impl FixedOffset {
     }
 }
 
-impl TimeZone for FixedOffset {
+#[cfg_attr(test, ::mutagen::mutate)] impl TimeZone for FixedOffset {
     type Offset = FixedOffset;
 
     fn from_offset(offset: &FixedOffset) -> FixedOffset { *offset }
@@ -114,11 +114,11 @@ impl TimeZone for FixedOffset {
     fn offset_from_utc_datetime(&self, _utc: &NaiveDateTime) -> FixedOffset { *self }
 }
 
-impl Offset for FixedOffset {
+#[cfg_attr(test, ::mutagen::mutate)] impl Offset for FixedOffset {
     fn fix(&self) -> FixedOffset { *self }
 }
 
-impl fmt::Debug for FixedOffset {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for FixedOffset {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let offset = self.local_minus_utc;
         let (sign, offset) = if offset < 0 {('-', -offset)} else {('+', offset)};
@@ -132,7 +132,7 @@ impl fmt::Debug for FixedOffset {
     }
 }
 
-impl fmt::Display for FixedOffset {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for FixedOffset {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { fmt::Debug::fmt(self, f) }
 }
 
@@ -141,7 +141,7 @@ impl fmt::Display for FixedOffset {
 // but keep keeps the leap second information.
 // this should be implemented more efficiently, but for the time being, this is generic right now.
 
-fn add_with_leapsecond<T>(lhs: &T, rhs: i32) -> T
+#[cfg_attr(test, ::mutagen::mutate)] fn add_with_leapsecond<T>(lhs: &T, rhs: i32) -> T
     where T: Timelike + Add<OldDuration, Output=T>
 {
     // extract and temporarily remove the fractional part and later recover it
@@ -150,7 +150,7 @@ fn add_with_leapsecond<T>(lhs: &T, rhs: i32) -> T
     (lhs + OldDuration::seconds(i64::from(rhs))).with_nanosecond(nanos).unwrap()
 }
 
-impl Add<FixedOffset> for NaiveTime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Add<FixedOffset> for NaiveTime {
     type Output = NaiveTime;
 
     #[inline]
@@ -159,7 +159,7 @@ impl Add<FixedOffset> for NaiveTime {
     }
 }
 
-impl Sub<FixedOffset> for NaiveTime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Sub<FixedOffset> for NaiveTime {
     type Output = NaiveTime;
 
     #[inline]
@@ -168,7 +168,7 @@ impl Sub<FixedOffset> for NaiveTime {
     }
 }
 
-impl Add<FixedOffset> for NaiveDateTime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Add<FixedOffset> for NaiveDateTime {
     type Output = NaiveDateTime;
 
     #[inline]
@@ -177,7 +177,7 @@ impl Add<FixedOffset> for NaiveDateTime {
     }
 }
 
-impl Sub<FixedOffset> for NaiveDateTime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Sub<FixedOffset> for NaiveDateTime {
     type Output = NaiveDateTime;
 
     #[inline]
@@ -186,7 +186,7 @@ impl Sub<FixedOffset> for NaiveDateTime {
     }
 }
 
-impl<Tz: TimeZone> Add<FixedOffset> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Add<FixedOffset> for DateTime<Tz> {
     type Output = DateTime<Tz>;
 
     #[inline]
@@ -195,7 +195,7 @@ impl<Tz: TimeZone> Add<FixedOffset> for DateTime<Tz> {
     }
 }
 
-impl<Tz: TimeZone> Sub<FixedOffset> for DateTime<Tz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> Sub<FixedOffset> for DateTime<Tz> {
     type Output = DateTime<Tz>;
 
     #[inline]

@@ -43,7 +43,7 @@ pub fn iso_week_from_yof(year: i32, of: Of) -> IsoWeek {
     IsoWeek { ywf: (year << 10) | (week << 4) as DateImpl | DateImpl::from(of.flags().0) }
 }
 
-impl IsoWeek {
+#[cfg_attr(test, ::mutagen::mutate)] impl IsoWeek {
     /// Returns the year number for this ISO week.
     ///
     /// # Example
@@ -125,7 +125,7 @@ impl IsoWeek {
 /// assert_eq!(format!("{:?}", NaiveDate::from_ymd(    0,  1,  2).iso_week()),  "-0001-W52");
 /// assert_eq!(format!("{:?}", NaiveDate::from_ymd(10000, 12, 31).iso_week()), "+10000-W52");
 /// ~~~~
-impl fmt::Debug for IsoWeek {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for IsoWeek {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let year = self.year();
         let week = self.week();

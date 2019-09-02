@@ -107,7 +107,7 @@ pub fn yo_to_cycle(year_mod_400: u32, ordinal: u32) -> u32 {
     year_mod_400 * 365 + u32::from(YEAR_DELTAS[year_mod_400 as usize]) + ordinal - 1
 }
 
-impl YearFlags {
+#[cfg_attr(test, ::mutagen::mutate)] impl YearFlags {
     #[inline]
     pub fn from_year(year: i32) -> YearFlags {
         let year = mod_floor(year, 400);
@@ -136,11 +136,11 @@ impl YearFlags {
     #[inline]
     pub fn nisoweeks(&self) -> u32 {
         let YearFlags(flags) = *self;
-        52 + ((0b0000_0100_0000_0110 >> flags as usize) & 1)
+        52u32 + ((0b0000_0100_0000_0110 >> flags as usize) & 1)
     }
 }
 
-impl fmt::Debug for YearFlags {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for YearFlags {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let YearFlags(flags) = *self;
         match flags {
@@ -277,7 +277,7 @@ static OL_TO_MDL: [u8; (MAX_OL as usize + 1)] = [
 #[derive(PartialEq, PartialOrd, Copy, Clone)]
 pub struct Of(pub u32);
 
-impl Of {
+#[cfg_attr(test, ::mutagen::mutate)] impl Of {
     #[inline]
     fn clamp_ordinal(ordinal: u32) -> u32 {
         if ordinal > 366 {0} else {ordinal}
@@ -327,7 +327,7 @@ impl Of {
     #[inline]
     pub fn with_flags(&self, YearFlags(flags): YearFlags) -> Of {
         let Of(of) = *self;
-        Of((of & !0b1111) | u32::from(flags))
+        Of((of & !0b1111u32) | u32::from(flags))
     }
 
     #[inline]
@@ -362,7 +362,7 @@ impl Of {
     }
 }
 
-impl fmt::Debug for Of {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Of {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let Of(of) = *self;
         write!(f, "Of(({} << 4) | {:#04o} /*{:?}*/)",
@@ -378,7 +378,7 @@ impl fmt::Debug for Of {
 #[derive(PartialEq, PartialOrd, Copy, Clone)]
 pub struct Mdf(pub u32);
 
-impl Mdf {
+#[cfg_attr(test, ::mutagen::mutate)] impl Mdf {
     #[inline]
     fn clamp_month(month: u32) -> u32 {
         if month > 12 {0} else {month}
@@ -438,7 +438,7 @@ impl Mdf {
     pub fn with_day(&self, day: u32) -> Mdf {
         let day = Mdf::clamp_day(day);
         let Mdf(mdf) = *self;
-        Mdf((mdf & !0b1_1111_0000) | (day << 4))
+        Mdf((mdf & !0b1_1111_0000u32) | (day << 4))
     }
 
     #[inline]
@@ -450,7 +450,7 @@ impl Mdf {
     #[inline]
     pub fn with_flags(&self, YearFlags(flags): YearFlags) -> Mdf {
         let Mdf(mdf) = *self;
-        Mdf((mdf & !0b1111) | u32::from(flags))
+        Mdf((mdf & !0b1111u32) | u32::from(flags))
     }
 
     #[inline]
@@ -459,7 +459,7 @@ impl Mdf {
     }
 }
 
-impl fmt::Debug for Mdf {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Mdf {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let Mdf(mdf) = *self;
         write!(f, "Mdf(({} << 9) | ({} << 4) | {:#04o} /*{:?}*/)",

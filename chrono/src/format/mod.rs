@@ -118,22 +118,22 @@ pub struct InternalNumeric {
     _dummy: Void,
 }
 
-impl Clone for InternalNumeric {
+#[cfg_attr(test, ::mutagen::mutate)] impl Clone for InternalNumeric {
     fn clone(&self) -> Self {
         match self._dummy {}
     }
 }
 
-impl PartialEq for InternalNumeric {
+#[cfg_attr(test, ::mutagen::mutate)] impl PartialEq for InternalNumeric {
     fn eq(&self, _other: &InternalNumeric) -> bool {
         match self._dummy {}
     }
 }
 
-impl Eq for InternalNumeric {
+#[cfg_attr(test, ::mutagen::mutate)] impl Eq for InternalNumeric {
 }
 
-impl fmt::Debug for InternalNumeric {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for InternalNumeric {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "<InternalNumeric>")
     }
@@ -305,13 +305,13 @@ enum ParseErrorKind {
 /// Same to `Result<T, ParseError>`.
 pub type ParseResult<T> = Result<T, ParseError>;
 
-impl fmt::Display for ParseError {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.description().fmt(f)
     }
 }
 
-impl Error for ParseError {
+#[cfg_attr(test, ::mutagen::mutate)] impl Error for ParseError {
     fn description(&self) -> &str {
         match self.0 {
             ParseErrorKind::OutOfRange => "input is out of range",
@@ -610,7 +610,7 @@ pub struct DelayedFormat<I> {
     items: I,
 }
 
-impl<'a, I: Iterator<Item=Item<'a>> + Clone> DelayedFormat<I> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, I: Iterator<Item=Item<'a>> + Clone> DelayedFormat<I> {
     /// Makes a new `DelayedFormat` value out of local date and time.
     pub fn new(date: Option<NaiveDate>, time: Option<NaiveTime>, items: I) -> DelayedFormat<I> {
         DelayedFormat { date: date, time: time, off: None, items: items }
@@ -625,7 +625,7 @@ impl<'a, I: Iterator<Item=Item<'a>> + Clone> DelayedFormat<I> {
     }
 }
 
-impl<'a, I: Iterator<Item=Item<'a>> + Clone> fmt::Display for DelayedFormat<I> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, I: Iterator<Item=Item<'a>> + Clone> fmt::Display for DelayedFormat<I> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         format(f, self.date.as_ref(), self.time.as_ref(), self.off.as_ref(), self.items.clone())
     }
@@ -657,7 +657,7 @@ impl<'a, I: Iterator<Item=Item<'a>> + Clone> fmt::Display for DelayedFormat<I> {
 /// # use chrono::Weekday;
 /// assert!("thurs".parse::<Weekday>().is_err());
 /// ~~~~
-impl FromStr for Weekday {
+#[cfg_attr(test, ::mutagen::mutate)] impl FromStr for Weekday {
     type Err = ParseWeekdayError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {

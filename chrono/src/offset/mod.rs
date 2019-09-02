@@ -38,7 +38,7 @@ pub enum LocalResult<T> {
     Ambiguous(T /*min*/, T /*max*/),
 }
 
-impl<T> LocalResult<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> LocalResult<T> {
     /// Returns `Some` only when the conversion result is unique, or `None` otherwise.
     pub fn single(self) -> Option<T> {
         match self {
@@ -73,7 +73,7 @@ impl<T> LocalResult<T> {
     }
 }
 
-impl<Tz: TimeZone> LocalResult<Date<Tz>> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Tz: TimeZone> LocalResult<Date<Tz>> {
     /// Makes a new `DateTime` from the current date and given `NaiveTime`.
     /// The offset in the current date is preserved.
     ///
@@ -166,7 +166,7 @@ impl<Tz: TimeZone> LocalResult<Date<Tz>> {
     }
 }
 
-impl<T: fmt::Debug> LocalResult<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: fmt::Debug> LocalResult<T> {
     /// Returns the single unique conversion result, or panics accordingly.
     pub fn unwrap(self) -> T {
         match self {

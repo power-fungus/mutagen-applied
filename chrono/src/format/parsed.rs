@@ -112,7 +112,7 @@ pub struct Parsed {
 
 /// Checks if `old` is either empty or has the same value to `new` (i.e. "consistent"),
 /// and if it is empty, set `old` to `new` as well.
-fn set_if_consistent<T: PartialEq>(old: &mut Option<T>, new: T) -> ParseResult<()> {
+#[cfg_attr(test, ::mutagen::mutate)] fn set_if_consistent<T: PartialEq>(old: &mut Option<T>, new: T) -> ParseResult<()> {
     if let Some(ref old) = *old {
         if *old == new {Ok(())} else {Err(IMPOSSIBLE)}
     } else {
@@ -121,7 +121,7 @@ fn set_if_consistent<T: PartialEq>(old: &mut Option<T>, new: T) -> ParseResult<(
     }
 }
 
-impl Default for Parsed {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for Parsed {
     fn default() -> Parsed {
         Parsed {
             year: None, year_div_100: None, year_mod_100: None, isoyear: None,
@@ -134,7 +134,7 @@ impl Default for Parsed {
     }
 }
 
-impl Parsed {
+#[cfg_attr(test, ::mutagen::mutate)] impl Parsed {
     /// Returns the initial value of parsed parts.
     pub fn new() -> Parsed {
         Parsed::default()

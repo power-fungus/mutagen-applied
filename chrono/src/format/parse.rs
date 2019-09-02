@@ -14,7 +14,7 @@ use super::scan;
 use super::{Parsed, ParseResult, Item, InternalFixed, InternalInternal};
 use super::{OUT_OF_RANGE, INVALID, TOO_SHORT, TOO_LONG, BAD_FORMAT};
 
-fn set_weekday_with_num_days_from_sunday(p: &mut Parsed, v: i64) -> ParseResult<()> {
+#[cfg_attr(test, ::mutagen::mutate)] fn set_weekday_with_num_days_from_sunday(p: &mut Parsed, v: i64) -> ParseResult<()> {
     p.set_weekday(match v {
         0 => Weekday::Sun, 1 => Weekday::Mon, 2 => Weekday::Tue,
         3 => Weekday::Wed, 4 => Weekday::Thu, 5 => Weekday::Fri,
@@ -22,7 +22,7 @@ fn set_weekday_with_num_days_from_sunday(p: &mut Parsed, v: i64) -> ParseResult<
     })
 }
 
-fn set_weekday_with_number_from_monday(p: &mut Parsed, v: i64) -> ParseResult<()> {
+#[cfg_attr(test, ::mutagen::mutate)] fn set_weekday_with_number_from_monday(p: &mut Parsed, v: i64) -> ParseResult<()> {
     p.set_weekday(match v {
         1 => Weekday::Mon, 2 => Weekday::Tue, 3 => Weekday::Wed,
         4 => Weekday::Thu, 5 => Weekday::Fri, 6 => Weekday::Sat,
@@ -30,7 +30,7 @@ fn set_weekday_with_number_from_monday(p: &mut Parsed, v: i64) -> ParseResult<()
     })
 }
 
-fn parse_rfc2822<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult<(&'a str, ())> {
+#[cfg_attr(test, ::mutagen::mutate)] fn parse_rfc2822<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult<(&'a str, ())> {
     macro_rules! try_consume {
         ($e:expr) => ({ let (s_, v) = r#try!($e); s = s_; v })
     }
@@ -127,7 +127,7 @@ fn parse_rfc2822<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult<(&'a st
     Ok((s, ()))
 }
 
-fn parse_rfc3339<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult<(&'a str, ())> {
+#[cfg_attr(test, ::mutagen::mutate)] fn parse_rfc3339<'a>(parsed: &mut Parsed, mut s: &'a str) -> ParseResult<(&'a str, ())> {
     macro_rules! try_consume {
         ($e:expr) => ({ let (s_, v) = r#try!($e); s = s_; v })
     }
@@ -375,7 +375,7 @@ pub fn parse<'a, I>(parsed: &mut Parsed, mut s: &str, items: I) -> ParseResult<(
 
 #[cfg(test)]
 #[test]
-fn test_parse() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_parse() {
     use super::*;
     use super::IMPOSSIBLE;
 
@@ -664,7 +664,7 @@ fn test_parse() {
 
 #[cfg(test)]
 #[test]
-fn test_rfc2822() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_rfc2822() {
     use crate::DateTime;
     use crate::offset::FixedOffset;
     use super::*;
@@ -719,7 +719,7 @@ fn test_rfc2822() {
 
 #[cfg(test)]
 #[test]
-fn parse_rfc850() {
+#[cfg_attr(test, ::mutagen::mutate)] fn parse_rfc850() {
     use crate::{Utc, TimeZone};
 
     static RFC850_FMT: &'static str =  "%A, %d-%b-%y %T GMT";
@@ -751,7 +751,7 @@ fn parse_rfc850() {
 
 #[cfg(test)]
 #[test]
-fn test_rfc3339() {
+#[cfg_attr(test, ::mutagen::mutate)] fn test_rfc3339() {
     use crate::DateTime;
     use crate::offset::FixedOffset;
     use super::*;
