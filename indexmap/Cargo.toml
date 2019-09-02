@@ -23,6 +23,7 @@ indexmap.
 
 keywords = ["hashmap"]
 categories = ["data-structures"]
+edition = "2018"
 
 [lib]
 bench = false
