@@ -39,7 +39,7 @@ quickcheck = { version = "0.8", default-features = false }
 fnv = "1.0"
 lazy_static = "1.3"
 serde_test = "1.0.99"
-mutagen = {path = "../../mutagen/mutagen"}
+mutagen = {path = "../mutagen/mutagen"}
 
 [features]
 # Serialization with serde 1.0

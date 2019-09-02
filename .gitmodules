@@ -1,0 +1,3 @@
+[submodule "mutagen"]
+	path = mutagen
+	url = ./mutagen

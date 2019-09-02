@@ -32,7 +32,7 @@ serde = "1.0.55"
 
 [dev-dependencies]
 serde = { version = "1.0.55", features = ["derive"] }
-mutagen = {path = "../../mutagen/mutagen"}
+mutagen = {path = "../mutagen/mutagen"}
 
 [profile.release]
 debug = true
