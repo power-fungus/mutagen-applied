@@ -48,16 +48,16 @@ pub use crate::set::IndexSet;
 #[derive(Copy, Debug)]
 struct HashValue(usize);
 
-impl HashValue {
+#[cfg_attr(test, ::mutagen::mutate)] impl HashValue {
     #[inline(always)]
     fn get(self) -> usize { self.0 }
 }
 
-impl Clone for HashValue {
+#[cfg_attr(test, ::mutagen::mutate)] impl Clone for HashValue {
     #[inline]
     fn clone(&self) -> Self { *self }
 }
-impl PartialEq for HashValue {
+#[cfg_attr(test, ::mutagen::mutate)] impl PartialEq for HashValue {
     #[inline]
     fn eq(&self, rhs: &Self) -> bool {
         self.0 == rhs.0
@@ -71,7 +71,7 @@ struct Bucket<K, V> {
     value: V,
 }
 
-impl<K, V> Bucket<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> Bucket<K, V> {
     // field accessors -- used for `f` instead of closures in `.map(f)`
     fn key_ref(&self) -> &K { &self.key }
     fn value_ref(&self) -> &V { &self.value }

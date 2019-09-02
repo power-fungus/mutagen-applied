@@ -63,7 +63,7 @@ pub struct IndexSet<T, S = RandomState> {
     map: IndexMap<T, (), S>,
 }
 
-impl<T, S> Entries for IndexSet<T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> Entries for IndexSet<T, S> {
     type Entry = Bucket<T>;
 
     fn into_entries(self) -> Vec<Self::Entry> {
@@ -85,7 +85,7 @@ impl<T, S> Entries for IndexSet<T, S> {
     }
 }
 
-impl<T, S> fmt::Debug for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> fmt::Debug for IndexSet<T, S>
     where T: fmt::Debug + Hash + Eq,
           S: BuildHasher,
 {
@@ -99,7 +99,7 @@ impl<T, S> fmt::Debug for IndexSet<T, S>
     }
 }
 
-impl<T> IndexSet<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> IndexSet<T> {
     /// Create a new set. (Does not allocate.)
     pub fn new() -> Self {
         IndexSet { map: IndexMap::new() }
@@ -114,7 +114,7 @@ impl<T> IndexSet<T> {
     }
 }
 
-impl<T, S> IndexSet<T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S> {
     /// Create a new set with capacity for `n` elements.
     /// (Does not allocate if `n` is zero.)
     ///
@@ -159,7 +159,7 @@ impl<T, S> IndexSet<T, S> {
     }
 }
 
-impl<T, S> IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S>
     where T: Hash + Eq,
           S: BuildHasher,
 {
@@ -473,7 +473,7 @@ impl<T, S> IndexSet<T, S>
     }
 }
 
-impl<T, S> IndexSet<T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S> {
     /// Get a value by index
     ///
     /// Valid indices are *0 <= index < self.len()*
@@ -522,25 +522,25 @@ pub struct IntoIter<T> {
     iter: vec::IntoIter<Bucket<T>>,
 }
 
-impl<T> Iterator for IntoIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> Iterator for IntoIter<T> {
     type Item = T;
 
     iterator_methods!(Bucket::key);
 }
 
-impl<T> DoubleEndedIterator for IntoIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> DoubleEndedIterator for IntoIter<T> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::key)
     }
 }
 
-impl<T> ExactSizeIterator for IntoIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> ExactSizeIterator for IntoIter<T> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
-impl<T: fmt::Debug> fmt::Debug for IntoIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: fmt::Debug> fmt::Debug for IntoIter<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let iter = self.iter.as_slice().iter().map(Bucket::key_ref);
         f.debug_list().entries(iter).finish()
@@ -559,31 +559,31 @@ pub struct Iter<'a, T: 'a> {
     iter: slice::Iter<'a, Bucket<T>>,
 }
 
-impl<'a, T> Iterator for Iter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> Iterator for Iter<'a, T> {
     type Item = &'a T;
 
     iterator_methods!(Bucket::key_ref);
 }
 
-impl<'a, T> DoubleEndedIterator for Iter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> DoubleEndedIterator for Iter<'a, T> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::key_ref)
     }
 }
 
-impl<'a, T> ExactSizeIterator for Iter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> ExactSizeIterator for Iter<'a, T> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
-impl<'a, T> Clone for Iter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> Clone for Iter<'a, T> {
     fn clone(&self) -> Self {
         Iter { iter: self.iter.clone() }
     }
 }
 
-impl<'a, T: fmt::Debug> fmt::Debug for Iter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T: fmt::Debug> fmt::Debug for Iter<'a, T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_list().entries(self.clone()).finish()
     }
@@ -600,17 +600,17 @@ pub struct Drain<'a, T: 'a> {
     iter: vec::Drain<'a, Bucket<T>>,
 }
 
-impl<'a, T> Iterator for Drain<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> Iterator for Drain<'a, T> {
     type Item = T;
 
     iterator_methods!(Bucket::key);
 }
 
-impl<'a, T> DoubleEndedIterator for Drain<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> DoubleEndedIterator for Drain<'a, T> {
     double_ended_iterator_methods!(Bucket::key);
 }
 
-impl<'a, T, S> IntoIterator for &'a IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> IntoIterator for &'a IndexSet<T, S>
     where T: Hash + Eq,
           S: BuildHasher,
 {
@@ -622,7 +622,7 @@ impl<'a, T, S> IntoIterator for &'a IndexSet<T, S>
     }
 }
 
-impl<T, S> IntoIterator for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IntoIterator for IndexSet<T, S>
     where T: Hash + Eq,
           S: BuildHasher,
 {
@@ -636,7 +636,7 @@ impl<T, S> IntoIterator for IndexSet<T, S>
     }
 }
 
-impl<T, S> FromIterator<T> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> FromIterator<T> for IndexSet<T, S>
     where T: Hash + Eq,
           S: BuildHasher + Default,
 {
@@ -646,7 +646,7 @@ impl<T, S> FromIterator<T> for IndexSet<T, S>
     }
 }
 
-impl<T, S> Extend<T> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> Extend<T> for IndexSet<T, S>
     where T: Hash + Eq,
           S: BuildHasher,
 {
@@ -656,7 +656,7 @@ impl<T, S> Extend<T> for IndexSet<T, S>
     }
 }
 
-impl<'a, T, S> Extend<&'a T> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Extend<&'a T> for IndexSet<T, S>
     where T: Hash + Eq + Copy + 'a,
           S: BuildHasher,
 {
@@ -667,7 +667,7 @@ impl<'a, T, S> Extend<&'a T> for IndexSet<T, S>
 }
 
 
-impl<T, S> Default for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> Default for IndexSet<T, S>
     where S: BuildHasher + Default,
 {
     /// Return an empty `IndexSet`
@@ -676,7 +676,7 @@ impl<T, S> Default for IndexSet<T, S>
     }
 }
 
-impl<T, S1, S2> PartialEq<IndexSet<T, S2>> for IndexSet<T, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S1, S2> PartialEq<IndexSet<T, S2>> for IndexSet<T, S1>
     where T: Hash + Eq,
           S1: BuildHasher,
           S2: BuildHasher
@@ -686,13 +686,13 @@ impl<T, S1, S2> PartialEq<IndexSet<T, S2>> for IndexSet<T, S1>
     }
 }
 
-impl<T, S> Eq for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> Eq for IndexSet<T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
 }
 
-impl<T, S> IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
@@ -735,7 +735,7 @@ pub struct Difference<'a, T: 'a, S: 'a> {
     other: &'a IndexSet<T, S>,
 }
 
-impl<'a, T, S> Iterator for Difference<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Iterator for Difference<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
@@ -755,7 +755,7 @@ impl<'a, T, S> Iterator for Difference<'a, T, S>
     }
 }
 
-impl<'a, T, S> DoubleEndedIterator for Difference<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> DoubleEndedIterator for Difference<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
@@ -769,13 +769,13 @@ impl<'a, T, S> DoubleEndedIterator for Difference<'a, T, S>
     }
 }
 
-impl<'a, T, S> Clone for Difference<'a, T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Clone for Difference<'a, T, S> {
     fn clone(&self) -> Self {
         Difference { iter: self.iter.clone(), ..*self }
     }
 }
 
-impl<'a, T, S> fmt::Debug for Difference<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> fmt::Debug for Difference<'a, T, S>
     where T: fmt::Debug + Eq + Hash,
           S: BuildHasher
 {
@@ -797,7 +797,7 @@ pub struct Intersection<'a, T: 'a, S: 'a> {
     other: &'a IndexSet<T, S>,
 }
 
-impl<'a, T, S> Iterator for Intersection<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Iterator for Intersection<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
@@ -817,7 +817,7 @@ impl<'a, T, S> Iterator for Intersection<'a, T, S>
     }
 }
 
-impl<'a, T, S> DoubleEndedIterator for Intersection<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> DoubleEndedIterator for Intersection<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher
 {
@@ -831,13 +831,13 @@ impl<'a, T, S> DoubleEndedIterator for Intersection<'a, T, S>
     }
 }
 
-impl<'a, T, S> Clone for Intersection<'a, T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Clone for Intersection<'a, T, S> {
     fn clone(&self) -> Self {
         Intersection { iter: self.iter.clone(), ..*self }
     }
 }
 
-impl<'a, T, S> fmt::Debug for Intersection<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> fmt::Debug for Intersection<'a, T, S>
     where T: fmt::Debug + Eq + Hash,
           S: BuildHasher,
 {
@@ -858,7 +858,7 @@ pub struct SymmetricDifference<'a, T: 'a, S1: 'a, S2: 'a> {
     iter: Chain<Difference<'a, T, S2>, Difference<'a, T, S1>>,
 }
 
-impl<'a, T, S1, S2> Iterator for SymmetricDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Iterator for SymmetricDifference<'a, T, S1, S2>
     where T: Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -880,7 +880,7 @@ impl<'a, T, S1, S2> Iterator for SymmetricDifference<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> DoubleEndedIterator for SymmetricDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> DoubleEndedIterator for SymmetricDifference<'a, T, S1, S2>
     where T: Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -890,13 +890,13 @@ impl<'a, T, S1, S2> DoubleEndedIterator for SymmetricDifference<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> Clone for SymmetricDifference<'a, T, S1, S2> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Clone for SymmetricDifference<'a, T, S1, S2> {
     fn clone(&self) -> Self {
         SymmetricDifference { iter: self.iter.clone() }
     }
 }
 
-impl<'a, T, S1, S2> fmt::Debug for SymmetricDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> fmt::Debug for SymmetricDifference<'a, T, S1, S2>
     where T: fmt::Debug + Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -918,7 +918,7 @@ pub struct Union<'a, T: 'a, S: 'a> {
     iter: Chain<Iter<'a, T>, Difference<'a, T, S>>,
 }
 
-impl<'a, T, S> Iterator for Union<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Iterator for Union<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher,
 {
@@ -939,7 +939,7 @@ impl<'a, T, S> Iterator for Union<'a, T, S>
     }
 }
 
-impl<'a, T, S> DoubleEndedIterator for Union<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> DoubleEndedIterator for Union<'a, T, S>
     where T: Eq + Hash,
           S: BuildHasher,
 {
@@ -948,13 +948,13 @@ impl<'a, T, S> DoubleEndedIterator for Union<'a, T, S>
     }
 }
 
-impl<'a, T, S> Clone for Union<'a, T, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> Clone for Union<'a, T, S> {
     fn clone(&self) -> Self {
         Union { iter: self.iter.clone() }
     }
 }
 
-impl<'a, T, S> fmt::Debug for Union<'a, T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> fmt::Debug for Union<'a, T, S>
     where T: fmt::Debug + Eq + Hash,
           S: BuildHasher,
 {
@@ -964,7 +964,7 @@ impl<'a, T, S> fmt::Debug for Union<'a, T, S>
 }
 
 
-impl<'a, 'b, T, S1, S2> BitAnd<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'b, T, S1, S2> BitAnd<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     where T: Eq + Hash + Clone,
           S1: BuildHasher + Default,
           S2: BuildHasher,
@@ -979,7 +979,7 @@ impl<'a, 'b, T, S1, S2> BitAnd<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     }
 }
 
-impl<'a, 'b, T, S1, S2> BitOr<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'b, T, S1, S2> BitOr<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     where T: Eq + Hash + Clone,
           S1: BuildHasher + Default,
           S2: BuildHasher,
@@ -995,7 +995,7 @@ impl<'a, 'b, T, S1, S2> BitOr<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     }
 }
 
-impl<'a, 'b, T, S1, S2> BitXor<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'b, T, S1, S2> BitXor<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     where T: Eq + Hash + Clone,
           S1: BuildHasher + Default,
           S2: BuildHasher,
@@ -1011,7 +1011,7 @@ impl<'a, 'b, T, S1, S2> BitXor<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     }
 }
 
-impl<'a, 'b, T, S1, S2> Sub<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, 'b, T, S1, S2> Sub<&'b IndexSet<T, S2>> for &'a IndexSet<T, S1>
     where T: Eq + Hash + Clone,
           S1: BuildHasher + Default,
           S2: BuildHasher,

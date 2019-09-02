@@ -26,7 +26,7 @@ use crate::{
     HashValue,
 };
 
-fn hash_elem_using<B: BuildHasher, K: ?Sized + Hash>(build: &B, k: &K) -> HashValue {
+#[cfg_attr(test, ::mutagen::mutate)] fn hash_elem_using<B: BuildHasher, K: ?Sized + Hash>(build: &B, k: &K) -> HashValue {
     let mut h = build.build_hasher();
     k.hash(&mut h);
     HashValue(h.finish() as usize)
@@ -37,7 +37,7 @@ fn hash_elem_using<B: BuildHasher, K: ?Sized + Hash>(build: &B, k: &K) -> HashVa
 #[derive(Debug)]
 struct ShortHash<Sz>(usize, PhantomData<Sz>);
 
-impl<Sz> ShortHash<Sz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> ShortHash<Sz> {
     /// Pretend this is a full HashValue, which
     /// is completely ok w.r.t determining bucket index
     ///
@@ -48,13 +48,13 @@ impl<Sz> ShortHash<Sz> {
     }
 }
 
-impl<Sz> Copy for ShortHash<Sz> { }
-impl<Sz> Clone for ShortHash<Sz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> Copy for ShortHash<Sz> { }
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> Clone for ShortHash<Sz> {
     #[inline]
     fn clone(&self) -> Self { *self }
 }
 
-impl<Sz> PartialEq for ShortHash<Sz> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> PartialEq for ShortHash<Sz> {
     #[inline]
     fn eq(&self, rhs: &Self) -> bool {
         self.0 == rhs.0
@@ -63,7 +63,7 @@ impl<Sz> PartialEq for ShortHash<Sz> {
 
 // Compare ShortHash == HashValue by truncating appropriately
 // if applicable before the comparison
-impl<Sz> PartialEq<HashValue> for ShortHash<Sz> where Sz: Size {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> PartialEq<HashValue> for ShortHash<Sz> where Sz: Size {
     #[inline]
     fn eq(&self, rhs: &HashValue) -> bool {
         if Sz::is_64_bit() {
@@ -73,7 +73,7 @@ impl<Sz> PartialEq<HashValue> for ShortHash<Sz> where Sz: Size {
         }
     }
 }
-impl<Sz> From<ShortHash<Sz>> for HashValue {
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> From<ShortHash<Sz>> for HashValue {
     fn from(x: ShortHash<Sz>) -> Self { HashValue(x.0) }
 }
 
@@ -98,12 +98,12 @@ struct Pos {
     index: u64,
 }
 
-impl Clone for Pos {
+#[cfg_attr(test, ::mutagen::mutate)] impl Clone for Pos {
     #[inline(always)]
     fn clone(&self) -> Self { *self }
 }
 
-impl fmt::Debug for Pos {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Pos {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.pos() {
             Some(i) => write!(f, "Pos({} / {:x})", i, self.index),
@@ -112,18 +112,18 @@ impl fmt::Debug for Pos {
     }
 }
 
-impl Pos {
+#[cfg_attr(test, ::mutagen::mutate)] impl Pos {
     #[inline]
-    fn none() -> Self { Pos { index: !0 } }
+    fn none() -> Self { Pos { index: !0u64 } }
 
     #[inline]
-    fn is_none(&self) -> bool { self.index == !0 }
+    fn is_none(&self) -> bool { self.index == !0u64 }
 
     /// Return the index part of the Pos value inside `Some(_)` if the position
     /// is not none, otherwise return `None`.
     #[inline]
     fn pos(&self) -> Option<usize> {
-        if self.index == !0 { None } else { Some(lo32(self.index as u64)) }
+        if self.index == !0u64 { None } else { Some(lo32(self.index as u64)) }
     }
 
     /// Set the index part of the Pos value to `i`
@@ -194,17 +194,17 @@ impl Pos {
 }
 
 #[inline]
-fn lo32(x: u64) -> usize { (x & 0xFFFF_FFFF) as usize }
+#[cfg_attr(test, ::mutagen::mutate)] fn lo32(x: u64) -> usize { (x & 0xFFFF_FFFF) as usize }
 
 // split into low, hi parts
 #[inline]
-fn split_lo_hi(x: u64) -> (u32, u32) { (x as u32, (x >> 32) as u32) }
+#[cfg_attr(test, ::mutagen::mutate)] fn split_lo_hi(x: u64) -> (u32, u32) { (x as u32, (x >> 32) as u32) }
 
 // Possibly contains the truncated hash value for an entry, depending on
 // the size class.
 struct ShortHashProxy<Sz>(usize, PhantomData<Sz>);
 
-impl<Sz> ShortHashProxy<Sz>
+#[cfg_attr(test, ::mutagen::mutate)] impl<Sz> ShortHashProxy<Sz>
     where Sz: Size
 {
     fn new(x: usize) -> Self {
@@ -280,11 +280,11 @@ struct OrderMapCore<K, V> {
 }
 
 #[inline(always)]
-fn desired_pos(mask: usize, hash: HashValue) -> usize {
+#[cfg_attr(test, ::mutagen::mutate)] fn desired_pos(mask: usize, hash: HashValue) -> usize {
     hash.0 & mask
 }
 
-impl<K, V, S> Entries for IndexMap<K, V, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> Entries for IndexMap<K, V, S> {
     type Entry = Bucket<K, V>;
 
     fn into_entries(self) -> Vec<Self::Entry> {
@@ -310,7 +310,7 @@ impl<K, V, S> Entries for IndexMap<K, V, S> {
 
 /// The number of steps that `current` is forward of the desired position for hash
 #[inline(always)]
-fn probe_distance(mask: usize, hash: HashValue, current: usize) -> usize {
+#[cfg_attr(test, ::mutagen::mutate)] fn probe_distance(mask: usize, hash: HashValue, current: usize) -> usize {
     current.wrapping_sub(desired_pos(mask, hash)) & mask
 }
 
@@ -323,7 +323,7 @@ enum Inserted<V> {
     }
 }
 
-impl<K, V, S> fmt::Debug for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> fmt::Debug for IndexMap<K, V, S>
     where K: fmt::Debug + Hash + Eq,
           V: fmt::Debug,
           S: BuildHasher,
@@ -356,12 +356,12 @@ impl<K, V, S> fmt::Debug for IndexMap<K, V, S>
 }
 
 #[inline]
-fn usable_capacity(cap: usize) -> usize {
+#[cfg_attr(test, ::mutagen::mutate)] fn usable_capacity(cap: usize) -> usize {
     cap - cap / 4
 }
 
 #[inline]
-fn to_raw_capacity(n: usize) -> usize {
+#[cfg_attr(test, ::mutagen::mutate)] fn to_raw_capacity(n: usize) -> usize {
     n + n / 3
 }
 
@@ -379,7 +379,7 @@ macro_rules! probe_loop {
     }
 }
 
-impl<K, V> IndexMap<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> IndexMap<K, V> {
     /// Create a new map. (Does not allocate.)
     pub fn new() -> Self {
         Self::with_capacity(0)
@@ -394,7 +394,7 @@ impl<K, V> IndexMap<K, V> {
     }
 }
 
-impl<K, V, S> IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> IndexMap<K, V, S>
 {
     /// Create a new map with capacity for `n` key-value pairs. (Does not
     /// allocate if `n` is zero.)
@@ -466,7 +466,7 @@ impl<K, V, S> IndexMap<K, V, S>
     }
 }
 
-impl<K, V> OrderMapCore<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> OrderMapCore<K, V> {
     // Return whether we need 32 or 64 bits to specify a bucket or entry index
     #[cfg(not(feature = "test_low_transition_point"))]
     fn size_class_is_64bit(&self) -> bool {
@@ -495,12 +495,12 @@ trait Size {
     }
 }
 
-impl Size for u32 {
+#[cfg_attr(test, ::mutagen::mutate)] impl Size for u32 {
     #[inline]
     fn is_64_bit() -> bool { false }
 }
 
-impl Size for u64 {
+#[cfg_attr(test, ::mutagen::mutate)] impl Size for u64 {
     #[inline]
     fn is_64_bit() -> bool { true }
 }
@@ -547,7 +547,7 @@ pub enum Entry<'a, K: 'a, V: 'a> {
     Vacant(VacantEntry<'a, K, V>),
 }
 
-impl<'a, K, V> Entry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Entry<'a, K, V> {
     /// Computes in **O(1)** time (amortized average).
     pub fn or_insert(self, default: V) -> &'a mut V {
         match self {
@@ -608,7 +608,7 @@ impl<'a, K, V> Entry<'a, K, V> {
     }
 }
 
-impl<'a, K: 'a + fmt::Debug, V: 'a + fmt::Debug> fmt::Debug for Entry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K: 'a + fmt::Debug, V: 'a + fmt::Debug> fmt::Debug for Entry<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             Entry::Vacant(ref v) => {
@@ -636,7 +636,7 @@ pub struct OccupiedEntry<'a, K: 'a, V: 'a> {
     index: usize,
 }
 
-impl<'a, K, V> OccupiedEntry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> OccupiedEntry<'a, K, V> {
     pub fn key(&self) -> &K { &self.key }
     pub fn get(&self) -> &V {
         &self.map.entries[self.index].value
@@ -720,7 +720,7 @@ impl<'a, K, V> OccupiedEntry<'a, K, V> {
     }
 }
 
-impl<'a, K: 'a + fmt::Debug, V: 'a + fmt::Debug> fmt::Debug for OccupiedEntry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K: 'a + fmt::Debug, V: 'a + fmt::Debug> fmt::Debug for OccupiedEntry<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_struct("OccupiedEntry")
             .field("key", self.key())
@@ -740,7 +740,7 @@ pub struct VacantEntry<'a, K: 'a, V: 'a> {
     probe: usize,
 }
 
-impl<'a, K, V> VacantEntry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> VacantEntry<'a, K, V> {
     pub fn key(&self) -> &K { &self.key }
     pub fn into_key(self) -> K { self.key }
     /// Return the index where the key-value pair will be inserted.
@@ -764,7 +764,7 @@ impl<'a, K, V> VacantEntry<'a, K, V> {
     }
 }
 
-impl<'a, K: 'a + fmt::Debug, V: 'a> fmt::Debug for VacantEntry<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K: 'a + fmt::Debug, V: 'a> fmt::Debug for VacantEntry<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_tuple("VacantEntry")
             .field(self.key())
@@ -772,7 +772,7 @@ impl<'a, K: 'a + fmt::Debug, V: 'a> fmt::Debug for VacantEntry<'a, K, V> {
     }
 }
 
-impl<K, V, S> IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher,
 {
@@ -1160,13 +1160,13 @@ impl<K, V, S> IndexMap<K, V, S>
     }
 }
 
-fn key_cmp<K, V>(k1: &K, _v1: &V, k2: &K, _v2: &V) -> Ordering
+#[cfg_attr(test, ::mutagen::mutate)] fn key_cmp<K, V>(k1: &K, _v1: &V, k2: &K, _v2: &V) -> Ordering
     where K: Ord
 {
     Ord::cmp(k1, k2)
 }
 
-impl<K, V, S> IndexMap<K, V, S> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> IndexMap<K, V, S> {
     /// Get a key-value pair by index
     ///
     /// Valid indices are *0 <= index < self.len()*
@@ -1230,7 +1230,7 @@ impl<K, V, S> IndexMap<K, V, S> {
 // using Hash + Eq at all in these methods.
 //
 // However, we should probably not let this show in the public API or docs.
-impl<K, V> OrderMapCore<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> OrderMapCore<K, V> {
     fn len(&self) -> usize { self.entries.len() }
 
     fn capacity(&self) -> usize {
@@ -1671,7 +1671,7 @@ impl<K, V> OrderMapCore<K, V> {
 /// + hash: The full hash value from the bucket
 /// + mask: self.mask.
 /// + entry_index: The index of the entry in self.entries
-fn find_existing_entry_at<Sz>(indices: &[Pos], hash: HashValue,
+#[cfg_attr(test, ::mutagen::mutate)] fn find_existing_entry_at<Sz>(indices: &[Pos], hash: HashValue,
                               mask: usize, entry_index: usize) -> usize
     where Sz: Size,
 {
@@ -1699,32 +1699,32 @@ pub struct Keys<'a, K: 'a, V: 'a> {
     pub(crate) iter: SliceIter<'a, Bucket<K, V>>,
 }
 
-impl<'a, K, V> Iterator for Keys<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for Keys<'a, K, V> {
     type Item = &'a K;
 
     iterator_methods!(Bucket::key_ref);
 }
 
-impl<'a, K, V> DoubleEndedIterator for Keys<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for Keys<'a, K, V> {
     fn next_back(&mut self) -> Option<&'a K> {
         self.iter.next_back().map(Bucket::key_ref)
     }
 }
 
-impl<'a, K, V> ExactSizeIterator for Keys<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> ExactSizeIterator for Keys<'a, K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
 // FIXME(#26925) Remove in favor of `#[derive(Clone)]`
-impl<'a, K, V> Clone for Keys<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Clone for Keys<'a, K, V> {
     fn clone(&self) -> Keys<'a, K, V> {
         Keys { iter: self.iter.clone() }
     }
 }
 
-impl<'a, K: fmt::Debug, V> fmt::Debug for Keys<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K: fmt::Debug, V> fmt::Debug for Keys<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_list()
             .entries(self.clone())
@@ -1743,32 +1743,32 @@ pub struct Values<'a, K: 'a, V: 'a> {
     iter: SliceIter<'a, Bucket<K, V>>,
 }
 
-impl<'a, K, V> Iterator for Values<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for Values<'a, K, V> {
     type Item = &'a V;
 
     iterator_methods!(Bucket::value_ref);
 }
 
-impl<'a, K, V> DoubleEndedIterator for Values<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for Values<'a, K, V> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::value_ref)
     }
 }
 
-impl<'a, K, V> ExactSizeIterator for Values<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> ExactSizeIterator for Values<'a, K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
 // FIXME(#26925) Remove in favor of `#[derive(Clone)]`
-impl<'a, K, V> Clone for Values<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Clone for Values<'a, K, V> {
     fn clone(&self) -> Values<'a, K, V> {
         Values { iter: self.iter.clone() }
     }
 }
 
-impl<'a, K, V: fmt::Debug> fmt::Debug for Values<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V: fmt::Debug> fmt::Debug for Values<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_list()
             .entries(self.clone())
@@ -1787,19 +1787,19 @@ pub struct ValuesMut<'a, K: 'a, V: 'a> {
     iter: SliceIterMut<'a, Bucket<K, V>>,
 }
 
-impl<'a, K, V> Iterator for ValuesMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for ValuesMut<'a, K, V> {
     type Item = &'a mut V;
 
     iterator_methods!(Bucket::value_mut);
 }
 
-impl<'a, K, V> DoubleEndedIterator for ValuesMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for ValuesMut<'a, K, V> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::value_mut)
     }
 }
 
-impl<'a, K, V> ExactSizeIterator for ValuesMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> ExactSizeIterator for ValuesMut<'a, K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
@@ -1816,32 +1816,32 @@ pub struct Iter<'a, K: 'a, V: 'a> {
     iter: SliceIter<'a, Bucket<K, V>>,
 }
 
-impl<'a, K, V> Iterator for Iter<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for Iter<'a, K, V> {
     type Item = (&'a K, &'a V);
 
     iterator_methods!(Bucket::refs);
 }
 
-impl<'a, K, V> DoubleEndedIterator for Iter<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for Iter<'a, K, V> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::refs)
     }
 }
 
-impl<'a, K, V> ExactSizeIterator for Iter<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> ExactSizeIterator for Iter<'a, K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
 // FIXME(#26925) Remove in favor of `#[derive(Clone)]`
-impl<'a, K, V> Clone for Iter<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Clone for Iter<'a, K, V> {
     fn clone(&self) -> Iter<'a, K, V> {
         Iter { iter: self.iter.clone() }
     }
 }
 
-impl<'a, K: fmt::Debug, V: fmt::Debug> fmt::Debug for Iter<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K: fmt::Debug, V: fmt::Debug> fmt::Debug for Iter<'a, K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_list()
             .entries(self.clone())
@@ -1860,19 +1860,19 @@ pub struct IterMut<'a, K: 'a, V: 'a> {
     iter: SliceIterMut<'a, Bucket<K, V>>,
 }
 
-impl<'a, K, V> Iterator for IterMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for IterMut<'a, K, V> {
     type Item = (&'a K, &'a mut V);
 
     iterator_methods!(Bucket::ref_mut);
 }
 
-impl<'a, K, V> DoubleEndedIterator for IterMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for IterMut<'a, K, V> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::ref_mut)
     }
 }
 
-impl<'a, K, V> ExactSizeIterator for IterMut<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> ExactSizeIterator for IterMut<'a, K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
@@ -1889,25 +1889,25 @@ pub struct IntoIter<K, V> {
     pub(crate) iter: VecIntoIter<Bucket<K, V>>,
 }
 
-impl<K, V> Iterator for IntoIter<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> Iterator for IntoIter<K, V> {
     type Item = (K, V);
 
     iterator_methods!(Bucket::key_value);
 }
 
-impl<'a, K, V> DoubleEndedIterator for IntoIter<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for IntoIter<K, V> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.iter.next_back().map(Bucket::key_value)
     }
 }
 
-impl<K, V> ExactSizeIterator for IntoIter<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V> ExactSizeIterator for IntoIter<K, V> {
     fn len(&self) -> usize {
         self.iter.len()
     }
 }
 
-impl<K: fmt::Debug, V: fmt::Debug> fmt::Debug for IntoIter<K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<K: fmt::Debug, V: fmt::Debug> fmt::Debug for IntoIter<K, V> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let iter = self.iter.as_slice().iter().map(Bucket::refs);
         f.debug_list().entries(iter).finish()
@@ -1925,18 +1925,18 @@ pub struct Drain<'a, K, V> where K: 'a, V: 'a {
     pub(crate) iter: ::std::vec::Drain<'a, Bucket<K, V>>
 }
 
-impl<'a, K, V> Iterator for Drain<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> Iterator for Drain<'a, K, V> {
     type Item = (K, V);
 
     iterator_methods!(Bucket::key_value);
 }
 
-impl<'a, K, V> DoubleEndedIterator for Drain<'a, K, V> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V> DoubleEndedIterator for Drain<'a, K, V> {
     double_ended_iterator_methods!(Bucket::key_value);
 }
 
 
-impl<'a, K, V, S> IntoIterator for &'a IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V, S> IntoIterator for &'a IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher,
 {
@@ -1947,7 +1947,7 @@ impl<'a, K, V, S> IntoIterator for &'a IndexMap<K, V, S>
     }
 }
 
-impl<'a, K, V, S> IntoIterator for &'a mut IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V, S> IntoIterator for &'a mut IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher,
 {
@@ -1958,7 +1958,7 @@ impl<'a, K, V, S> IntoIterator for &'a mut IndexMap<K, V, S>
     }
 }
 
-impl<K, V, S> IntoIterator for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> IntoIterator for IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher,
 {
@@ -1973,7 +1973,7 @@ impl<K, V, S> IntoIterator for IndexMap<K, V, S>
 
 use std::ops::{Index, IndexMut};
 
-impl<'a, K, V, Q: ?Sized, S> Index<&'a Q> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V, Q: ?Sized, S> Index<&'a Q> for IndexMap<K, V, S>
     where Q: Hash + Equivalent<K>,
           K: Hash + Eq,
           S: BuildHasher,
@@ -1994,7 +1994,7 @@ impl<'a, K, V, Q: ?Sized, S> Index<&'a Q> for IndexMap<K, V, S>
 /// pairs that are already present.
 ///
 /// You can **not** insert new pairs with index syntax, use `.insert()`.
-impl<'a, K, V, Q: ?Sized, S> IndexMut<&'a Q> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V, Q: ?Sized, S> IndexMut<&'a Q> for IndexMap<K, V, S>
     where Q: Hash + Equivalent<K>,
           K: Hash + Eq,
           S: BuildHasher,
@@ -2009,7 +2009,7 @@ impl<'a, K, V, Q: ?Sized, S> IndexMut<&'a Q> for IndexMap<K, V, S>
     }
 }
 
-impl<K, V, S> FromIterator<(K, V)> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> FromIterator<(K, V)> for IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher + Default,
 {
@@ -2027,7 +2027,7 @@ impl<K, V, S> FromIterator<(K, V)> for IndexMap<K, V, S>
     }
 }
 
-impl<K, V, S> Extend<(K, V)> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> Extend<(K, V)> for IndexMap<K, V, S>
     where K: Hash + Eq,
           S: BuildHasher,
 {
@@ -2045,7 +2045,7 @@ impl<K, V, S> Extend<(K, V)> for IndexMap<K, V, S>
     }
 }
 
-impl<'a, K, V, S> Extend<(&'a K, &'a V)> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, K, V, S> Extend<(&'a K, &'a V)> for IndexMap<K, V, S>
     where K: Hash + Eq + Copy,
           V: Copy,
           S: BuildHasher,
@@ -2058,7 +2058,7 @@ impl<'a, K, V, S> Extend<(&'a K, &'a V)> for IndexMap<K, V, S>
     }
 }
 
-impl<K, V, S> Default for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> Default for IndexMap<K, V, S>
     where S: BuildHasher + Default,
 {
     /// Return an empty `IndexMap`
@@ -2067,7 +2067,7 @@ impl<K, V, S> Default for IndexMap<K, V, S>
     }
 }
 
-impl<K, V1, S1, V2, S2> PartialEq<IndexMap<K, V2, S2>> for IndexMap<K, V1, S1>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V1, S1, V2, S2> PartialEq<IndexMap<K, V2, S2>> for IndexMap<K, V1, S1>
     where K: Hash + Eq,
           V1: PartialEq<V2>,
           S1: BuildHasher,
@@ -2082,7 +2082,7 @@ impl<K, V1, S1, V2, S2> PartialEq<IndexMap<K, V2, S2>> for IndexMap<K, V1, S1>
     }
 }
 
-impl<K, V, S> Eq for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> Eq for IndexMap<K, V, S>
     where K: Eq + Hash,
           V: Eq,
           S: BuildHasher

@@ -20,7 +20,7 @@ use IndexSet;
 type Bucket<T> = ::Bucket<T, ()>;
 
 /// Requires crate feature `"rayon"`.
-impl<T, S> IntoParallelIterator for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IntoParallelIterator for IndexSet<T, S>
     where T: Hash + Eq + Send,
           S: BuildHasher,
 {
@@ -45,26 +45,26 @@ pub struct IntoParIter<T> {
     entries: Vec<Bucket<T>>,
 }
 
-impl<T: fmt::Debug> fmt::Debug for IntoParIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: fmt::Debug> fmt::Debug for IntoParIter<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let iter = self.entries.iter().map(Bucket::key_ref);
         f.debug_list().entries(iter).finish()
     }
 }
 
-impl<T: Send> ParallelIterator for IntoParIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: Send> ParallelIterator for IntoParIter<T> {
     type Item = T;
 
     parallel_iterator_methods!(Bucket::key);
 }
 
-impl<T: Send> IndexedParallelIterator for IntoParIter<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: Send> IndexedParallelIterator for IntoParIter<T> {
     indexed_parallel_iterator_methods!(Bucket::key);
 }
 
 
 /// Requires crate feature `"rayon"`.
-impl<'a, T, S> IntoParallelIterator for &'a IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S> IntoParallelIterator for &'a IndexSet<T, S>
     where T: Hash + Eq + Sync,
           S: BuildHasher,
 {
@@ -89,32 +89,32 @@ pub struct ParIter<'a, T: 'a> {
     entries: &'a [Bucket<T>],
 }
 
-impl<'a, T> Clone for ParIter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T> Clone for ParIter<'a, T> {
     fn clone(&self) -> Self {
         ParIter { ..*self }
     }
 }
 
-impl<'a, T: fmt::Debug> fmt::Debug for ParIter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T: fmt::Debug> fmt::Debug for ParIter<'a, T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let iter = self.entries.iter().map(Bucket::key_ref);
         f.debug_list().entries(iter).finish()
     }
 }
 
-impl<'a, T: Sync> ParallelIterator for ParIter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T: Sync> ParallelIterator for ParIter<'a, T> {
     type Item = &'a T;
 
     parallel_iterator_methods!(Bucket::key_ref);
 }
 
-impl<'a, T: Sync> IndexedParallelIterator for ParIter<'a, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T: Sync> IndexedParallelIterator for ParIter<'a, T> {
     indexed_parallel_iterator_methods!(Bucket::key_ref);
 }
 
 
 /// Requires crate feature `"rayon"`.
-impl<T, S> IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S>
     where T: Hash + Eq + Sync,
           S: BuildHasher + Sync,
 {
@@ -228,13 +228,13 @@ pub struct ParDifference<'a, T: 'a, S1: 'a, S2: 'a> {
     set2: &'a IndexSet<T, S2>,
 }
 
-impl<'a, T, S1, S2> Clone for ParDifference<'a, T, S1, S2> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Clone for ParDifference<'a, T, S1, S2> {
     fn clone(&self) -> Self {
         ParDifference { ..*self }
     }
 }
 
-impl<'a, T, S1, S2> fmt::Debug for ParDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> fmt::Debug for ParDifference<'a, T, S1, S2>
     where T: fmt::Debug + Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -244,7 +244,7 @@ impl<'a, T, S1, S2> fmt::Debug for ParDifference<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> ParallelIterator for ParDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> ParallelIterator for ParDifference<'a, T, S1, S2>
     where T: Hash + Eq + Sync,
           S1: BuildHasher + Sync,
           S2: BuildHasher + Sync,
@@ -274,13 +274,13 @@ pub struct ParIntersection<'a, T: 'a, S1: 'a, S2: 'a> {
     set2: &'a IndexSet<T, S2>,
 }
 
-impl<'a, T, S1, S2> Clone for ParIntersection<'a, T, S1, S2> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Clone for ParIntersection<'a, T, S1, S2> {
     fn clone(&self) -> Self {
         ParIntersection { ..*self }
     }
 }
 
-impl<'a, T, S1, S2> fmt::Debug for ParIntersection<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> fmt::Debug for ParIntersection<'a, T, S1, S2>
     where T: fmt::Debug + Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -290,7 +290,7 @@ impl<'a, T, S1, S2> fmt::Debug for ParIntersection<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> ParallelIterator for ParIntersection<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> ParallelIterator for ParIntersection<'a, T, S1, S2>
     where T: Hash + Eq + Sync,
           S1: BuildHasher + Sync,
           S2: BuildHasher + Sync,
@@ -320,13 +320,13 @@ pub struct ParSymmetricDifference<'a, T: 'a, S1: 'a, S2: 'a> {
     set2: &'a IndexSet<T, S2>,
 }
 
-impl<'a, T, S1, S2> Clone for ParSymmetricDifference<'a, T, S1, S2> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Clone for ParSymmetricDifference<'a, T, S1, S2> {
     fn clone(&self) -> Self {
         ParSymmetricDifference { ..*self }
     }
 }
 
-impl<'a, T, S1, S2> fmt::Debug for ParSymmetricDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> fmt::Debug for ParSymmetricDifference<'a, T, S1, S2>
     where T: fmt::Debug + Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -336,7 +336,7 @@ impl<'a, T, S1, S2> fmt::Debug for ParSymmetricDifference<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> ParallelIterator for ParSymmetricDifference<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> ParallelIterator for ParSymmetricDifference<'a, T, S1, S2>
     where T: Hash + Eq + Sync,
           S1: BuildHasher + Sync,
           S2: BuildHasher + Sync,
@@ -366,13 +366,13 @@ pub struct ParUnion<'a, T: 'a, S1: 'a, S2: 'a> {
     set2: &'a IndexSet<T, S2>,
 }
 
-impl<'a, T, S1, S2> Clone for ParUnion<'a, T, S1, S2> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> Clone for ParUnion<'a, T, S1, S2> {
     fn clone(&self) -> Self {
         ParUnion { ..*self }
     }
 }
 
-impl<'a, T, S1, S2> fmt::Debug for ParUnion<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> fmt::Debug for ParUnion<'a, T, S1, S2>
     where T: fmt::Debug + Eq + Hash,
           S1: BuildHasher,
           S2: BuildHasher,
@@ -382,7 +382,7 @@ impl<'a, T, S1, S2> fmt::Debug for ParUnion<'a, T, S1, S2>
     }
 }
 
-impl<'a, T, S1, S2> ParallelIterator for ParUnion<'a, T, S1, S2>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T, S1, S2> ParallelIterator for ParUnion<'a, T, S1, S2>
     where T: Hash + Eq + Sync,
           S1: BuildHasher + Sync,
           S2: BuildHasher + Sync,
@@ -402,7 +402,7 @@ impl<'a, T, S1, S2> ParallelIterator for ParUnion<'a, T, S1, S2>
 
 
 /// Requires crate feature `"rayon"`.
-impl<T, S> IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> IndexSet<T, S>
     where T: Hash + Eq + Send,
           S: BuildHasher + Send,
 {
@@ -437,7 +437,7 @@ impl<T, S> IndexSet<T, S>
 
 
 /// Requires crate feature `"rayon"`.
-impl<T, S> FromParallelIterator<T> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> FromParallelIterator<T> for IndexSet<T, S>
     where T: Eq + Hash + Send,
           S: BuildHasher + Default + Send,
 {
@@ -455,7 +455,7 @@ impl<T, S> FromParallelIterator<T> for IndexSet<T, S>
 }
 
 /// Requires crate feature `"rayon"`.
-impl<T, S> ParallelExtend<(T)> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> ParallelExtend<(T)> for IndexSet<T, S>
     where T: Eq + Hash + Send,
           S: BuildHasher + Send,
 {
@@ -469,7 +469,7 @@ impl<T, S> ParallelExtend<(T)> for IndexSet<T, S>
 }
 
 /// Requires crate feature `"rayon"`.
-impl<'a, T: 'a, S> ParallelExtend<&'a T> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'a, T: 'a, S> ParallelExtend<&'a T> for IndexSet<T, S>
     where T: Copy + Eq + Hash + Send + Sync,
           S: BuildHasher + Send,
 {

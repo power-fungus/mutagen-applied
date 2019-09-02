@@ -46,7 +46,7 @@ pub trait MutableKeys {
 /// Opt-in mutable access to keys.
 ///
 /// See [`MutableKeys`](trait.MutableKeys.html) for more information.
-impl<K, V, S> MutableKeys for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> MutableKeys for IndexMap<K, V, S>
     where K: Eq + Hash,
           S: BuildHasher,
 {

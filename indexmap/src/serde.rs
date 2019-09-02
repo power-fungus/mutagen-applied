@@ -12,7 +12,7 @@ use std::marker::PhantomData;
 use IndexMap;
 
 /// Requires crate feature `"serde-1"`
-impl<K, V, S> Serialize for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<K, V, S> Serialize for IndexMap<K, V, S>
     where K: Serialize + Hash + Eq,
           V: Serialize,
           S: BuildHasher
@@ -30,7 +30,7 @@ impl<K, V, S> Serialize for IndexMap<K, V, S>
 
 struct OrderMapVisitor<K, V, S>(PhantomData<(K, V, S)>);
 
-impl<'de, K, V, S> Visitor<'de> for OrderMapVisitor<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, K, V, S> Visitor<'de> for OrderMapVisitor<K, V, S>
     where K: Deserialize<'de> + Eq + Hash,
           V: Deserialize<'de>,
           S: Default + BuildHasher
@@ -55,7 +55,7 @@ impl<'de, K, V, S> Visitor<'de> for OrderMapVisitor<K, V, S>
 }
 
 /// Requires crate feature `"serde-1"`
-impl<'de, K, V, S> Deserialize<'de> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, K, V, S> Deserialize<'de> for IndexMap<K, V, S>
     where K: Deserialize<'de> + Eq + Hash,
           V: Deserialize<'de>,
           S: Default + BuildHasher
@@ -67,7 +67,7 @@ impl<'de, K, V, S> Deserialize<'de> for IndexMap<K, V, S>
     }
 }
 
-impl<'de, K, V, S, E> IntoDeserializer<'de, E> for IndexMap<K, V, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, K, V, S, E> IntoDeserializer<'de, E> for IndexMap<K, V, S>
     where K: IntoDeserializer<'de, E> + Eq + Hash,
           V: IntoDeserializer<'de, E>,
           S: BuildHasher,
@@ -84,7 +84,7 @@ impl<'de, K, V, S, E> IntoDeserializer<'de, E> for IndexMap<K, V, S>
 use IndexSet;
 
 /// Requires crate feature `"serde-1"`
-impl<T, S> Serialize for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, S> Serialize for IndexSet<T, S>
     where T: Serialize + Hash + Eq,
           S: BuildHasher
 {
@@ -101,7 +101,7 @@ impl<T, S> Serialize for IndexSet<T, S>
 
 struct OrderSetVisitor<T, S>(PhantomData<(T, S)>);
 
-impl<'de, T, S> Visitor<'de> for OrderSetVisitor<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, T, S> Visitor<'de> for OrderSetVisitor<T, S>
     where T: Deserialize<'de> + Eq + Hash,
           S: Default + BuildHasher
 {
@@ -125,7 +125,7 @@ impl<'de, T, S> Visitor<'de> for OrderSetVisitor<T, S>
 }
 
 /// Requires crate feature `"serde-1"`
-impl<'de, T, S> Deserialize<'de> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, T, S> Deserialize<'de> for IndexSet<T, S>
     where T: Deserialize<'de> + Eq + Hash,
           S: Default + BuildHasher
 {
@@ -136,7 +136,7 @@ impl<'de, T, S> Deserialize<'de> for IndexSet<T, S>
     }
 }
 
-impl<'de, T, S, E> IntoDeserializer<'de, E> for IndexSet<T, S>
+#[cfg_attr(test, ::mutagen::mutate)] impl<'de, T, S, E> IntoDeserializer<'de, E> for IndexSet<T, S>
     where T: IntoDeserializer<'de, E> + Eq + Hash,
           S: BuildHasher,
           E: Error,
