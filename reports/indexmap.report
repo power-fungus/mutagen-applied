@@ -1,13 +1,13 @@
 
 Tests without mutations
-target/debug/deps/serde-3a9e51d601de0301 ... ok
-target/debug/deps/equivalent_trait-956113d8bfdc0481 ... ok
-target/debug/deps/tests-24a4d9ee102921df ... ok
-target/debug/deps/macros_full_path-6b146aa6a6c5cfc0 ... ok
-target/debug/deps/quick-74d046e068eac997 ... ok
-target/debug/deps/indexmap-8a565944421c840f ... ok
+target/debug/deps/indexmap-1e832a5fed233026 ... ok
+target/debug/deps/serde-ba1c6b4712cd1f26 ... ok
+target/debug/deps/tests-c448523a4e460ee9 ... ok
+target/debug/deps/equivalent_trait-975cdf195d998b0c ... ok
+target/debug/deps/quick-561cfd92c6eb921f ... ok
+target/debug/deps/macros_full_path-9fe99e207dcc1f44 ... ok
 
-Mutants
+Test 187 Mutants
 1: binop_eq, replace `==` with `!=`, at src/equivalent.rs@25:14-25:16(fn Q::equivalent) ... killed
 2: stmt_call, remove `self . map . with_entries (f) ;`, at src/set.rs@84:8-84:32(fn IndexSet < T, S >::with_entries) ... NOT COVERED
 3: stmt_call, remove `self . map . clear () ;`, at src/set.rs@170:8-170:24(fn IndexSet < T, S >::clear) ... NOT COVERED
@@ -50,214 +50,244 @@ Mutants
 40: lit_int, replace `32` with `31`, at src/map.rs@138:52-138:54(fn Pos::set_pos) ... killed
 41: lit_int, replace `32` with `33`, at src/map.rs@138:59-138:61(fn Pos::set_pos) ... killed
 42: lit_int, replace `32` with `31`, at src/map.rs@138:59-138:61(fn Pos::set_pos) ... killed
-43: lit_int, replace `32` with `33`, at src/map.rs@152:54-152:56(fn Pos::with_hash) ... killed
-44: lit_int, replace `32` with `31`, at src/map.rs@152:54-152:56(fn Pos::with_hash) ... killed
-45: unop_not, remove `!`, at src/map.rs@165:15-165:16(fn Pos::resolve) ... NOT COVERED
-46: lit_int, replace `0` with `1`, at src/map.rs@166:63-166:64(fn Pos::resolve) ... NOT COVERED
-47: unop_not, remove `!`, at src/map.rs@171:15-171:16(fn Pos::resolve) ... killed
-48: lit_int, replace `4294967295` with `4294967296`, at src/map.rs@197:69-197:80(fn lo32) ... killed
-49: lit_int, replace `4294967295` with `4294967294`, at src/map.rs@197:69-197:80(fn lo32) ... SURVIVED
-50: lit_int, replace `32` with `33`, at src/map.rs@201:93-201:95(fn split_lo_hi) ... killed
-51: lit_int, replace `32` with `31`, at src/map.rs@201:93-201:95(fn split_lo_hi) ... killed
-52: stmt_call, remove `f (& mut self . core . entries) ;`, at src/map.rs@306:8-306:33(fn IndexMap < K, V, S >::with_entries) ... NOT COVERED
-53: stmt_call, remove `self . core . restore_hash_index (side_index) ;`, at src/map.rs@307:8-307:48(fn IndexMap < K, V, S >::with_entries) ... NOT COVERED
-54: lit_int, replace `4` with `5`, at src/map.rs@360:16-360:17(fn usable_capacity) ... SURVIVED
-55: lit_int, replace `4` with `3`, at src/map.rs@360:16-360:17(fn usable_capacity) ... SURVIVED
-56: lit_int, replace `3` with `4`, at src/map.rs@365:12-365:13(fn to_raw_capacity) ... SURVIVED
-57: lit_int, replace `3` with `2`, at src/map.rs@365:12-365:13(fn to_raw_capacity) ... SURVIVED
-58: binop_add, replace `+` with `-`, at src/map.rs@365:6-365:7(fn to_raw_capacity) ... SURVIVED
-59: lit_int, replace `0` with `1`, at src/map.rs@385:28-385:29(fn IndexMap < K, V >::new) ... killed
-60: lit_int, replace `0` with `1`, at src/map.rs@406:16-406:17(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-61: binop_eq, replace `==` with `!=`, at src/map.rs@406:13-406:15(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-62: lit_int, replace `0` with `1`, at src/map.rs@409:26-409:27(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... SURVIVED
-63: lit_int, replace `8` with `9`, at src/map.rs@417:55-417:56(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-64: lit_int, replace `8` with `7`, at src/map.rs@417:55-417:56(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-65: lit_int, replace `1` with `2`, at src/map.rs@420:47-420:48(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-66: lit_int, replace `1` with `0`, at src/map.rs@420:47-420:48(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
-67: lit_int, replace `0` with `1`, at src/map.rs@437:51-437:52(fn IndexMap < K, V, S >::is_empty) ... killed
-68: binop_eq, replace `==` with `!=`, at src/map.rs@437:48-437:50(fn IndexMap < K, V, S >::is_empty) ... killed
-69: lit_int, replace `0` with `1`, at src/map.rs@443:39-443:40(fn IndexMap < K, V, S >::with_hasher) ... NOT COVERED
-70: binop_cmp, replace `>` with `<`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-71: binop_cmp, replace `>` with `<=`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-72: binop_cmp, replace `>` with `>=`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-73: binop_cmp, replace `>=` with `<`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-74: binop_cmp, replace `>=` with `<=`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-75: binop_cmp, replace `>=` with `>`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-76: binop_bool, replace `&&` with `||`, at src/map.rs@473:55-473:57(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
-77: lit_int, replace `64` with `65`, at src/map.rs@480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
-78: lit_int, replace `64` with `63`, at src/map.rs@480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
-79: binop_cmp, replace `>=` with `<`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
-80: binop_cmp, replace `>=` with `<=`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
-81: binop_cmp, replace `>=` with `>`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
-82: lit_bool, replace `false` with `true`, at src/map.rs@500:29-500:34(fn u32::is_64_bit) ... SURVIVED
-83: lit_bool, replace `true` with `false`, at src/map.rs@505:29-505:33(fn u64::is_64_bit) ... NOT COVERED
-84: stmt_call, remove `f (o . get_mut ()) ;`, at src/map.rs@590:16-590:30(fn Entry < 'a, K, V >::and_modify) ... killed
-85: stmt_call, remove `self . map . entries . push (Bucket { hash : self . hash, key : self . key, value }) ;`, at src/map.rs@760:8-760:79(fn VacantEntry < 'a, K, V >::insert_impl) ... killed
-86: stmt_call, remove `self . map . insert_phase_2 :: < Sz > (self . probe, old_pos) ;`, at src/map.rs@762:8-762:58(fn VacantEntry < 'a, K, V >::insert_impl) ... killed
-87: stmt_call, remove `self . core . clear () ;`, at src/map.rs@791:8-791:25(fn IndexMap < K, V, S >::clear) ... NOT COVERED
-88: lit_int, replace `0` with `1`, at src/map.rs@798:24-798:25(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
-89: binop_cmp, replace `>` with `<`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
-90: binop_cmp, replace `>` with `<=`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
-91: binop_cmp, replace `>` with `>=`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
-92: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@799:12-799:30(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
-93: binop_eq, replace `==` with `!=`, at src/map.rs@816:22-816:24(fn IndexMap < K, V, S >::reserve_one) ... killed
-94: stmt_call, remove `self . core . double_capacity :: < Sz > () ;`, at src/map.rs@823:8-823:41(fn IndexMap < K, V, S >::double_capacity) ... killed
-95: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@840:8-840:26(fn IndexMap < K, V, S >::insert) ... killed
-96: stmt_call, remove `self . core . insert_phase_2 :: < u64 > (probe, old_pos) ;`, at src/map.rs@846:20-846:67(fn IndexMap < K, V, S >::insert) ... NOT COVERED
-97: stmt_call, remove `self . core . insert_phase_2 :: < u32 > (probe, old_pos) ;`, at src/map.rs@855:20-855:67(fn IndexMap < K, V, S >::insert) ... killed (timeout)
-98: stmt_call, remove `entry . insert (value) ;`, at src/map.rs@882:16-882:35(fn IndexMap < K, V, S >::insert_full) ... killed
-99: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@893:8-893:26(fn IndexMap < K, V, S >::entry) ... SURVIVED
-100: stmt_call, remove `self . retain_mut (move | k, v | keep (k, v)) ;`, at src/map.rs@1102:8-1102:47(fn IndexMap < K, V, S >::retain) ... NOT COVERED
-101: stmt_call, remove `self . core . retain_in_order_impl :: < Sz, F > (keep) ;`, at src/map.rs@1115:8-1115:53(fn IndexMap < K, V, S >::retain_mut_sz) ... NOT COVERED
-102: stmt_call, remove `self . core . entries . sort_by (move | a, b | cmp (& a . key, & a . value, & b . key, & b . value)) ;`, at src/map.rs@1148:8-1148:86(fn IndexMap < K, V, S >::sorted_by) ... NOT COVERED
-103: stmt_call, remove `self . core . clear_indices () ;`, at src/map.rs@1155:8-1155:33(fn IndexMap < K, V, S >::drain) ... NOT COVERED
-104: stmt_call, remove `self . entries . clear () ;`, at src/map.rs@1241:8-1241:28(fn OrderMapCore < K, V >::clear) ... NOT COVERED
-105: stmt_call, remove `self . clear_indices () ;`, at src/map.rs@1242:8-1242:28(fn OrderMapCore < K, V >::clear) ... NOT COVERED
-106: lit_int, replace `8` with `9`, at src/map.rs@1254:22-1254:28(fn OrderMapCore < K, V >::first_allocation) ... killed
-107: lit_int, replace `8` with `7`, at src/map.rs@1254:22-1254:28(fn OrderMapCore < K, V >::first_allocation) ... killed
-108: lit_int, replace `1` with `2`, at src/map.rs@1255:41-1255:42(fn OrderMapCore < K, V >::first_allocation) ... killed
-109: lit_int, replace `1` with `0`, at src/map.rs@1255:41-1255:42(fn OrderMapCore < K, V >::first_allocation) ... killed
-110: lit_int, replace `0` with `1`, at src/map.rs@1266:34-1266:35(fn OrderMapCore < K, V >::double_capacity) ... killed
-111: binop_eq, replace `==` with `!=`, at src/map.rs@1266:31-1266:33(fn OrderMapCore < K, V >::double_capacity) ... killed
-112: lit_int, replace `0` with `1`, at src/map.rs@1271:30-1271:31(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
-113: lit_int, replace `0` with `1`, at src/map.rs@1274:19-1274:20(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
-114: binop_eq, replace `==` with `!=`, at src/map.rs@1274:21-1274:23(fn OrderMapCore < K, V >::double_capacity) ... killed
-115: lit_int, replace `2` with `3`, at src/map.rs@1283:47-1283:48(fn OrderMapCore < K, V >::double_capacity) ... killed
-116: lit_int, replace `2` with `1`, at src/map.rs@1283:47-1283:48(fn OrderMapCore < K, V >::double_capacity) ... killed
-117: lit_int, replace `1` with `2`, at src/map.rs@1285:45-1285:46(fn OrderMapCore < K, V >::double_capacity) ... killed
-118: lit_int, replace `1` with `0`, at src/map.rs@1285:45-1285:46(fn OrderMapCore < K, V >::double_capacity) ... killed
-119: stmt_call, remove `self . entries . reserve_exact (more) ;`, at src/map.rs@1296:8-1296:40(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
-120: lit_int, replace `0` with `1`, at src/map.rs@1344:23-1344:24(fn OrderMapCore < K, V >::entry_phase_1) ... killed
-121: lit_int, replace `0` with `1`, at src/map.rs@1390:23-1390:24(fn OrderMapCore < K, V >::insert_phase_1) ... killed
-122: stmt_call, remove `self . entries . push (Bucket { hash, key, value }) ;`, at src/map.rs@1421:8-1421:54(fn OrderMapCore < K, V >::insert_phase_1) ... killed (timeout)
-123: lit_int, replace `0` with `1`, at src/map.rs@1455:23-1455:24(fn OrderMapCore < K, V >::find_using_impl) ... killed
-124: lit_int, replace `0` with `1`, at src/map.rs@1479:51-1479:52(fn OrderMapCore < K, V >::find_existing_entry) ... killed
-125: lit_int, replace `2` with `3`, at src/map.rs@1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-126: lit_int, replace `2` with `1`, at src/map.rs@1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-127: binop_cmp, replace `<` with `<=`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-128: binop_cmp, replace `<` with `>=`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-129: binop_cmp, replace `<` with `>`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-130: binop_cmp, replace `>` with `<`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-131: binop_cmp, replace `>` with `<=`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-132: binop_cmp, replace `>` with `>=`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-133: lit_int, replace `1` with `2`, at src/map.rs@1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-134: lit_int, replace `1` with `0`, at src/map.rs@1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-135: stmt_call, remove `pos . set_pos :: < Sz > (i - 1) ;`, at src/map.rs@1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-136: binop_add, replace `+` with `-`, at src/map.rs@1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-137: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-138: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1565:8-1565:54(fn OrderMapCore < K, V >::swap_remove_found_impl) ... killed
-139: lit_int, replace `1` with `2`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
-140: lit_int, replace `1` with `0`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
-141: binop_add, replace `+` with `-`, at src/map.rs@1576:40-1576:41(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
-142: lit_int, replace `0` with `1`, at src/map.rs@1601:28-1601:29(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-143: lit_int, replace `0` with `1`, at src/map.rs@1602:17-1602:18(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-144: unop_not, remove `!`, at src/map.rs@1611:15-1611:16(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-145: lit_int, replace `1` with `2`, at src/map.rs@1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-146: lit_int, replace `1` with `0`, at src/map.rs@1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-147: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1614:16-1614:62(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-148: lit_int, replace `0` with `1`, at src/map.rs@1615:34-1615:35(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-149: binop_cmp, replace `>` with `<`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-150: binop_cmp, replace `>` with `<=`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-151: binop_cmp, replace `>` with `>=`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-152: stmt_call, remove `self . indices [probe] . set_pos :: < Sz > (i - n_deleted) ;`, at src/map.rs@1616:16-1616:64(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-153: stmt_call, remove `self . entries . swap (i - n_deleted, i) ;`, at src/map.rs@1617:16-1617:51(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-154: stmt_call, remove `self . entries . truncate (len - n_deleted) ;`, at src/map.rs@1620:8-1620:46(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
-155: stmt_call, remove `self . entries . sort_by (move | ei, ej | compare (& ei . key, & ei . value, & ej . key, & ej . value)) ;`, at src/map.rs@1627:8-1627:91(fn OrderMapCore < K, V >::sort_by) ... NOT COVERED
-156: stmt_call, remove `self . restore_hash_index (side_index) ;`, at src/map.rs@1628:8-1628:43(fn OrderMapCore < K, V >::sort_by) ... NOT COVERED
-157: stmt_call, remove `pos . set_pos :: < Sz > (new_index [i]) ;`, at src/map.rs@1656:20-1656:51(fn OrderMapCore < K, V >::apply_new_index) ... NOT COVERED
-158: stmt_call, remove `map . extend (iter) ;`, at src/map.rs@2025:8-2025:24(fn IndexMap < K, V, S >::from_iter) ... killed
-159: stmt_call, remove `self . insert (k, v) ;`, at src/map.rs@2044:33-2044:50(fn IndexMap < K, V, S >::extend) ... killed
-160: stmt_call, remove `self . extend (iterable . into_iter () . map (| (& key, & value) | (key, value))) ;`, at src/map.rs@2057:8-2057:76(fn IndexMap < K, V, S >::extend) ... killed
-161: lit_int, replace `0` with `1`, at src/map.rs@2066:39-2066:40(fn IndexMap < K, V, S >::default) ... NOT COVERED
-162: binop_eq, replace `!=` with `==`, at src/map.rs@2077:22-2077:24(fn IndexMap < K, V1, S1 >::eq) ... killed
-163: lit_bool, replace `false` with `true`, at src/map.rs@2078:19-2078:24(fn IndexMap < K, V1, S1 >::eq) ... killed
-164: lit_bool, replace `false` with `true`, at src/map.rs@2081:61-2081:66(fn IndexMap < K, V1, S1 >::eq) ... SURVIVED
-165: binop_eq, replace `==` with `!=`, at src/map.rs@2081:79-2081:81(fn IndexMap < K, V1, S1 >::eq) ... killed
-166: binop_eq, replace `==` with `!=`, at src/lib.rs@63:15-63:17(fn HashValue::eq) ... NOT COVERED
+43: binop_bit, replace `|` with `&`, at src/map.rs@138:34-138:35(fn Pos::set_pos) ... killed
+44: binop_bit, replace `|` with `^`, at src/map.rs@138:34-138:35(fn Pos::set_pos) ... SURVIVED
+45: lit_int, replace `32` with `33`, at src/map.rs@152:54-152:56(fn Pos::with_hash) ... killed
+46: lit_int, replace `32` with `31`, at src/map.rs@152:54-152:56(fn Pos::with_hash) ... killed
+47: binop_bit, replace `|` with `&`, at src/map.rs@152:32-152:33(fn Pos::with_hash) ... killed
+48: binop_bit, replace `|` with `^`, at src/map.rs@152:32-152:33(fn Pos::with_hash) ... SURVIVED
+49: unop_not, remove `!`, at src/map.rs@165:15-165:16(fn Pos::resolve) ... NOT COVERED
+50: lit_int, replace `0` with `1`, at src/map.rs@166:63-166:64(fn Pos::resolve) ... NOT COVERED
+51: unop_not, remove `!`, at src/map.rs@171:15-171:16(fn Pos::resolve) ... killed
+52: lit_int, replace `4294967295` with `4294967296`, at src/map.rs@197:69-197:80(fn lo32) ... killed
+53: lit_int, replace `4294967295` with `4294967294`, at src/map.rs@197:69-197:80(fn lo32) ... SURVIVED
+54: binop_bit, replace `&` with `|`, at src/map.rs@197:67-197:68(fn lo32) ... killed
+55: binop_bit, replace `&` with `^`, at src/map.rs@197:67-197:68(fn lo32) ... killed
+56: lit_int, replace `32` with `33`, at src/map.rs@201:93-201:95(fn split_lo_hi) ... killed
+57: lit_int, replace `32` with `31`, at src/map.rs@201:93-201:95(fn split_lo_hi) ... killed
+58: binop_bit, replace `&` with `|`, at src/map.rs@284:11-284:12(fn desired_pos) ... killed (timeout)
+59: binop_bit, replace `&` with `^`, at src/map.rs@284:11-284:12(fn desired_pos) ... killed
+60: stmt_call, remove `f (& mut self . core . entries) ;`, at src/map.rs@306:8-306:33(fn IndexMap < K, V, S >::with_entries) ... NOT COVERED
+61: stmt_call, remove `self . core . restore_hash_index (side_index) ;`, at src/map.rs@307:8-307:48(fn IndexMap < K, V, S >::with_entries) ... NOT COVERED
+62: binop_bit, replace `&` with `|`, at src/map.rs@314:50-314:51(fn probe_distance) ... killed
+63: binop_bit, replace `&` with `^`, at src/map.rs@314:50-314:51(fn probe_distance) ... killed
+64: lit_int, replace `4` with `5`, at src/map.rs@360:16-360:17(fn usable_capacity) ... SURVIVED
+65: lit_int, replace `4` with `3`, at src/map.rs@360:16-360:17(fn usable_capacity) ... SURVIVED
+66: binop_num, replace `/` with `*`, at src/map.rs@360:14-360:15(fn usable_capacity) ... killed
+67: binop_num, replace `-` with `+`, at src/map.rs@360:8-360:9(fn usable_capacity) ... killed
+68: lit_int, replace `3` with `4`, at src/map.rs@365:12-365:13(fn to_raw_capacity) ... SURVIVED
+69: lit_int, replace `3` with `2`, at src/map.rs@365:12-365:13(fn to_raw_capacity) ... SURVIVED
+70: binop_num, replace `/` with `*`, at src/map.rs@365:10-365:11(fn to_raw_capacity) ... SURVIVED
+71: binop_num, replace `+` with `-`, at src/map.rs@365:6-365:7(fn to_raw_capacity) ... SURVIVED
+72: lit_int, replace `0` with `1`, at src/map.rs@385:28-385:29(fn IndexMap < K, V >::new) ... killed
+73: lit_int, replace `0` with `1`, at src/map.rs@406:16-406:17(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+74: binop_eq, replace `==` with `!=`, at src/map.rs@406:13-406:15(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+75: lit_int, replace `0` with `1`, at src/map.rs@409:26-409:27(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... SURVIVED
+76: lit_int, replace `8` with `9`, at src/map.rs@417:55-417:56(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+77: lit_int, replace `8` with `7`, at src/map.rs@417:55-417:56(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+78: lit_int, replace `1` with `2`, at src/map.rs@420:47-420:48(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+79: lit_int, replace `1` with `0`, at src/map.rs@420:47-420:48(fn IndexMap < K, V, S >::with_capacity_and_hasher) ... killed
+80: lit_int, replace `0` with `1`, at src/map.rs@437:51-437:52(fn IndexMap < K, V, S >::is_empty) ... killed
+81: binop_eq, replace `==` with `!=`, at src/map.rs@437:48-437:50(fn IndexMap < K, V, S >::is_empty) ... killed
+82: lit_int, replace `0` with `1`, at src/map.rs@443:39-443:40(fn IndexMap < K, V, S >::with_hasher) ... NOT COVERED
+83: binop_cmp, replace `>` with `<`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+84: binop_cmp, replace `>` with `<=`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+85: binop_cmp, replace `>` with `>=`, at src/map.rs@473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+86: binop_cmp, replace `>=` with `<`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+87: binop_cmp, replace `>=` with `<=`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+88: binop_cmp, replace `>=` with `>`, at src/map.rs@474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+89: binop_bool, replace `&&` with `||`, at src/map.rs@473:55-473:57(fn OrderMapCore < K, V >::size_class_is_64bit) ... SURVIVED
+90: lit_int, replace `64` with `65`, at src/map.rs@480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
+91: lit_int, replace `64` with `63`, at src/map.rs@480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
+92: binop_cmp, replace `>=` with `<`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
+93: binop_cmp, replace `>=` with `<=`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
+94: binop_cmp, replace `>=` with `>`, at src/map.rs@480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) ... NOT COVERED
+95: lit_bool, replace `false` with `true`, at src/map.rs@500:29-500:34(fn u32::is_64_bit) ... SURVIVED
+96: lit_bool, replace `true` with `false`, at src/map.rs@505:29-505:33(fn u64::is_64_bit) ... NOT COVERED
+97: stmt_call, remove `f (o . get_mut ()) ;`, at src/map.rs@590:16-590:30(fn Entry < 'a, K, V >::and_modify) ... killed
+98: stmt_call, remove `self . map . entries . push (Bucket { hash : self . hash, key : self . key, value }) ;`, at src/map.rs@760:8-760:79(fn VacantEntry < 'a, K, V >::insert_impl) ... killed
+99: stmt_call, remove `self . map . insert_phase_2 :: < Sz > (self . probe, old_pos) ;`, at src/map.rs@762:8-762:58(fn VacantEntry < 'a, K, V >::insert_impl) ... killed
+100: stmt_call, remove `self . core . clear () ;`, at src/map.rs@791:8-791:25(fn IndexMap < K, V, S >::clear) ... NOT COVERED
+101: lit_int, replace `0` with `1`, at src/map.rs@798:24-798:25(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
+102: binop_cmp, replace `>` with `<`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
+103: binop_cmp, replace `>` with `<=`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
+104: binop_cmp, replace `>` with `>=`, at src/map.rs@798:22-798:23(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
+105: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@799:12-799:30(fn IndexMap < K, V, S >::reserve) ... NOT COVERED
+106: binop_eq, replace `==` with `!=`, at src/map.rs@816:22-816:24(fn IndexMap < K, V, S >::reserve_one) ... killed
+107: stmt_call, remove `self . core . double_capacity :: < Sz > () ;`, at src/map.rs@823:8-823:41(fn IndexMap < K, V, S >::double_capacity) ... killed
+108: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@840:8-840:26(fn IndexMap < K, V, S >::insert) ... killed
+109: stmt_call, remove `self . core . insert_phase_2 :: < u64 > (probe, old_pos) ;`, at src/map.rs@846:20-846:67(fn IndexMap < K, V, S >::insert) ... NOT COVERED
+110: stmt_call, remove `self . core . insert_phase_2 :: < u32 > (probe, old_pos) ;`, at src/map.rs@855:20-855:67(fn IndexMap < K, V, S >::insert) ... killed (timeout)
+111: stmt_call, remove `entry . insert (value) ;`, at src/map.rs@882:16-882:35(fn IndexMap < K, V, S >::insert_full) ... killed
+112: stmt_call, remove `self . reserve_one () ;`, at src/map.rs@893:8-893:26(fn IndexMap < K, V, S >::entry) ... SURVIVED
+113: stmt_call, remove `self . retain_mut (move | k, v | keep (k, v)) ;`, at src/map.rs@1102:8-1102:47(fn IndexMap < K, V, S >::retain) ... NOT COVERED
+114: stmt_call, remove `self . core . retain_in_order_impl :: < Sz, F > (keep) ;`, at src/map.rs@1115:8-1115:53(fn IndexMap < K, V, S >::retain_mut_sz) ... NOT COVERED
+115: stmt_call, remove `self . core . entries . sort_by (move | a, b | cmp (& a . key, & a . value, & b . key, & b . value)) ;`, at src/map.rs@1148:8-1148:86(fn IndexMap < K, V, S >::sorted_by) ... NOT COVERED
+116: stmt_call, remove `self . core . clear_indices () ;`, at src/map.rs@1155:8-1155:33(fn IndexMap < K, V, S >::drain) ... NOT COVERED
+117: stmt_call, remove `self . entries . clear () ;`, at src/map.rs@1241:8-1241:28(fn OrderMapCore < K, V >::clear) ... NOT COVERED
+118: stmt_call, remove `self . clear_indices () ;`, at src/map.rs@1242:8-1242:28(fn OrderMapCore < K, V >::clear) ... NOT COVERED
+119: lit_int, replace `8` with `9`, at src/map.rs@1254:22-1254:28(fn OrderMapCore < K, V >::first_allocation) ... killed
+120: lit_int, replace `8` with `7`, at src/map.rs@1254:22-1254:28(fn OrderMapCore < K, V >::first_allocation) ... killed
+121: lit_int, replace `1` with `2`, at src/map.rs@1255:41-1255:42(fn OrderMapCore < K, V >::first_allocation) ... killed
+122: lit_int, replace `1` with `0`, at src/map.rs@1255:41-1255:42(fn OrderMapCore < K, V >::first_allocation) ... killed
+123: lit_int, replace `0` with `1`, at src/map.rs@1266:34-1266:35(fn OrderMapCore < K, V >::double_capacity) ... killed
+124: binop_eq, replace `==` with `!=`, at src/map.rs@1266:31-1266:33(fn OrderMapCore < K, V >::double_capacity) ... killed
+125: lit_int, replace `0` with `1`, at src/map.rs@1271:30-1271:31(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
+126: lit_int, replace `0` with `1`, at src/map.rs@1274:19-1274:20(fn OrderMapCore < K, V >::double_capacity) ... killed
+127: binop_eq, replace `==` with `!=`, at src/map.rs@1274:21-1274:23(fn OrderMapCore < K, V >::double_capacity) ... killed
+128: lit_int, replace `2` with `3`, at src/map.rs@1283:47-1283:48(fn OrderMapCore < K, V >::double_capacity) ... killed
+129: lit_int, replace `2` with `1`, at src/map.rs@1283:47-1283:48(fn OrderMapCore < K, V >::double_capacity) ... killed
+130: binop_num, replace `*` with `/`, at src/map.rs@1283:45-1283:46(fn OrderMapCore < K, V >::double_capacity) ... killed (timeout)
+131: lit_int, replace `1` with `2`, at src/map.rs@1285:45-1285:46(fn OrderMapCore < K, V >::double_capacity) ... killed
+132: lit_int, replace `1` with `0`, at src/map.rs@1285:45-1285:46(fn OrderMapCore < K, V >::double_capacity) ... killed
+133: binop_num, replace `-` with `+`, at src/map.rs@1295:35-1295:36(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
+134: stmt_call, remove `self . entries . reserve_exact (more) ;`, at src/map.rs@1296:8-1296:40(fn OrderMapCore < K, V >::double_capacity) ... SURVIVED
+135: lit_int, replace `0` with `1`, at src/map.rs@1344:23-1344:24(fn OrderMapCore < K, V >::entry_phase_1) ... killed
+136: lit_int, replace `0` with `1`, at src/map.rs@1390:23-1390:24(fn OrderMapCore < K, V >::insert_phase_1) ... killed
+137: stmt_call, remove `self . entries . push (Bucket { hash, key, value }) ;`, at src/map.rs@1421:8-1421:54(fn OrderMapCore < K, V >::insert_phase_1) ... killed (timeout)
+138: lit_int, replace `0` with `1`, at src/map.rs@1455:23-1455:24(fn OrderMapCore < K, V >::find_using_impl) ... killed
+139: lit_int, replace `0` with `1`, at src/map.rs@1479:51-1479:52(fn OrderMapCore < K, V >::find_existing_entry) ... killed
+140: binop_num, replace `-` with `+`, at src/map.rs@1501:52-1501:53(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+141: lit_int, replace `2` with `3`, at src/map.rs@1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+142: lit_int, replace `2` with `1`, at src/map.rs@1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+143: binop_num, replace `*` with `/`, at src/map.rs@1501:61-1501:62(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+144: binop_cmp, replace `<` with `<=`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+145: binop_cmp, replace `<` with `>=`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+146: binop_cmp, replace `<` with `>`, at src/map.rs@1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+147: binop_cmp, replace `>` with `<`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+148: binop_cmp, replace `>` with `<=`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+149: binop_cmp, replace `>` with `>=`, at src/map.rs@1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+150: lit_int, replace `1` with `2`, at src/map.rs@1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+151: lit_int, replace `1` with `0`, at src/map.rs@1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+152: binop_num, replace `-` with `+`, at src/map.rs@1507:44-1507:45(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+153: stmt_call, remove `pos . set_pos :: < Sz > (i - 1) ;`, at src/map.rs@1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+154: binop_num, replace `+` with `-`, at src/map.rs@1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+155: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
+156: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1565:8-1565:54(fn OrderMapCore < K, V >::swap_remove_found_impl) ... killed
+157: lit_int, replace `1` with `2`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
+158: lit_int, replace `1` with `0`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
+159: binop_num, replace `+` with `-`, at src/map.rs@1576:40-1576:41(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
+160: lit_int, replace `0` with `1`, at src/map.rs@1601:28-1601:29(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+161: lit_int, replace `0` with `1`, at src/map.rs@1602:17-1602:18(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+162: unop_not, remove `!`, at src/map.rs@1611:15-1611:16(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+163: lit_int, replace `1` with `2`, at src/map.rs@1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+164: lit_int, replace `1` with `0`, at src/map.rs@1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+165: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1614:16-1614:62(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+166: lit_int, replace `0` with `1`, at src/map.rs@1615:34-1615:35(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+167: binop_cmp, replace `>` with `<`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+168: binop_cmp, replace `>` with `<=`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+169: binop_cmp, replace `>` with `>=`, at src/map.rs@1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+170: binop_num, replace `-` with `+`, at src/map.rs@1616:52-1616:53(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+171: stmt_call, remove `self . indices [probe] . set_pos :: < Sz > (i - n_deleted) ;`, at src/map.rs@1616:16-1616:64(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+172: binop_num, replace `-` with `+`, at src/map.rs@1617:36-1617:37(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+173: stmt_call, remove `self . entries . swap (i - n_deleted, i) ;`, at src/map.rs@1617:16-1617:51(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+174: binop_num, replace `-` with `+`, at src/map.rs@1620:34-1620:35(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+175: stmt_call, remove `self . entries . truncate (len - n_deleted) ;`, at src/map.rs@1620:8-1620:46(fn OrderMapCore < K, V >::retain_in_order_impl) ... NOT COVERED
+176: stmt_call, remove `self . entries . sort_by (move | ei, ej | compare (& ei . key, & ei . value, & ej . key, & ej . value)) ;`, at src/map.rs@1627:8-1627:91(fn OrderMapCore < K, V >::sort_by) ... NOT COVERED
+177: stmt_call, remove `self . restore_hash_index (side_index) ;`, at src/map.rs@1628:8-1628:43(fn OrderMapCore < K, V >::sort_by) ... NOT COVERED
+178: stmt_call, remove `pos . set_pos :: < Sz > (new_index [i]) ;`, at src/map.rs@1656:20-1656:51(fn OrderMapCore < K, V >::apply_new_index) ... NOT COVERED
+179: stmt_call, remove `map . extend (iter) ;`, at src/map.rs@2025:8-2025:24(fn IndexMap < K, V, S >::from_iter) ... killed
+180: stmt_call, remove `self . insert (k, v) ;`, at src/map.rs@2044:33-2044:50(fn IndexMap < K, V, S >::extend) ... killed
+181: stmt_call, remove `self . extend (iterable . into_iter () . map (| (& key, & value) | (key, value))) ;`, at src/map.rs@2057:8-2057:76(fn IndexMap < K, V, S >::extend) ... killed
+182: lit_int, replace `0` with `1`, at src/map.rs@2066:39-2066:40(fn IndexMap < K, V, S >::default) ... NOT COVERED
+183: binop_eq, replace `!=` with `==`, at src/map.rs@2077:22-2077:24(fn IndexMap < K, V1, S1 >::eq) ... killed
+184: lit_bool, replace `false` with `true`, at src/map.rs@2078:19-2078:24(fn IndexMap < K, V1, S1 >::eq) ... killed
+185: lit_bool, replace `false` with `true`, at src/map.rs@2081:61-2081:66(fn IndexMap < K, V1, S1 >::eq) ... SURVIVED
+186: binop_eq, replace `==` with `!=`, at src/map.rs@2081:79-2081:81(fn IndexMap < K, V1, S1 >::eq) ... killed
+187: binop_eq, replace `==` with `!=`, at src/lib.rs@63:15-63:17(fn HashValue::eq) ... NOT COVERED
 SURVIVED
     src/equivalent.rs
             all 1 mutants killed
     src/lib.rs
             all 1 mutants survived
-        166: replace `==` with `!=` at 63:15-63:17(fn HashValue::eq) NOT COVERED
+        187: replace `==` with `!=` at 63:15-63:17(fn HashValue::eq) NOT COVERED
     src/map.rs
-            76/139(54.68%) mutants survived
+            85/160(53.12%) mutants survived
         28: replace `==` with `!=` at 60:15-60:17(fn ShortHash < Sz >::eq) NOT COVERED
         29: replace `==` with `!=` at 70:19-70:21(fn ShortHash < Sz >::eq) NOT COVERED
-        45: remove `!` at 165:15-165:16(fn Pos::resolve) NOT COVERED
-        46: replace `0` with `1` at 166:63-166:64(fn Pos::resolve) NOT COVERED
-        49: replace `4294967295` with `4294967294` at 197:69-197:80(fn lo32)
-        52: remove `f (& mut self . core . entries) ;` at 306:8-306:33(fn IndexMap < K, V, S >::with_entries) NOT COVERED
-        53: remove `self . core . restore_hash_index (side_index) ;` at 307:8-307:48(fn IndexMap < K, V, S >::with_entries) NOT COVERED
-        54: replace `4` with `5` at 360:16-360:17(fn usable_capacity)
-        55: replace `4` with `3` at 360:16-360:17(fn usable_capacity)
-        56: replace `3` with `4` at 365:12-365:13(fn to_raw_capacity)
-        57: replace `3` with `2` at 365:12-365:13(fn to_raw_capacity)
-        58: replace `+` with `-` at 365:6-365:7(fn to_raw_capacity)
-        62: replace `0` with `1` at 409:26-409:27(fn IndexMap < K, V, S >::with_capacity_and_hasher)
-        69: replace `0` with `1` at 443:39-443:40(fn IndexMap < K, V, S >::with_hasher) NOT COVERED
-        70: replace `>` with `<` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
-        71: replace `>` with `<=` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
-        72: replace `>` with `>=` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
-        73: replace `>=` with `<` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
-        74: replace `>=` with `<=` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
-        75: replace `>=` with `>` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
-        76: replace `&&` with `||` at 473:55-473:57(fn OrderMapCore < K, V >::size_class_is_64bit)
-        77: replace `64` with `65` at 480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
-        78: replace `64` with `63` at 480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
-        79: replace `>=` with `<` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
-        80: replace `>=` with `<=` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
-        81: replace `>=` with `>` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
-        82: replace `false` with `true` at 500:29-500:34(fn u32::is_64_bit)
-        83: replace `true` with `false` at 505:29-505:33(fn u64::is_64_bit) NOT COVERED
-        87: remove `self . core . clear () ;` at 791:8-791:25(fn IndexMap < K, V, S >::clear) NOT COVERED
-        88: replace `0` with `1` at 798:24-798:25(fn IndexMap < K, V, S >::reserve) NOT COVERED
-        89: replace `>` with `<` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
-        90: replace `>` with `<=` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
-        91: replace `>` with `>=` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
-        92: remove `self . reserve_one () ;` at 799:12-799:30(fn IndexMap < K, V, S >::reserve) NOT COVERED
-        96: remove `self . core . insert_phase_2 :: < u64 > (probe, old_pos) ;` at 846:20-846:67(fn IndexMap < K, V, S >::insert) NOT COVERED
-        99: remove `self . reserve_one () ;` at 893:8-893:26(fn IndexMap < K, V, S >::entry)
-        100: remove `self . retain_mut (move | k, v | keep (k, v)) ;` at 1102:8-1102:47(fn IndexMap < K, V, S >::retain) NOT COVERED
-        101: remove `self . core . retain_in_order_impl :: < Sz, F > (keep) ;` at 1115:8-1115:53(fn IndexMap < K, V, S >::retain_mut_sz) NOT COVERED
-        102: remove `self . core . entries . sort_by (move | a, b | cmp (& a . key, & a . value, & b . key, & b . value)) ;` at 1148:8-1148:86(fn IndexMap < K, V, S >::sorted_by) NOT COVERED
-        103: remove `self . core . clear_indices () ;` at 1155:8-1155:33(fn IndexMap < K, V, S >::drain) NOT COVERED
-        104: remove `self . entries . clear () ;` at 1241:8-1241:28(fn OrderMapCore < K, V >::clear) NOT COVERED
-        105: remove `self . clear_indices () ;` at 1242:8-1242:28(fn OrderMapCore < K, V >::clear) NOT COVERED
-        112: replace `0` with `1` at 1271:30-1271:31(fn OrderMapCore < K, V >::double_capacity)
-        113: replace `0` with `1` at 1274:19-1274:20(fn OrderMapCore < K, V >::double_capacity)
-        119: remove `self . entries . reserve_exact (more) ;` at 1296:8-1296:40(fn OrderMapCore < K, V >::double_capacity)
-        125: replace `2` with `3` at 1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        126: replace `2` with `1` at 1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        127: replace `<` with `<=` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        128: replace `<` with `>=` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        129: replace `<` with `>` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        130: replace `>` with `<` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        131: replace `>` with `<=` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        132: replace `>` with `>=` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        133: replace `1` with `2` at 1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        134: replace `1` with `0` at 1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        135: remove `pos . set_pos :: < Sz > (i - 1) ;` at 1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        136: replace `+` with `-` at 1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        137: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
-        142: replace `0` with `1` at 1601:28-1601:29(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        143: replace `0` with `1` at 1602:17-1602:18(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        144: remove `!` at 1611:15-1611:16(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        145: replace `1` with `2` at 1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        146: replace `1` with `0` at 1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        147: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1614:16-1614:62(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        148: replace `0` with `1` at 1615:34-1615:35(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        149: replace `>` with `<` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        150: replace `>` with `<=` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        151: replace `>` with `>=` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        152: remove `self . indices [probe] . set_pos :: < Sz > (i - n_deleted) ;` at 1616:16-1616:64(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        153: remove `self . entries . swap (i - n_deleted, i) ;` at 1617:16-1617:51(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        154: remove `self . entries . truncate (len - n_deleted) ;` at 1620:8-1620:46(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
-        155: remove `self . entries . sort_by (move | ei, ej | compare (& ei . key, & ei . value, & ej . key, & ej . value)) ;` at 1627:8-1627:91(fn OrderMapCore < K, V >::sort_by) NOT COVERED
-        156: remove `self . restore_hash_index (side_index) ;` at 1628:8-1628:43(fn OrderMapCore < K, V >::sort_by) NOT COVERED
-        157: remove `pos . set_pos :: < Sz > (new_index [i]) ;` at 1656:20-1656:51(fn OrderMapCore < K, V >::apply_new_index) NOT COVERED
-        161: replace `0` with `1` at 2066:39-2066:40(fn IndexMap < K, V, S >::default) NOT COVERED
-        164: replace `false` with `true` at 2081:61-2081:66(fn IndexMap < K, V1, S1 >::eq)
+        44: replace `|` with `^` at 138:34-138:35(fn Pos::set_pos)
+        48: replace `|` with `^` at 152:32-152:33(fn Pos::with_hash)
+        49: remove `!` at 165:15-165:16(fn Pos::resolve) NOT COVERED
+        50: replace `0` with `1` at 166:63-166:64(fn Pos::resolve) NOT COVERED
+        53: replace `4294967295` with `4294967294` at 197:69-197:80(fn lo32)
+        60: remove `f (& mut self . core . entries) ;` at 306:8-306:33(fn IndexMap < K, V, S >::with_entries) NOT COVERED
+        61: remove `self . core . restore_hash_index (side_index) ;` at 307:8-307:48(fn IndexMap < K, V, S >::with_entries) NOT COVERED
+        64: replace `4` with `5` at 360:16-360:17(fn usable_capacity)
+        65: replace `4` with `3` at 360:16-360:17(fn usable_capacity)
+        68: replace `3` with `4` at 365:12-365:13(fn to_raw_capacity)
+        69: replace `3` with `2` at 365:12-365:13(fn to_raw_capacity)
+        70: replace `/` with `*` at 365:10-365:11(fn to_raw_capacity)
+        71: replace `+` with `-` at 365:6-365:7(fn to_raw_capacity)
+        75: replace `0` with `1` at 409:26-409:27(fn IndexMap < K, V, S >::with_capacity_and_hasher)
+        82: replace `0` with `1` at 443:39-443:40(fn IndexMap < K, V, S >::with_hasher) NOT COVERED
+        83: replace `>` with `<` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
+        84: replace `>` with `<=` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
+        85: replace `>` with `>=` at 473:27-473:28(fn OrderMapCore < K, V >::size_class_is_64bit)
+        86: replace `>=` with `<` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
+        87: replace `>=` with `<=` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
+        88: replace `>=` with `>` at 474:32-474:34(fn OrderMapCore < K, V >::size_class_is_64bit)
+        89: replace `&&` with `||` at 473:55-473:57(fn OrderMapCore < K, V >::size_class_is_64bit)
+        90: replace `64` with `65` at 480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
+        91: replace `64` with `63` at 480:31-480:33(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
+        92: replace `>=` with `<` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
+        93: replace `>=` with `<=` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
+        94: replace `>=` with `>` at 480:28-480:30(fn OrderMapCore < K, V >::size_class_is_64bit) NOT COVERED
+        95: replace `false` with `true` at 500:29-500:34(fn u32::is_64_bit)
+        96: replace `true` with `false` at 505:29-505:33(fn u64::is_64_bit) NOT COVERED
+        100: remove `self . core . clear () ;` at 791:8-791:25(fn IndexMap < K, V, S >::clear) NOT COVERED
+        101: replace `0` with `1` at 798:24-798:25(fn IndexMap < K, V, S >::reserve) NOT COVERED
+        102: replace `>` with `<` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
+        103: replace `>` with `<=` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
+        104: replace `>` with `>=` at 798:22-798:23(fn IndexMap < K, V, S >::reserve) NOT COVERED
+        105: remove `self . reserve_one () ;` at 799:12-799:30(fn IndexMap < K, V, S >::reserve) NOT COVERED
+        109: remove `self . core . insert_phase_2 :: < u64 > (probe, old_pos) ;` at 846:20-846:67(fn IndexMap < K, V, S >::insert) NOT COVERED
+        112: remove `self . reserve_one () ;` at 893:8-893:26(fn IndexMap < K, V, S >::entry)
+        113: remove `self . retain_mut (move | k, v | keep (k, v)) ;` at 1102:8-1102:47(fn IndexMap < K, V, S >::retain) NOT COVERED
+        114: remove `self . core . retain_in_order_impl :: < Sz, F > (keep) ;` at 1115:8-1115:53(fn IndexMap < K, V, S >::retain_mut_sz) NOT COVERED
+        115: remove `self . core . entries . sort_by (move | a, b | cmp (& a . key, & a . value, & b . key, & b . value)) ;` at 1148:8-1148:86(fn IndexMap < K, V, S >::sorted_by) NOT COVERED
+        116: remove `self . core . clear_indices () ;` at 1155:8-1155:33(fn IndexMap < K, V, S >::drain) NOT COVERED
+        117: remove `self . entries . clear () ;` at 1241:8-1241:28(fn OrderMapCore < K, V >::clear) NOT COVERED
+        118: remove `self . clear_indices () ;` at 1242:8-1242:28(fn OrderMapCore < K, V >::clear) NOT COVERED
+        125: replace `0` with `1` at 1271:30-1271:31(fn OrderMapCore < K, V >::double_capacity)
+        133: replace `-` with `+` at 1295:35-1295:36(fn OrderMapCore < K, V >::double_capacity)
+        134: remove `self . entries . reserve_exact (more) ;` at 1296:8-1296:40(fn OrderMapCore < K, V >::double_capacity)
+        140: replace `-` with `+` at 1501:52-1501:53(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        141: replace `2` with `3` at 1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        142: replace `2` with `1` at 1501:63-1501:64(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        143: replace `*` with `/` at 1501:61-1501:62(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        144: replace `<` with `<=` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        145: replace `<` with `>=` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        146: replace `<` with `>` at 1501:30-1501:31(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        147: replace `>` with `<` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        148: replace `>` with `<=` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        149: replace `>` with `>=` at 1505:25-1505:26(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        150: replace `1` with `2` at 1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        151: replace `1` with `0` at 1507:46-1507:47(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        152: replace `-` with `+` at 1507:44-1507:45(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        153: remove `pos . set_pos :: < Sz > (i - 1) ;` at 1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        154: replace `+` with `-` at 1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        155: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        160: replace `0` with `1` at 1601:28-1601:29(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        161: replace `0` with `1` at 1602:17-1602:18(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        162: remove `!` at 1611:15-1611:16(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        163: replace `1` with `2` at 1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        164: replace `1` with `0` at 1612:29-1612:30(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        165: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1614:16-1614:62(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        166: replace `0` with `1` at 1615:34-1615:35(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        167: replace `>` with `<` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        168: replace `>` with `<=` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        169: replace `>` with `>=` at 1615:32-1615:33(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        170: replace `-` with `+` at 1616:52-1616:53(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        171: remove `self . indices [probe] . set_pos :: < Sz > (i - n_deleted) ;` at 1616:16-1616:64(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        172: replace `-` with `+` at 1617:36-1617:37(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        173: remove `self . entries . swap (i - n_deleted, i) ;` at 1617:16-1617:51(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        174: replace `-` with `+` at 1620:34-1620:35(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        175: remove `self . entries . truncate (len - n_deleted) ;` at 1620:8-1620:46(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
+        176: remove `self . entries . sort_by (move | ei, ej | compare (& ei . key, & ei . value, & ej . key, & ej . value)) ;` at 1627:8-1627:91(fn OrderMapCore < K, V >::sort_by) NOT COVERED
+        177: remove `self . restore_hash_index (side_index) ;` at 1628:8-1628:43(fn OrderMapCore < K, V >::sort_by) NOT COVERED
+        178: remove `pos . set_pos :: < Sz > (new_index [i]) ;` at 1656:20-1656:51(fn OrderMapCore < K, V >::apply_new_index) NOT COVERED
+        182: replace `0` with `1` at 2066:39-2066:40(fn IndexMap < K, V, S >::default) NOT COVERED
+        185: replace `false` with `true` at 2081:61-2081:66(fn IndexMap < K, V1, S1 >::eq)
     src/set.rs
             11/25(44.00%) mutants survived
         2: remove `self . map . with_entries (f) ;` at 84:8-84:32(fn IndexSet < T, S >::with_entries) NOT COVERED
@@ -272,6 +302,6 @@ SURVIVED
         25: remove `!` at 764:15-764:16(fn Difference < 'a, T, S >::next_back) NOT COVERED
         26: replace `0` with `1` at 816:9-816:10(fn Intersection < 'a, T, S >::size_hint)
 
-166 generated mutations
-78(46.99%) mutants killed, 8(4.82%) by timeout
-88(53.01%) mutants SURVIVED, 63(37.95%) NOT COVERED
+187 generated mutations
+90(48.13%) mutants killed, 10(5.35%) by timeout
+97(51.87%) mutants SURVIVED, 69(36.90%) NOT COVERED

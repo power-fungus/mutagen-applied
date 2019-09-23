@@ -1,9 +1,9 @@
 
 Tests without mutations
-target/debug/deps/tests-cf25a03849dd837b ... ok
-target/debug/deps/csv-fb2cb4ea1e8cd171 ... ok
+target/debug/deps/tests-2d189f45ef4f69fe ... ok
+target/debug/deps/csv-74dec29ac3fea99c ... ok
 
-Mutants
+Test 185 Mutants
 1: lit_int, replace `1` with `2`, at src/deserializer.rs@179:30-179:31(fn DeStringRecord < 'r >::next_field) ... SURVIVED
 2: lit_int, replace `1` with `0`, at src/deserializer.rs@179:30-179:31(fn DeStringRecord < 'r >::next_field) ... SURVIVED
 3: lit_int, replace `1` with `2`, at src/deserializer.rs@201:50-201:51(fn DeStringRecord < 'r >::error) ... SURVIVED
@@ -32,159 +32,163 @@ Mutants
 26: lit_int, replace `1` with `0`, at src/reader.rs@37:27-37:28(fn ReaderBuilder::default) ... killed
 27: lit_int, replace `10` with `11`, at src/reader.rs@37:32-37:34(fn ReaderBuilder::default) ... SURVIVED
 28: lit_int, replace `10` with `9`, at src/reader.rs@37:32-37:34(fn ReaderBuilder::default) ... SURVIVED
-29: lit_bool, replace `false` with `true`, at src/reader.rs@38:22-38:27(fn ReaderBuilder::default) ... killed
-30: lit_bool, replace `true` with `false`, at src/reader.rs@39:25-39:29(fn ReaderBuilder::default) ... SURVIVED
-31: stmt_call, remove `self . builder . delimiter (delimiter) ;`, at src/reader.rs@167:8-167:41(fn ReaderBuilder::delimiter) ... NOT COVERED
-32: stmt_call, remove `self . builder . terminator (term . to_core ()) ;`, at src/reader.rs@388:8-388:47(fn ReaderBuilder::terminator) ... NOT COVERED
-33: stmt_call, remove `self . builder . quote (quote) ;`, at src/reader.rs@422:8-422:33(fn ReaderBuilder::quote) ... NOT COVERED
-34: stmt_call, remove `self . builder . escape (escape) ;`, at src/reader.rs@461:8-461:35(fn ReaderBuilder::escape) ... NOT COVERED
-35: stmt_call, remove `self . builder . double_quote (yes) ;`, at src/reader.rs@498:8-498:38(fn ReaderBuilder::double_quote) ... NOT COVERED
-36: stmt_call, remove `self . builder . quoting (yes) ;`, at src/reader.rs@535:8-535:33(fn ReaderBuilder::quoting) ... NOT COVERED
-37: stmt_call, remove `self . builder . comment (comment) ;`, at src/reader.rs@573:8-573:37(fn ReaderBuilder::comment) ... NOT COVERED
-38: stmt_call, remove `self . builder . ascii () ;`, at src/reader.rs@607:8-607:28(fn ReaderBuilder::ascii) ... NOT COVERED
-39: stmt_call, remove `self . builder . nfa (yes) ;`, at src/reader.rs@624:8-624:29(fn ReaderBuilder::nfa) ... NOT COVERED
-40: lit_bool, replace `false` with `true`, at src/reader.rs@799:23-799:28(fn Reader < R >::new) ... killed
-41: lit_bool, replace `false` with `true`, at src/reader.rs@800:24-800:29(fn Reader < R >::new) ... killed
-42: lit_bool, replace `false` with `true`, at src/reader.rs@801:21-801:26(fn Reader < R >::new) ... killed
-43: stmt_call, remove `self . set_headers_impl (Err (record)) ;`, at src/reader.rs@1302:12-1302:46(fn Reader < R >::headers) ... killed
-44: stmt_call, remove `self . set_headers_impl (Err (record)) ;`, at src/reader.rs@1371:12-1371:46(fn Reader < R >::byte_headers) ... killed
-45: stmt_call, remove `self . set_headers_impl (Ok (headers)) ;`, at src/reader.rs@1404:8-1404:42(fn Reader < R >::set_headers) ... NOT COVERED
-46: stmt_call, remove `self . set_headers_impl (Err (headers)) ;`, at src/reader.rs@1435:8-1435:43(fn Reader < R >::set_byte_headers) ... NOT COVERED
-47: stmt_call, remove `str_headers . trim () ;`, at src/reader.rs@1458:16-1458:34(fn Reader < R >::set_headers_impl) ... killed
-48: stmt_call, remove `byte_headers . trim () ;`, at src/reader.rs@1460:12-1460:31(fn Reader < R >::set_headers_impl) ... killed
-49: stmt_call, remove `record . trim () ;`, at src/reader.rs@1511:12-1511:25(fn Reader < R >::read_record) ... SURVIVED
-50: unop_not, remove `!`, at src/reader.rs@1557:11-1557:12(fn Reader < R >::read_byte_record) ... killed
-51: unop_not, remove `!`, at src/reader.rs@1557:33-1557:34(fn Reader < R >::read_byte_record) ... killed
-52: binop_bool, replace `&&` with `||`, at src/reader.rs@1557:30-1557:32(fn Reader < R >::read_byte_record) ... SURVIVED
-53: unop_not, remove `!`, at src/reader.rs@1557:60-1557:61(fn Reader < R >::read_byte_record) ... killed
-54: binop_bool, replace `&&` with `||`, at src/reader.rs@1557:57-1557:59(fn Reader < R >::read_byte_record) ... killed
-55: lit_bool, replace `true` with `false`, at src/reader.rs@1562:35-1562:39(fn Reader < R >::read_byte_record) ... killed
-56: stmt_call, remove `record . clone_from (& headers . byte_record) ;`, at src/reader.rs@1563:16-1563:55(fn Reader < R >::read_byte_record) ... killed
-57: stmt_call, remove `record . trim () ;`, at src/reader.rs@1565:20-1565:33(fn Reader < R >::read_byte_record) ... NOT COVERED
-58: unop_not, remove `!`, at src/reader.rs@1567:26-1567:27(fn Reader < R >::read_byte_record) ... killed
-59: lit_bool, replace `true` with `false`, at src/reader.rs@1571:27-1571:31(fn Reader < R >::read_byte_record) ... killed
-60: unop_not, remove `!`, at src/reader.rs@1572:11-1572:12(fn Reader < R >::read_byte_record) ... killed
-61: binop_bool, replace `&&` with `||`, at src/reader.rs@1572:30-1572:32(fn Reader < R >::read_byte_record) ... killed
-62: stmt_call, remove `self . set_headers_impl (Err (record . clone ())) ;`, at src/reader.rs@1573:12-1573:54(fn Reader < R >::read_byte_record) ... killed
-63: stmt_call, remove `record . trim () ;`, at src/reader.rs@1580:20-1580:33(fn Reader < R >::read_byte_record) ... killed
-64: stmt_call, remove `record . trim () ;`, at src/reader.rs@1585:12-1585:25(fn Reader < R >::read_byte_record) ... SURVIVED
-65: stmt_call, remove `record . clear () ;`, at src/reader.rs@1599:8-1599:22(fn Reader < R >::read_byte_record_impl) ... SURVIVED
-66: stmt_call, remove `record . set_position (Some (self . state . cur_pos . clone ())) ;`, at src/reader.rs@1600:8-1600:61(fn Reader < R >::read_byte_record_impl) ... killed
-67: lit_bool, replace `false` with `true`, at src/reader.rs@1602:22-1602:27(fn Reader < R >::read_byte_record_impl) ... NOT COVERED
-68: lit_int, replace `0` with `1`, at src/reader.rs@1604:40-1604:41(fn Reader < R >::read_byte_record_impl) ... killed
-69: lit_int, replace `0` with `1`, at src/reader.rs@1604:43-1604:44(fn Reader < R >::read_byte_record_impl) ... killed
-70: stmt_call, remove `self . rdr . consume (nin) ;`, at src/reader.rs@1615:12-1615:33(fn Reader < R >::read_byte_record_impl) ... killed
-71: binop_add, replace `+` with `-`, at src/reader.rs@1619:31-1619:32(fn Reader < R >::read_byte_record_impl) ... killed
-72: stmt_call, remove `self . state . cur_pos . set_byte (byte + nin as u64) . set_line (self . core . line ()) ;`, at src/reader.rs@1617:12-1620:43(fn Reader < R >::read_byte_record_impl) ... killed
-73: stmt_call, remove `record . expand_fields () ;`, at src/reader.rs@1626:20-1626:42(fn Reader < R >::read_byte_record_impl) ... killed (timeout)
-74: stmt_call, remove `record . expand_ends () ;`, at src/reader.rs@1630:20-1630:40(fn Reader < R >::read_byte_record_impl) ... killed (timeout)
-75: stmt_call, remove `record . set_len (endlen) ;`, at src/reader.rs@1634:20-1634:42(fn Reader < R >::read_byte_record_impl) ... killed
-76: lit_bool, replace `true` with `false`, at src/reader.rs@1636:30-1636:34(fn Reader < R >::read_byte_record_impl) ... killed
-77: lit_bool, replace `true` with `false`, at src/reader.rs@1639:37-1639:41(fn Reader < R >::read_byte_record_impl) ... SURVIVED
-78: lit_bool, replace `false` with `true`, at src/reader.rs@1640:30-1640:35(fn Reader < R >::read_byte_record_impl) ... killed
-79: lit_bool, replace `true` with `false`, at src/reader.rs@1812:28-1812:32(fn Reader < R >::seek) ... SURVIVED
-80: binop_eq, replace `==` with `!=`, at src/reader.rs@1813:22-1813:24(fn Reader < R >::seek) ... killed
-81: stmt_call, remove `self . core . reset () ;`, at src/reader.rs@1817:8-1817:25(fn Reader < R >::seek) ... SURVIVED
-82: stmt_call, remove `self . core . set_line (pos . line ()) ;`, at src/reader.rs@1818:8-1818:38(fn Reader < R >::seek) ... killed
-83: lit_bool, replace `false` with `true`, at src/reader.rs@1820:25-1820:30(fn Reader < R >::seek) ... killed
-84: lit_bool, replace `true` with `false`, at src/reader.rs@1843:28-1843:32(fn Reader < R >::seek_raw) ... NOT COVERED
-85: stmt_call, remove `self . core . reset () ;`, at src/reader.rs@1845:8-1845:25(fn Reader < R >::seek_raw) ... NOT COVERED
-86: stmt_call, remove `self . core . set_line (pos . line ()) ;`, at src/reader.rs@1846:8-1846:38(fn Reader < R >::seek_raw) ... NOT COVERED
-87: lit_bool, replace `false` with `true`, at src/reader.rs@1848:25-1848:30(fn Reader < R >::seek_raw) ... NOT COVERED
-88: lit_int, replace `1` with `2`, at src/reader.rs@1857:46-1857:47(fn ReaderState::add_record) ... killed
-89: lit_int, replace `1` with `0`, at src/reader.rs@1857:46-1857:47(fn ReaderState::add_record) ... killed
-90: stmt_call, remove `self . cur_pos . set_record (i . checked_add (1) . unwrap ()) ;`, at src/reader.rs@1857:8-1857:58(fn ReaderState::add_record) ... killed
-91: unop_not, remove `!`, at src/reader.rs@1858:11-1858:12(fn ReaderState::add_record) ... killed
-92: binop_eq, replace `!=` with `==`, at src/reader.rs@1862:43-1862:45(fn ReaderState::add_record) ... killed
-93: unop_not, remove `!`, at src/reader.rs@1889:25-1889:26(fn DeserializeRecordsIntoIter < R, D >::new) ... NOT COVERED
-94: unop_not, remove `!`, at src/reader.rs@1947:25-1947:26(fn DeserializeRecordsIter < 'r, R, D >::new) ... NOT COVERED
-95: lit_bool, replace `false` with `true`, at src/serializer.rs@461:39-461:44(fn SeHeader < 'w, W >::wrote_header) ... killed
-96: lit_bool, replace `true` with `false`, at src/serializer.rs@462:54-462:58(fn SeHeader < 'w, W >::wrote_header) ... killed
-97: lit_int, replace `8` with `9`, at src/writer.rs@34:22-34:23(fn WriterBuilder::default) ... SURVIVED
-98: lit_int, replace `8` with `7`, at src/writer.rs@34:22-34:23(fn WriterBuilder::default) ... SURVIVED
-99: lit_int, replace `1` with `2`, at src/writer.rs@34:27-34:28(fn WriterBuilder::default) ... SURVIVED
-100: lit_int, replace `1` with `0`, at src/writer.rs@34:27-34:28(fn WriterBuilder::default) ... killed (timeout)
-101: lit_int, replace `10` with `11`, at src/writer.rs@34:32-34:34(fn WriterBuilder::default) ... SURVIVED
-102: lit_int, replace `10` with `9`, at src/writer.rs@34:32-34:34(fn WriterBuilder::default) ... SURVIVED
-103: lit_bool, replace `false` with `true`, at src/writer.rs@35:22-35:27(fn WriterBuilder::default) ... killed
-104: lit_bool, replace `true` with `false`, at src/writer.rs@36:25-36:29(fn WriterBuilder::default) ... killed
-105: stmt_call, remove `self . builder . delimiter (delimiter) ;`, at src/writer.rs@143:8-143:41(fn WriterBuilder::delimiter) ... NOT COVERED
-106: stmt_call, remove `self . builder . terminator (term . to_core ()) ;`, at src/writer.rs@322:8-322:47(fn WriterBuilder::terminator) ... NOT COVERED
-107: stmt_call, remove `self . builder . quote_style (style . to_core ()) ;`, at src/writer.rs@379:8-379:49(fn WriterBuilder::quote_style) ... NOT COVERED
-108: stmt_call, remove `self . builder . quote (quote) ;`, at src/writer.rs@407:8-407:33(fn WriterBuilder::quote) ... NOT COVERED
-109: stmt_call, remove `self . builder . double_quote (yes) ;`, at src/writer.rs@436:8-436:38(fn WriterBuilder::double_quote) ... NOT COVERED
-110: stmt_call, remove `self . builder . escape (escape) ;`, at src/writer.rs@469:8-469:35(fn WriterBuilder::escape) ... NOT COVERED
-111: unop_not, remove `!`, at src/writer.rs@563:33-563:34(fn Writer < W >::drop) ... SURVIVED
-112: binop_bool, replace `&&` with `||`, at src/writer.rs@563:30-563:32(fn Writer < W >::drop) ... killed
-113: lit_int, replace `0` with `1`, at src/writer.rs@606:63-606:64(fn Writer < W >::new) ... killed
-114: lit_int, replace `0` with `1`, at src/writer.rs@611:32-611:33(fn Writer < W >::new) ... killed
-115: lit_bool, replace `false` with `true`, at src/writer.rs@612:26-612:31(fn Writer < W >::new) ... SURVIVED
-116: lit_int, replace `2` with `3`, at src/writer.rs@949:13-949:14(fn Writer < W >::write_byte_record) ... SURVIVED
-117: lit_int, replace `2` with `1`, at src/writer.rs@949:13-949:14(fn Writer < W >::write_byte_record) ... SURVIVED
-118: lit_int, replace `1` with `2`, at src/writer.rs@951:43-951:44(fn Writer < W >::write_byte_record) ... SURVIVED
-119: lit_int, replace `1` with `0`, at src/writer.rs@951:43-951:44(fn Writer < W >::write_byte_record) ... SURVIVED
-120: binop_add, replace `+` with `-`, at src/writer.rs@951:12-951:13(fn Writer < W >::write_byte_record) ... SURVIVED
-121: lit_int, replace `2` with `3`, at src/writer.rs@953:15-953:16(fn Writer < W >::write_byte_record) ... SURVIVED
-122: lit_int, replace `2` with `1`, at src/writer.rs@953:15-953:16(fn Writer < W >::write_byte_record) ... SURVIVED
-123: binop_add, replace `+` with `-`, at src/writer.rs@953:12-953:13(fn Writer < W >::write_byte_record) ... SURVIVED
-124: lit_int, replace `2` with `3`, at src/writer.rs@955:14-955:15(fn Writer < W >::write_byte_record) ... SURVIVED
-125: lit_int, replace `2` with `1`, at src/writer.rs@955:14-955:15(fn Writer < W >::write_byte_record) ... SURVIVED
-126: binop_add, replace `+` with `-`, at src/writer.rs@955:12-955:13(fn Writer < W >::write_byte_record) ... SURVIVED
-127: binop_cmp, replace `<` with `<=`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
-128: binop_cmp, replace `<` with `>=`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
-129: binop_cmp, replace `<` with `>`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
-130: lit_bool, replace `true` with `false`, at src/writer.rs@959:24-959:28(fn Writer < W >::write_byte_record) ... killed
-131: unop_not, remove `!`, at src/writer.rs@961:15-961:16(fn Writer < W >::write_byte_record) ... killed
-132: lit_int, replace `0` with `1`, at src/writer.rs@962:36-962:37(fn Writer < W >::write_byte_record) ... killed
-133: lit_int, replace `1` with `2`, at src/writer.rs@963:33-963:34(fn Writer < W >::write_byte_record) ... killed
-134: lit_int, replace `1` with `0`, at src/writer.rs@963:33-963:34(fn Writer < W >::write_byte_record) ... killed
-135: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@963:16-963:35(fn Writer < W >::write_byte_record) ... killed
-136: lit_bool, replace `false` with `true`, at src/writer.rs@965:20-965:25(fn Writer < W >::write_byte_record) ... killed
-137: unop_not, remove `!`, at src/writer.rs@967:15-967:16(fn Writer < W >::write_byte_record) ... killed
-138: stmt_call, remove `self . buf . writable () [.. field . len ()] . copy_from_slice (field) ;`, at src/writer.rs@968:16-968:73(fn Writer < W >::write_byte_record) ... killed
-139: stmt_call, remove `self . buf . written (field . len ()) ;`, at src/writer.rs@969:16-969:45(fn Writer < W >::write_byte_record) ... killed
-140: lit_int, replace `0` with `1`, at src/writer.rs@971:36-971:37(fn Writer < W >::write_byte_record) ... NOT COVERED
-141: lit_int, replace `1` with `2`, at src/writer.rs@972:33-972:34(fn Writer < W >::write_byte_record) ... NOT COVERED
-142: lit_int, replace `1` with `0`, at src/writer.rs@972:33-972:34(fn Writer < W >::write_byte_record) ... NOT COVERED
-143: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@972:16-972:35(fn Writer < W >::write_byte_record) ... NOT COVERED
-144: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@982:16-982:38(fn Writer < W >::write_byte_record) ... NOT COVERED
-145: lit_int, replace `0` with `1`, at src/writer.rs@983:36-983:37(fn Writer < W >::write_byte_record) ... NOT COVERED
-146: lit_int, replace `1` with `2`, at src/writer.rs@984:33-984:34(fn Writer < W >::write_byte_record) ... NOT COVERED
-147: lit_int, replace `1` with `0`, at src/writer.rs@984:33-984:34(fn Writer < W >::write_byte_record) ... NOT COVERED
-148: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@984:16-984:35(fn Writer < W >::write_byte_record) ... NOT COVERED
-149: lit_int, replace `0` with `1`, at src/writer.rs@1033:39-1033:40(fn Writer < W >::write_field_impl) ... killed
-150: binop_cmp, replace `>` with `<`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
-151: binop_cmp, replace `>` with `<=`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
-152: binop_cmp, replace `>` with `>=`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
-153: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1040:12-1040:34(fn Writer < W >::write_field_impl) ... killed
-154: lit_int, replace `1` with `2`, at src/writer.rs@1043:49-1043:50(fn Writer < W >::write_field_impl) ... killed
-155: lit_int, replace `1` with `0`, at src/writer.rs@1043:49-1043:50(fn Writer < W >::write_field_impl) ... killed
-156: lit_bool, replace `true` with `false`, at src/writer.rs@1058:30-1058:34(fn Writer < W >::flush) ... SURVIVED
-157: lit_bool, replace `false` with `true`, at src/writer.rs@1060:30-1060:35(fn Writer < W >::flush) ... SURVIVED
-158: stmt_call, remove `self . buf . clear () ;`, at src/writer.rs@1062:8-1062:24(fn Writer < W >::flush) ... SURVIVED
-159: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1082:12-1082:34(fn Writer < W >::write_delimiter) ... killed
-160: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1095:12-1095:34(fn Writer < W >::write_terminator) ... killed
-161: lit_int, replace `0` with `1`, at src/writer.rs@1098:48-1098:49(fn Writer < W >::write_terminator) ... killed
-162: lit_int, replace `0` with `1`, at src/writer.rs@1113:36-1113:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-163: lit_int, replace `1` with `2`, at src/writer.rs@1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-164: lit_int, replace `1` with `0`, at src/writer.rs@1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-165: lit_int, replace `2` with `3`, at src/writer.rs@1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-166: lit_int, replace `2` with `1`, at src/writer.rs@1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-167: stmt_call, remove `self . buf . written (2) ;`, at src/writer.rs@1115:16-1115:35(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
-168: lit_int, replace `0` with `1`, at src/writer.rs@1118:36-1118:37(fn Writer < W >::write_terminator_into_buffer) ... killed
-169: lit_int, replace `1` with `2`, at src/writer.rs@1119:33-1119:34(fn Writer < W >::write_terminator_into_buffer) ... killed
-170: lit_int, replace `1` with `0`, at src/writer.rs@1119:33-1119:34(fn Writer < W >::write_terminator_into_buffer) ... killed
-171: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@1119:16-1119:35(fn Writer < W >::write_terminator_into_buffer) ... killed
-172: lit_int, replace `0` with `1`, at src/writer.rs@1123:36-1123:37(fn Writer < W >::write_terminator_into_buffer) ... SURVIVED
-173: unop_not, remove `!`, at src/writer.rs@1128:11-1128:12(fn Writer < W >::check_field_count) ... killed
-174: binop_eq, replace `!=` with `==`, at src/writer.rs@1134:43-1134:45(fn Writer < W >::check_field_count) ... killed
-175: lit_int, replace `0` with `1`, at src/writer.rs@1174:19-1174:20(fn Buffer::clear) ... SURVIVED
-176: binop_eq, replace `==` with `!=`, at src/lib.rs@283:13-283:15(fn Trim::should_trim_fields) ... killed
-177: binop_eq, replace `==` with `!=`, at src/lib.rs@283:38-283:40(fn Trim::should_trim_fields) ... killed
-178: binop_bool, replace `||` with `&&`, at src/lib.rs@283:30-283:32(fn Trim::should_trim_fields) ... killed
-179: binop_eq, replace `==` with `!=`, at src/lib.rs@287:13-287:15(fn Trim::should_trim_headers) ... killed
-180: binop_eq, replace `==` with `!=`, at src/lib.rs@287:39-287:41(fn Trim::should_trim_headers) ... killed
-181: binop_bool, replace `||` with `&&`, at src/lib.rs@287:31-287:33(fn Trim::should_trim_headers) ... killed
+29: binop_num, replace `*` with `/`, at src/reader.rs@37:24-37:25(fn ReaderBuilder::default) ... killed
+30: lit_bool, replace `false` with `true`, at src/reader.rs@38:22-38:27(fn ReaderBuilder::default) ... killed
+31: lit_bool, replace `true` with `false`, at src/reader.rs@39:25-39:29(fn ReaderBuilder::default) ... SURVIVED
+32: stmt_call, remove `self . builder . delimiter (delimiter) ;`, at src/reader.rs@167:8-167:41(fn ReaderBuilder::delimiter) ... NOT COVERED
+33: stmt_call, remove `self . builder . terminator (term . to_core ()) ;`, at src/reader.rs@388:8-388:47(fn ReaderBuilder::terminator) ... NOT COVERED
+34: stmt_call, remove `self . builder . quote (quote) ;`, at src/reader.rs@422:8-422:33(fn ReaderBuilder::quote) ... NOT COVERED
+35: stmt_call, remove `self . builder . escape (escape) ;`, at src/reader.rs@461:8-461:35(fn ReaderBuilder::escape) ... NOT COVERED
+36: stmt_call, remove `self . builder . double_quote (yes) ;`, at src/reader.rs@498:8-498:38(fn ReaderBuilder::double_quote) ... NOT COVERED
+37: stmt_call, remove `self . builder . quoting (yes) ;`, at src/reader.rs@535:8-535:33(fn ReaderBuilder::quoting) ... NOT COVERED
+38: stmt_call, remove `self . builder . comment (comment) ;`, at src/reader.rs@573:8-573:37(fn ReaderBuilder::comment) ... NOT COVERED
+39: stmt_call, remove `self . builder . ascii () ;`, at src/reader.rs@607:8-607:28(fn ReaderBuilder::ascii) ... NOT COVERED
+40: stmt_call, remove `self . builder . nfa (yes) ;`, at src/reader.rs@624:8-624:29(fn ReaderBuilder::nfa) ... NOT COVERED
+41: lit_bool, replace `false` with `true`, at src/reader.rs@799:23-799:28(fn Reader < R >::new) ... killed
+42: lit_bool, replace `false` with `true`, at src/reader.rs@800:24-800:29(fn Reader < R >::new) ... killed
+43: lit_bool, replace `false` with `true`, at src/reader.rs@801:21-801:26(fn Reader < R >::new) ... killed
+44: stmt_call, remove `self . set_headers_impl (Err (record)) ;`, at src/reader.rs@1302:12-1302:46(fn Reader < R >::headers) ... killed
+45: stmt_call, remove `self . set_headers_impl (Err (record)) ;`, at src/reader.rs@1371:12-1371:46(fn Reader < R >::byte_headers) ... killed
+46: stmt_call, remove `self . set_headers_impl (Ok (headers)) ;`, at src/reader.rs@1404:8-1404:42(fn Reader < R >::set_headers) ... NOT COVERED
+47: stmt_call, remove `self . set_headers_impl (Err (headers)) ;`, at src/reader.rs@1435:8-1435:43(fn Reader < R >::set_byte_headers) ... NOT COVERED
+48: stmt_call, remove `str_headers . trim () ;`, at src/reader.rs@1458:16-1458:34(fn Reader < R >::set_headers_impl) ... killed
+49: stmt_call, remove `byte_headers . trim () ;`, at src/reader.rs@1460:12-1460:31(fn Reader < R >::set_headers_impl) ... killed
+50: stmt_call, remove `record . trim () ;`, at src/reader.rs@1511:12-1511:25(fn Reader < R >::read_record) ... SURVIVED
+51: unop_not, remove `!`, at src/reader.rs@1557:11-1557:12(fn Reader < R >::read_byte_record) ... killed
+52: unop_not, remove `!`, at src/reader.rs@1557:33-1557:34(fn Reader < R >::read_byte_record) ... killed
+53: binop_bool, replace `&&` with `||`, at src/reader.rs@1557:30-1557:32(fn Reader < R >::read_byte_record) ... SURVIVED
+54: unop_not, remove `!`, at src/reader.rs@1557:60-1557:61(fn Reader < R >::read_byte_record) ... killed
+55: binop_bool, replace `&&` with `||`, at src/reader.rs@1557:57-1557:59(fn Reader < R >::read_byte_record) ... killed
+56: lit_bool, replace `true` with `false`, at src/reader.rs@1562:35-1562:39(fn Reader < R >::read_byte_record) ... killed
+57: stmt_call, remove `record . clone_from (& headers . byte_record) ;`, at src/reader.rs@1563:16-1563:55(fn Reader < R >::read_byte_record) ... killed
+58: stmt_call, remove `record . trim () ;`, at src/reader.rs@1565:20-1565:33(fn Reader < R >::read_byte_record) ... NOT COVERED
+59: unop_not, remove `!`, at src/reader.rs@1567:26-1567:27(fn Reader < R >::read_byte_record) ... killed
+60: lit_bool, replace `true` with `false`, at src/reader.rs@1571:27-1571:31(fn Reader < R >::read_byte_record) ... killed
+61: unop_not, remove `!`, at src/reader.rs@1572:11-1572:12(fn Reader < R >::read_byte_record) ... killed
+62: binop_bool, replace `&&` with `||`, at src/reader.rs@1572:30-1572:32(fn Reader < R >::read_byte_record) ... killed
+63: stmt_call, remove `self . set_headers_impl (Err (record . clone ())) ;`, at src/reader.rs@1573:12-1573:54(fn Reader < R >::read_byte_record) ... killed
+64: stmt_call, remove `record . trim () ;`, at src/reader.rs@1580:20-1580:33(fn Reader < R >::read_byte_record) ... killed
+65: stmt_call, remove `record . trim () ;`, at src/reader.rs@1585:12-1585:25(fn Reader < R >::read_byte_record) ... SURVIVED
+66: stmt_call, remove `record . clear () ;`, at src/reader.rs@1599:8-1599:22(fn Reader < R >::read_byte_record_impl) ... SURVIVED
+67: stmt_call, remove `record . set_position (Some (self . state . cur_pos . clone ())) ;`, at src/reader.rs@1600:8-1600:61(fn Reader < R >::read_byte_record_impl) ... killed
+68: lit_bool, replace `false` with `true`, at src/reader.rs@1602:22-1602:27(fn Reader < R >::read_byte_record_impl) ... NOT COVERED
+69: lit_int, replace `0` with `1`, at src/reader.rs@1604:40-1604:41(fn Reader < R >::read_byte_record_impl) ... killed
+70: lit_int, replace `0` with `1`, at src/reader.rs@1604:43-1604:44(fn Reader < R >::read_byte_record_impl) ... killed
+71: stmt_call, remove `self . rdr . consume (nin) ;`, at src/reader.rs@1615:12-1615:33(fn Reader < R >::read_byte_record_impl) ... killed
+72: binop_num, replace `+` with `-`, at src/reader.rs@1619:31-1619:32(fn Reader < R >::read_byte_record_impl) ... killed
+73: stmt_call, remove `self . state . cur_pos . set_byte (byte + nin as u64) . set_line (self . core . line ()) ;`, at src/reader.rs@1617:12-1620:43(fn Reader < R >::read_byte_record_impl) ... killed
+74: stmt_call, remove `record . expand_fields () ;`, at src/reader.rs@1626:20-1626:42(fn Reader < R >::read_byte_record_impl) ... killed (timeout)
+75: stmt_call, remove `record . expand_ends () ;`, at src/reader.rs@1630:20-1630:40(fn Reader < R >::read_byte_record_impl) ... killed (timeout)
+76: stmt_call, remove `record . set_len (endlen) ;`, at src/reader.rs@1634:20-1634:42(fn Reader < R >::read_byte_record_impl) ... killed
+77: lit_bool, replace `true` with `false`, at src/reader.rs@1636:30-1636:34(fn Reader < R >::read_byte_record_impl) ... killed
+78: lit_bool, replace `true` with `false`, at src/reader.rs@1639:37-1639:41(fn Reader < R >::read_byte_record_impl) ... SURVIVED
+79: lit_bool, replace `false` with `true`, at src/reader.rs@1640:30-1640:35(fn Reader < R >::read_byte_record_impl) ... killed
+80: lit_bool, replace `true` with `false`, at src/reader.rs@1812:28-1812:32(fn Reader < R >::seek) ... SURVIVED
+81: binop_eq, replace `==` with `!=`, at src/reader.rs@1813:22-1813:24(fn Reader < R >::seek) ... killed
+82: stmt_call, remove `self . core . reset () ;`, at src/reader.rs@1817:8-1817:25(fn Reader < R >::seek) ... SURVIVED
+83: stmt_call, remove `self . core . set_line (pos . line ()) ;`, at src/reader.rs@1818:8-1818:38(fn Reader < R >::seek) ... killed
+84: lit_bool, replace `false` with `true`, at src/reader.rs@1820:25-1820:30(fn Reader < R >::seek) ... killed
+85: lit_bool, replace `true` with `false`, at src/reader.rs@1843:28-1843:32(fn Reader < R >::seek_raw) ... NOT COVERED
+86: stmt_call, remove `self . core . reset () ;`, at src/reader.rs@1845:8-1845:25(fn Reader < R >::seek_raw) ... NOT COVERED
+87: stmt_call, remove `self . core . set_line (pos . line ()) ;`, at src/reader.rs@1846:8-1846:38(fn Reader < R >::seek_raw) ... NOT COVERED
+88: lit_bool, replace `false` with `true`, at src/reader.rs@1848:25-1848:30(fn Reader < R >::seek_raw) ... NOT COVERED
+89: lit_int, replace `1` with `2`, at src/reader.rs@1857:46-1857:47(fn ReaderState::add_record) ... killed
+90: lit_int, replace `1` with `0`, at src/reader.rs@1857:46-1857:47(fn ReaderState::add_record) ... killed
+91: stmt_call, remove `self . cur_pos . set_record (i . checked_add (1) . unwrap ()) ;`, at src/reader.rs@1857:8-1857:58(fn ReaderState::add_record) ... killed
+92: unop_not, remove `!`, at src/reader.rs@1858:11-1858:12(fn ReaderState::add_record) ... killed
+93: binop_eq, replace `!=` with `==`, at src/reader.rs@1862:43-1862:45(fn ReaderState::add_record) ... killed
+94: unop_not, remove `!`, at src/reader.rs@1889:25-1889:26(fn DeserializeRecordsIntoIter < R, D >::new) ... NOT COVERED
+95: unop_not, remove `!`, at src/reader.rs@1947:25-1947:26(fn DeserializeRecordsIter < 'r, R, D >::new) ... NOT COVERED
+96: lit_bool, replace `false` with `true`, at src/serializer.rs@461:39-461:44(fn SeHeader < 'w, W >::wrote_header) ... killed
+97: lit_bool, replace `true` with `false`, at src/serializer.rs@462:54-462:58(fn SeHeader < 'w, W >::wrote_header) ... killed
+98: lit_int, replace `8` with `9`, at src/writer.rs@34:22-34:23(fn WriterBuilder::default) ... SURVIVED
+99: lit_int, replace `8` with `7`, at src/writer.rs@34:22-34:23(fn WriterBuilder::default) ... SURVIVED
+100: lit_int, replace `1` with `2`, at src/writer.rs@34:27-34:28(fn WriterBuilder::default) ... SURVIVED
+101: lit_int, replace `1` with `0`, at src/writer.rs@34:27-34:28(fn WriterBuilder::default) ... killed (timeout)
+102: lit_int, replace `10` with `11`, at src/writer.rs@34:32-34:34(fn WriterBuilder::default) ... SURVIVED
+103: lit_int, replace `10` with `9`, at src/writer.rs@34:32-34:34(fn WriterBuilder::default) ... SURVIVED
+104: binop_num, replace `*` with `/`, at src/writer.rs@34:24-34:25(fn WriterBuilder::default) ... killed (timeout)
+105: lit_bool, replace `false` with `true`, at src/writer.rs@35:22-35:27(fn WriterBuilder::default) ... killed
+106: lit_bool, replace `true` with `false`, at src/writer.rs@36:25-36:29(fn WriterBuilder::default) ... killed
+107: stmt_call, remove `self . builder . delimiter (delimiter) ;`, at src/writer.rs@143:8-143:41(fn WriterBuilder::delimiter) ... NOT COVERED
+108: stmt_call, remove `self . builder . terminator (term . to_core ()) ;`, at src/writer.rs@322:8-322:47(fn WriterBuilder::terminator) ... NOT COVERED
+109: stmt_call, remove `self . builder . quote_style (style . to_core ()) ;`, at src/writer.rs@379:8-379:49(fn WriterBuilder::quote_style) ... NOT COVERED
+110: stmt_call, remove `self . builder . quote (quote) ;`, at src/writer.rs@407:8-407:33(fn WriterBuilder::quote) ... NOT COVERED
+111: stmt_call, remove `self . builder . double_quote (yes) ;`, at src/writer.rs@436:8-436:38(fn WriterBuilder::double_quote) ... NOT COVERED
+112: stmt_call, remove `self . builder . escape (escape) ;`, at src/writer.rs@469:8-469:35(fn WriterBuilder::escape) ... NOT COVERED
+113: unop_not, remove `!`, at src/writer.rs@563:33-563:34(fn Writer < W >::drop) ... SURVIVED
+114: binop_bool, replace `&&` with `||`, at src/writer.rs@563:30-563:32(fn Writer < W >::drop) ... killed
+115: lit_int, replace `0` with `1`, at src/writer.rs@606:63-606:64(fn Writer < W >::new) ... killed
+116: lit_int, replace `0` with `1`, at src/writer.rs@611:32-611:33(fn Writer < W >::new) ... killed
+117: lit_bool, replace `false` with `true`, at src/writer.rs@612:26-612:31(fn Writer < W >::new) ... SURVIVED
+118: lit_int, replace `2` with `3`, at src/writer.rs@949:13-949:14(fn Writer < W >::write_byte_record) ... SURVIVED
+119: lit_int, replace `2` with `1`, at src/writer.rs@949:13-949:14(fn Writer < W >::write_byte_record) ... SURVIVED
+120: binop_num, replace `*` with `/`, at src/writer.rs@949:15-949:16(fn Writer < W >::write_byte_record) ... SURVIVED
+121: lit_int, replace `1` with `2`, at src/writer.rs@951:43-951:44(fn Writer < W >::write_byte_record) ... SURVIVED
+122: lit_int, replace `1` with `0`, at src/writer.rs@951:43-951:44(fn Writer < W >::write_byte_record) ... SURVIVED
+123: binop_num, replace `+` with `-`, at src/writer.rs@951:12-951:13(fn Writer < W >::write_byte_record) ... SURVIVED
+124: lit_int, replace `2` with `3`, at src/writer.rs@953:15-953:16(fn Writer < W >::write_byte_record) ... SURVIVED
+125: lit_int, replace `2` with `1`, at src/writer.rs@953:15-953:16(fn Writer < W >::write_byte_record) ... SURVIVED
+126: binop_num, replace `*` with `/`, at src/writer.rs@953:17-953:18(fn Writer < W >::write_byte_record) ... SURVIVED
+127: binop_num, replace `+` with `-`, at src/writer.rs@953:12-953:13(fn Writer < W >::write_byte_record) ... SURVIVED
+128: lit_int, replace `2` with `3`, at src/writer.rs@955:14-955:15(fn Writer < W >::write_byte_record) ... SURVIVED
+129: lit_int, replace `2` with `1`, at src/writer.rs@955:14-955:15(fn Writer < W >::write_byte_record) ... SURVIVED
+130: binop_num, replace `+` with `-`, at src/writer.rs@955:12-955:13(fn Writer < W >::write_byte_record) ... SURVIVED
+131: binop_cmp, replace `<` with `<=`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
+132: binop_cmp, replace `<` with `>=`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
+133: binop_cmp, replace `<` with `>`, at src/writer.rs@956:37-956:38(fn Writer < W >::write_byte_record) ... SURVIVED
+134: lit_bool, replace `true` with `false`, at src/writer.rs@959:24-959:28(fn Writer < W >::write_byte_record) ... killed
+135: unop_not, remove `!`, at src/writer.rs@961:15-961:16(fn Writer < W >::write_byte_record) ... killed
+136: lit_int, replace `0` with `1`, at src/writer.rs@962:36-962:37(fn Writer < W >::write_byte_record) ... killed
+137: lit_int, replace `1` with `2`, at src/writer.rs@963:33-963:34(fn Writer < W >::write_byte_record) ... killed
+138: lit_int, replace `1` with `0`, at src/writer.rs@963:33-963:34(fn Writer < W >::write_byte_record) ... killed
+139: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@963:16-963:35(fn Writer < W >::write_byte_record) ... killed
+140: lit_bool, replace `false` with `true`, at src/writer.rs@965:20-965:25(fn Writer < W >::write_byte_record) ... killed
+141: unop_not, remove `!`, at src/writer.rs@967:15-967:16(fn Writer < W >::write_byte_record) ... killed
+142: stmt_call, remove `self . buf . writable () [.. field . len ()] . copy_from_slice (field) ;`, at src/writer.rs@968:16-968:73(fn Writer < W >::write_byte_record) ... killed
+143: stmt_call, remove `self . buf . written (field . len ()) ;`, at src/writer.rs@969:16-969:45(fn Writer < W >::write_byte_record) ... killed
+144: lit_int, replace `0` with `1`, at src/writer.rs@971:36-971:37(fn Writer < W >::write_byte_record) ... NOT COVERED
+145: lit_int, replace `1` with `2`, at src/writer.rs@972:33-972:34(fn Writer < W >::write_byte_record) ... NOT COVERED
+146: lit_int, replace `1` with `0`, at src/writer.rs@972:33-972:34(fn Writer < W >::write_byte_record) ... NOT COVERED
+147: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@972:16-972:35(fn Writer < W >::write_byte_record) ... NOT COVERED
+148: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@982:16-982:38(fn Writer < W >::write_byte_record) ... NOT COVERED
+149: lit_int, replace `0` with `1`, at src/writer.rs@983:36-983:37(fn Writer < W >::write_byte_record) ... NOT COVERED
+150: lit_int, replace `1` with `2`, at src/writer.rs@984:33-984:34(fn Writer < W >::write_byte_record) ... NOT COVERED
+151: lit_int, replace `1` with `0`, at src/writer.rs@984:33-984:34(fn Writer < W >::write_byte_record) ... NOT COVERED
+152: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@984:16-984:35(fn Writer < W >::write_byte_record) ... NOT COVERED
+153: lit_int, replace `0` with `1`, at src/writer.rs@1033:39-1033:40(fn Writer < W >::write_field_impl) ... killed
+154: binop_cmp, replace `>` with `<`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
+155: binop_cmp, replace `>` with `<=`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
+156: binop_cmp, replace `>` with `>=`, at src/writer.rs@1033:37-1033:38(fn Writer < W >::write_field_impl) ... killed
+157: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1040:12-1040:34(fn Writer < W >::write_field_impl) ... killed
+158: lit_int, replace `1` with `2`, at src/writer.rs@1043:49-1043:50(fn Writer < W >::write_field_impl) ... killed
+159: lit_int, replace `1` with `0`, at src/writer.rs@1043:49-1043:50(fn Writer < W >::write_field_impl) ... killed
+160: lit_bool, replace `true` with `false`, at src/writer.rs@1058:30-1058:34(fn Writer < W >::flush) ... SURVIVED
+161: lit_bool, replace `false` with `true`, at src/writer.rs@1060:30-1060:35(fn Writer < W >::flush) ... SURVIVED
+162: stmt_call, remove `self . buf . clear () ;`, at src/writer.rs@1062:8-1062:24(fn Writer < W >::flush) ... SURVIVED
+163: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1082:12-1082:34(fn Writer < W >::write_delimiter) ... killed
+164: stmt_call, remove `self . buf . written (nout) ;`, at src/writer.rs@1095:12-1095:34(fn Writer < W >::write_terminator) ... killed
+165: lit_int, replace `0` with `1`, at src/writer.rs@1098:48-1098:49(fn Writer < W >::write_terminator) ... killed
+166: lit_int, replace `0` with `1`, at src/writer.rs@1113:36-1113:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+167: lit_int, replace `1` with `2`, at src/writer.rs@1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+168: lit_int, replace `1` with `0`, at src/writer.rs@1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+169: lit_int, replace `2` with `3`, at src/writer.rs@1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+170: lit_int, replace `2` with `1`, at src/writer.rs@1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+171: stmt_call, remove `self . buf . written (2) ;`, at src/writer.rs@1115:16-1115:35(fn Writer < W >::write_terminator_into_buffer) ... NOT COVERED
+172: lit_int, replace `0` with `1`, at src/writer.rs@1118:36-1118:37(fn Writer < W >::write_terminator_into_buffer) ... killed
+173: lit_int, replace `1` with `2`, at src/writer.rs@1119:33-1119:34(fn Writer < W >::write_terminator_into_buffer) ... killed
+174: lit_int, replace `1` with `0`, at src/writer.rs@1119:33-1119:34(fn Writer < W >::write_terminator_into_buffer) ... killed
+175: stmt_call, remove `self . buf . written (1) ;`, at src/writer.rs@1119:16-1119:35(fn Writer < W >::write_terminator_into_buffer) ... killed
+176: lit_int, replace `0` with `1`, at src/writer.rs@1123:36-1123:37(fn Writer < W >::write_terminator_into_buffer) ... SURVIVED
+177: unop_not, remove `!`, at src/writer.rs@1128:11-1128:12(fn Writer < W >::check_field_count) ... killed
+178: binop_eq, replace `!=` with `==`, at src/writer.rs@1134:43-1134:45(fn Writer < W >::check_field_count) ... killed
+179: lit_int, replace `0` with `1`, at src/writer.rs@1174:19-1174:20(fn Buffer::clear) ... SURVIVED
+180: binop_eq, replace `==` with `!=`, at src/lib.rs@283:13-283:15(fn Trim::should_trim_fields) ... killed
+181: binop_eq, replace `==` with `!=`, at src/lib.rs@283:38-283:40(fn Trim::should_trim_fields) ... killed
+182: binop_bool, replace `||` with `&&`, at src/lib.rs@283:30-283:32(fn Trim::should_trim_fields) ... killed
+183: binop_eq, replace `==` with `!=`, at src/lib.rs@287:13-287:15(fn Trim::should_trim_headers) ... killed
+184: binop_eq, replace `==` with `!=`, at src/lib.rs@287:39-287:41(fn Trim::should_trim_headers) ... killed
+185: binop_bool, replace `||` with `&&`, at src/lib.rs@287:31-287:33(fn Trim::should_trim_headers) ... killed
 SURVIVED
     src/deserializer.rs
             13/22(59.09%) mutants survived
@@ -204,91 +208,93 @@ SURVIVED
     src/lib.rs
             all 6 mutants killed
     src/reader.rs
-            32/72(44.44%) mutants survived
+            32/73(43.84%) mutants survived
         23: replace `8` with `9` at 37:22-37:23(fn ReaderBuilder::default)
         24: replace `8` with `7` at 37:22-37:23(fn ReaderBuilder::default)
         25: replace `1` with `2` at 37:27-37:28(fn ReaderBuilder::default)
         27: replace `10` with `11` at 37:32-37:34(fn ReaderBuilder::default)
         28: replace `10` with `9` at 37:32-37:34(fn ReaderBuilder::default)
-        30: replace `true` with `false` at 39:25-39:29(fn ReaderBuilder::default)
-        31: remove `self . builder . delimiter (delimiter) ;` at 167:8-167:41(fn ReaderBuilder::delimiter) NOT COVERED
-        32: remove `self . builder . terminator (term . to_core ()) ;` at 388:8-388:47(fn ReaderBuilder::terminator) NOT COVERED
-        33: remove `self . builder . quote (quote) ;` at 422:8-422:33(fn ReaderBuilder::quote) NOT COVERED
-        34: remove `self . builder . escape (escape) ;` at 461:8-461:35(fn ReaderBuilder::escape) NOT COVERED
-        35: remove `self . builder . double_quote (yes) ;` at 498:8-498:38(fn ReaderBuilder::double_quote) NOT COVERED
-        36: remove `self . builder . quoting (yes) ;` at 535:8-535:33(fn ReaderBuilder::quoting) NOT COVERED
-        37: remove `self . builder . comment (comment) ;` at 573:8-573:37(fn ReaderBuilder::comment) NOT COVERED
-        38: remove `self . builder . ascii () ;` at 607:8-607:28(fn ReaderBuilder::ascii) NOT COVERED
-        39: remove `self . builder . nfa (yes) ;` at 624:8-624:29(fn ReaderBuilder::nfa) NOT COVERED
-        45: remove `self . set_headers_impl (Ok (headers)) ;` at 1404:8-1404:42(fn Reader < R >::set_headers) NOT COVERED
-        46: remove `self . set_headers_impl (Err (headers)) ;` at 1435:8-1435:43(fn Reader < R >::set_byte_headers) NOT COVERED
-        49: remove `record . trim () ;` at 1511:12-1511:25(fn Reader < R >::read_record)
-        52: replace `&&` with `||` at 1557:30-1557:32(fn Reader < R >::read_byte_record)
-        57: remove `record . trim () ;` at 1565:20-1565:33(fn Reader < R >::read_byte_record) NOT COVERED
-        64: remove `record . trim () ;` at 1585:12-1585:25(fn Reader < R >::read_byte_record)
-        65: remove `record . clear () ;` at 1599:8-1599:22(fn Reader < R >::read_byte_record_impl)
-        67: replace `false` with `true` at 1602:22-1602:27(fn Reader < R >::read_byte_record_impl) NOT COVERED
-        77: replace `true` with `false` at 1639:37-1639:41(fn Reader < R >::read_byte_record_impl)
-        79: replace `true` with `false` at 1812:28-1812:32(fn Reader < R >::seek)
-        81: remove `self . core . reset () ;` at 1817:8-1817:25(fn Reader < R >::seek)
-        84: replace `true` with `false` at 1843:28-1843:32(fn Reader < R >::seek_raw) NOT COVERED
-        85: remove `self . core . reset () ;` at 1845:8-1845:25(fn Reader < R >::seek_raw) NOT COVERED
-        86: remove `self . core . set_line (pos . line ()) ;` at 1846:8-1846:38(fn Reader < R >::seek_raw) NOT COVERED
-        87: replace `false` with `true` at 1848:25-1848:30(fn Reader < R >::seek_raw) NOT COVERED
-        93: remove `!` at 1889:25-1889:26(fn DeserializeRecordsIntoIter < R, D >::new) NOT COVERED
-        94: remove `!` at 1947:25-1947:26(fn DeserializeRecordsIter < 'r, R, D >::new) NOT COVERED
+        31: replace `true` with `false` at 39:25-39:29(fn ReaderBuilder::default)
+        32: remove `self . builder . delimiter (delimiter) ;` at 167:8-167:41(fn ReaderBuilder::delimiter) NOT COVERED
+        33: remove `self . builder . terminator (term . to_core ()) ;` at 388:8-388:47(fn ReaderBuilder::terminator) NOT COVERED
+        34: remove `self . builder . quote (quote) ;` at 422:8-422:33(fn ReaderBuilder::quote) NOT COVERED
+        35: remove `self . builder . escape (escape) ;` at 461:8-461:35(fn ReaderBuilder::escape) NOT COVERED
+        36: remove `self . builder . double_quote (yes) ;` at 498:8-498:38(fn ReaderBuilder::double_quote) NOT COVERED
+        37: remove `self . builder . quoting (yes) ;` at 535:8-535:33(fn ReaderBuilder::quoting) NOT COVERED
+        38: remove `self . builder . comment (comment) ;` at 573:8-573:37(fn ReaderBuilder::comment) NOT COVERED
+        39: remove `self . builder . ascii () ;` at 607:8-607:28(fn ReaderBuilder::ascii) NOT COVERED
+        40: remove `self . builder . nfa (yes) ;` at 624:8-624:29(fn ReaderBuilder::nfa) NOT COVERED
+        46: remove `self . set_headers_impl (Ok (headers)) ;` at 1404:8-1404:42(fn Reader < R >::set_headers) NOT COVERED
+        47: remove `self . set_headers_impl (Err (headers)) ;` at 1435:8-1435:43(fn Reader < R >::set_byte_headers) NOT COVERED
+        50: remove `record . trim () ;` at 1511:12-1511:25(fn Reader < R >::read_record)
+        53: replace `&&` with `||` at 1557:30-1557:32(fn Reader < R >::read_byte_record)
+        58: remove `record . trim () ;` at 1565:20-1565:33(fn Reader < R >::read_byte_record) NOT COVERED
+        65: remove `record . trim () ;` at 1585:12-1585:25(fn Reader < R >::read_byte_record)
+        66: remove `record . clear () ;` at 1599:8-1599:22(fn Reader < R >::read_byte_record_impl)
+        68: replace `false` with `true` at 1602:22-1602:27(fn Reader < R >::read_byte_record_impl) NOT COVERED
+        78: replace `true` with `false` at 1639:37-1639:41(fn Reader < R >::read_byte_record_impl)
+        80: replace `true` with `false` at 1812:28-1812:32(fn Reader < R >::seek)
+        82: remove `self . core . reset () ;` at 1817:8-1817:25(fn Reader < R >::seek)
+        85: replace `true` with `false` at 1843:28-1843:32(fn Reader < R >::seek_raw) NOT COVERED
+        86: remove `self . core . reset () ;` at 1845:8-1845:25(fn Reader < R >::seek_raw) NOT COVERED
+        87: remove `self . core . set_line (pos . line ()) ;` at 1846:8-1846:38(fn Reader < R >::seek_raw) NOT COVERED
+        88: replace `false` with `true` at 1848:25-1848:30(fn Reader < R >::seek_raw) NOT COVERED
+        94: remove `!` at 1889:25-1889:26(fn DeserializeRecordsIntoIter < R, D >::new) NOT COVERED
+        95: remove `!` at 1947:25-1947:26(fn DeserializeRecordsIter < 'r, R, D >::new) NOT COVERED
     src/serializer.rs
             all 2 mutants killed
     src/writer.rs
-            47/79(59.49%) mutants survived
-        97: replace `8` with `9` at 34:22-34:23(fn WriterBuilder::default)
-        98: replace `8` with `7` at 34:22-34:23(fn WriterBuilder::default)
-        99: replace `1` with `2` at 34:27-34:28(fn WriterBuilder::default)
-        101: replace `10` with `11` at 34:32-34:34(fn WriterBuilder::default)
-        102: replace `10` with `9` at 34:32-34:34(fn WriterBuilder::default)
-        105: remove `self . builder . delimiter (delimiter) ;` at 143:8-143:41(fn WriterBuilder::delimiter) NOT COVERED
-        106: remove `self . builder . terminator (term . to_core ()) ;` at 322:8-322:47(fn WriterBuilder::terminator) NOT COVERED
-        107: remove `self . builder . quote_style (style . to_core ()) ;` at 379:8-379:49(fn WriterBuilder::quote_style) NOT COVERED
-        108: remove `self . builder . quote (quote) ;` at 407:8-407:33(fn WriterBuilder::quote) NOT COVERED
-        109: remove `self . builder . double_quote (yes) ;` at 436:8-436:38(fn WriterBuilder::double_quote) NOT COVERED
-        110: remove `self . builder . escape (escape) ;` at 469:8-469:35(fn WriterBuilder::escape) NOT COVERED
-        111: remove `!` at 563:33-563:34(fn Writer < W >::drop)
-        115: replace `false` with `true` at 612:26-612:31(fn Writer < W >::new)
-        116: replace `2` with `3` at 949:13-949:14(fn Writer < W >::write_byte_record)
-        117: replace `2` with `1` at 949:13-949:14(fn Writer < W >::write_byte_record)
-        118: replace `1` with `2` at 951:43-951:44(fn Writer < W >::write_byte_record)
-        119: replace `1` with `0` at 951:43-951:44(fn Writer < W >::write_byte_record)
-        120: replace `+` with `-` at 951:12-951:13(fn Writer < W >::write_byte_record)
-        121: replace `2` with `3` at 953:15-953:16(fn Writer < W >::write_byte_record)
-        122: replace `2` with `1` at 953:15-953:16(fn Writer < W >::write_byte_record)
-        123: replace `+` with `-` at 953:12-953:13(fn Writer < W >::write_byte_record)
-        124: replace `2` with `3` at 955:14-955:15(fn Writer < W >::write_byte_record)
-        125: replace `2` with `1` at 955:14-955:15(fn Writer < W >::write_byte_record)
-        126: replace `+` with `-` at 955:12-955:13(fn Writer < W >::write_byte_record)
-        127: replace `<` with `<=` at 956:37-956:38(fn Writer < W >::write_byte_record)
-        128: replace `<` with `>=` at 956:37-956:38(fn Writer < W >::write_byte_record)
-        129: replace `<` with `>` at 956:37-956:38(fn Writer < W >::write_byte_record)
-        140: replace `0` with `1` at 971:36-971:37(fn Writer < W >::write_byte_record) NOT COVERED
-        141: replace `1` with `2` at 972:33-972:34(fn Writer < W >::write_byte_record) NOT COVERED
-        142: replace `1` with `0` at 972:33-972:34(fn Writer < W >::write_byte_record) NOT COVERED
-        143: remove `self . buf . written (1) ;` at 972:16-972:35(fn Writer < W >::write_byte_record) NOT COVERED
-        144: remove `self . buf . written (nout) ;` at 982:16-982:38(fn Writer < W >::write_byte_record) NOT COVERED
-        145: replace `0` with `1` at 983:36-983:37(fn Writer < W >::write_byte_record) NOT COVERED
-        146: replace `1` with `2` at 984:33-984:34(fn Writer < W >::write_byte_record) NOT COVERED
-        147: replace `1` with `0` at 984:33-984:34(fn Writer < W >::write_byte_record) NOT COVERED
-        148: remove `self . buf . written (1) ;` at 984:16-984:35(fn Writer < W >::write_byte_record) NOT COVERED
-        156: replace `true` with `false` at 1058:30-1058:34(fn Writer < W >::flush)
-        157: replace `false` with `true` at 1060:30-1060:35(fn Writer < W >::flush)
-        158: remove `self . buf . clear () ;` at 1062:8-1062:24(fn Writer < W >::flush)
-        162: replace `0` with `1` at 1113:36-1113:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        163: replace `1` with `2` at 1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        164: replace `1` with `0` at 1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        165: replace `2` with `3` at 1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        166: replace `2` with `1` at 1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        167: remove `self . buf . written (2) ;` at 1115:16-1115:35(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
-        172: replace `0` with `1` at 1123:36-1123:37(fn Writer < W >::write_terminator_into_buffer)
-        175: replace `0` with `1` at 1174:19-1174:20(fn Buffer::clear)
+            49/82(59.76%) mutants survived
+        98: replace `8` with `9` at 34:22-34:23(fn WriterBuilder::default)
+        99: replace `8` with `7` at 34:22-34:23(fn WriterBuilder::default)
+        100: replace `1` with `2` at 34:27-34:28(fn WriterBuilder::default)
+        102: replace `10` with `11` at 34:32-34:34(fn WriterBuilder::default)
+        103: replace `10` with `9` at 34:32-34:34(fn WriterBuilder::default)
+        107: remove `self . builder . delimiter (delimiter) ;` at 143:8-143:41(fn WriterBuilder::delimiter) NOT COVERED
+        108: remove `self . builder . terminator (term . to_core ()) ;` at 322:8-322:47(fn WriterBuilder::terminator) NOT COVERED
+        109: remove `self . builder . quote_style (style . to_core ()) ;` at 379:8-379:49(fn WriterBuilder::quote_style) NOT COVERED
+        110: remove `self . builder . quote (quote) ;` at 407:8-407:33(fn WriterBuilder::quote) NOT COVERED
+        111: remove `self . builder . double_quote (yes) ;` at 436:8-436:38(fn WriterBuilder::double_quote) NOT COVERED
+        112: remove `self . builder . escape (escape) ;` at 469:8-469:35(fn WriterBuilder::escape) NOT COVERED
+        113: remove `!` at 563:33-563:34(fn Writer < W >::drop)
+        117: replace `false` with `true` at 612:26-612:31(fn Writer < W >::new)
+        118: replace `2` with `3` at 949:13-949:14(fn Writer < W >::write_byte_record)
+        119: replace `2` with `1` at 949:13-949:14(fn Writer < W >::write_byte_record)
+        120: replace `*` with `/` at 949:15-949:16(fn Writer < W >::write_byte_record)
+        121: replace `1` with `2` at 951:43-951:44(fn Writer < W >::write_byte_record)
+        122: replace `1` with `0` at 951:43-951:44(fn Writer < W >::write_byte_record)
+        123: replace `+` with `-` at 951:12-951:13(fn Writer < W >::write_byte_record)
+        124: replace `2` with `3` at 953:15-953:16(fn Writer < W >::write_byte_record)
+        125: replace `2` with `1` at 953:15-953:16(fn Writer < W >::write_byte_record)
+        126: replace `*` with `/` at 953:17-953:18(fn Writer < W >::write_byte_record)
+        127: replace `+` with `-` at 953:12-953:13(fn Writer < W >::write_byte_record)
+        128: replace `2` with `3` at 955:14-955:15(fn Writer < W >::write_byte_record)
+        129: replace `2` with `1` at 955:14-955:15(fn Writer < W >::write_byte_record)
+        130: replace `+` with `-` at 955:12-955:13(fn Writer < W >::write_byte_record)
+        131: replace `<` with `<=` at 956:37-956:38(fn Writer < W >::write_byte_record)
+        132: replace `<` with `>=` at 956:37-956:38(fn Writer < W >::write_byte_record)
+        133: replace `<` with `>` at 956:37-956:38(fn Writer < W >::write_byte_record)
+        144: replace `0` with `1` at 971:36-971:37(fn Writer < W >::write_byte_record) NOT COVERED
+        145: replace `1` with `2` at 972:33-972:34(fn Writer < W >::write_byte_record) NOT COVERED
+        146: replace `1` with `0` at 972:33-972:34(fn Writer < W >::write_byte_record) NOT COVERED
+        147: remove `self . buf . written (1) ;` at 972:16-972:35(fn Writer < W >::write_byte_record) NOT COVERED
+        148: remove `self . buf . written (nout) ;` at 982:16-982:38(fn Writer < W >::write_byte_record) NOT COVERED
+        149: replace `0` with `1` at 983:36-983:37(fn Writer < W >::write_byte_record) NOT COVERED
+        150: replace `1` with `2` at 984:33-984:34(fn Writer < W >::write_byte_record) NOT COVERED
+        151: replace `1` with `0` at 984:33-984:34(fn Writer < W >::write_byte_record) NOT COVERED
+        152: remove `self . buf . written (1) ;` at 984:16-984:35(fn Writer < W >::write_byte_record) NOT COVERED
+        160: replace `true` with `false` at 1058:30-1058:34(fn Writer < W >::flush)
+        161: replace `false` with `true` at 1060:30-1060:35(fn Writer < W >::flush)
+        162: remove `self . buf . clear () ;` at 1062:8-1062:24(fn Writer < W >::flush)
+        166: replace `0` with `1` at 1113:36-1113:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        167: replace `1` with `2` at 1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        168: replace `1` with `0` at 1114:36-1114:37(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        169: replace `2` with `3` at 1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        170: replace `2` with `1` at 1115:33-1115:34(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        171: remove `self . buf . written (2) ;` at 1115:16-1115:35(fn Writer < W >::write_terminator_into_buffer) NOT COVERED
+        176: replace `0` with `1` at 1123:36-1123:37(fn Writer < W >::write_terminator_into_buffer)
+        179: replace `0` with `1` at 1174:19-1174:20(fn Buffer::clear)
 
-181 generated mutations
-89(49.17%) mutants killed, 3(1.66%) by timeout
-92(50.83%) mutants SURVIVED, 47(25.97%) NOT COVERED
+185 generated mutations
+91(49.19%) mutants killed, 4(2.16%) by timeout
+94(50.81%) mutants SURVIVED, 47(25.41%) NOT COVERED
