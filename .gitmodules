@@ -1,3 +1,6 @@
 [submodule "mutagen"]
 	path = mutagen
 	url = ./mutagen
+[submodule "regex"]
+	path = regex
+	url = ./regex
