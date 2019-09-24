@@ -1,3 +1,4 @@
 [submodule "mutagen"]
 	path = mutagen
-	url = https://github.com/power-fungus/mutagen
+	url = ./mutagen
+	#url = https://github.com/power-fungus/mutagen
