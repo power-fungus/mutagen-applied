@@ -88,6 +88,7 @@ tokio-net = { version = "=0.2.0-alpha.6", optional = true, path = "../tokio-net"
 tokio-executor = { version = "=0.2.0-alpha.6", optional = true, path = "../tokio-executor", features = ["tracing"] }
 
 [dev-dependencies]
+mutagen = {path = "../../mutagen/mutagen"}
 tokio-test = { version = "=0.2.0-alpha.6", path = "../tokio-test" }
 
 futures-preview = "=0.3.0-alpha.19"

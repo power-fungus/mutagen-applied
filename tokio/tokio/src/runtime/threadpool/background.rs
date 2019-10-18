@@ -43,7 +43,7 @@ pub(crate) fn spawn(clock: &Clock) -> io::Result<Background> {
     })
 }
 
-impl Background {
+#[cfg_attr(test, ::mutagen::mutate)] impl Background {
     pub(super) fn reactor(&self) -> &driver::Handle {
         &self.reactor_handle
     }
@@ -53,7 +53,7 @@ impl Background {
     }
 }
 
-impl Drop for Background {
+#[cfg_attr(test, ::mutagen::mutate)] impl Drop for Background {
     fn drop(&mut self) {
         let _ = self.shutdown_tx.take().unwrap().send(());
         let _ = self.thread.take().unwrap().join();

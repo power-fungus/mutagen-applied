@@ -95,7 +95,7 @@ pub struct Spawn(());
 /// [`DefaultExecutor`].
 ///
 /// [`DefaultExecutor`]: struct.DefaultExecutor.html
-pub fn spawn<F>(f: F) -> Spawn
+#[cfg_attr(test, ::mutagen::mutate)] pub fn spawn<F>(f: F) -> Spawn
 where
     F: Future<Output = ()> + 'static + Send,
 {

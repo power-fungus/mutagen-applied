@@ -57,7 +57,7 @@ struct Inner {
 
 // ===== impl Runtime =====
 
-impl Runtime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Runtime {
     /// Create a new runtime instance with default configuration values.
     ///
     /// This results in a reactor, thread pool, and timer being initialized. The

@@ -15,7 +15,7 @@ pub struct TaskExecutor {
     pub(super) inner: Sender,
 }
 
-impl TaskExecutor {
+#[cfg_attr(test, ::mutagen::mutate)] impl TaskExecutor {
     /// Spawn a future onto the Tokio runtime.
     ///
     /// This spawns the given future onto the runtime's executor, usually a
@@ -54,7 +54,7 @@ impl TaskExecutor {
     }
 }
 
-impl tokio_executor::Executor for TaskExecutor {
+#[cfg_attr(test, ::mutagen::mutate)] impl tokio_executor::Executor for TaskExecutor {
     fn spawn(
         &mut self,
         future: Pin<Box<dyn Future<Output = ()> + Send>>,
@@ -63,7 +63,7 @@ impl tokio_executor::Executor for TaskExecutor {
     }
 }
 
-impl<T> tokio_executor::TypedExecutor<T> for TaskExecutor
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> tokio_executor::TypedExecutor<T> for TaskExecutor
 where
     T: Future<Output = ()> + Send + 'static,
 {

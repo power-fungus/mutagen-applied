@@ -60,7 +60,7 @@ pub struct Builder {
     clock: Clock,
 }
 
-impl Builder {
+#[cfg_attr(test, ::mutagen::mutate)] impl Builder {
     /// Returns a new runtime builder initialized with default configuration
     /// values.
     ///
@@ -372,7 +372,7 @@ impl Builder {
     }
 }
 
-impl Default for Builder {
+#[cfg_attr(test, ::mutagen::mutate)] impl Default for Builder {
     fn default() -> Self {
         Self::new()
     }

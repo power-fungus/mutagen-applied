@@ -75,4 +75,4 @@ pub trait StreamExt: Stream {
     }
 }
 
-impl<T: ?Sized> StreamExt for T where T: Stream {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized> StreamExt for T where T: Stream {}

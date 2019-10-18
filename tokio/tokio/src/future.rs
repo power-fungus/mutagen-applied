@@ -66,4 +66,4 @@ pub trait FutureExt: Future {
     }
 }
 
-impl<T: ?Sized> FutureExt for T where T: Future {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized> FutureExt for T where T: Future {}

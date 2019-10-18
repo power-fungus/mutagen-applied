@@ -31,7 +31,7 @@ pub(super) type Parker = Timer<Reactor>;
 #[derive(Debug, Clone)]
 pub struct Handle(ExecutorHandle);
 
-impl Handle {
+#[cfg_attr(test, ::mutagen::mutate)] impl Handle {
     /// Spawn a future onto the `CurrentThread` runtime instance corresponding to this handle
     ///
     /// # Panics
@@ -59,7 +59,7 @@ impl Handle {
     }
 }
 
-impl<T> crate::executor::TypedExecutor<T> for Handle
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> crate::executor::TypedExecutor<T> for Handle
 where
     T: Future<Output = ()> + Send + 'static,
 {
@@ -74,19 +74,19 @@ pub struct RunError {
     inner: current_thread::RunError,
 }
 
-impl fmt::Display for RunError {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Display for RunError {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(fmt, "{}", self.inner)
     }
 }
 
-impl Error for RunError {
+#[cfg_attr(test, ::mutagen::mutate)] impl Error for RunError {
     fn source(&self) -> Option<&(dyn Error + 'static)> {
         self.inner.source()
     }
 }
 
-impl Runtime {
+#[cfg_attr(test, ::mutagen::mutate)] impl Runtime {
     /// Returns a new runtime initialized with default configuration values.
     pub fn new() -> io::Result<Runtime> {
         Builder::new().build()
