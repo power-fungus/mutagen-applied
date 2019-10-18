@@ -1,0 +1,13 @@
+# Patch dependencies to run all tests against versions of the crate in the
+# repository.
+[patch.crates-io]
+tokio = { path = "tokio" }
+tokio-codec = { path = "tokio-codec" }
+tokio-executor = { path = "tokio-executor" }
+tokio-fs = { path = "tokio-fs" }
+tokio-io = { path = "tokio-io" }
+tokio-macros = { path = "tokio-macros" }
+tokio-net = { path = "tokio-net" }
+tokio-sync = { path = "tokio-sync" }
+tokio-timer = { path = "tokio-timer" }
+tokio-tls = { path = "tokio-tls" }
