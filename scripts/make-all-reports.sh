@@ -7,7 +7,14 @@ git submodule update --init
 mkdir -p reports
 cargo install --path mutagen/mutagen-runner --root . --force --offline
 
-crates=$(cat crates)
+crates=$(ls crates)
+
+for crate in ${crates[@]}; do
+  echo $crate
+  pushd $crate
+  cargo test --no-run
+  popd
+done
 
 for crate in ${crates[@]}; do
   echo $crate
