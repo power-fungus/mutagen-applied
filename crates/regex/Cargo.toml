@@ -134,7 +134,7 @@ quickcheck = { version = "0.8", default-features = false }
 rand = "0.6.5"
 # To check README's example
 doc-comment = "0.3"
-mutagen = {path = "../mutagen/mutagen"}
+mutagen = {path = "../../mutagen/mutagen"}
 
 # Run the test suite on the default behavior of Regex::new.
 # This includes a mish mash of NFAs and DFAs, which are chosen automatically

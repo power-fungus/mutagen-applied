@@ -9,6 +9,8 @@ cargo install --path mutagen/mutagen-runner --root . --force --offline
 
 crates=$(ls crates)
 
+cd crates
+
 for crate in ${crates[@]}; do
   echo $crate
   pushd $crate
@@ -26,6 +28,6 @@ done
 for crate in ${crates[@]}; do
   echo $crate
   pushd $crate
-  ../bin/cargo-mutagen | tee ../reports/$crate.report
+  ../../bin/cargo-mutagen | tee ../../reports/$crate.report
   popd
 done

@@ -114,7 +114,7 @@ serde_derive = "1.0"
 tokio-timer = "0.2.8"
 brotli2 = "0.3.2"
 flate2 = "1.0.2"
-mutagen = {path = "../mutagen/mutagen"}
+mutagen = {path = "../../mutagen/mutagen"}
 
 [profile.release]
 lto = true
