@@ -41,7 +41,7 @@ struct Guard<'a, T> {
 ///
 /// To restore this read/write object from its `split::ReadHalf` and
 /// `split::WriteHalf` use `unsplit`.
-pub fn split<T>(stream: T) -> (ReadHalf<T>, WriteHalf<T>)
+#[cfg_attr(test, ::mutagen::mutate)] pub fn split<T>(stream: T) -> (ReadHalf<T>, WriteHalf<T>)
 where
     T: AsyncRead + AsyncWrite,
 {
@@ -59,7 +59,7 @@ where
     (rd, wr)
 }
 
-impl<T> ReadHalf<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> ReadHalf<T> {
     /// Reunite with a previously split `WriteHalf`.
     ///
     /// # Panics
@@ -81,7 +81,7 @@ impl<T> ReadHalf<T> {
     }
 }
 
-impl<T: AsyncRead> AsyncRead for ReadHalf<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: AsyncRead> AsyncRead for ReadHalf<T> {
     fn poll_read(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -101,7 +101,7 @@ impl<T: AsyncRead> AsyncRead for ReadHalf<T> {
     }
 }
 
-impl<T: AsyncWrite> AsyncWrite for WriteHalf<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: AsyncWrite> AsyncWrite for WriteHalf<T> {
     fn poll_write(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -131,7 +131,7 @@ impl<T: AsyncWrite> AsyncWrite for WriteHalf<T> {
     }
 }
 
-impl<T> Inner<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> Inner<T> {
     fn poll_lock(&self, cx: &mut Context<'_>) -> Poll<Guard<'_, T>> {
         if !self.locked.compare_and_swap(false, true, Acquire) {
             Poll::Ready(Guard { inner: self })
@@ -146,7 +146,7 @@ impl<T> Inner<T> {
     }
 }
 
-impl<T> Guard<'_, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> Guard<'_, T> {
     fn stream_pin(&mut self) -> Pin<&mut T> {
         // safety: the stream is pinned in `Arc` and the `Guard` ensures mutual
         // exclusion.
@@ -154,7 +154,7 @@ impl<T> Guard<'_, T> {
     }
 }
 
-impl<T> Drop for Guard<'_, T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T> Drop for Guard<'_, T> {
     fn drop(&mut self) {
         self.inner.locked.store(false, Release);
     }
@@ -165,13 +165,13 @@ unsafe impl<T: Send> Send for WriteHalf<T> {}
 unsafe impl<T: Sync> Sync for ReadHalf<T> {}
 unsafe impl<T: Sync> Sync for WriteHalf<T> {}
 
-impl<T: fmt::Debug> fmt::Debug for ReadHalf<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: fmt::Debug> fmt::Debug for ReadHalf<T> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt.debug_struct("split::ReadHalf").finish()
     }
 }
 
-impl<T: fmt::Debug> fmt::Debug for WriteHalf<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: fmt::Debug> fmt::Debug for WriteHalf<T> {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt.debug_struct("split::WriteHalf").finish()
     }

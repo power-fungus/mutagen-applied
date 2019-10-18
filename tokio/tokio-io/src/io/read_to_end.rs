@@ -30,7 +30,7 @@ struct Guard<'a> {
     len: usize,
 }
 
-impl Drop for Guard<'_> {
+#[cfg_attr(test, ::mutagen::mutate)] impl Drop for Guard<'_> {
     fn drop(&mut self) {
         unsafe {
             self.buf.set_len(self.len);
@@ -84,7 +84,7 @@ pub(super) fn read_to_end_internal<R: AsyncRead + ?Sized>(
     ret
 }
 
-impl<A> Future for ReadToEnd<'_, A>
+#[cfg_attr(test, ::mutagen::mutate)] impl<A> Future for ReadToEnd<'_, A>
 where
     A: AsyncRead + ?Sized + Unpin,
 {

@@ -130,15 +130,15 @@ macro_rules! deref_async_read {
     }
 }
 
-impl<T: ?Sized + AsyncRead + Unpin> AsyncRead for Box<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncRead + Unpin> AsyncRead for Box<T> {
     deref_async_read!();
 }
 
-impl<T: ?Sized + AsyncRead + Unpin> AsyncRead for &mut T {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncRead + Unpin> AsyncRead for &mut T {
     deref_async_read!();
 }
 
-impl<P> AsyncRead for Pin<P>
+#[cfg_attr(test, ::mutagen::mutate)] impl<P> AsyncRead for Pin<P>
 where
     P: DerefMut + Unpin,
     P::Target: AsyncRead,
@@ -156,7 +156,7 @@ where
     }
 }
 
-impl AsyncRead for &[u8] {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncRead for &[u8] {
     unsafe fn prepare_uninitialized_buffer(&self, _buf: &mut [u8]) -> bool {
         false
     }
@@ -170,7 +170,7 @@ impl AsyncRead for &[u8] {
     }
 }
 
-impl<T: AsRef<[u8]> + Unpin> AsyncRead for io::Cursor<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: AsRef<[u8]> + Unpin> AsyncRead for io::Cursor<T> {
     unsafe fn prepare_uninitialized_buffer(&self, _buf: &mut [u8]) -> bool {
         false
     }

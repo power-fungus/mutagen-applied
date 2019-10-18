@@ -29,7 +29,7 @@ where
     }
 }
 
-impl<T, U> Chain<T, U>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, U> Chain<T, U>
 where
     T: AsyncRead,
     U: AsyncRead,
@@ -64,7 +64,7 @@ where
     }
 }
 
-impl<T, U> fmt::Debug for Chain<T, U>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, U> fmt::Debug for Chain<T, U>
 where
     T: fmt::Debug,
     U: fmt::Debug,
@@ -77,7 +77,7 @@ where
     }
 }
 
-impl<T, U> AsyncRead for Chain<T, U>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, U> AsyncRead for Chain<T, U>
 where
     T: AsyncRead,
     U: AsyncRead,
@@ -99,7 +99,7 @@ where
     }
 }
 
-impl<T, U> AsyncBufRead for Chain<T, U>
+#[cfg_attr(test, ::mutagen::mutate)] impl<T, U> AsyncBufRead for Chain<T, U>
 where
     T: AsyncBufRead,
     U: AsyncBufRead,

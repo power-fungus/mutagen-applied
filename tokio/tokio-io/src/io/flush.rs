@@ -20,7 +20,7 @@ where
     Flush { a }
 }
 
-impl<A> Future for Flush<'_, A>
+#[cfg_attr(test, ::mutagen::mutate)] impl<A> Future for Flush<'_, A>
 where
     A: AsyncWrite + Unpin + ?Sized,
 {

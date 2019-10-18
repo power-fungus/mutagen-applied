@@ -18,7 +18,7 @@ use std::{
 #[derive(Debug)]
 pub struct BufStream<RW>(#[pin] BufReader<BufWriter<RW>>);
 
-impl<RW: AsyncRead + AsyncWrite> BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW: AsyncRead + AsyncWrite> BufStream<RW> {
     /// Wrap a type in both [`BufWriter`] and [`BufReader`].
     ///
     /// See the documentation for those types and [`BufStream`] for details.
@@ -55,13 +55,13 @@ impl<RW: AsyncRead + AsyncWrite> BufStream<RW> {
     }
 }
 
-impl<RW> From<BufReader<BufWriter<RW>>> for BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW> From<BufReader<BufWriter<RW>>> for BufStream<RW> {
     fn from(b: BufReader<BufWriter<RW>>) -> Self {
         BufStream(b)
     }
 }
 
-impl<RW> From<BufWriter<BufReader<RW>>> for BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW> From<BufWriter<BufReader<RW>>> for BufStream<RW> {
     fn from(b: BufWriter<BufReader<RW>>) -> Self {
         // we need to "invert" the reader and writer
         let BufWriter {
@@ -89,7 +89,7 @@ impl<RW> From<BufWriter<BufReader<RW>>> for BufStream<RW> {
     }
 }
 
-impl<RW: AsyncRead + AsyncWrite> AsyncWrite for BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW: AsyncRead + AsyncWrite> AsyncWrite for BufStream<RW> {
     fn poll_write(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -107,7 +107,7 @@ impl<RW: AsyncRead + AsyncWrite> AsyncWrite for BufStream<RW> {
     }
 }
 
-impl<RW: AsyncRead + AsyncWrite> AsyncRead for BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW: AsyncRead + AsyncWrite> AsyncRead for BufStream<RW> {
     fn poll_read(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -122,7 +122,7 @@ impl<RW: AsyncRead + AsyncWrite> AsyncRead for BufStream<RW> {
     }
 }
 
-impl<RW: AsyncBufRead + AsyncRead + AsyncWrite> AsyncBufRead for BufStream<RW> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<RW: AsyncBufRead + AsyncRead + AsyncWrite> AsyncBufRead for BufStream<RW> {
     fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         self.project().0.poll_fill_buf(cx)
     }

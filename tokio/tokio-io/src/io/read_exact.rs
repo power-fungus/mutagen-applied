@@ -33,11 +33,11 @@ pub struct ReadExact<'a, A: ?Sized> {
     pos: usize,
 }
 
-fn eof() -> io::Error {
+#[cfg_attr(test, ::mutagen::mutate)] fn eof() -> io::Error {
     io::Error::new(io::ErrorKind::UnexpectedEof, "early eof")
 }
 
-impl<A> Future for ReadExact<'_, A>
+#[cfg_attr(test, ::mutagen::mutate)] impl<A> Future for ReadExact<'_, A>
 where
     A: AsyncRead + Unpin + ?Sized,
 {

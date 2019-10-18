@@ -38,11 +38,11 @@ pub struct Repeat {
 /// ```
 ///
 /// [std]: https://doc.rust-lang.org/std/io/fn.repeat.html
-pub fn repeat(byte: u8) -> Repeat {
+#[cfg_attr(test, ::mutagen::mutate)] pub fn repeat(byte: u8) -> Repeat {
     Repeat { byte }
 }
 
-impl AsyncRead for Repeat {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncRead for Repeat {
     #[inline]
     fn poll_read(
         self: Pin<&mut Self>,

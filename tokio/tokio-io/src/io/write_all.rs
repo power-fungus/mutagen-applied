@@ -20,7 +20,7 @@ where
     WriteAll { writer, buf }
 }
 
-impl<W> Future for WriteAll<'_, W>
+#[cfg_attr(test, ::mutagen::mutate)] impl<W> Future for WriteAll<'_, W>
 where
     W: AsyncWrite + Unpin + ?Sized,
 {

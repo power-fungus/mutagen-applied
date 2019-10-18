@@ -89,4 +89,4 @@ pub trait AsyncReadExt: AsyncRead {
     }
 }
 
-impl<R: AsyncRead + ?Sized> AsyncReadExt for R {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead + ?Sized> AsyncReadExt for R {}

@@ -28,7 +28,7 @@ pub struct Read<'a, R: ?Sized> {
     buf: &'a mut [u8],
 }
 
-impl<R> Future for Read<'_, R>
+#[cfg_attr(test, ::mutagen::mutate)] impl<R> Future for Read<'_, R>
 where
     R: AsyncRead + Unpin + ?Sized,
 {

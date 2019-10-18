@@ -65,15 +65,15 @@ macro_rules! deref_async_buf_read {
     }
 }
 
-impl<T: ?Sized + AsyncBufRead + Unpin> AsyncBufRead for Box<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncBufRead + Unpin> AsyncBufRead for Box<T> {
     deref_async_buf_read!();
 }
 
-impl<T: ?Sized + AsyncBufRead + Unpin> AsyncBufRead for &mut T {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncBufRead + Unpin> AsyncBufRead for &mut T {
     deref_async_buf_read!();
 }
 
-impl<P> AsyncBufRead for Pin<P>
+#[cfg_attr(test, ::mutagen::mutate)] impl<P> AsyncBufRead for Pin<P>
 where
     P: DerefMut + Unpin,
     P::Target: AsyncBufRead,
@@ -87,7 +87,7 @@ where
     }
 }
 
-impl AsyncBufRead for &[u8] {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncBufRead for &[u8] {
     fn poll_fill_buf(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         Poll::Ready(Ok(*self))
     }
@@ -97,7 +97,7 @@ impl AsyncBufRead for &[u8] {
     }
 }
 
-impl<T: AsRef<[u8]> + Unpin> AsyncBufRead for io::Cursor<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: AsRef<[u8]> + Unpin> AsyncBufRead for io::Cursor<T> {
     fn poll_fill_buf(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         Poll::Ready(io::BufRead::fill_buf(self.get_mut()))
     }

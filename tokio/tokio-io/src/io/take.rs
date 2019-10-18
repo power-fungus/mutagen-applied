@@ -23,7 +23,7 @@ pub(super) fn take<R: AsyncRead>(inner: R, limit: u64) -> Take<R> {
     }
 }
 
-impl<R: AsyncRead> Take<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead> Take<R> {
     /// Returns the remaining number of bytes that can be
     /// read before this instance will return EOF.
     ///
@@ -72,7 +72,7 @@ impl<R: AsyncRead> Take<R> {
     }
 }
 
-impl<R: AsyncRead> AsyncRead for Take<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead> AsyncRead for Take<R> {
     unsafe fn prepare_uninitialized_buffer(&self, buf: &mut [u8]) -> bool {
         self.inner.prepare_uninitialized_buffer(buf)
     }
@@ -94,7 +94,7 @@ impl<R: AsyncRead> AsyncRead for Take<R> {
     }
 }
 
-impl<R: AsyncBufRead> AsyncBufRead for Take<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncBufRead> AsyncBufRead for Take<R> {
     #[project]
     fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         #[project]

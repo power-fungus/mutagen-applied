@@ -20,7 +20,7 @@ where
     Shutdown { a }
 }
 
-impl<A> Future for Shutdown<'_, A>
+#[cfg_attr(test, ::mutagen::mutate)] impl<A> Future for Shutdown<'_, A>
 where
     A: AsyncWrite + Unpin + ?Sized,
 {

@@ -35,11 +35,11 @@ pub struct Sink {
 /// assert_eq!(num_bytes, 5);
 /// # }
 /// ```
-pub fn sink() -> Sink {
+#[cfg_attr(test, ::mutagen::mutate)] pub fn sink() -> Sink {
     Sink { _p: () }
 }
 
-impl AsyncWrite for Sink {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncWrite for Sink {
     #[inline]
     fn poll_write(
         self: Pin<&mut Self>,
@@ -60,7 +60,7 @@ impl AsyncWrite for Sink {
     }
 }
 
-impl fmt::Debug for Sink {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Sink {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.pad("Sink { .. }")
     }

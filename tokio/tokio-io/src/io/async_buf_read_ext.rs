@@ -103,4 +103,4 @@ pub trait AsyncBufReadExt: AsyncBufRead {
     }
 }
 
-impl<R: AsyncBufRead + ?Sized> AsyncBufReadExt for R {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncBufRead + ?Sized> AsyncBufReadExt for R {}

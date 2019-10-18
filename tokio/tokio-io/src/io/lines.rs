@@ -32,7 +32,7 @@ where
     }
 }
 
-impl<R: AsyncBufRead> Stream for Lines<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncBufRead> Stream for Lines<R> {
     type Item = io::Result<String>;
 
     #[project]

@@ -32,7 +32,7 @@ pub struct BufReader<R> {
     pub(super) cap: usize,
 }
 
-impl<R: AsyncRead> BufReader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead> BufReader<R> {
     /// Creates a new `BufReader` with a default buffer capacity. The default is currently 8 KB,
     /// but may change in the future.
     pub fn new(inner: R) -> Self {
@@ -98,7 +98,7 @@ impl<R: AsyncRead> BufReader<R> {
     }
 }
 
-impl<R: AsyncRead> AsyncRead for BufReader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead> AsyncRead for BufReader<R> {
     fn poll_read(
         mut self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -124,7 +124,7 @@ impl<R: AsyncRead> AsyncRead for BufReader<R> {
     }
 }
 
-impl<R: AsyncRead> AsyncBufRead for BufReader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead> AsyncBufRead for BufReader<R> {
     #[project]
     fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         #[project]
@@ -153,7 +153,7 @@ impl<R: AsyncRead> AsyncBufRead for BufReader<R> {
     }
 }
 
-impl<R: AsyncRead + AsyncWrite> AsyncWrite for BufReader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncRead + AsyncWrite> AsyncWrite for BufReader<R> {
     fn poll_write(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -171,7 +171,7 @@ impl<R: AsyncRead + AsyncWrite> AsyncWrite for BufReader<R> {
     }
 }
 
-impl<R: fmt::Debug> fmt::Debug for BufReader<R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: fmt::Debug> fmt::Debug for BufReader<R> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("BufReader")
             .field("reader", &self.inner)

@@ -29,7 +29,7 @@ where
     }
 }
 
-fn read_to_string_internal<R: AsyncRead + ?Sized>(
+#[cfg_attr(test, ::mutagen::mutate)] fn read_to_string_internal<R: AsyncRead + ?Sized>(
     reader: Pin<&mut R>,
     cx: &mut Context<'_>,
     buf: &mut String,
@@ -52,7 +52,7 @@ fn read_to_string_internal<R: AsyncRead + ?Sized>(
     }
 }
 
-impl<A> Future for ReadToString<'_, A>
+#[cfg_attr(test, ::mutagen::mutate)] impl<A> Future for ReadToString<'_, A>
 where
     A: AsyncRead + ?Sized + Unpin,
 {

@@ -161,15 +161,15 @@ macro_rules! deref_async_write {
     }
 }
 
-impl<T: ?Sized + AsyncWrite + Unpin> AsyncWrite for Box<T> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncWrite + Unpin> AsyncWrite for Box<T> {
     deref_async_write!();
 }
 
-impl<T: ?Sized + AsyncWrite + Unpin> AsyncWrite for &mut T {
+#[cfg_attr(test, ::mutagen::mutate)] impl<T: ?Sized + AsyncWrite + Unpin> AsyncWrite for &mut T {
     deref_async_write!();
 }
 
-impl<P> AsyncWrite for Pin<P>
+#[cfg_attr(test, ::mutagen::mutate)] impl<P> AsyncWrite for Pin<P>
 where
     P: DerefMut + Unpin,
     P::Target: AsyncWrite,
@@ -191,7 +191,7 @@ where
     }
 }
 
-impl AsyncWrite for Vec<u8> {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncWrite for Vec<u8> {
     fn poll_write(
         self: Pin<&mut Self>,
         _cx: &mut Context<'_>,

@@ -36,7 +36,7 @@ pub struct BufWriter<W> {
     pub(super) written: usize,
 }
 
-impl<W: AsyncWrite> BufWriter<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: AsyncWrite> BufWriter<W> {
     /// Creates a new `BufWriter` with a default buffer capacity. The default is currently 8 KB,
     /// but may change in the future.
     pub fn new(inner: W) -> Self {
@@ -118,7 +118,7 @@ impl<W: AsyncWrite> BufWriter<W> {
     }
 }
 
-impl<W: AsyncWrite> AsyncWrite for BufWriter<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: AsyncWrite> AsyncWrite for BufWriter<W> {
     fn poll_write(
         mut self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -147,7 +147,7 @@ impl<W: AsyncWrite> AsyncWrite for BufWriter<W> {
     }
 }
 
-impl<W: AsyncWrite + AsyncRead> AsyncRead for BufWriter<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: AsyncWrite + AsyncRead> AsyncRead for BufWriter<W> {
     fn poll_read(
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -162,7 +162,7 @@ impl<W: AsyncWrite + AsyncRead> AsyncRead for BufWriter<W> {
     }
 }
 
-impl<W: AsyncWrite + AsyncBufRead> AsyncBufRead for BufWriter<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: AsyncWrite + AsyncBufRead> AsyncBufRead for BufWriter<W> {
     fn poll_fill_buf(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         self.get_pin_mut().poll_fill_buf(cx)
     }
@@ -172,7 +172,7 @@ impl<W: AsyncWrite + AsyncBufRead> AsyncBufRead for BufWriter<W> {
     }
 }
 
-impl<W: fmt::Debug> fmt::Debug for BufWriter<W> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: fmt::Debug> fmt::Debug for BufWriter<W> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("BufWriter")
             .field("writer", &self.inner)

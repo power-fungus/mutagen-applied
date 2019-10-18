@@ -54,7 +54,7 @@ pub(super) fn read_line_internal<R: AsyncBufRead + ?Sized>(
     }
 }
 
-impl<R: AsyncBufRead + ?Sized + Unpin> Future for ReadLine<'_, R> {
+#[cfg_attr(test, ::mutagen::mutate)] impl<R: AsyncBufRead + ?Sized + Unpin> Future for ReadLine<'_, R> {
     type Output = io::Result<usize>;
 
     fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {

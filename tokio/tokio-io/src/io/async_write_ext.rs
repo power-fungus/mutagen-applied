@@ -39,4 +39,4 @@ pub trait AsyncWriteExt: AsyncWrite {
     }
 }
 
-impl<W: AsyncWrite + ?Sized> AsyncWriteExt for W {}
+#[cfg_attr(test, ::mutagen::mutate)] impl<W: AsyncWrite + ?Sized> AsyncWriteExt for W {}

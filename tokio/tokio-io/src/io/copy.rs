@@ -57,7 +57,7 @@ pub struct Copy<'a, R: ?Sized, W: ?Sized> {
 /// ```
 ///
 /// [std]: https://doc.rust-lang.org/std/io/fn.copy.html
-pub fn copy<'a, R, W>(reader: &'a mut R, writer: &'a mut W) -> Copy<'a, R, W>
+#[cfg_attr(test, ::mutagen::mutate)] pub fn copy<'a, R, W>(reader: &'a mut R, writer: &'a mut W) -> Copy<'a, R, W>
 where
     R: AsyncRead + Unpin + ?Sized,
     W: AsyncWrite + Unpin + ?Sized,
@@ -73,7 +73,7 @@ where
     }
 }
 
-impl<R, W> Future for Copy<'_, R, W>
+#[cfg_attr(test, ::mutagen::mutate)] impl<R, W> Future for Copy<'_, R, W>
 where
     R: AsyncRead + Unpin + ?Sized,
     W: AsyncWrite + Unpin + ?Sized,

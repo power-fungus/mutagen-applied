@@ -37,11 +37,11 @@ pub struct Empty {
 /// ```
 ///
 /// [std]: https://doc.rust-lang.org/std/io/fn.empty.html
-pub fn empty() -> Empty {
+#[cfg_attr(test, ::mutagen::mutate)] pub fn empty() -> Empty {
     Empty { _p: () }
 }
 
-impl AsyncRead for Empty {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncRead for Empty {
     #[inline]
     fn poll_read(
         self: Pin<&mut Self>,
@@ -52,7 +52,7 @@ impl AsyncRead for Empty {
     }
 }
 
-impl AsyncBufRead for Empty {
+#[cfg_attr(test, ::mutagen::mutate)] impl AsyncBufRead for Empty {
     #[inline]
     fn poll_fill_buf(self: Pin<&mut Self>, _: &mut Context<'_>) -> Poll<io::Result<&[u8]>> {
         Poll::Ready(Ok(&[]))
@@ -62,7 +62,7 @@ impl AsyncBufRead for Empty {
     fn consume(self: Pin<&mut Self>, _: usize) {}
 }
 
-impl fmt::Debug for Empty {
+#[cfg_attr(test, ::mutagen::mutate)] impl fmt::Debug for Empty {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.pad("Empty { .. }")
     }

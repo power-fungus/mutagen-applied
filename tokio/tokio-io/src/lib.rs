@@ -44,4 +44,4 @@ pub use bytes::{Buf, BufMut};
 
 #[cfg(feature = "util")]
 #[cfg(test)]
-fn is_unpin<T: Unpin>() {}
+#[cfg_attr(test, ::mutagen::mutate)] fn is_unpin<T: Unpin>() {}
