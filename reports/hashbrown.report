@@ -1,0 +1,267 @@
+
+Tests without mutations
+target/debug/deps/hasher-0a4f458f3f48c73d ... ok
+target/debug/deps/set-19d05dbb6f832192 ... ok
+target/debug/deps/hashbrown-dcecde44f864de6a ... ok
+target/debug/deps/serde-c213dd84d29d663a ... ok
+target/debug/deps/rayon-ef56260e1bce5069 ... ok
+
+Test 181 Mutants
+1: binop_bit, replace `^` with `&`, at src/raw/bitmask.rs@25:23-25:24(fn BitMask::invert) ... killed
+2: binop_bit, replace `^` with `|`, at src/raw/bitmask.rs@25:23-25:24(fn BitMask::invert) ... killed
+3: lit_int, replace `1` with `2`, at src/raw/bitmask.rs@32:35-32:36(fn BitMask::remove_lowest_bit) ... killed
+4: lit_int, replace `1` with `0`, at src/raw/bitmask.rs@32:35-32:36(fn BitMask::remove_lowest_bit) ... killed
+5: binop_num, replace `-` with `+`, at src/raw/bitmask.rs@32:33-32:34(fn BitMask::remove_lowest_bit) ... killed
+6: binop_bit, replace `&` with `|`, at src/raw/bitmask.rs@32:23-32:24(fn BitMask::remove_lowest_bit) ... killed
+7: binop_bit, replace `&` with `^`, at src/raw/bitmask.rs@32:23-32:24(fn BitMask::remove_lowest_bit) ... killed
+8: lit_int, replace `0` with `1`, at src/raw/bitmask.rs@37:18-37:19(fn BitMask::any_bit_set) ... killed
+9: binop_eq, replace `!=` with `==`, at src/raw/bitmask.rs@37:15-37:17(fn BitMask::any_bit_set) ... killed
+10: lit_int, replace `0` with `1`, at src/raw/bitmask.rs@43:21-43:22(fn BitMask::lowest_set_bit) ... killed
+11: binop_eq, replace `==` with `!=`, at src/raw/bitmask.rs@43:18-43:20(fn BitMask::lowest_set_bit) ... killed
+12: lit_int, replace `8` with `9`, at src/raw/bitmask.rs@71:57-71:58(fn BitMask::trailing_zeros) ... NOT COVERED
+13: lit_int, replace `8` with `7`, at src/raw/bitmask.rs@71:57-71:58(fn BitMask::trailing_zeros) ... NOT COVERED
+14: lit_int, replace `0` with `1`, at src/raw/bitmask.rs@71:62-71:63(fn BitMask::trailing_zeros) ... NOT COVERED
+15: binop_eq, replace `==` with `!=`, at src/raw/bitmask.rs@71:59-71:61(fn BitMask::trailing_zeros) ... NOT COVERED
+16: binop_bool, replace `&&` with `||`, at src/raw/bitmask.rs@71:37-71:39(fn BitMask::trailing_zeros) ... SURVIVED
+17: binop_num, replace `/` with `*`, at src/raw/bitmask.rs@72:57-72:58(fn BitMask::trailing_zeros) ... NOT COVERED
+18: binop_num, replace `/` with `*`, at src/raw/bitmask.rs@74:45-74:46(fn BitMask::trailing_zeros) ... SURVIVED
+19: binop_num, replace `/` with `*`, at src/raw/bitmask.rs@81:40-81:41(fn BitMask::leading_zeros) ... SURVIVED
+20: lit_int, replace `128` with `129`, at src/raw/mod.rs@104:11-104:15(fn is_full) ... killed
+21: lit_int, replace `128` with `127`, at src/raw/mod.rs@104:11-104:15(fn is_full) ... killed
+22: binop_bit, replace `&` with `|`, at src/raw/mod.rs@104:9-104:10(fn is_full) ... killed
+23: binop_bit, replace `&` with `^`, at src/raw/mod.rs@104:9-104:10(fn is_full) ... killed
+24: lit_int, replace `0` with `1`, at src/raw/mod.rs@104:19-104:20(fn is_full) ... killed
+25: binop_eq, replace `==` with `!=`, at src/raw/mod.rs@104:16-104:18(fn is_full) ... killed
+26: lit_int, replace `128` with `129`, at src/raw/mod.rs@110:11-110:15(fn is_special) ... SURVIVED
+27: lit_int, replace `128` with `127`, at src/raw/mod.rs@110:11-110:15(fn is_special) ... SURVIVED
+28: binop_bit, replace `&` with `|`, at src/raw/mod.rs@110:9-110:10(fn is_special) ... SURVIVED
+29: binop_bit, replace `&` with `^`, at src/raw/mod.rs@110:9-110:10(fn is_special) ... SURVIVED
+30: lit_int, replace `0` with `1`, at src/raw/mod.rs@110:19-110:20(fn is_special) ... SURVIVED
+31: binop_eq, replace `!=` with `==`, at src/raw/mod.rs@110:16-110:18(fn is_special) ... killed
+32: lit_int, replace `1` with `2`, at src/raw/mod.rs@117:11-117:15(fn special_is_empty) ... SURVIVED
+33: lit_int, replace `1` with `0`, at src/raw/mod.rs@117:11-117:15(fn special_is_empty) ... killed
+34: binop_bit, replace `&` with `|`, at src/raw/mod.rs@117:9-117:10(fn special_is_empty) ... SURVIVED
+35: binop_bit, replace `&` with `^`, at src/raw/mod.rs@117:9-117:10(fn special_is_empty) ... SURVIVED
+36: lit_int, replace `0` with `1`, at src/raw/mod.rs@117:19-117:20(fn special_is_empty) ... killed
+37: binop_eq, replace `!=` with `==`, at src/raw/mod.rs@117:16-117:18(fn special_is_empty) ... killed
+38: lit_int, replace `8` with `9`, at src/raw/mod.rs@136:35-136:36(fn h2) ... killed
+39: lit_int, replace `8` with `7`, at src/raw/mod.rs@136:35-136:36(fn h2) ... SURVIVED
+40: binop_num, replace `*` with `/`, at src/raw/mod.rs@136:33-136:34(fn h2) ... killed
+41: lit_int, replace `7` with `8`, at src/raw/mod.rs@136:39-136:40(fn h2) ... SURVIVED
+42: lit_int, replace `7` with `6`, at src/raw/mod.rs@136:39-136:40(fn h2) ... SURVIVED
+43: binop_num, replace `-` with `+`, at src/raw/mod.rs@136:37-136:38(fn h2) ... killed
+44: lit_int, replace `127` with `128`, at src/raw/mod.rs@137:12-137:16(fn h2) ... SURVIVED
+45: lit_int, replace `127` with `126`, at src/raw/mod.rs@137:12-137:16(fn h2) ... SURVIVED
+46: binop_bit, replace `&` with `|`, at src/raw/mod.rs@137:10-137:11(fn h2) ... SURVIVED
+47: binop_bit, replace `&` with `^`, at src/raw/mod.rs@137:10-137:11(fn h2) ... SURVIVED
+48: lit_int, replace `8` with `9`, at src/raw/mod.rs@182:32-182:33(fn capacity_to_buckets) ... SURVIVED
+49: lit_int, replace `8` with `7`, at src/raw/mod.rs@182:32-182:33(fn capacity_to_buckets) ... SURVIVED
+50: binop_cmp, replace `<` with `<=`, at src/raw/mod.rs@182:30-182:31(fn capacity_to_buckets) ... SURVIVED
+51: binop_cmp, replace `<` with `>=`, at src/raw/mod.rs@182:30-182:31(fn capacity_to_buckets) ... killed
+52: binop_cmp, replace `<` with `>`, at src/raw/mod.rs@182:30-182:31(fn capacity_to_buckets) ... killed
+53: lit_int, replace `1` with `2`, at src/raw/mod.rs@184:14-184:15(fn capacity_to_buckets) ... SURVIVED
+54: lit_int, replace `1` with `0`, at src/raw/mod.rs@184:14-184:15(fn capacity_to_buckets) ... killed
+55: binop_num, replace `+` with `-`, at src/raw/mod.rs@184:12-184:13(fn capacity_to_buckets) ... killed
+56: lit_int, replace `8` with `9`, at src/raw/mod.rs@190:24-190:25(fn capacity_to_buckets) ... killed
+57: lit_int, replace `8` with `7`, at src/raw/mod.rs@190:24-190:25(fn capacity_to_buckets) ... killed
+58: lit_int, replace `7` with `8`, at src/raw/mod.rs@190:30-190:31(fn capacity_to_buckets) ... killed
+59: lit_int, replace `7` with `6`, at src/raw/mod.rs@190:30-190:31(fn capacity_to_buckets) ... SURVIVED
+60: binop_num, replace `/` with `*`, at src/raw/mod.rs@190:28-190:29(fn capacity_to_buckets) ... killed
+61: lit_int, replace `8` with `9`, at src/raw/mod.rs@203:21-203:22(fn bucket_mask_to_capacity) ... SURVIVED
+62: lit_int, replace `8` with `7`, at src/raw/mod.rs@203:21-203:22(fn bucket_mask_to_capacity) ... SURVIVED
+63: binop_cmp, replace `<` with `<=`, at src/raw/mod.rs@203:19-203:20(fn bucket_mask_to_capacity) ... SURVIVED
+64: binop_cmp, replace `<` with `>=`, at src/raw/mod.rs@203:19-203:20(fn bucket_mask_to_capacity) ... killed
+65: binop_cmp, replace `<` with `>`, at src/raw/mod.rs@203:19-203:20(fn bucket_mask_to_capacity) ... killed
+66: lit_int, replace `1` with `2`, at src/raw/mod.rs@209:24-209:25(fn bucket_mask_to_capacity) ... SURVIVED
+67: lit_int, replace `1` with `0`, at src/raw/mod.rs@209:24-209:25(fn bucket_mask_to_capacity) ... killed
+68: binop_num, replace `+` with `-`, at src/raw/mod.rs@209:22-209:23(fn bucket_mask_to_capacity) ... killed
+69: lit_int, replace `8` with `9`, at src/raw/mod.rs@209:29-209:30(fn bucket_mask_to_capacity) ... killed
+70: lit_int, replace `8` with `7`, at src/raw/mod.rs@209:29-209:30(fn bucket_mask_to_capacity) ... SURVIVED
+71: binop_num, replace `/` with `*`, at src/raw/mod.rs@209:27-209:28(fn bucket_mask_to_capacity) ... killed
+72: lit_int, replace `7` with `8`, at src/raw/mod.rs@209:34-209:35(fn bucket_mask_to_capacity) ... killed
+73: lit_int, replace `7` with `6`, at src/raw/mod.rs@209:34-209:35(fn bucket_mask_to_capacity) ... killed
+74: binop_num, replace `*` with `/`, at src/raw/mod.rs@209:32-209:33(fn bucket_mask_to_capacity) ... killed
+75: binop_num, replace `+` with `-`, at src/raw/mod.rs@247:31-247:32(fn calculate_layout) ... killed
+76: lit_int, replace `1` with `2`, at src/raw/mod.rs@247:72-247:73(fn calculate_layout) ... SURVIVED
+77: lit_int, replace `1` with `0`, at src/raw/mod.rs@247:72-247:73(fn calculate_layout) ... SURVIVED
+78: binop_num, replace `-` with `+`, at src/raw/mod.rs@247:70-247:71(fn calculate_layout) ... SURVIVED
+79: lit_int, replace `1` with `2`, at src/raw/mod.rs@247:93-247:94(fn calculate_layout) ... SURVIVED
+80: lit_int, replace `1` with `0`, at src/raw/mod.rs@247:93-247:94(fn calculate_layout) ... killed
+81: binop_num, replace `-` with `+`, at src/raw/mod.rs@247:91-247:92(fn calculate_layout) ... killed
+82: unop_not, remove `!`, at src/raw/mod.rs@247:78-247:79(fn calculate_layout) ... killed
+83: binop_bit, replace `&` with `|`, at src/raw/mod.rs@247:76-247:77(fn calculate_layout) ... killed
+84: binop_bit, replace `&` with `^`, at src/raw/mod.rs@247:76-247:77(fn calculate_layout) ... killed
+85: lit_int, replace `0` with `1`, at src/raw/mod.rs@365:25-365:26(fn RawTable < T >::new) ... killed
+86: lit_int, replace `0` with `1`, at src/raw/mod.rs@366:19-366:20(fn RawTable < T >::new) ... killed
+87: lit_int, replace `0` with `1`, at src/raw/mod.rs@367:25-367:26(fn RawTable < T >::new) ... killed
+88: lit_int, replace `0` with `1`, at src/raw/mod.rs@401:23-401:24(fn RawTable < T >::try_with_capacity) ... killed
+89: binop_eq, replace `==` with `!=`, at src/raw/mod.rs@401:20-401:22(fn RawTable < T >::try_with_capacity) ... killed
+90: binop_bit, replace `&` with `|`, at src/raw/mod.rs@491:26-491:27(fn RawTable < T >::probe_seq) ... killed
+91: binop_bit, replace `&` with `^`, at src/raw/mod.rs@491:26-491:27(fn RawTable < T >::probe_seq) ... killed
+92: lit_int, replace `0` with `1`, at src/raw/mod.rs@492:20-492:21(fn RawTable < T >::probe_seq) ... killed
+93: unop_not, remove `!`, at src/raw/mod.rs@565:11-565:12(fn RawTable < T >::clear_no_drop) ... killed
+94: lit_int, replace `0` with `1`, at src/raw/mod.rs@570:21-570:22(fn RawTable < T >::clear_no_drop) ... killed
+95: lit_int, replace `0` with `1`, at src/raw/mod.rs@595:23-595:24(fn RawTable < T >::shrink_to) ... killed
+96: binop_eq, replace `==` with `!=`, at src/raw/mod.rs@595:20-595:22(fn RawTable < T >::shrink_to) ... killed
+97: binop_cmp, replace `<` with `<=`, at src/raw/mod.rs@610:23-610:24(fn RawTable < T >::shrink_to) ... SURVIVED
+98: binop_cmp, replace `<` with `>=`, at src/raw/mod.rs@610:23-610:24(fn RawTable < T >::shrink_to) ... killed
+99: binop_cmp, replace `<` with `>`, at src/raw/mod.rs@610:23-610:24(fn RawTable < T >::shrink_to) ... killed
+100: lit_int, replace `0` with `1`, at src/raw/mod.rs@612:29-612:30(fn RawTable < T >::shrink_to) ... killed
+101: binop_eq, replace `==` with `!=`, at src/raw/mod.rs@612:26-612:28(fn RawTable < T >::shrink_to) ... killed
+102: stmt_call, remove `self . resize (min_size, hasher, Fallibility :: Infallible) . unwrap_or_else (| _ | unsafe { hint :: unreachable_unchecked () }) ;`, at src/raw/mod.rs@615:16-616:81(fn RawTable < T >::shrink_to) ... killed
+103: binop_cmp, replace `>` with `<`, at src/raw/mod.rs@625:22-625:23(fn RawTable < T >::reserve) ... killed
+104: binop_cmp, replace `>` with `<=`, at src/raw/mod.rs@625:22-625:23(fn RawTable < T >::reserve) ... killed
+105: binop_cmp, replace `>` with `>=`, at src/raw/mod.rs@625:22-625:23(fn RawTable < T >::reserve) ... killed
+106: stmt_call, remove `self . reserve_rehash (additional, hasher, Fallibility :: Infallible) . unwrap_or_else (| _ | unsafe { hint :: unreachable_unchecked () }) ;`, at src/raw/mod.rs@626:12-627:77(fn RawTable < T >::reserve) ... killed
+107: binop_cmp, replace `>` with `<`, at src/raw/mod.rs@639:22-639:23(fn RawTable < T >::try_reserve) ... killed
+108: binop_cmp, replace `>` with `<=`, at src/raw/mod.rs@639:22-639:23(fn RawTable < T >::try_reserve) ... killed
+109: binop_cmp, replace `>` with `>=`, at src/raw/mod.rs@639:22-639:23(fn RawTable < T >::try_reserve) ... SURVIVED
+110: lit_int, replace `2` with `3`, at src/raw/mod.rs@661:40-661:41(fn RawTable < T >::reserve_rehash) ... SURVIVED
+111: lit_int, replace `2` with `1`, at src/raw/mod.rs@661:40-661:41(fn RawTable < T >::reserve_rehash) ... SURVIVED
+112: binop_num, replace `/` with `*`, at src/raw/mod.rs@661:38-661:39(fn RawTable < T >::reserve_rehash) ... killed
+113: binop_cmp, replace `<=` with `<`, at src/raw/mod.rs@661:21-661:23(fn RawTable < T >::reserve_rehash) ... SURVIVED
+114: binop_cmp, replace `<=` with `>=`, at src/raw/mod.rs@661:21-661:23(fn RawTable < T >::reserve_rehash) ... killed
+115: binop_cmp, replace `<=` with `>`, at src/raw/mod.rs@661:21-661:23(fn RawTable < T >::reserve_rehash) ... killed
+116: stmt_call, remove `self . rehash_in_place (hasher) ;`, at src/raw/mod.rs@664:12-664:40(fn RawTable < T >::reserve_rehash) ... NOT COVERED
+117: lit_int, replace `1` with `2`, at src/raw/mod.rs@670:54-670:55(fn RawTable < T >::reserve_rehash) ... killed
+118: lit_int, replace `1` with `0`, at src/raw/mod.rs@670:54-670:55(fn RawTable < T >::reserve_rehash) ... SURVIVED
+119: binop_num, replace `+` with `-`, at src/raw/mod.rs@670:52-670:53(fn RawTable < T >::reserve_rehash) ... killed
+120: binop_num, replace `+` with `-`, at src/raw/mod.rs@907:19-907:20(fn RawTable < T >::capacity) ... killed
+121: lit_int, replace `1` with `2`, at src/raw/mod.rs@919:27-919:28(fn RawTable < T >::buckets) ... killed
+122: lit_int, replace `1` with `0`, at src/raw/mod.rs@919:27-919:28(fn RawTable < T >::buckets) ... killed
+123: binop_num, replace `+` with `-`, at src/raw/mod.rs@919:25-919:26(fn RawTable < T >::buckets) ... killed
+124: lit_int, replace `1` with `2`, at src/raw/mod.rs@925:27-925:28(fn RawTable < T >::num_ctrl_bytes) ... SURVIVED
+125: lit_int, replace `1` with `0`, at src/raw/mod.rs@925:27-925:28(fn RawTable < T >::num_ctrl_bytes) ... killed
+126: binop_num, replace `+` with `-`, at src/raw/mod.rs@925:25-925:26(fn RawTable < T >::num_ctrl_bytes) ... killed
+127: binop_num, replace `+` with `-`, at src/raw/mod.rs@925:29-925:30(fn RawTable < T >::num_ctrl_bytes) ... killed
+128: lit_int, replace `0` with `1`, at src/raw/mod.rs@932:28-932:29(fn RawTable < T >::is_empty_singleton) ... killed
+129: binop_eq, replace `==` with `!=`, at src/raw/mod.rs@932:25-932:27(fn RawTable < T >::is_empty_singleton) ... killed
+130: stmt_call, remove `mem :: forget (self) ;`, at src/raw/mod.rs@973:8-973:25(fn RawTable < T >::into_alloc) ... killed
+131: unop_not, remove `!`, at src/raw/mod.rs@1053:11-1053:12(fn RawTable < T >::drop) ... killed
+132: lit_int, replace `0` with `1`, at src/raw/mod.rs@1215:12-1215:13(fn RawIterRange < T >::size_hint) ... NOT COVERED
+133: lit_int, replace `1` with `2`, at src/raw/mod.rs@1245:26-1245:27(fn RawIter < T >::next) ... killed
+134: lit_int, replace `1` with `0`, at src/raw/mod.rs@1245:26-1245:27(fn RawIter < T >::next) ... killed
+135: lit_int, replace `0` with `1`, at src/map.rs@507:22-507:23(fn HashMap < K, V, S >::is_empty) ... killed
+136: binop_eq, replace `==` with `!=`, at src/map.rs@507:19-507:21(fn HashMap < K, V, S >::is_empty) ... killed
+137: stmt_call, remove `self . table . clear () ;`, at src/map.rs@554:8-554:26(fn HashMap < K, V, S >::clear) ... NOT COVERED
+138: stmt_call, remove `self . table . reserve (additional, | x | make_hash (hash_builder, & x . 0)) ;`, at src/map.rs@583:8-584:67(fn HashMap < K, V, S >::reserve) ... killed
+139: lit_int, replace `0` with `1`, at src/map.rs@629:29-629:30(fn HashMap < K, V, S >::shrink_to_fit) ... killed
+140: stmt_call, remove `self . table . shrink_to (0, | x | make_hash (hash_builder, & x . 0)) ;`, at src/map.rs@629:8-629:66(fn HashMap < K, V, S >::shrink_to_fit) ... killed
+141: stmt_call, remove `self . table . shrink_to (min_capacity, | x | make_hash (hash_builder, & x . 0)) ;`, at src/map.rs@658:8-659:71(fn HashMap < K, V, S >::shrink_to) ... NOT COVERED
+142: binop_eq, replace `!=` with `==`, at src/map.rs@1029:22-1029:24(fn HashMap < K, V, S >::eq) ... killed
+143: lit_bool, replace `false` with `true`, at src/map.rs@1030:19-1030:24(fn HashMap < K, V, S >::eq) ... killed
+144: lit_bool, replace `false` with `true`, at src/map.rs@1034:54-1034:59(fn HashMap < K, V, S >::eq) ... SURVIVED
+145: binop_eq, replace `==` with `!=`, at src/map.rs@1034:72-1034:74(fn HashMap < K, V, S >::eq) ... killed
+146: stmt_call, remove `k . hash (& mut hasher) ;`, at src/map.rs@1334:8-1334:27(fn RawEntryBuilderMut < 'a, K, V, S >::from_key) ... killed
+147: stmt_call, remove `k . hash (& mut hasher) ;`, at src/map.rs@1395:8-1395:27(fn RawEntryBuilder < 'a, K, V, S >::from_key) ... killed
+148: stmt_call, remove `entry . insert (value) ;`, at src/map.rs@1456:16-1456:35(fn RawEntryMut < 'a, K, V, S >::insert) ... NOT COVERED
+149: stmt_call, remove `f (k, v) ;`, at src/map.rs@1554:20-1554:27(fn RawEntryMut < 'a, K, V, S >::and_modify) ... NOT COVERED
+150: stmt_call, remove `key . hash (& mut hasher) ;`, at src/map.rs@1668:8-1668:29(fn RawVacantEntryMut < 'a, K, V, S >::insert) ... killed
+151: stmt_call, remove `key . hash (& mut hasher) ;`, at src/map.rs@1713:8-1713:29(fn RawVacantEntryMut < 'a, K, V, S >::insert_entry) ... NOT COVERED
+152: stmt_call, remove `entry . insert (value) ;`, at src/map.rs@2087:16-2087:35(fn Entry < 'a, K, V, S >::insert) ... NOT COVERED
+153: stmt_call, remove `f (entry . get_mut ()) ;`, at src/map.rs@2194:16-2194:34(fn Entry < 'a, K, V, S >::and_modify) ... NOT COVERED
+154: stmt_call, remove `mem :: swap (& mut value, old_value) ;`, at src/map.rs@2374:8-2374:40(fn OccupiedEntry < 'a, K, V, S >::insert) ... killed
+155: stmt_call, remove `map . insert (k, v) ;`, at src/map.rs@2554:12-2554:28(fn HashMap < K, V, S >::from_iter) ... killed
+156: stmt_call, remove `iter . for_each (| (k, v) | { map . insert (k, v) ; }) ;`, at src/map.rs@2553:8-2555:10(fn HashMap < K, V, S >::from_iter) ... killed
+157: lit_int, replace `1` with `2`, at src/map.rs@2575:34-2575:35(fn HashMap < K, V, S >::extend) ... SURVIVED
+158: lit_int, replace `1` with `0`, at src/map.rs@2575:34-2575:35(fn HashMap < K, V, S >::extend) ... SURVIVED
+159: binop_num, replace `+` with `-`, at src/map.rs@2575:32-2575:33(fn HashMap < K, V, S >::extend) ... SURVIVED
+160: lit_int, replace `2` with `3`, at src/map.rs@2575:39-2575:40(fn HashMap < K, V, S >::extend) ... SURVIVED
+161: lit_int, replace `2` with `1`, at src/map.rs@2575:39-2575:40(fn HashMap < K, V, S >::extend) ... SURVIVED
+162: binop_num, replace `/` with `*`, at src/map.rs@2575:37-2575:38(fn HashMap < K, V, S >::extend) ... SURVIVED
+163: stmt_call, remove `self . reserve (reserve) ;`, at src/map.rs@2577:8-2577:29(fn HashMap < K, V, S >::extend) ... SURVIVED
+164: stmt_call, remove `self . insert (k, v) ;`, at src/map.rs@2579:12-2579:29(fn HashMap < K, V, S >::extend) ... killed
+165: stmt_call, remove `iter . for_each (move | (k, v) | { self . insert (k, v) ; }) ;`, at src/map.rs@2578:8-2580:10(fn HashMap < K, V, S >::extend) ... killed
+166: stmt_call, remove `self . extend (iter . into_iter () . map (| (& key, & value) | (key, value))) ;`, at src/map.rs@2592:8-2592:72(fn HashMap < K, V, S >::extend) ... killed
+167: unop_not, remove `!`, at src/set.rs@682:28-682:29(fn HashSet < T, S >::is_disjoint) ... killed
+168: binop_cmp, replace `<=` with `<`, at src/set.rs@703:22-703:24(fn HashSet < T, S >::is_subset) ... SURVIVED
+169: binop_cmp, replace `<=` with `>=`, at src/set.rs@703:22-703:24(fn HashSet < T, S >::is_subset) ... killed
+170: binop_cmp, replace `<=` with `>`, at src/set.rs@703:22-703:24(fn HashSet < T, S >::is_subset) ... killed
+171: lit_bool, replace `false` with `true`, at src/set.rs@706:12-706:17(fn HashSet < T, S >::is_subset) ... killed
+172: stmt_call, remove `vacant . insert (()) ;`, at src/set.rs@777:16-777:33(fn HashSet < T, S >::replace) ... killed
+173: stmt_call, remove `self . map . retain (| k, _ | f (k)) ;`, at src/set.rs@858:8-858:36(fn HashSet < T, S >::retain) ... killed
+174: binop_eq, replace `!=` with `==`, at src/set.rs@868:22-868:24(fn HashSet < T, S >::eq) ... killed
+175: lit_bool, replace `false` with `true`, at src/set.rs@869:19-869:24(fn HashSet < T, S >::eq) ... killed
+176: stmt_call, remove `set . extend (iter) ;`, at src/set.rs@901:8-901:24(fn HashSet < T, S >::from_iter) ... killed
+177: stmt_call, remove `self . map . extend (iter . into_iter () . map (| k | (k, ()))) ;`, at src/set.rs@913:8-913:58(fn HashSet < T, S >::extend) ... killed
+178: stmt_call, remove `self . extend (iter . into_iter () . cloned ()) ;`, at src/set.rs@924:8-924:46(fn HashSet < T, S >::extend) ... killed
+179: lit_int, replace `0` with `1`, at src/set.rs@1313:9-1313:10(fn Intersection < 'a, T, S >::size_hint) ... NOT COVERED
+180: unop_not, remove `!`, at src/set.rs@1355:15-1355:16(fn Difference < 'a, T, S >::next) ... killed
+181: lit_int, replace `0` with `1`, at src/set.rs@1364:9-1364:10(fn Difference < 'a, T, S >::size_hint) ... NOT COVERED
+SURVIVED
+    src/map.rs
+            15/32(46.88%) mutants survived
+        137: remove `self . table . clear () ;` at 554:8-554:26(fn HashMap < K, V, S >::clear) NOT COVERED
+        141: remove `self . table . shrink_to (min_capacity, | x | make_hash (hash_builder, & x . 0)) ;` at 658:8-659:71(fn HashMap < K, V, S >::shrink_to) NOT COVERED
+        144: replace `false` with `true` at 1034:54-1034:59(fn HashMap < K, V, S >::eq)
+        148: remove `entry . insert (value) ;` at 1456:16-1456:35(fn RawEntryMut < 'a, K, V, S >::insert) NOT COVERED
+        149: remove `f (k, v) ;` at 1554:20-1554:27(fn RawEntryMut < 'a, K, V, S >::and_modify) NOT COVERED
+        151: remove `key . hash (& mut hasher) ;` at 1713:8-1713:29(fn RawVacantEntryMut < 'a, K, V, S >::insert_entry) NOT COVERED
+        152: remove `entry . insert (value) ;` at 2087:16-2087:35(fn Entry < 'a, K, V, S >::insert) NOT COVERED
+        153: remove `f (entry . get_mut ()) ;` at 2194:16-2194:34(fn Entry < 'a, K, V, S >::and_modify) NOT COVERED
+        157: replace `1` with `2` at 2575:34-2575:35(fn HashMap < K, V, S >::extend)
+        158: replace `1` with `0` at 2575:34-2575:35(fn HashMap < K, V, S >::extend)
+        159: replace `+` with `-` at 2575:32-2575:33(fn HashMap < K, V, S >::extend)
+        160: replace `2` with `3` at 2575:39-2575:40(fn HashMap < K, V, S >::extend)
+        161: replace `2` with `1` at 2575:39-2575:40(fn HashMap < K, V, S >::extend)
+        162: replace `/` with `*` at 2575:37-2575:38(fn HashMap < K, V, S >::extend)
+        163: remove `self . reserve (reserve) ;` at 2577:8-2577:29(fn HashMap < K, V, S >::extend)
+    src/raw/bitmask.rs
+            8/19(42.11%) mutants survived
+        12: replace `8` with `9` at 71:57-71:58(fn BitMask::trailing_zeros) NOT COVERED
+        13: replace `8` with `7` at 71:57-71:58(fn BitMask::trailing_zeros) NOT COVERED
+        14: replace `0` with `1` at 71:62-71:63(fn BitMask::trailing_zeros) NOT COVERED
+        15: replace `==` with `!=` at 71:59-71:61(fn BitMask::trailing_zeros) NOT COVERED
+        16: replace `&&` with `||` at 71:37-71:39(fn BitMask::trailing_zeros)
+        17: replace `/` with `*` at 72:57-72:58(fn BitMask::trailing_zeros) NOT COVERED
+        18: replace `/` with `*` at 74:45-74:46(fn BitMask::trailing_zeros)
+        19: replace `/` with `*` at 81:40-81:41(fn BitMask::leading_zeros)
+    src/raw/mod.rs
+            38/115(33.04%) mutants survived
+        26: replace `128` with `129` at 110:11-110:15(fn is_special)
+        27: replace `128` with `127` at 110:11-110:15(fn is_special)
+        28: replace `&` with `|` at 110:9-110:10(fn is_special)
+        29: replace `&` with `^` at 110:9-110:10(fn is_special)
+        30: replace `0` with `1` at 110:19-110:20(fn is_special)
+        32: replace `1` with `2` at 117:11-117:15(fn special_is_empty)
+        34: replace `&` with `|` at 117:9-117:10(fn special_is_empty)
+        35: replace `&` with `^` at 117:9-117:10(fn special_is_empty)
+        39: replace `8` with `7` at 136:35-136:36(fn h2)
+        41: replace `7` with `8` at 136:39-136:40(fn h2)
+        42: replace `7` with `6` at 136:39-136:40(fn h2)
+        44: replace `127` with `128` at 137:12-137:16(fn h2)
+        45: replace `127` with `126` at 137:12-137:16(fn h2)
+        46: replace `&` with `|` at 137:10-137:11(fn h2)
+        47: replace `&` with `^` at 137:10-137:11(fn h2)
+        48: replace `8` with `9` at 182:32-182:33(fn capacity_to_buckets)
+        49: replace `8` with `7` at 182:32-182:33(fn capacity_to_buckets)
+        50: replace `<` with `<=` at 182:30-182:31(fn capacity_to_buckets)
+        53: replace `1` with `2` at 184:14-184:15(fn capacity_to_buckets)
+        59: replace `7` with `6` at 190:30-190:31(fn capacity_to_buckets)
+        61: replace `8` with `9` at 203:21-203:22(fn bucket_mask_to_capacity)
+        62: replace `8` with `7` at 203:21-203:22(fn bucket_mask_to_capacity)
+        63: replace `<` with `<=` at 203:19-203:20(fn bucket_mask_to_capacity)
+        66: replace `1` with `2` at 209:24-209:25(fn bucket_mask_to_capacity)
+        70: replace `8` with `7` at 209:29-209:30(fn bucket_mask_to_capacity)
+        76: replace `1` with `2` at 247:72-247:73(fn calculate_layout)
+        77: replace `1` with `0` at 247:72-247:73(fn calculate_layout)
+        78: replace `-` with `+` at 247:70-247:71(fn calculate_layout)
+        79: replace `1` with `2` at 247:93-247:94(fn calculate_layout)
+        97: replace `<` with `<=` at 610:23-610:24(fn RawTable < T >::shrink_to)
+        109: replace `>` with `>=` at 639:22-639:23(fn RawTable < T >::try_reserve)
+        110: replace `2` with `3` at 661:40-661:41(fn RawTable < T >::reserve_rehash)
+        111: replace `2` with `1` at 661:40-661:41(fn RawTable < T >::reserve_rehash)
+        113: replace `<=` with `<` at 661:21-661:23(fn RawTable < T >::reserve_rehash)
+        116: remove `self . rehash_in_place (hasher) ;` at 664:12-664:40(fn RawTable < T >::reserve_rehash) NOT COVERED
+        118: replace `1` with `0` at 670:54-670:55(fn RawTable < T >::reserve_rehash)
+        124: replace `1` with `2` at 925:27-925:28(fn RawTable < T >::num_ctrl_bytes)
+        132: replace `0` with `1` at 1215:12-1215:13(fn RawIterRange < T >::size_hint) NOT COVERED
+    src/set.rs
+            3/15(20.00%) mutants survived
+        168: replace `<=` with `<` at 703:22-703:24(fn HashSet < T, S >::is_subset)
+        179: replace `0` with `1` at 1313:9-1313:10(fn Intersection < 'a, T, S >::size_hint) NOT COVERED
+        181: replace `0` with `1` at 1364:9-1364:10(fn Difference < 'a, T, S >::size_hint) NOT COVERED
+
+181 generated mutations
+117(64.64%) mutants killed, 0(0.00%) by timeout
+64(35.36%) mutants SURVIVED, 16(8.84%) NOT COVERED

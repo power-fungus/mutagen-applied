@@ -1,11 +1,11 @@
 
 Tests without mutations
-target/debug/deps/indexmap-1e832a5fed233026 ... ok
-target/debug/deps/serde-ba1c6b4712cd1f26 ... ok
-target/debug/deps/tests-c448523a4e460ee9 ... ok
-target/debug/deps/equivalent_trait-975cdf195d998b0c ... ok
-target/debug/deps/quick-561cfd92c6eb921f ... ok
-target/debug/deps/macros_full_path-9fe99e207dcc1f44 ... ok
+target/debug/deps/indexmap-03263b2771f71b7a ... ok
+target/debug/deps/serde-1f0e4bcc2582f9a1 ... ok
+target/debug/deps/equivalent_trait-e05f168446778d25 ... ok
+target/debug/deps/macros_full_path-cb72f19471984119 ... ok
+target/debug/deps/quick-a23d4d07ed56f800 ... ok
+target/debug/deps/tests-8ac79a8e79b6403a ... ok
 
 Test 187 Mutants
 1: binop_eq, replace `==` with `!=`, at src/equivalent.rs@25:14-25:16(fn Q::equivalent) ... killed

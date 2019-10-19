@@ -1,0 +1,30 @@
+
+Tests without mutations
+target/debug/deps/default_bytes-09fe45fab318d7a0 ... ok
+target/debug/deps/nfa-200a845fc1369ef7 ... ok
+target/debug/deps/default-7c1b833692684e29 ... ok
+target/debug/deps/backtrack-289ce924468a4397 ... ok
+target/debug/deps/backtrack_bytes-e8a8de6212440550 ... ok
+target/debug/deps/regex-67ac7e835efb5662 ... ok
+target/debug/deps/nfa_bytes-2ff32f8604bbe42e ... ok
+target/debug/deps/backtrack_utf8bytes-9f80df73cd032f0f ... ok
+target/debug/deps/nfa_utf8bytes-bfad5b79e65445d9 ... ok
+target/debug/deps/crates_regex-1b64572e200f2511 ... ok
+
+Test 1707 Mutants
+1: stmt_call, remove `self . m . jobs . clear () ;`, at src/backtrack.rs@110:8-110:27(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+2: lit_int, replace `1` with `2`, at src/backtrack.rs@123:51-123:52(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+3: lit_int, replace `1` with `0`, at src/backtrack.rs@123:51-123:52(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+4: binop_num, replace `+` with `-`, at src/backtrack.rs@123:49-123:50(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+5: binop_num, replace `*` with `/`, at src/backtrack.rs@123:29-123:30(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+6: binop_num, replace `+` with `-`, at src/backtrack.rs@123:54-123:55(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... killed
+7: lit_int, replace `1` with `2`, at src/backtrack.rs@123:67-123:68(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+8: lit_int, replace `1` with `0`, at src/backtrack.rs@123:67-123:68(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+9: binop_num, replace `-` with `+`, at src/backtrack.rs@123:65-123:66(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+10: binop_num, replace `/` with `*`, at src/backtrack.rs@124:16-124:17(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+11: stmt_call, remove `self . m . visited . truncate (visited_len) ;`, at src/backtrack.rs@125:8-125:44(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+12: lit_int, replace `0` with `1`, at src/backtrack.rs@127:17-127:18(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+13: binop_cmp, replace `>` with `<`, at src/backtrack.rs@129:23-129:24(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... killed
+14: binop_cmp, replace `>` with `<=`, at src/backtrack.rs@129:23-129:24(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... killed
+15: binop_cmp, replace `>` with `>=`, at src/backtrack.rs@129:23-129:24(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... SURVIVED
+16: binop_num, replace `-` with `+`, at src/backtrack.rs@131:53-131:54(fn Bounded < 'a, 'm, 'r, 's, I >::clear) ... 

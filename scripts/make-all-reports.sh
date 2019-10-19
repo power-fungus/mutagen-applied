@@ -3,7 +3,6 @@
 set -e
 
 # prepare and update runner setup
-git submodule update --init
 mkdir -p reports
 cargo install --path mutagen/mutagen-runner --root . --force --offline
 
@@ -14,6 +13,7 @@ cd crates
 for crate in ${crates[@]}; do
   echo $crate
   pushd $crate
+  cargo clean
   cargo test --no-run
   popd
 done

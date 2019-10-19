@@ -1,17 +1,17 @@
 
 Tests without mutations
-target/debug/deps/actix-9b71c621814765a2 ... ok
-target/debug/deps/derive-8d767df892ae41b4 ... ok
-target/debug/deps/test_context-035746824ab4d556 ... ok
-target/debug/deps/test_address-f382216218b754d4 ... ok
-target/debug/deps/test_actors-ad82fd09da1ffbc7 ... ok
-target/debug/deps/test_sink-2d6768e1ba018603 ... ok
-target/debug/deps/test_sync-ccf9920dd39dbc62 ... ok
-target/debug/deps/test_actor-0d87d774cfec07fd ... ok
-target/debug/deps/test_lifecycle-28c4956a343f0b5e ... ok
-target/debug/deps/test_fut-e3b7f1cd4c31f4f3 ... ok
-target/debug/deps/test_supervisor-a1d9ad2422cfa797 ... ok
-target/debug/deps/test_arbiter-08a08033d9c6f1ec ... ok
+target/debug/deps/actix-2a6b10f313419709 ... ok
+target/debug/deps/test_actor-a4e050d327f60af0 ... ok
+target/debug/deps/test_lifecycle-10742213ba8dcb4f ... ok
+target/debug/deps/test_context-5b33e67734c0da58 ... ok
+target/debug/deps/test_supervisor-1f99043251ab55a4 ... ok
+target/debug/deps/test_sink-a06d1d7de8f7a7ad ... ok
+target/debug/deps/derive-42abcf29c08edcfd ... ok
+target/debug/deps/test_arbiter-973a6ae4d3414b78 ... ok
+target/debug/deps/test_fut-a1a1809f5bad48b7 ... ok
+target/debug/deps/test_sync-d87b9ac61940efef ... ok
+target/debug/deps/test_actors-a156be81cf7f308e ... ok
+target/debug/deps/test_address-9d8e4e223ad3ed6d ... ok
 
 Test 358 Mutants
 1: binop_eq, replace `==` with `!=`, at src/actor.rs@240:13-240:15(fn ActorState::alive) ... NOT COVERED
