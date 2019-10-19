@@ -1,8 +1,8 @@
 
 Tests without mutations
-target/debug/deps/actix_web-78ec1c5762224b43 ... ok
-target/debug/deps/test_server-5e60af3c6cfdf84e ... ok
-target/debug/deps/test_httpserver-1065b760b82fa053 ... ok
+target/debug/deps/test_server-9530263f962ccf9b ... ok
+target/debug/deps/actix_web-fb19a490defb572b ... ok
+target/debug/deps/test_httpserver-a1b0621cc742ec31 ... ok
 
 Test 335 Mutants
 1: stmt_call, remove `self . data . push (Box :: new (Data :: new (data))) ;`, at src/app.rs@103:8-103:49(fn App < T, B >::data) ... killed

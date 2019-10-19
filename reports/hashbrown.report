@@ -1,10 +1,10 @@
 
 Tests without mutations
-target/debug/deps/hasher-0a4f458f3f48c73d ... ok
-target/debug/deps/set-19d05dbb6f832192 ... ok
-target/debug/deps/hashbrown-dcecde44f864de6a ... ok
-target/debug/deps/serde-c213dd84d29d663a ... ok
-target/debug/deps/rayon-ef56260e1bce5069 ... ok
+target/debug/deps/serde-19b8e1e6d312ecdd ... ok
+target/debug/deps/set-61f292ade006cb40 ... ok
+target/debug/deps/hasher-358bc3b8aa1727d1 ... ok
+target/debug/deps/hashbrown-27b94b9f104786e5 ... ok
+target/debug/deps/rayon-590122a1d95bf779 ... ok
 
 Test 181 Mutants
 1: binop_bit, replace `^` with `&`, at src/raw/bitmask.rs@25:23-25:24(fn BitMask::invert) ... killed

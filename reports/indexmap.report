@@ -1,11 +1,11 @@
 
 Tests without mutations
-target/debug/deps/indexmap-03263b2771f71b7a ... ok
-target/debug/deps/serde-1f0e4bcc2582f9a1 ... ok
-target/debug/deps/equivalent_trait-e05f168446778d25 ... ok
-target/debug/deps/macros_full_path-cb72f19471984119 ... ok
-target/debug/deps/quick-a23d4d07ed56f800 ... ok
-target/debug/deps/tests-8ac79a8e79b6403a ... ok
+target/debug/deps/macros_full_path-d4e4fef95f485d6b ... ok
+target/debug/deps/equivalent_trait-3396fd0605164bbe ... ok
+target/debug/deps/indexmap-45578f209b1ddfa6 ... ok
+target/debug/deps/quick-e1e731f8fdca8ef2 ... ok
+target/debug/deps/serde-dcc42140f783b9c2 ... ok
+target/debug/deps/tests-bc6bb4e2433dc4ac ... ok
 
 Test 187 Mutants
 1: binop_eq, replace `==` with `!=`, at src/equivalent.rs@25:14-25:16(fn Q::equivalent) ... killed
@@ -163,7 +163,7 @@ Test 187 Mutants
 153: stmt_call, remove `pos . set_pos :: < Sz > (i - 1) ;`, at src/map.rs@1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
 154: binop_num, replace `+` with `-`, at src/map.rs@1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
 155: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) ... NOT COVERED
-156: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1565:8-1565:54(fn OrderMapCore < K, V >::swap_remove_found_impl) ... killed
+156: stmt_call, remove `self . backward_shift_after_removal :: < Sz > (probe) ;`, at src/map.rs@1565:8-1565:54(fn OrderMapCore < K, V >::swap_remove_found_impl) ... SURVIVED
 157: lit_int, replace `1` with `2`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
 158: lit_int, replace `1` with `0`, at src/map.rs@1576:42-1576:43(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
 159: binop_num, replace `+` with `-`, at src/map.rs@1576:40-1576:41(fn OrderMapCore < K, V >::backward_shift_after_removal) ... killed
@@ -202,7 +202,7 @@ SURVIVED
             all 1 mutants survived
         187: replace `==` with `!=` at 63:15-63:17(fn HashValue::eq) NOT COVERED
     src/map.rs
-            85/160(53.12%) mutants survived
+            86/160(53.75%) mutants survived
         28: replace `==` with `!=` at 60:15-60:17(fn ShortHash < Sz >::eq) NOT COVERED
         29: replace `==` with `!=` at 70:19-70:21(fn ShortHash < Sz >::eq) NOT COVERED
         44: replace `|` with `^` at 138:34-138:35(fn Pos::set_pos)
@@ -267,6 +267,7 @@ SURVIVED
         153: remove `pos . set_pos :: < Sz > (i - 1) ;` at 1507:24-1507:48(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
         154: replace `+` with `-` at 1514:34-1514:35(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
         155: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1529:8-1529:54(fn OrderMapCore < K, V >::shift_remove_found_impl) NOT COVERED
+        156: remove `self . backward_shift_after_removal :: < Sz > (probe) ;` at 1565:8-1565:54(fn OrderMapCore < K, V >::swap_remove_found_impl)
         160: replace `0` with `1` at 1601:28-1601:29(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
         161: replace `0` with `1` at 1602:17-1602:18(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
         162: remove `!` at 1611:15-1611:16(fn OrderMapCore < K, V >::retain_in_order_impl) NOT COVERED
@@ -303,5 +304,5 @@ SURVIVED
         26: replace `0` with `1` at 816:9-816:10(fn Intersection < 'a, T, S >::size_hint)
 
 187 generated mutations
-90(48.13%) mutants killed, 10(5.35%) by timeout
-97(51.87%) mutants SURVIVED, 69(36.90%) NOT COVERED
+89(47.59%) mutants killed, 10(5.35%) by timeout
+98(52.41%) mutants SURVIVED, 69(36.90%) NOT COVERED
